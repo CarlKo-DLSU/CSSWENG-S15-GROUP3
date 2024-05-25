@@ -2,28 +2,122 @@
 <html>
 
     <head>
-        <title> Homepage </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> SX Manila | Homepage </title>
+        <link rel="stylesheet" href="../css/1-index.css">
     </head>
 
     <body>
-        <h1> Homepage </h1>
-        <nav>
-            <ul>
-                <li><a href="1-index.html"> Home </a></li>
-                <li><a href="2-past-events.html"> Past Events </a></li>
-                <li><a href="#upcoming-events">Upcoming Events</a></li>
-                <li><a href="3-about.html"> About </a></li>
-            </ul>
-        </nav>
+        <div id="header">   
+            <div id="current-events">
+                <div id="text-container">
+                    <p id="live-events-text">Show here current live events</p>
+                    <p id="more-info-text">For more information <span class="highlight" style="cursor: pointer;" onclick="window.location.href='2-events.html';">Click Here</span></p>
+                </div>
+            </div>
 
-        <div id="upcoming-events">
-            <h2> Preselling </h2>
-            <ul>
-                <li><a href="https://forms.gle/sample1" target="_blank"> Upcoming Event 1 </a></li>
-                <li><a href="https://forms.gle/sample2" target="_blank"> Upcoming Event 2 </a></li>
-                <li><a href="https://forms.gle/sample3" target="_blank"> Upcoming Event 3 </a></li>
-            </ul>
+            <div id="nav">
+                <img id="nav-logo" src="../images/nav-logo.png" alt="logo">
+                <img id="nav-hamburger" src="../images/nav-hamburger.png" alt="menu hamburger">
+        
+                <div id="nav-panel">
+                    <div id="nav-buttons">
+                        <a href="3-about.html">About Us</a>
+                        <a href="2-events.html">Events</a>
+                        <a href="#">Bookings</a>
+                        <a href="#">Merchandise</a>
+                        <a href="#" id="sign-in-link">Sign In</a>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
+
+        <div id="sign-in-popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+
+                <img id="sign-in-logo" src="../images/nav-logo.png" alt="logo">
+
+                <p class="popup-text">Welcome back</p>
+
+                <form id="sign-in-form">
+                    <input type="text" id="sign-in-email" name="email" placeholder="Email">
+                    
+                    <input type="password" id="sign-in-password" name="password" placeholder="Password">
+                    
+                    <label for="remember-me">
+                        <input type="checkbox" id="remember-me" name="remember-me"> Remember me
+                    </label>
+                    
+                    <button type="submit" id="sign-in-btn">Sign In</button>
+                </form>
+
+                <div id="to-register-container">
+                    <p>No account yet? <button id="to-register-btn">Register</button>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="register-popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+
+                <p class="popup-text">Register</p>
+
+                <form id="register-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+
+                    <label for="register-email">Email</label>
+                    <input type="text" id="register-email" name="email">
+
+                    <label for="contact-number">Contact Number</label>
+                    <input type="text" id="contact-number" name="contact-number">
+
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password">
+
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+
+                    <button type="submit" id="register-btn">Register</button>
+                </form>
+
+                <div id="to-sign-in-container">
+                    <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div id="past-events">
+            <div id="slides-container">
+
+                <div class="slides">
+                    <img src="../images/slideshow-eras.png">
+                </div>
+    
+                <div class="slides">
+                    <img src="../images/slideshow-bewitched.png">
+                </div>
+
+                <div class="red-bar top-bar"></div>
+                <div class="red-bar bottom-bar"></div>
+            </div>
+        
+        </div>
+
+        <div id="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <script src="../js/nav.js"></script>
+        <script src="../js/popup.js"></script>
+        <script src="../js/slideshow.js"></script>
+
     </body>
 
 </html>
