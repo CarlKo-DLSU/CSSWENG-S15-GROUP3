@@ -3,10 +3,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const signInLink = document.getElementById("sign-in-link");
     const signInPopup = document.getElementById("sign-in-popup");
     const signInCloseBtn = signInPopup.querySelector(".close-btn");
+    const navPanel = document.getElementById("nav-panel");
 
     signInLink.addEventListener("click", function(event) {
         event.preventDefault();
         signInPopup.style.display = "flex";
+        navPanel.classList.add("closing"); 
+        setTimeout(() => {
+            navPanel.style.display = "none";
+            navPanel.classList.remove("closing");
+        }, 300);
     });
 
     signInCloseBtn.addEventListener("click", function() {
