@@ -689,6 +689,26 @@ button[type="submit"]:hover {
     z-index: 0; /* Lower stacking order */
 }
 
+#servicesFrame{
+    background-color: #F7F7F7;
+    height: 397px;
+    width: 100%;
+}
+
+.serviceTitle{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    padding: 20px;
+    text-align: center;
+}
+
+.service{
+    background-color: #EA0029;
+    margin: auto;
+    width: 350px;
+    padding: 20px;
+}
+
 /* --------------------FOOTER-------------------- */
 #footer {
     background-color: #000000;
