@@ -21,8 +21,7 @@ body {
     font-size: 15px;
 }
 
-
-
+/* --------------------HEADER-------------------- */
 #header {
     width: 100%;
     margin: 0;
@@ -56,8 +55,7 @@ body {
     text-decoration: underline;
 }
 
-
-
+/* --------------------NAV BAR-------------------- */
 #nav {
     width: 100%;
     background-color: #FFFFFF;
@@ -79,8 +77,7 @@ body {
     cursor: pointer;
 }
 
-
-
+/* -------------------NAV PANEL-------------------- */
 @keyframes slideIn {
     from {
       transform: translateX(100%);
@@ -135,8 +132,7 @@ body {
     margin-bottom: 25px;
 }
 
-
-
+/* --------------------SIGN-IN POP-UP-------------------- */
 .popup {
     display: none;
     position: fixed;
@@ -293,8 +289,7 @@ button[type="submit"]:hover {
     color: #c10023;
 }
 
-
-
+/* --------------------REGISTER POP-UP-------------------- */
 #register-form {
     display: flex;
     flex-direction: column;
@@ -338,8 +333,7 @@ button[type="submit"]:hover {
     color: #c10023;
 }
 
-
-
+/* --------------------PAST EVENTS SLIDESHOW-------------------- */
 #past-events {
     position: relative;
     animation: fadeInFromLeft 1.5s ease;
@@ -369,7 +363,7 @@ button[type="submit"]:hover {
     max-width: 100%;
     margin: 0;
     overflow: hidden;
-    transform: translateY(1px);
+    transform: translateY(2px);
 }
 
 .slides img {
@@ -400,10 +394,10 @@ button[type="submit"]:hover {
     background-color: #EA0029;
 }
 
-
-
+/* --------------------UPCOMING EVENTS SLIDER-------------------- */
 #upcoming-events {
     padding-top: 17px;
+    margin-bottom: 20px;
 }
 
 #upcoming-events-header {
@@ -437,13 +431,13 @@ button[type="submit"]:hover {
     align-items: center;
 }
 
-.upcoming-search-icon {
+#upcoming-search-icon {
     color: #333;
     height: 10px;
     width: 10px;
 }
 
-.upcoming-search-bar {
+#upcoming-search-bar {
     display: flex;
     align-items: center;
     background-color: #FFFFFF;
@@ -453,22 +447,23 @@ button[type="submit"]:hover {
     height: 20px;
 }
 
-.upcoming-search-input {
+#upcoming-search-input {
     border: none;
     outline: none;
     margin-left: 7px;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-size: 10px;
-    color: #15151540;
+    color: #000000;
     width: 105px;
 }
 
-.upcoming-search-input::placeholder {
+#upcoming-search-input::placeholder {
     color: #CCCCCC; /* Adjusts placeholder text color */
 }
 
-.upcoming-search-bar .upcoming-search-icon:hover {
+#upcoming-search-bar,
+#upcoming-search-icon:hover {
     cursor: pointer; /* Optional: Changes cursor to pointer on hover */
 }
 
@@ -530,187 +525,162 @@ button[type="submit"]:hover {
     background: #EA0029; /* Handle color */
 }
 
-/* css for 2-events */
-
-#nav2 {
-    display: flex;
-    justify-content: space-around;
+/* --------------------UPCOMING EVENTS POPUPS-------------------- */
+.event-popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.3);
+    justify-content: center;
     align-items: center;
-    background-color: #FFFFFF;
-    border-top: 1px solid #ccc; /* Optional: Adds a border to the rectangle */
 }
 
-.section {
-    flex: 1;
+.event-popup-content img {
+    width: 100%;
+    height: auto;
+}
+
+.event-popup-content {
+    background-color: #fefefe;
+    width: 85%;
+    max-width: 400px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
-    padding: 10px;
+    position: relative;
+    opacity: 0;
+    animation: fadeInPopup 0.3s ease forwards;
+}
+
+.event-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
     font-size: 16px;
-    color: #333;
-    text-decoration: none;
+    margin-top: 2px;
+    margin-bottom: 4px;
 }
 
-.section:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-}
-
-.eventTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    background-color: #FFFFFF;
-}
-
-#pastEvents-title {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 20px;
-    margin: 0;
-}
-
-#search-container {
-    display: flex;
-    align-items: center;
-}
-
-.search-icon {
-    font-size: 20px;
-    color: #333;
-    margin-right: 10px; /* Adjusts spacing between small icon and search bar */
-    margin-left: 30px; /* Adjusts spacing between input text and icon */
-    height: 10px;
-    width: 10px;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 25px; 
-    padding: 5px 10px; /* Adjusts padding inside the search bar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
-    width: 200px; /* Adjusts the width of the search bar */
-    height: 18px;
-}
-
-.search-input {
-    border: none;
-    outline: none;
-    flex: 1;
-    padding: 2px;
-    border-radius: 25px;
-    font-size: 10px;
-    color: #333;
-}
-
-.search-input::placeholder {
-    color: #999; /* Adjusts placeholder text color */
-}
-
-.search-bar .search-icon:hover {
-    cursor: pointer; /* Optional: Changes cursor to pointer on hover */
-}
-
-.pastEvent{
-    width: 340px;
-    height: 447px;
-    margin: auto;
-    margin-bottom: 50px;
-}
-.pastEvent-image{
-    width: 100%;
-    height: 327.8px;
-}
-.pastEvent-details{
-    background-color:#EA0029;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    color: #FFFFFF;
-    height: 119.2px;
-    display: flex;
-    justify-content: center; /* Centers content horizontally */
-    align-items: center;
-}
-
-.contactInfo{
-    background-color:#EA0029;
-    display: flex;
-    flex-direction: column;
-    height: 152px;
-}
-
-.contactInfo-title{
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    margin-top: 20px;
-    margin-left: 30px;
-    color: #FFFFFF;
-}
-
-.contactInfo-details{
+.event-date,
+.event-location {
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
-    font-size: 12px;
-    margin-left: 30px;
-    margin-top: 10px;
-    color: #FFFFFF;
+    font-size: 14px;
 }
 
-.contactInfo-icons{
-    width: 22px;
-    height: 22px;
-    gap: 10px;
+.merch-presale-btn {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #B80022;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 6px;
+    margin-bottom: 10px;
 }
 
-
-/* 3- about */
-
-#aboutUs-frame{
-    width: 100%;
-    height: 304px;
-    display: flex;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 5);
-}
-.aboutUs-framePicture{
-    width: 50%;
-}
-.aboutUs-frameTitle{
-    font-family: "Poppins", sans-serif;
-    font-weight: 600px;
-    font-size: 24px;
-    width: 50%;
-    float: right;
-    display: flex; 
-    align-items: center; /* Center vertically */
-    padding: 30px;
-}
-.aboutUs-details{
-    background-color: #EA0029;
-    font-family: "Poppins", sans-serif;
-    color: #FFFFFF;
-    padding: 20px;
-    position: relative; /* Ensure z-index works */
-    z-index: 0; /* Lower stacking order */
-}
-#servicesFrame{
+/* --------------------BOOKING SECTION-------------------- */
+#booking {
     background-color: #F7F7F7;
-    height: 397px;
-    width: 100%;
+    position: relative;
+    padding-bottom: 13px;
 }
-.serviceTitle{
+
+#red-rectangle {
+    width: 80%;
+    height: 220px;
+    background-color: #B80022;
+    margin: 25px auto 0;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+#booking img {
+    position: relative;
+    top: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 255px;
+}
+
+#showstopper-text {
+    text-align: center;
+    margin-top: 60px;
+}
+
+#showstopper-text p {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 750;
+    font-size: 23px;
+    line-height: 1;
+}
+
+#booking-subtext {
+    margin-top: 17px;
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+#book-now-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px; 
+    background-color: #EA0029;
+    color: white;
+    border: none;
+    border-radius: 800px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-weight: 750;
+    font-size: 14px;
+}
+
+/* --------------------FOOTER-------------------- */
+#footer {
+    background-color: #000000;
+    color: #FFFFFF;
+    position: relative;
+}
+
+#contact-us {
     font-family: "Poppins", sans-serif;
     font-weight: 600;
-    padding: 20px;
-    text-align: center;
+    font-size: 13px;
+    padding-top: 23px;
+    padding-left: 23px;
+    letter-spacing: 1.2px;
+    line-height: 20px;
 }
-.service{
-    background-color: #EA0029;
-    margin: auto;
-    width: 350px;
-    padding: 20px;
+
+#contact-details {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    line-height: 22px;
+    padding-top: 4px;
+    padding-left: 23px;
+}
+
+#socials {
+    padding-top: 20px;
+    padding-bottom: 23px;
+    padding-left: 21px;
+}
+
+.socials-icon {
+    height: 21px;
+    width: 22px;
+    margin-right: 9px;
 }
