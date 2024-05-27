@@ -13,58 +13,86 @@
 
     <body>
         <div id="header">   
-            <div id="nav">
+            <div id="current-events">
+                <div id="text-container">
+                    <p id="live-events">Show here current live events</p>
+                    <p id="more-info">For more information <span class="highlight">Click Here</span></p>
+                </div>
+            </div>
 
-                <img id="nav-logo" src="../images/nav-logo.png" alt="logo">
-                <img id="nav-hamburger" src="../images/nav-hamburger.png" alt="menu hamburger">
+            <div id="nav">
+                <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
+                <img id="nav-hamburger" src="../images/1-index/nav-hamburger.png" alt="menu hamburger">
         
                 <div id="nav-panel">
                     <div id="nav-buttons">
-                        <a href="#">About Us</a>
-                        <a href="#">Events</a>
+                        <a href="3-about.html">About Us</a>
+                        <a href="2-events.html">Events</a>
                         <a href="#">Bookings</a>
                         <a href="#">Merchandise</a>
-                        <a href="#">Sign In</a>
+                        <a href="#" id="sign-in-link">Sign In</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="past-events-frame">
+
+            <div id="past-events-header">
+                <p id="past-events-title">Past Events</p>
+    
+                <div id="past-search-container">
+                    <div id="past-filter">
+                        <img src="../images/2-events/past-filter.png" alt="filter icon" id="past-filter">
+                    </div>
+    
+                    <div id="past-search-bar">
+                        <input type="text" id="past-search-input" placeholder="Search">
+                        <img src="../images/2-events/past-search.png" alt="search icon" id="past-search-icon">
                     </div>
                 </div>
             </div>
 
-            <div id="nav2">
-                <div class="section">Home</div>
-                <div class="section">About Us</div>
-                <div class="section">Booking</div>
-                <div class="section">Merchandise</div>
+            <div class="pastEvent">
+                <img class="pastEvent-image" src="../images/2-events/events-placeholder1.jpg" alt="bocchi1">
+                <div class="pastEvent-detailBox">
+                    <span class="pastEvent-details">Kessoku Band in Starry</span>
+                </div>
             </div>
-        </div>
-
-        <div class="eventTitle">
-            <p id="pastEvents-title">Past Events</p>
-            <div id="search-container">
-                <img class="search-icon" src="filter.png" alt="search-icon">
-                <div class="search-bar">
-                    <input type="text" class="search-input" placeholder="Search">
-                    <img class="search-icon" src="search-icon.png" alt="search-icon">
+    
+            <div class="pastEvent">
+                <img class="pastEvent-image" src="../images/2-events/events-placeholder2.jpg" alt="bocchi2">
+                <div class="pastEvent-detailBox">
+                    <span class="pastEvent-details">Bocchi with A Guitar Solo</span>
+                </div>
+            </div>
+    
+            <div class="pastEvent">
+                <img class="pastEvent-image" src="../images/2-events/events-placeholder3.jpg" alt="bocchi3">
+                <div class="pastEvent-detailBox">
+                    <span class="pastEvent-details">School Festival Fiasco</span>
                 </div>
             </div>
         </div>
 
-        <div class="pastEvent">
-            <img class="pastEvent-image" src="placeholderimg.jpg" alt="">
-            <div class="pastEvent-details">Here is a cool detail</div>
-        </div>
-        <div class="pastEvent">
-            <img class="pastEvent-image" src="SXM-placeholderimg.jpg" alt="">
-            <div class="pastEvent-details">Here is a cool detail</div>
+
+        <div id="footer">
+            <p id="contact-us">CONTACT US</p>
+
+            <div id="contact-details">
+                <p>example@gmail.com</p>
+                <p>+63 9XX XXXX</p>
+            </div>
+
+            <div id="socials">
+                <img src="../images/1-index/footer-fb.png" id="fb-icon" class="socials-icon">
+                <img src="../images/1-index/footer-ig.png" id="ig-icon" class="socials-icon">
+                <img src="../images/1-index/footer-x.png" id="x-icon" class="socials-icon">
+            </div>
         </div>
 
-
-        <div class="contactInfo">
-            <div class="contactInfo-title">CONTACT US</div>
-            <div class="contactInfo-details">xxxxxxxx</div>
-            <img class="contactInfo-icons" src="" alt="">
-        </div>
-        
-        <script src="../js/nav.js"></script>
+        <script src="../js/1-index.js"></script>
     </body>
 
 </html>
