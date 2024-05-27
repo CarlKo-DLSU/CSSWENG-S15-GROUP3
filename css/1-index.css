@@ -377,7 +377,7 @@ button[type="submit"]:hover {
     to {opacity: 1}
 }
 
-#dots {
+.dots {
     text-align: center;
 }
 
@@ -690,7 +690,7 @@ button[type="submit"]:hover {
     z-index: 0; /* Lower stacking order */
 }
 
-#servicesFrame{
+#servicesFrame {
     background-color: #F7F7F7;
     height: 397px;
     width: 100%;
@@ -716,12 +716,9 @@ button[type="submit"]:hover {
     border-radius: 20px 20px 20px 20px;
 }
 
-.service::before,
-.service::after {
-    content: "";
+.arrow {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 37%;
     width: 30px;
     height: 30px;
     background-repeat: no-repeat;
@@ -729,14 +726,19 @@ button[type="submit"]:hover {
     background-size: contain;
 }
 
-.service::before {
+.arrow.left {
     left: 5px;
     background-image: url("../images/3-aboutUs/leftArrow.png");
 }
 
-.service::after {
+.arrow.right {
     right: 5px;
     background-image: url("../images/3-aboutUs/rightArrow.png");
+}
+
+.arrow.left:hover,
+.arrow.right:hover{
+    filter: brightness(0%);
 }
 
 .servicePicture {
