@@ -396,6 +396,7 @@ button[type="submit"]:hover {
 }
 
 /* --------------------UPCOMING EVENTS SLIDER-------------------- */
+
 #upcoming-events {
     padding-top: 17px;
     margin-bottom: 20px;
@@ -414,6 +415,7 @@ button[type="submit"]:hover {
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-size: 20px;
+    line-height: 24px;
 }
 
 #upcoming-search-container {
@@ -646,6 +648,110 @@ button[type="submit"]:hover {
     font-weight: 750;
     font-size: 14px;
 }
+
+/* ------------------PAST EVENTS ---------------- */
+
+.past-events-frame {
+    border-top: 1px solid rgba(230,230,230,255);
+    padding-bottom: 15px;
+}
+
+#past-events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 15px 0px 15px;
+}
+
+#past-events-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#past-search-container {
+    display: flex;
+    align-items: center;
+}
+
+#past-filter {
+    height: 27px;
+    display: block;
+    cursor: pointer;
+}
+
+#past-search-container {
+    display: flex;
+    align-items: center;
+}
+
+#past-search-icon {
+    color: #333;
+    height: 10px;
+    width: 10px;
+}
+
+#past-search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid #15151540;
+    border-radius: 25px; 
+    width: 120px; /* Adjusts the width of the search bar */
+    height: 20px;
+}
+
+#past-search-input {
+    border: none;
+    outline: none;
+    margin-left: 7px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    color: #000000;
+    width: 95px;
+}
+
+#past-search-input::placeholder {
+    color: #CCCCCC; /* Adjusts placeholder text color */
+}
+
+#past-search-bar,
+#past-search-icon:hover {
+    cursor: pointer; /* Optional: Changes cursor to pointer on hover */
+}
+
+.pastEvent {
+    width: 340px;
+    padding: 15px 25px;
+    align-items: center;
+}
+
+.pastEvent-image {
+    height: 328px;
+    width: 340px;
+    object-fit: cover;
+}
+
+.pastEvent-detailBox {
+    height: 119px;
+    width: 340px;
+    background-color: rgba(234, 0, 41, 1);
+    display: flex;
+    align-items: center;
+    margin-top: -4px;
+}
+
+.pastEvent-details {
+    font-family: "Poppins", sans-serif;
+    width: 340px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20.04px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+}
+
 /* ---------------------ABOUT-------------------- */
 
 #aboutUs-frame{
@@ -750,7 +856,7 @@ button[type="submit"]:hover {
 
 .serviceDescription {
     color: rgba(255, 255, 255, 1);
-    font-family: Poppins;
+    font-family: "Poppins", sans-serif;
     font-size: 15px;
     font-weight: 600;
     line-height: 22.5px;
@@ -771,7 +877,7 @@ button[type="submit"]:hover {
 }
 
 .aboutUs-visitText {
-    font-family: Open Sans;
+    font-family: "Open Sans";
     font-size: 13px;
     font-weight: 600;
     line-height: 19.5px;
@@ -781,7 +887,7 @@ button[type="submit"]:hover {
 }
 
 #aboutUs-visitTextHeader {
-    font-family: Open Sans;
+    font-family: "Open Sans";
     font-size: 36px;
     font-weight: 800;
     line-height: 54px;
@@ -795,7 +901,7 @@ button[type="submit"]:hover {
 }
 
 #aboutUs-visitButtonText {
-    font-family: Poppins;
+    font-family: "Poppins", sans-serif;
     font-size: 14px;
     font-weight: 700;
     line-height: 21px;
