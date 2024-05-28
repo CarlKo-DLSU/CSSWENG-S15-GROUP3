@@ -12,35 +12,7 @@
     </head>
 
     <style>
-        .image-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            width: 30px; /* Adjust width as needed */
-            height: 30px; /* Adjust height as needed */
-            background-color: rgba(0, 0, 0, 0.5); /* Example background */
-            color: white; /* Example color */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .arrow.left {
-            left: 10px; /* Adjust position as needed */
-        }
-
-        .arrow.right {
-            right: 10px; /* Adjust position as needed */
-        }
+        
     </style>
     <body>
         <div id="header">   
@@ -111,10 +83,10 @@
         <div id="past-event-popup" class="event-popup">
             <div class="event-popup-content past-event-popup-content">
                 <div id="past-event-details" class="event-details"></div>
-                <div class="image-container">
-                    <div class="arrow left"></div>
+                <div class="popupImage-container">
+                    <div class="arrowPopup left"></div>
                     <img id="past-event-image" class="event-image" src="" alt="Past Event Image">
-                    <div class="arrow right"></div>
+                    <div class="arrowPopup right"></div>
                 </div>
             </div>
         </div>
@@ -136,6 +108,7 @@
         </div>
 
         <script src="../js/2-events.js"></script>
+        <script src="../js/1-index.jscript>
     </body>
 
 </html>

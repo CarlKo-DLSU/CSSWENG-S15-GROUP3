@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const pastEvents = document.querySelectorAll('.pastEvent');
     const pastEventImage = document.getElementById('past-event-image');
     const pastEventDetails = document.getElementById('past-event-details');
-    const leftArrow = document.querySelector('.arrow.left');
-    const rightArrow = document.querySelector('.arrow.right');
+    const leftArrow = document.querySelector('.arrowPopup.left');
+    const rightArrow = document.querySelector('.arrowPopup.right');
 
     let currentEventIndex = 0;
 

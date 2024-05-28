@@ -781,6 +781,41 @@ button[type="submit"]:hover {
     object-fit: cover;
 }
 
+.popupImage-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrowPopup {
+    position: absolute;
+    top: 45%;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: white; 
+    border-radius: 50%;
+}
+
+.arrowPopup.left {
+    left: 10px; 
+    background-image: url("../images/3-aboutUs/leftArrow.png");
+}
+
+.arrowPopup.right {
+    right: 10px;
+    background-image: url("../images/3-aboutUs/rightArrow.png");
+}
+
+.arrowPopup.left:hover,
+.arrowPopup.right:hover{
+    filter: brightness(0%);
+}
+
 /* ---------------------ABOUT-------------------- */
 
 #aboutUs-frame{
