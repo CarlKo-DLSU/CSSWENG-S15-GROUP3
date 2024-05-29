@@ -377,7 +377,7 @@ button[type="submit"]:hover {
     to {opacity: 1}
 }
 
-.dots {
+#dots {
     text-align: center;
 }
 
