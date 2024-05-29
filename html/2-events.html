@@ -19,12 +19,15 @@
             <div id="current-events">
                 <div id="text-container">
                     <p id="live-events">Show here current live events</p>
-                    <p id="more-info">For more information <span class="highlight">Click Here</span></p>
+                    <p id="more-info">For more information <span class="highlight" style="cursor: pointer;" onclick="window.location.href='2-events.html';">Click Here</span></p>
                 </div>
             </div>
 
             <div id="nav">
-                <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
+                <a href="1-index.html">
+                    <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
+                </a>
+                
                 <img id="nav-hamburger" src="../images/1-index/nav-hamburger.png" alt="menu hamburger">
         
                 <div id="nav-panel">
@@ -36,6 +39,65 @@
                         <a href="#" id="sign-in-link">Sign In</a>
                     </div>
                     
+                </div>
+            </div>
+        </div>
+
+        <!--------------------SIGN IN-------------------->
+        <div id="sign-in-popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+
+                <img id="sign-in-logo" src="../images/1-index/nav-logo.png" alt="logo">
+
+                <p class="popup-text">Welcome back</p>
+
+                <form id="sign-in-form">
+                    <input type="text" id="sign-in-email" name="email" placeholder="Email">
+                    
+                    <input type="password" id="sign-in-password" name="password" placeholder="Password">
+                    
+                    <label for="remember-me">
+                        <input type="checkbox" id="remember-me" name="remember-me"> Remember me
+                    </label>
+                    
+                    <button type="submit" id="sign-in-btn">Sign In</button>
+                </form>
+
+                <div id="to-register-container">
+                    <p>No account yet? <button id="to-register-btn">Register</button>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!--------------------REGISTER-------------------->
+        <div id="register-popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+
+                <p class="popup-text">Register</p>
+
+                <form id="register-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+
+                    <label for="register-email">Email</label>
+                    <input type="text" id="register-email" name="email">
+
+                    <label for="contact-number">Contact Number</label>
+                    <input type="text" id="contact-number" name="contact-number">
+
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password">
+
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+
+                    <button type="submit" id="register-btn">Register</button>
+                </form>
+
+                <div id="to-sign-in-container">
+                    <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
                 </div>
             </div>
         </div>
@@ -108,7 +170,7 @@
         </div>
 
         <script src="../js/2-events.js"></script>
-        <script src="../js/1-index.jscript>
+        <script src="../js/1-index.js"></script>
     </body>
 
 </html>
