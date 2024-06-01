@@ -26,6 +26,27 @@ window.addEventListener("click", function(event) {
     }
 });
 
+// ----------------------------------------HOMEPAGE SEARCH----------------------------------------
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("upcoming-search-input");
+    const slides = document.querySelectorAll(".upcoming-slide");
+
+    searchInput.addEventListener("input", function() {
+        const query = searchInput.value.toLowerCase();
+
+        slides.forEach(function(slide) {
+            const title = slide.getAttribute("data-title").toLowerCase();
+            const date = slide.getAttribute("data-date").toLowerCase();
+
+            if (title.includes(query) || date.includes(query)) {
+                slide.style.display = "block";
+            } else {
+                slide.style.display = "none";
+            }
+        });
+    });
+});
+
 
 
 // ----------------------------------------POPUP----------------------------------------
