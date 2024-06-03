@@ -134,7 +134,38 @@
 
                 <div id="upcoming-search-container">
                     <div id="upcoming-filter">
-                        <img src="../images/1-index/upcoming-filter.png" alt="filter icon" id="upcoming-filter">
+                        <img src="../images/1-index/upcoming-filter.png" alt="filter icon" id="upcoming-filter-icon">
+                        
+                    </div>
+
+                    <!--------------------FILTER POPUP-------------------->
+                    <div id="upcoming-filter-popup">
+                        <div class="popup-content">
+                            <span class="close-btn">&times;</span>
+
+                            <p class="popup-text">Filter Options</p>
+
+                            <form id="upcoming-filter-form">
+                                <label for="event-type" class="filter-option-title">Event Type</label>
+                                <div id="event-type-checkboxes">
+                                    <input type="checkbox" id="concert" name="event-type" value="concert">
+                                    <label for="concert">Concert</label><br>
+                                    <input type="checkbox" id="choral" name="event-type" value="choral">
+                                    <label for="choral">Choral</label><br>
+                                    <input type="checkbox" id="game" name="event-type" value="game">
+                                    <label for="game">Game</label><br>
+                                </div>
+
+                                <label for="location" class="filter-option-title">Location</label>
+                                <input type="text" id="location" name="location">
+
+                                <label for="date-range" class="filter-option-title">Date Range</label>
+                                <input type="date" id="start-date" name="start-date">
+                                <input type="date" id="end-date" name="end-date">
+
+                                <button type="submit" id="apply-filters-btn">Apply Filters</button>
+                            </form>
+                        </div>
                     </div>
 
                     <div id="upcoming-search-bar">
@@ -148,7 +179,7 @@
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
 
-                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour Live in Manila!" data-date="September 21, 2024" data-details="Mall of Asia MOA Arena, Pasay">
+                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour Live in Manila!" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
                     <img src="../images/1-index/upcoming-eras.png" alt="eras">
 
                     <div class="event-preview">
@@ -161,7 +192,7 @@
 
                 </div>
                 
-                <div class="upcoming-slide" data-title="DLSU Chorale: Saliw Lasalyano" data-date="March 16, 2024" data-details="De La Salle University Manila">
+                <div class="upcoming-slide" data-title="DLSU Chorale: Saliw Lasalyano" data-date="2024-03-16" data-location="De La Salle University Manila, NCR" data-type="choral">
 
                     <img src="../images/1-index/upcoming-saliw.png" alt="saliw">
 
@@ -175,7 +206,7 @@
 
                 </div>
 
-                <div class="upcoming-slide" data-title="Genshin Impact Character Event Wish: The Hearth's Ashen Shadow" data-date="April 24, 2024" data-details="Dire Balemoon Arlecchino, Teyvat">
+                <div class="upcoming-slide" data-title="Genshin Impact Character Event Wish: The Hearth's Ashen Shadow Dire Balemoon Arlecchino" data-date="2024-04-24" data-location="Teyvat" data-type="game">
 
                     <img src="../images/1-index/upcoming-genshin.png" alt="genshin">
 
