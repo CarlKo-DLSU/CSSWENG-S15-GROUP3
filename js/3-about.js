@@ -15,8 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
     updateServiceDetails(currentServiceIndex);
 
     document.querySelector(".arrow.left").addEventListener("click", function(e) {
-        currentServiceIndex = (currentServiceIndex - 1) % services.length;
-        updateServiceDetails(currentServiceIndex);
+        if (currentServiceIndex == 0) {
+            currentServiceIndex = services.length - 1;
+            updateServiceDetails(currentServiceIndex);
+        } else {
+            currentServiceIndex = (currentServiceIndex - 1) % services.length;
+            updateServiceDetails(currentServiceIndex);
+        }
     });
 
     document.querySelector(".arrow.right").addEventListener("click", function(e) {
