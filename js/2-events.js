@@ -24,11 +24,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    var imageAlt;
     // Event listener for pastEvent clicks
     document.querySelectorAll(".pastEvent").forEach(function(pastEvent) {
         pastEvent.addEventListener("click", function() {
             var details = pastEvent.querySelector(".pastEvent-details").textContent;
-            var imageSrc = pastEvent.querySelector(".pastEvent-image").src;
+            imageAlt = pastEvent.querySelector(".pastEvent-image").alt;
+            var imageSrc = `../images/2-events/${imageAlt}1.jpg`;
             if (details && imageSrc) {
                 openPastEventPopup(details, imageSrc);
             } else {
@@ -44,38 +46,35 @@ document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener("click", function(event) {
             if (event.target === pastEventPopup) {
                 closePastEventPopup();
+                currentImageIndex = 0;
             }
         });
     } else {
         console.error("Past event popup element not found.");
     }
 
+    
+    let currentImageIndex = 0;
+    var imgCount = 5;
 
-
-    const pastEvents = document.querySelectorAll('.pastEvent');
     const pastEventImage = document.getElementById('past-event-image');
-    const pastEventDetails = document.getElementById('past-event-details');
     const leftArrow = document.querySelector('.arrowPopup.left');
     const rightArrow = document.querySelector('.arrowPopup.right');
 
-    let currentEventIndex = 0;
 
     function updateEventPopup() {
-        const event = pastEvents[currentEventIndex];
-        const eventImage = event.querySelector('.pastEvent-image').src;
-        const eventDetails = event.querySelector('.pastEvent-details').textContent;
+        const eventImage = `../images/2-events/${imageAlt}${currentImageIndex+1}.jpg`;
 
         pastEventImage.src = eventImage;
-        pastEventDetails.textContent = eventDetails;
     }
 
     leftArrow.addEventListener('click', function () {
-        currentEventIndex = (currentEventIndex === 0) ? pastEvents.length - 1 : currentEventIndex - 1;
+        currentImageIndex = (currentImageIndex === 0) ? imgCount - 1 : currentImageIndex - 1;
         updateEventPopup();
     });
 
     rightArrow.addEventListener('click', function () {
-        currentEventIndex = (currentEventIndex === pastEvents.length - 1) ? 0 : currentEventIndex + 1;
+        currentImageIndex = (currentImageIndex === imgCount - 1) ? 0 : currentImageIndex + 1;
         updateEventPopup();
     });
 
