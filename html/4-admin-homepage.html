@@ -12,13 +12,13 @@
         <div id="header">   
             <div id="current-events">
                 <div id="text-container">
-                    <p id="live-events">ADMIN VIEW</p>
+                    <p id="live-events">Show here current live events</p>
                     <p id="more-info">For more information <span class="highlight" style="cursor: pointer;" onclick="window.location.href='2-events.html';">Click Here</span></p>
                 </div>
             </div>
 
             <div id="nav">
-                <a href="1-index.html">
+                <a href="4-admin-homepage.html">
                     <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
                 </a>
                 
@@ -26,16 +26,19 @@
         
                 <div id="nav-panel">
                     <div id="nav-buttons">
-                        <a href="1-index.html">Home</a>
+                        <a href="4-admin-homepage.html">Home</a>
                         <a href="3-about.html">About Us</a>
                         <a href="2-events.html">Events</a>
                         <a href="#">Bookings</a>
                         <a href="#">Merchandise</a>
                         <a href="#" id="sign-in-link">Sign In</a>
+                        <a href="1-index.html">Log Out</a>
                     </div>
                     
                 </div>
             </div>
+            
+            <div class="red-bar bottom-bar"></div>
         </div>
 
         <!--------------------SIGN IN-------------------->
@@ -97,6 +100,8 @@
             </div>
         </div>
 
+        <div id="buffer"></div>
+
         <!--------------------PAST EVENTS-------------------->
         <div id="past-events">
             <div id="slides-container">
@@ -113,7 +118,6 @@
                     <img src="../images/1-index/slideshow-genshin.png">
                 </div>
 
-                <div class="red-bar top-bar"></div>
                 <div class="red-bar bottom-bar"></div>
             </div>
         
@@ -176,11 +180,50 @@
 
             </div>
 
+            <!--------------------ADMIN: ADD NEW UPCOMING EVENT-------------------->
+            <div id="add-upcoming-event">
+                <button id="add-upcoming-event-btn">
+                    <img src="../images/1-index/plus.png" alt="add icon" id="add-icon">
+                    Add new upcoming event
+                </button>
+            </div>
+
+            <!--------------------ADD UPCOMING EVENT POPUP-------------------->
+            <div id="add-upcoming-event-popup">
+                
+                <button id="close-popup-btn">&lt;</button>
+
+                <div id="popup-title">Add new event</div>
+
+                <div id="add-upcoming-event-popup-content">
+
+                    <form id="add-upcoming-event-form">
+                        <label for="event-title">Event Title:</label><br>
+                        <input type="text" id="event-title" name="event-title"><br>
+                        
+                        <label for="event-date">Event Date:</label><br>
+                        <input type="date" id="event-date" name="event-date"><br>
+                        
+                        <label for="event-venue">Event Venue:</label><br>
+                        <input type="text" id="event-venue" name="event-venue"><br>
+                        
+                        <label for="merch-presale-link">Merch Presale Link:</label><br>
+                        <input type="url" id="merch-presale-link" name="merch-presale-link"><br>
+                        
+                        <label for="event-cover-photo">Event Cover Photo:</label><br>
+                        <input type="file" id="event-cover-photo" name="event-cover-photo"><br>
+                        
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
 
                 <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour Live in Manila!" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
-                    <img src="../images/1-index/upcoming-eras.png" alt="eras">
+                    <img src="../images/1-index/upcoming-eras.png" alt="eras" class="upcoming-poster">
+                    <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
 
                     <div class="event-preview">
                         <div class="preview-text">
@@ -193,8 +236,8 @@
                 </div>
                 
                 <div class="upcoming-slide" data-title="DLSU Chorale: Saliw Lasalyano" data-date="2024-03-16" data-location="De La Salle University Manila, NCR" data-type="choral">
-
-                    <img src="../images/1-index/upcoming-saliw.png" alt="saliw">
+                    <img src="../images/1-index/upcoming-saliw.png" alt="saliw" class="upcoming-poster">
+                    <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
 
                     <div class="event-preview">
                         <div class="preview-text">
@@ -207,8 +250,8 @@
                 </div>
 
                 <div class="upcoming-slide" data-title="Genshin Impact Character Event Wish: The Hearth's Ashen Shadow Dire Balemoon Arlecchino" data-date="2024-04-24" data-location="Teyvat" data-type="game">
-
-                    <img src="../images/1-index/upcoming-genshin.png" alt="genshin">
+                    <img src="../images/1-index/upcoming-genshin.png" alt="genshin" class="upcoming-poster">
+                    <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
 
                     <div class="event-preview">
                         <div class="preview-text">
@@ -324,6 +367,7 @@
 
         <script src="../js/1-index.js"></script>
         <script src="../js/login.js"></script>
+        <script src="../js/4-admin-homepage.js"></script>
 
     </body>
 

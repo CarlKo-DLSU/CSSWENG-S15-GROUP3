@@ -26,6 +26,9 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
+    position: fixed; /* Fix the header position */
+    top: 0; /* Position it at the top of the viewport */
+    z-index: 1000; /* Ensure it's above other content */
 }
 
 #current-events {
@@ -334,6 +337,10 @@ button[type="submit"]:hover {
     color: #c10023;
 }
 
+#buffer {
+    height: 121px;
+}
+
 /* --------------------PAST EVENTS SLIDESHOW-------------------- */
 #past-events {
     position: relative;
@@ -395,7 +402,8 @@ button[type="submit"]:hover {
     background-color: #EA0029;
 }
 
-/* --------------------UPCOMING EVENTS SLIDER-------------------- */
+
+/* --------------------UPCOMING EVENTS-------------------- */
 
 #upcoming-events {
     padding-top: 17px;
@@ -529,11 +537,87 @@ button[type="submit"]:hover {
     cursor: pointer; /* Optional: Changes cursor to pointer on hover */
 }
 
+#add-upcoming-event {
+    display: flex;
+    justify-content: center;
+    margin: 7px 0;
+}
+
+#add-upcoming-event-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 94.3%;
+    max-width: 800px;
+    height: 33px;
+    background-color: #EA0029;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+#add-icon {
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+}
+
+#add-upcoming-event-popup {
+    display: none;
+    position: fixed;
+    top: 124px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 75px);
+    background-color: white;
+    z-index: 1000;
+}
+
+#close-popup-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-size: 25px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+#popup-title {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#add-upcoming-event-popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+
 #upcoming-events-slider {
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    padding: 10px 0;
+    padding: 0px 0;
     margin-left: 10px;
     position: relative;
 }
@@ -543,9 +627,23 @@ button[type="submit"]:hover {
     margin-right: 10px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-.upcoming-slide img {
+.upcoming-edit-icon {
+    position: absolute;
+    top: 10px;  
+    right: 10px;  
+    width: 24px;  
+    height: 24px;  
+    cursor: pointer;
+    background-color: rgba(74, 74, 74, 0.31); 
+    border-radius: 50%;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+}
+
+.upcoming-poster {
     height: 400px;
 }
 
