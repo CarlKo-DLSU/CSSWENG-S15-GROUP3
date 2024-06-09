@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> SX Manila | Homepage </title>
+        <link rel="stylesheet" href="../css/1-index.css">
+    </head>
+
+    <body>
+        <!--------------------HEADER-------------------->
+        <div id="header">   
+            <div id="current-events">
+                <div id="text-container">
+                    <p id="live-events">ADMIN VIEW</p>
+                    <p id="more-info">For more information <span class="highlight" style="cursor: pointer;" onclick="window.location.href='2-events.html';">Click Here</span></p>
+                </div>
+            </div>
+
+            <div id="nav">
+                <a href="1-index.html">
+                    <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
+                </a>
+                
+                <img id="nav-hamburger" src="../images/1-index/nav-hamburger.png" alt="menu hamburger">
+        
+                <div id="nav-panel">
+                    <div id="nav-buttons">
+                        <a href="1-index.html">Home</a>
+                        <a href="3-about.html">About Us</a>
+                        <a href="2-events.html">Events</a>
+                        <a href="#">Bookings</a>
+                        <a href="#">Merchandise</a>
+                        <a href="#" id="sign-in-link">Sign In</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!--------------------SIGN IN-------------------->
+        <div id="sign-in-popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+
+                <img id="sign-in-logo" src="../images/1-index/nav-logo.png" alt="logo">
+
+                <p class="popup-text">Welcome back</p>
+
+                <form id="sign-in-form">
+                    <input type="text" id="sign-in-email" name="email" placeholder="Email">
+                    
+                    <input type="password" id="sign-in-password" name="password" placeholder="Password">
+                    
+                    <label for="remember-me">
+                        <input type="checkbox" id="remember-me" name="remember-me"> Remember me
+                    </label>
+                    
+                    <button type="submit" id="sign-in-btn">Sign In</button>
+                </form>
+
+                <div id="to-register-container">
+                    <p>No account yet? <button id="to-register-btn">Register</button>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!--------------------REGISTER-------------------->
+        <div id="register-popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+
+                <p class="popup-text">Register</p>
+
+                <form id="register-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+
+                    <label for="register-email">Email</label>
+                    <input type="text" id="register-email" name="email">
+
+                    <label for="contact-number">Contact Number</label>
+                    <input type="text" id="contact-number" name="contact-number">
+
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password">
+
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+
+                    <button type="submit" id="register-btn">Register</button>
+                </form>
+
+                <div id="to-sign-in-container">
+                    <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!--------------------PAST EVENTS-------------------->
+        <div id="past-events">
+            <div id="slides-container">
+                
+                <div class="slides">
+                    <img src="../images/1-index/slideshow-eras.png">
+                </div>
+    
+                <div class="slides">
+                    <img src="../images/1-index/slideshow-bewitched.png">
+                </div>
+
+                <div class="slides">
+                    <img src="../images/1-index/slideshow-genshin.png">
+                </div>
+
+                <div class="red-bar top-bar"></div>
+                <div class="red-bar bottom-bar"></div>
+            </div>
+        
+            <div id="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+        </div>
+
+        <!--------------------UPCOMING EVENTS-------------------->
+        <div id="upcoming-events">
+
+            <div id="upcoming-events-header">
+
+                <p id="upcoming-events-title">Upcoming Events</p>
+
+                <div id="upcoming-search-container">
+                    <div id="upcoming-filter">
+                        <img src="../images/1-index/upcoming-filter.png" alt="filter icon" id="upcoming-filter-icon">
+                        
+                    </div>
+
+                    <!--------------------FILTER POPUP-------------------->
+                    <div id="upcoming-filter-popup">
+                        <div class="popup-content">
+                            <span class="close-btn">&times;</span>
+
+                            <p class="popup-text">Filter Options</p>
+
+                            <form id="upcoming-filter-form">
+                                <label for="event-type" class="filter-option-title">Event Type</label>
+                                <div id="event-type-checkboxes">
+                                    <input type="checkbox" id="concert" name="event-type" value="concert">
+                                    <label for="concert">Concert</label><br>
+                                    <input type="checkbox" id="choral" name="event-type" value="choral">
+                                    <label for="choral">Choral</label><br>
+                                    <input type="checkbox" id="game" name="event-type" value="game">
+                                    <label for="game">Game</label><br>
+                                </div>
+
+                                <label for="location" class="filter-option-title">Location</label>
+                                <input type="text" id="location" name="location">
+
+                                <label for="date-range" class="filter-option-title">Date Range</label>
+                                <input type="date" id="start-date" name="start-date">
+                                <input type="date" id="end-date" name="end-date">
+
+                                <button type="submit" id="apply-filters-btn">Apply Filters</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="upcoming-search-bar">
+                        <input type="text" id="upcoming-search-input" placeholder="Search">
+                        <img src="../images/1-index/upcoming-search.png" alt="search icon" id="upcoming-search-icon">
+                    </div>
+                </div>
+
+            </div>
+
+            <!--------------------UPCOMING EVENTS SLIDER-------------------->
+            <div id="upcoming-events-slider">
+
+                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour Live in Manila!" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
+                    <img src="../images/1-index/upcoming-eras.png" alt="eras">
+
+                    <div class="event-preview">
+                        <div class="preview-text">
+                            <p class="preview-date">SEPTEMBER 21, 2024</p>
+                            <p class="preview-title">Taylor Swift: The Eras Tour</p>
+                            <p class="preview-title">Live in Manila!</p>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="upcoming-slide" data-title="DLSU Chorale: Saliw Lasalyano" data-date="2024-03-16" data-location="De La Salle University Manila, NCR" data-type="choral">
+
+                    <img src="../images/1-index/upcoming-saliw.png" alt="saliw">
+
+                    <div class="event-preview">
+                        <div class="preview-text">
+                            <p class="preview-date">MARCH 16, 2024</p>
+                            <p class="preview-title">DLSU Chorale</p>
+                            <p class="preview-title">Saliw Lasalyano</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="upcoming-slide" data-title="Genshin Impact Character Event Wish: The Hearth's Ashen Shadow Dire Balemoon Arlecchino" data-date="2024-04-24" data-location="Teyvat" data-type="game">
+
+                    <img src="../images/1-index/upcoming-genshin.png" alt="genshin">
+
+                    <div class="event-preview">
+                        <div class="preview-text">
+                            <p class="preview-date">APRIL 24, 2024</p>
+                            <p class="preview-title">The Hearth's Ashen Shadow</p>
+                            <p class="preview-title">"Dire Balemoon" Arlecchino</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--------------------UPCOMING EVENTS POPUPS-------------------->
+            <div id="upcoming-event-popup-1" class="event-popup">
+
+                <div class="event-popup-content">
+
+                    <div class="popup-content-details">
+
+                        <img src="../images/1-index/upcoming-popup-eras.png" alt="popup poster">
+
+                        <div class="upcoming-event-details">
+                            <p class="event-title">Taylor Swift: The Eras Tour</p>
+                            <p class="event-date">September 21, 2024</p>
+                            <p class="event-location">MOA Arena, Pasay</p>
+                            <button class="merch-presale-btn">Merch Presale</button>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            </div>
+            
+            <div id="upcoming-event-popup-2" class="event-popup">
+
+                <div class="event-popup-content">
+
+                    <div class="popup-content-details">
+
+                        <img src="../images/1-index/upcoming-popup-saliw.png" alt="popup poster">
+                        
+                        <div class="upcoming-event-details">
+                            <p class="event-title">DLSU Chorale: Saliw Lasalyano</p>
+                            <p class="event-date">March 16, 2024</p>
+                            <p class="event-location">DLSU Manila</p>
+                            <button class="merch-presale-btn">Merch Presale</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="upcoming-event-popup-3" class="event-popup">
+
+                <div class="event-popup-content">
+
+                    <div class="popup-content-details">
+
+                        <img src="../images/1-index/upcoming-popup-genshin.png" alt="popup poster">
+
+                        <div class="upcoming-event-details">
+                            <p class="event-title">"The Hearth's Ashen Shadow"</p>
+                            <p class="event-date">April 24, 2024</p>
+                            <p class="event-location">Teyvat</p>
+                            <button class="merch-presale-btn">Merch Presale</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--------------------BOOKING SECTION-------------------->
+        <div id="booking">
+            <div id="red-rectangle"></div>
+
+            <img src="../images/1-index/booking-taylor.png" alt="Booking Taylor">
+
+            <div id="showstopper-text">
+                <p>LET'S CREATE THE NEXT</p>
+                <p>SHOWSTOPPER.</p>
+            </div>
+
+            <div id="booking-subtext">
+                <p>Book an appointment with us!</p>
+            </div>
+
+            <button id="book-now-btn">BOOK NOW</button>
+        </div>
+
+        <!--------------------FOOTER-------------------->
+        <div id="footer">
+            <p id="contact-us">CONTACT US</p>
+
+            <div id="contact-details">
+                <p>example@gmail.com</p>
+                <p>+63 9XX XXXX</p>
+            </div>
+
+            <div id="socials">
+                <img src="../images/1-index/footer-fb.png" id="fb-icon" class="socials-icon">
+                <img src="../images/1-index/footer-ig.png" id="ig-icon" class="socials-icon">
+                <img src="../images/1-index/footer-x.png" id="x-icon" class="socials-icon">
+            </div>
+        </div>
+
+        <script src="../js/1-index.js"></script>
+
+    </body>
+
+</html>
