@@ -628,6 +628,7 @@ button[type="submit"]:hover {
     display: flex;
     flex-direction: column;
     position: relative;
+    cursor: pointer;
 }
 
 .upcoming-edit-icon {
@@ -1170,4 +1171,5 @@ button[type="submit"]:hover {
     height: 21px;
     width: 22px;
     margin-right: 9px;
+    cursor: pointer;
 }
