@@ -576,7 +576,7 @@ button[type="submit"]:hover {
     z-index: 1000;
 }
 
-#close-popup-btn {
+.close-popup-btn {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -611,6 +611,58 @@ button[type="submit"]:hover {
     align-items: flex-start;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
+}
+
+#edit-upcoming-event {
+    display: flex;
+    justify-content: center;
+    margin: 7px 0;
+}
+
+#edit-upcoming-event-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 94.3%;
+    max-width: 800px;
+    height: 33px;
+    background-color: #EA0029;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+#edit-upcoming-event-popup {
+    display: none;
+    position: fixed;
+    top: 124px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 75px);
+    background-color: white;
+    z-index: 1000;
+}
+
+#edit-upcoming-event-popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+
+#edit-upcoming-cover-photo-preview {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    margin-top: 10px;
 }
 
 #upcoming-events-slider {
@@ -667,6 +719,12 @@ button[type="submit"]:hover {
 }
 
 .preview-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #B80022;
+}
+
+.preview-subtitle {
     font-size: 15px;
     font-weight: 500;
     color: #B80022;

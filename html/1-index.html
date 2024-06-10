@@ -18,7 +18,7 @@
             </div>
 
             <div id="nav">
-                <a href="1-index.html">
+                <a href="4-admin-homepage.html">
                     <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
                 </a>
                 
@@ -26,17 +26,18 @@
         
                 <div id="nav-panel">
                     <div id="nav-buttons">
-                        <a href="1-index.html">Home</a>
+                        <a href="4-admin-homepage.html">Home</a>
                         <a href="3-about.html">About Us</a>
                         <a href="2-events.html">Events</a>
                         <a href="#">Bookings</a>
                         <a href="#">Merchandise</a>
                         <a href="#" id="sign-in-link">Sign In</a>
+                        <a href="1-index.html">Log Out</a>
                     </div>
                     
                 </div>
             </div>
-
+            
             <div class="red-bar bottom-bar"></div>
         </div>
 
@@ -182,42 +183,40 @@
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
 
-                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour Live in Manila!" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
+                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
                     <img src="../images/1-index/upcoming-eras.png" alt="eras" class="upcoming-poster">
 
                     <div class="event-preview">
                         <div class="preview-text">
                             <p class="preview-date">SEPTEMBER 21, 2024</p>
                             <p class="preview-title">Taylor Swift: The Eras Tour</p>
-                            <p class="preview-title">Live in Manila!</p>
+                            <p class="preview-subtitle">Live in Manila!</p>
                         </div>
                     </div>
 
                 </div>
                 
                 <div class="upcoming-slide" data-title="DLSU Chorale: Saliw Lasalyano" data-date="2024-03-16" data-location="De La Salle University Manila, NCR" data-type="choral">
-
                     <img src="../images/1-index/upcoming-saliw.png" alt="saliw" class="upcoming-poster">
 
                     <div class="event-preview">
                         <div class="preview-text">
                             <p class="preview-date">MARCH 16, 2024</p>
-                            <p class="preview-title">DLSU Chorale</p>
-                            <p class="preview-title">Saliw Lasalyano</p>
+                            <p class="preview-title">DLSU Chorale: Saliw Lasalyano</p>
+                            <p class="preview-subtitle">A Choral Festival</p>
                         </div>
                     </div>
 
                 </div>
 
                 <div class="upcoming-slide" data-title="Genshin Impact Character Event Wish: The Hearth's Ashen Shadow Dire Balemoon Arlecchino" data-date="2024-04-24" data-location="Teyvat" data-type="game">
-
                     <img src="../images/1-index/upcoming-genshin.png" alt="genshin" class="upcoming-poster">
 
                     <div class="event-preview">
                         <div class="preview-text">
                             <p class="preview-date">APRIL 24, 2024</p>
                             <p class="preview-title">The Hearth's Ashen Shadow</p>
-                            <p class="preview-title">"Dire Balemoon" Arlecchino</p>
+                            <p class="preview-subtitle">"Dire Balemoon" Arlecchino</p>
                         </div>
                     </div>
 
@@ -232,12 +231,12 @@
 
                     <div class="popup-content-details">
 
-                        <img src="../images/1-index/upcoming-popup-eras.png" alt="popup poster">
+                        <img src="../images/1-index/upcoming-popup-eras.png" class="upcoming-popup-poster" alt="popup poster">
 
                         <div class="upcoming-event-details">
                             <p class="event-title">Taylor Swift: The Eras Tour</p>
                             <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            <button class="merch-presale-btn">Merch Presale</button>
+                            <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 
                     </div>
@@ -252,12 +251,12 @@
 
                     <div class="popup-content-details">
 
-                        <img src="../images/1-index/upcoming-popup-saliw.png" alt="popup poster">
+                        <img src="../images/1-index/upcoming-popup-saliw.png" class="upcoming-popup-poster" alt="popup poster">
                         
                         <div class="upcoming-event-details">
                             <p class="event-title">DLSU Chorale: Saliw Lasalyano</p>
                             <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            <button class="merch-presale-btn">Merch Presale</button>
+                            <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 
                     </div>
@@ -272,12 +271,12 @@
 
                     <div class="popup-content-details">
 
-                        <img src="../images/1-index/upcoming-popup-genshin.png" alt="popup poster">
+                        <img src="../images/1-index/upcoming-popup-genshin.png" class="upcoming-popup-poster" alt="popup poster">
 
                         <div class="upcoming-event-details">
                             <p class="event-title">"The Hearth's Ashen Shadow"</p>
                             <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            <button class="merch-presale-btn">Merch Presale</button>
+                            <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 
                     </div>
@@ -324,6 +323,7 @@
 
         <script src="../js/1-index.js"></script>
         <script src="../js/login.js"></script>
+        <script src="../js/4-admin-homepage.js"></script>
 
     </body>
 

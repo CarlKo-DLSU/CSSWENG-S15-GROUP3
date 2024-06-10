@@ -190,8 +190,7 @@
 
             <!--------------------ADD UPCOMING EVENT POPUP-------------------->
             <div id="add-upcoming-event-popup">
-                
-                <button id="close-popup-btn">&lt;</button>
+                <button id="close-add-popup-btn" class="close-popup-btn">&lt;</button>
 
                 <div id="popup-title">Add new event</div>
 
@@ -200,6 +199,9 @@
                     <form id="add-upcoming-event-form">
                         <label for="add-upcoming-title">Event Title</label><br>
                         <input type="text" id="add-upcoming-title" name="add-upcoming-title"><br>
+
+                        <label for="add-upcoming-subtitle">Event Subtitle</label><br>
+                        <input type="text" id="add-upcoming-subtitle" name="add-upcoming-subtitle"><br>
                         
                         <label for="add-upcoming-date">Event Date</label><br>
                         <input type="date" id="add-upcoming-date" name="add-upcoming-date"><br>
@@ -226,6 +228,48 @@
                 </div>
             </div>
 
+            <!--------------------EDIT UPCOMING EVENT POPUP-------------------->
+            <div id="edit-upcoming-event-popup">
+                <button id="close-edit-popup-btn" class="close-popup-btn">&lt;</button>
+
+                <div id="popup-title">Edit event</div>
+
+                <div id="edit-upcoming-event-popup-content">
+                    
+                    <form id="edit-upcoming-event-form">
+                        <label for="edit-upcoming-title">Event Title</label><br>
+                        <input type="text" id="edit-upcoming-title" name="edit-upcoming-title"><br>
+
+                        <label for="edit-upcoming-subtitle">Event Subtitle</label><br>
+                        <input type="text" id="edit-upcoming-subtitle" name="edit-upcoming-subtitle"><br>
+                        
+                        <label for="edit-upcoming-date">Event Date</label><br>
+                        <input type="date" id="edit-upcoming-date" name="edit-upcoming-date"><br>
+
+                        <label for="edit-upcoming-description">Event Description</label><br>
+                        <input type="text" id="edit-upcoming-description" name="edit-upcoming-description" maxlength="100"><br>
+                        
+                        <label for="edit-upcoming-venue">Event Venue</label><br>
+                        <input type="text" id="edit-upcoming-venue" name="edit-upcoming-venue"><br>
+                        
+                        <label for="edit-upcoming-merch-link">Merch Presale Link</label><br>
+                        <input type="url" id="edit-upcoming-merch-link" name="edit-upcoming-merch-link"><br>
+                        
+                        <label for="edit-upcoming-cover-photo">Event Cover Photo</label><br>
+                        <input type="file" id="edit-upcoming-cover-photo" name="edit-upcoming-cover-photo" accept="image/*"><br>
+                        <img id="edit-upcoming-cover-photo-preview" src="" alt="Cover Photo Preview">
+                        
+                        <div class="edit-upcoming-preview-buttons">
+                            <button type="button" id="edit-upcoming-preview-popup-btn">Preview event pop-up</button>
+                            <button type="button" id="edit-upcoming-preview-homepage-btn">Preview homepage</button>
+                        </div>
+
+                        <input type="submit" value="Update event" id="update-event-btn">
+                    </form>
+                </div>
+            </div>
+                        
+
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
 
@@ -237,7 +281,7 @@
                         <div class="preview-text">
                             <p class="preview-date">SEPTEMBER 21, 2024</p>
                             <p class="preview-title">Taylor Swift: The Eras Tour</p>
-                            <p class="preview-title">Live in Manila!</p>
+                            <p class="preview-subtitle">Live in Manila!</p>
                         </div>
                     </div>
 
@@ -250,8 +294,8 @@
                     <div class="event-preview">
                         <div class="preview-text">
                             <p class="preview-date">MARCH 16, 2024</p>
-                            <p class="preview-title">DLSU Chorale</p>
-                            <p class="preview-title">Saliw Lasalyano</p>
+                            <p class="preview-title">DLSU Chorale: Saliw Lasalyano</p>
+                            <p class="preview-subtitle">A Choral Festival</p>
                         </div>
                     </div>
 
@@ -265,7 +309,7 @@
                         <div class="preview-text">
                             <p class="preview-date">APRIL 24, 2024</p>
                             <p class="preview-title">The Hearth's Ashen Shadow</p>
-                            <p class="preview-title">"Dire Balemoon" Arlecchino</p>
+                            <p class="preview-subtitle">"Dire Balemoon" Arlecchino</p>
                         </div>
                     </div>
 
@@ -285,7 +329,7 @@
                         <div class="upcoming-event-details">
                             <p class="event-title">Taylor Swift: The Eras Tour</p>
                             <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            <button class="merch-presale-btn">Merch Presale</button>
+                            <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 
                     </div>
@@ -305,7 +349,7 @@
                         <div class="upcoming-event-details">
                             <p class="event-title">DLSU Chorale: Saliw Lasalyano</p>
                             <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            <button class="merch-presale-btn">Merch Presale</button>
+                            <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 
                     </div>
@@ -325,7 +369,7 @@
                         <div class="upcoming-event-details">
                             <p class="event-title">"The Hearth's Ashen Shadow"</p>
                             <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            <button class="merch-presale-btn">Merch Presale</button>
+                            <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 
                     </div>
