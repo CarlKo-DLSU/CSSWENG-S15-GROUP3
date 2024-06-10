@@ -724,8 +724,7 @@ button[type="submit"]:hover {
     margin-bottom: 4px;
 }
 
-.event-date,
-.event-location {
+.event-description {
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
     font-size: 14px;

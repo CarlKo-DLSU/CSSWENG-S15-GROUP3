@@ -198,22 +198,30 @@
                 <div id="add-upcoming-event-popup-content">
 
                     <form id="add-upcoming-event-form">
-                        <label for="event-title">Event Title:</label><br>
-                        <input type="text" id="event-title" name="event-title"><br>
+                        <label for="add-upcoming-title">Event Title</label><br>
+                        <input type="text" id="add-upcoming-title" name="add-upcoming-title"><br>
                         
-                        <label for="event-date">Event Date:</label><br>
-                        <input type="date" id="event-date" name="event-date"><br>
+                        <label for="add-upcoming-date">Event Date</label><br>
+                        <input type="date" id="add-upcoming-date" name="add-upcoming-date"><br>
+
+                        <label for="add-upcoming-description">Event Description</label><br>
+                        <input type="text" id="add-upcoming-description" name="add-upcoming-description" maxlength="100"><br>
                         
-                        <label for="event-venue">Event Venue:</label><br>
-                        <input type="text" id="event-venue" name="event-venue"><br>
+                        <label for="add-upcoming-venue">Event Venue</label><br>
+                        <input type="text" id="add-upcoming-venue" name="add-upcoming-venue"><br>
                         
-                        <label for="merch-presale-link">Merch Presale Link:</label><br>
-                        <input type="url" id="merch-presale-link" name="merch-presale-link"><br>
+                        <label for="add-upcoming-merch-link">Merch Presale Link</label><br>
+                        <input type="url" id="add-upcoming-merch-link" name="add-upcoming-merch-link"><br>
                         
-                        <label for="event-cover-photo">Event Cover Photo:</label><br>
-                        <input type="file" id="event-cover-photo" name="event-cover-photo"><br>
+                        <label for="add-upcoming-cover-photo">Event Cover Photo</label><br>
+                        <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo"><br>
                         
-                        <input type="submit" value="Submit">
+                        <div class="add-upcoming-preview-buttons">
+                            <button type="button" id="add-upcoming-preview-popup-btn">Preview event pop-up</button>
+                            <button type="button" id="add-upcoming-preview-homepage-btn">Preview homepage</button>
+                        </div>
+
+                        <input type="submit" value="Publish new event">
                     </form>
                 </div>
             </div>
@@ -221,7 +229,7 @@
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
 
-                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour Live in Manila!" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
+                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
                     <img src="../images/1-index/upcoming-eras.png" alt="eras" class="upcoming-poster">
                     <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
 
@@ -272,12 +280,11 @@
 
                     <div class="popup-content-details">
 
-                        <img src="../images/1-index/upcoming-popup-eras.png" alt="popup poster">
+                        <img src="../images/1-index/upcoming-popup-eras.png" class="upcoming-popup-poster" alt="popup poster">
 
                         <div class="upcoming-event-details">
                             <p class="event-title">Taylor Swift: The Eras Tour</p>
-                            <p class="event-date">September 21, 2024</p>
-                            <p class="event-location">MOA Arena, Pasay</p>
+                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
                             <button class="merch-presale-btn">Merch Presale</button>
                         </div>
 
@@ -293,12 +300,11 @@
 
                     <div class="popup-content-details">
 
-                        <img src="../images/1-index/upcoming-popup-saliw.png" alt="popup poster">
+                        <img src="../images/1-index/upcoming-popup-saliw.png" class="upcoming-popup-poster" alt="popup poster">
                         
                         <div class="upcoming-event-details">
                             <p class="event-title">DLSU Chorale: Saliw Lasalyano</p>
-                            <p class="event-date">March 16, 2024</p>
-                            <p class="event-location">DLSU Manila</p>
+                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
                             <button class="merch-presale-btn">Merch Presale</button>
                         </div>
 
@@ -314,12 +320,11 @@
 
                     <div class="popup-content-details">
 
-                        <img src="../images/1-index/upcoming-popup-genshin.png" alt="popup poster">
+                        <img src="../images/1-index/upcoming-popup-genshin.png" class="upcoming-popup-poster" alt="popup poster">
 
                         <div class="upcoming-event-details">
                             <p class="event-title">"The Hearth's Ashen Shadow"</p>
-                            <p class="event-date">April 24, 2024</p>
-                            <p class="event-location">Teyvat</p>
+                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
                             <button class="merch-presale-btn">Merch Presale</button>
                         </div>
 
