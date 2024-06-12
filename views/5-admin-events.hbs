@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html>
 
+    <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> SX Manila | About Us </title>
+        <title> SX Manila | Events </title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins&display=swap" rel="stylesheet">
@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="../css/1-index.css">
     </head>
 
+    <style>
+        
+    </style>
     <body>
         <!--------------------HEADER-------------------->
         <div id="header">   
@@ -22,7 +25,7 @@
             </div>
 
             <div id="nav">
-                <a href="/">
+                <a href="4-admin-homepage.hbs">
                     <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
                 </a>
                 
@@ -30,7 +33,7 @@
         
                 <div id="nav-panel">
                     <div id="nav-buttons">
-                        <a href="/">Home</a>
+                        <a href="4-admin-homepage.hbs">Home</a>
                         <a href="3-about.hbs">About Us</a>
                         <a href="2-events.hbs">Events</a>
                         <a href="#">Bookings</a>
@@ -54,7 +57,7 @@
 
                 <p class="popup-text">Welcome back</p>
 
-                <form id="sign-in-form" action="/signin" method="post">
+                <form id="sign-in-form">
                     <input type="text" id="sign-in-email" name="email" placeholder="Email">
                     
                     <input type="password" id="sign-in-password" name="password" placeholder="Password">
@@ -104,41 +107,43 @@
             </div>
         </div>
 
-        <div id="aboutUs-frame">
-            <img class="aboutUs-framePicture" src="../images/3-aboutUs/performer-placeholder.jpg" alt="BOCCHI THE ROCK!">
-            <span class="aboutUs-frameTitle">SOUND.<br>EXPERIENCE.<br>MANILA.</span>
+        <!--------------------PAST EVENTS-------------------->
+
+        <div class="past-events-frame">
+            <div id="past-events-header">
+                
+                <div id="past-search-container">
+                    <div id="past-filter">
+                        <img src="../images/2-events/past-filter.png" alt="filter icon" id="past-filter">
+                    </div>
+    
+                    <div id="past-search-bar">
+                        <input type="text" id="past-search-input" placeholder="Search">
+                        <img src="../images/2-events/past-search.png" alt="search icon" id="past-search-icon">
+                    </div>
+                </div>
+            </div>
+
+            <p id="past-events-title">Past Events</p>
+
+            <div class="pastEventList"></div>
+            
         </div>
+            
 
-        <div class="aboutUs-details">Delivering through with our<br>customers and clients by<br>organizing, planning, and executing<br>successful events.</div>
-
-        <div id="servicesFrame">
-            <div class="serviceTitle">OUR SERVICES</div>
-            <div class="service">
-                <div class="arrow left"></div>
-                <img class="servicePicture" src="../images/3-aboutUs/service1.png" alt="Event Management & Live Staging">
-                <div class="serviceDescription">Event Management & Live Staging</div>
-                <div class="arrow right"></div>
-                <div id="dots">
-                    <div class="dot" id="dot1"></div>
-                    <div class="dot" id="dot2"></div>
-                    <div class="dot" id="dot3"></div>
+        <!--------------------PAST EVENTS POPUPS-------------------->
+        <div id="past-event-popup" class="event-popup">
+            <div class="event-popup-content past-event-popup-content">
+                <div id="past-event-details" class="event-details"></div>
+                <div class="popupImage-container">
+                    <div class="arrowPopup left"></div>
+                    <img id="past-event-image" class="event-image" src="" alt="Past Event Image">
+                    <div class="arrowPopup right"></div>
                 </div>
             </div>
         </div>
         
 
-        <div class="aboutUs-visitFrame">
-            <img id="aboutUs-visitPicture" src="../images/3-aboutUs/tech-placeholder.jpg" alt="techtite">
-            <div class="aboutUs-visitText">
-                <span id="aboutUs-visitTextHeader">SX MANILA</span><br><br>
-                POST - a group that holds and organizes music event productions.<br><br>
-                From electrifying concerts to soul-stirring festivals, our passion for music and dedication to innovation shine through every beat.<br>
-                <div id="aboutUs-visitButton">
-                    <span id="aboutUs-visitButtonText">VISIT FB PAGE</span>
-                </div>
-            </div>
-        </div>
-        
         <div id="footer">
             <p id="contact-us">CONTACT US</p>
 
@@ -154,8 +159,9 @@
             </div>
         </div>
 
+        <script src="../js/2-events.js"></script>
         <script src="../js/1-index.js"></script>
-        <script src="../js/3-about.js"></script>
         <script src="../js/login.js"></script>
     </body>
+
 </html>
