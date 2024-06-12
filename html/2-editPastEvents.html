@@ -110,17 +110,17 @@
             <!-- Divider for title and cover image -->
     
             <div class="divider divider-left">
-                Create album event
+                <p>Create album event</p>
                 <div class="editPastEventTitle">
                     Event Title
                     <br>
-                    <textarea name="" id="" style="height: 18px;"></textarea>
+                    <input type="text" id="event-title" style="font-size: 30px; width: 100%; border-radius: 10px;">
                     <br>
                     Event Cover Photo
                     <br>                
                 </div>
                 <div class="coverImage-container">
-                    <img id="imagePlaceholder-cover" src="uploadImage.png" alt="Upload Image">
+                    <img id="imagePlaceholder-cover" src="../images/2-events/uploadImage.png" alt="Upload Image">
                     <input type="file" id="fileInput-cover" accept="image/*">
                 </div>
             </div>
@@ -133,8 +133,8 @@
     
                 <!-- Gallery of Past Event -->
                 <div class="addImageGallery" id="addImageGallery">
-                    <div class="hollow-box" id="hollowBox2">
-                        <img id="imagePlaceholder-gallery" src="uploadImage.png" alt="Upload Image">
+                    <div class="hollow-box uploadImage-hollowbox" id="hollowBox2">
+                        <img id="imagePlaceholder-gallery" src="../images/2-events/uploadImage.png" alt="Upload Image">
                         <input type="file" id="fileInput-gallery" accept="image/*">
                     </div>
                 </div>
