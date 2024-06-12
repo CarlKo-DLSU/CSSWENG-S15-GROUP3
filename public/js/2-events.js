@@ -5,23 +5,17 @@ const Event = function(title, cover, images) {
 }
 
 let events = [];
-let imagesList = [];
-let editEventImages = [];
 
 let imagesList1 = ["bocchi1.jpg", "bocchi2.jpg", "bocchi3.jpg", "bocchi4.jpg", "bocchi5.jpg"];
-imagesList.push(imagesList1);
 let imagesList2 = ["kita1.jpg", "kita2.jpg", "kita3.jpg", "kita4.jpg", "kita5.jpg"];
-imagesList.push(imagesList2);
 let imagesList3 = ["nijika1.jpg", "nijika2.jpg", "nijika3.jpg", "nijika4.jpg", "nijika5.jpg"];
-imagesList.push(imagesList3);
 let imagesList4 = ["ryo1.jpg", "ryo2.jpg", "ryo3.jpg", "ryo4.jpg", "ryo5.jpg"];
-imagesList.push(imagesList4);
 
 // Create events and push them into the events array
-events.push(new Event("Hitori Gotoh - Lead Guitarist", "bocchi-event.jpg", imagesList[0]));
-events.push(new Event("Ikuyo Kita - Vocalist/Guitarist", "kita-event.jpg", imagesList[1]));
-events.push(new Event("Nijika Ijichi - Drummer", "nijika-event.jpg", imagesList[2]));
-events.push(new Event("Ryo Yamada - Bassist", "ryo-event.webp", imagesList[3]));
+events.push(new Event("Hitori Gotoh - Lead Guitarist", "bocchi-event.jpg", imagesList1));
+events.push(new Event("Ikuyo Kita - Vocalist/Guitarist", "kita-event.jpg", imagesList2));
+events.push(new Event("Nijika Ijichi - Drummer", "nijika-event.jpg", imagesList3));
+events.push(new Event("Ryo Yamada - Bassist", "ryo-event.webp", imagesList4));
 
 
 function addExistingEvents() {
@@ -43,10 +37,7 @@ function addExistingEvents() {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    if (document.querySelector(".pastEventList")) {
-        addExistingEvents();
-    }
-
+    addExistingEvents();
     let currentImageIndex = 0;
     let currentEventImages = [];
 
@@ -89,6 +80,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // Event listener for left arrow
+    leftArrow.addEventListener('click', function() {
+        currentImageIndex = (currentImageIndex === 0) ? currentEventImages.length - 1 : currentImageIndex - 1;
+        updateEventPopup();
+    });
+
+    // Event listener for right arrow
+    rightArrow.addEventListener('click', function() {
+        currentImageIndex = (currentImageIndex === currentEventImages.length - 1) ? 0 : currentImageIndex + 1;
+        updateEventPopup();
+    });
+
+
     document.querySelectorAll(".pastEvent").forEach(function(pastEvent, index) {
         pastEvent.addEventListener("click", function() {
             var details = pastEvent.querySelector(".pastEvent-details").textContent;
@@ -113,19 +117,4 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         console.error("Past event popup element not found.");
     }
-
-    leftArrow.addEventListener('click', function() {
-        currentImageIndex = (currentImageIndex === 0) ? currentEventImages.length - 1 : currentImageIndex - 1;
-        updateEventPopup();
-    });
-
-    rightArrow.addEventListener('click', function() {
-        currentImageIndex = (currentImageIndex === currentEventImages.length - 1) ? 0 : currentImageIndex + 1;
-        updateEventPopup();
-    });
 });
-
-
-
-
-
