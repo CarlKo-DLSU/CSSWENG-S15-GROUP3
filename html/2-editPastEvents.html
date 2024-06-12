@@ -103,27 +103,48 @@
             </div>
         </div>
 
-        <!--------------------PAST EVENTS-------------------->
+        <!-------------------- CREATE PAS EVENTPAST EVENTS-------------------->
 
-        <div class="past-events-frame">
-            <div id="past-events-header">
-                
-                <div id="past-search-container">
-                    <div id="past-filter">
-                        <img src="../images/2-events/past-filter.png" alt="filter icon" id="past-filter">
-                    </div>
+        <div class="editPastEvents">
+
+            <!-- Divider for title and cover image -->
     
-                    <div id="past-search-bar">
-                        <input type="text" id="past-search-input" placeholder="Search">
-                        <img src="../images/2-events/past-search.png" alt="search icon" id="past-search-icon">
-                    </div>
+            <div class="divider divider-left">
+                Create album event
+                <div class="editPastEventTitle">
+                    Event Title
+                    <br>
+                    <textarea name="" id="" style="height: 18px;"></textarea>
+                    <br>
+                    Event Cover Photo
+                    <br>                
+                </div>
+                <div class="coverImage-container">
+                    <img id="imagePlaceholder-cover" src="uploadImage.png" alt="Upload Image">
+                    <input type="file" id="fileInput-cover" accept="image/*">
                 </div>
             </div>
-
-            <p id="past-events-title">Past Events</p>
-
-            <div class="pastEventList"></div>
-            
+    
+            <!-- Divider for gallery and sumbit buttons -->
+    
+            <div class="divider divider-right">
+                Event Album images
+                <br>
+    
+                <!-- Gallery of Past Event -->
+                <div class="addImageGallery" id="addImageGallery">
+                    <div class="hollow-box" id="hollowBox2">
+                        <img id="imagePlaceholder-gallery" src="uploadImage.png" alt="Upload Image">
+                        <input type="file" id="fileInput-gallery" accept="image/*">
+                    </div>
+                </div>
+    
+                <!-- Submit and preview buttons -->
+                <div class="buttonContainer">
+                    <div class="editPastEvent-button previewEventAlbum">Preview Event Album</div>
+                    <div class="editPastEvent-button publishEventAlbum">Publish Event Album</div>
+                </div>
+            </div>
         </div>
             
 
