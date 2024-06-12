@@ -1043,6 +1043,7 @@ button[type="submit"]:hover {
     height: 304px;
     display: flex;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 5);
+    margin-top: 124px;
 }
 
 .aboutUs-framePicture {
