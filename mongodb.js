@@ -2,15 +2,27 @@ const mongoose = require("mongoose")
 
 mongoose.connect("mongodb://localhost:27017/CSSWENGS15")
 .then(()=>{
-    console.log("Successfully connected!");
+    console.log("MongoDB successfully connected!");
 })
 .catch(()=>{
-    console.log("Failed to connect!");
+    console.log("Failed to connect to MongoDB!");
 })
+
+// placeholder schemas, delete this + use /models files in future
 
 const profileSchema = new mongoose.Schema({
     name: {
         type: String,
+        required: true,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    phone: {
+        type: Number,
         required: true,
         unique: true
     },
@@ -59,6 +71,10 @@ const oldEventSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("Profile", profileSchema);
-module.exports = mongoose.model("NewEvent", newEventSchema);
-module.exports = mongoose.model("OldEvent", oldEventSchema);
+const profiles = new mongoose.model("profileCollection", profileSchema)
+const newEvents = new mongoose.model("newEventCollection", newEventSchema)
+const oldEvents = new mongoose.model("oldEventCollection", oldEventSchema)
+
+module.exports = profiles
+module.exports = newEvents
+module.exports = oldEvents
