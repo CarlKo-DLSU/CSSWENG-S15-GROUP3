@@ -2,12 +2,15 @@ const express = require("express")
 const app = express()
 const path = require("path")
 const hbs = require("hbs")
-const profiles = require("./mongodb")
-const newEvents = require("./mongodb")
-const oldEvents = require("./mongodb")
+const mongo = require("./mongodb")
+
+const profiles = require("./models/Profile")
+const newEvents = require("./models/NewEvent")
+const oldEvents = require("./models/OldEvent")
 
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
+app.use(express.urlencoded({extended:false}))
 app.set("view engine","hbs")
 app.set("views", __dirname + "/views")
 

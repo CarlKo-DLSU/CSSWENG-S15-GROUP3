@@ -23,4 +23,5 @@ const newEventSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("NewEvent", newEventSchema);
+const newEvents = new mongoose.model("newEventCollection", newEventSchema)
+module.exports = newEvents
