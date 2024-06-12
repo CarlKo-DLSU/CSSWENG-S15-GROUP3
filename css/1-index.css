@@ -1308,19 +1308,26 @@ button[type="submit"]:hover {
     width: 112px; /* Set the width of the hollow box */
     height: 112px; /* Set the height of the hollow box */
     margin: 10px; /* Set the margin of the hollow box */
-    overflow: hidden; /* Hide overflow content */
 }
 .uploadImage-hollowbox{
     border: 1px solid #000; /* Set the border of the hollow box */
     border-style: dashed;
 }
-.hollow-box img {
+.hollowbox-picture {
     width: 100%; /* Make the image fill the entire width of the hollow box */
     height: 100%; /* Make the image fill the entire height of the hollow box */
     object-fit: cover; /* Scale the image while preserving its aspect ratio to cover the entire box */
     position: absolute; /* Position the image absolutely inside the hollow box */
     top: 0; /* Align the image to the top of the hollow box */
     left: 0; /* Align the image to the left of the hollow box */
+}
+.hollowbox-deleteIcon {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 15%; /* Adjust the width and height based on your delete icon */
+    height: 15%;
+    cursor: pointer;
 }
 
 /* Buttons for preview and publishing */

@@ -6,6 +6,7 @@ const Event = function(title, cover, images) {
 
 let events = [];
 let imagesList = [];
+let editEventImages = [];
 
 let imagesList1 = ["bocchi1.jpg", "bocchi2.jpg", "bocchi3.jpg", "bocchi4.jpg", "bocchi5.jpg"];
 imagesList.push(imagesList1);
@@ -124,6 +125,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+
 // JavaScript to replace placeholder image with uploaded image for imagePlaceholder-cover
 const imagePlaceholderForCover = document.getElementById('imagePlaceholder-cover');
 const fileInput = document.getElementById('fileInput-cover');
@@ -164,11 +167,31 @@ fileInput2.addEventListener('change', function(event) {
         // Create a new hollow box for the uploaded image
         const newHollowBox = document.createElement('div');
         newHollowBox.classList.add('hollow-box');
+
+        // Create a new image element and set its source to the uploaded image
         const newImage = document.createElement('img');
         newImage.src = reader.result;
         newImage.alt = 'Uploaded Image';
+        newImage.classList.add('hollowbox-picture');
+        
+
+        // Create a new image element for the delete button
+        const deleteButton = document.createElement('img');
+        deleteButton.src = '../images/2-events/deleteIcon.png'; // Change 'deleteIcon.png' to the correct path
+        deleteButton.classList.add('hollowbox-deleteIcon');
+
+        // Append the image and the delete button to the hollow box
         newHollowBox.appendChild(newImage);
+        newHollowBox.appendChild(deleteButton);
+
+        // Append the new hollow box to the gallery
         addImageGallery.appendChild(newHollowBox);
+
+        // Add event listener to the delete button
+        deleteButton.addEventListener('click', function() {
+            // Traverse up the DOM to find the parent hollow box and remove it
+            newHollowBox.parentNode.removeChild(newHollowBox);
+        });
     };
 
     reader.readAsDataURL(file); // Read the selected file as a data URL
