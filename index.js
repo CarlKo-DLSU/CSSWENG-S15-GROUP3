@@ -34,6 +34,14 @@ app.get('/3-about.hbs', (req, res) => {
     res.render('3-about');
 });
 
+app.get('/4-admin-homepage.hbs', (req, res) => {
+    res.render('4-admin-homepage');
+});
+
+app.get('/5-admin-events.hbs', (req, res) => {
+    res.render('5-admin-events');
+});
+
 app.get('/5-editPastEvents.hbs', (req, res) => {
     res.render('5-editPastEvents');
 });
