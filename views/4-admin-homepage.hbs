@@ -13,12 +13,12 @@
             <div id="current-events">
                 <div id="text-container">
                     <p id="live-events">Show here current live events</p>
-                    <p id="more-info">For more information <span class="highlight" style="cursor: pointer;" onclick="window.location.href='2-events.html';">Click Here</span></p>
+                    <p id="more-info">For more information <span class="highlight" style="cursor: pointer;" onclick="window.location.href='2-events.hbs';">Click Here</span></p>
                 </div>
             </div>
 
             <div id="nav">
-                <a href="4-admin-homepage.html">
+                <a href="4-admin-homepage.hbs">
                     <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
                 </a>
                 
@@ -26,13 +26,13 @@
         
                 <div id="nav-panel">
                     <div id="nav-buttons">
-                        <a href="4-admin-homepage.html">Home</a>
-                        <a href="3-about.html">About Us</a>
-                        <a href="2-events.html">Events</a>
+                        <a href="4-admin-homepage.hbs">Home</a>
+                        <a href="3-about.hbs">About Us</a>
+                        <a href="2-events.hbs">Events</a>
                         <a href="#">Bookings</a>
                         <a href="#">Merchandise</a>
                         <a href="#" id="sign-in-link">Sign In</a>
-                        <a href="1-index.html">Log Out</a>
+                        <a href="1-index.hbs">Log Out</a>
                     </div>
                     
                 </div>
@@ -50,7 +50,7 @@
 
                 <p class="popup-text">Welcome back</p>
 
-                <form id="sign-in-form">
+                <form id="sign-in-form" action="/signin" method="post">
                     <input type="text" id="sign-in-email" name="email" placeholder="Email">
                     
                     <input type="password" id="sign-in-password" name="password" placeholder="Password">
@@ -75,7 +75,7 @@
 
                 <p class="popup-text">Register</p>
 
-                <form id="register-form">
+                <form form id="register-form" action="/register" method="post">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name">
 
@@ -415,8 +415,8 @@
         </div>
 
         <script src="../js/1-index.js"></script>
-        <script src="../js/login.js"></script>
         <script src="../js/4-admin-homepage.js"></script>
+        <script src="../js/login.js"></script>
 
     </body>
 
