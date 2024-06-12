@@ -51,6 +51,27 @@ app.post("/register", async(req,res)=>{
     res.render("1-index")
 })
 
+app.post("/signin", async(req,res)=>{
+    try {
+        const check = await profiles.findOne({email:req.body.email})
+
+        if(check.password === req.body.password){
+            if(req.body.email === "admin@gmail.com") {
+                res.render("4-admin-homepage")
+                console.log("Greetings Admin!")
+            } else {
+                res.render("1-index")
+                console.log("Greetings!")
+            }
+        }
+        else {
+            res.render("1-index")
+        }
+    } catch {
+        res.send("Wrong Details")
+    }
+})
+
 app.listen(3000,()=>{
     console.log("Port connected");
 })
