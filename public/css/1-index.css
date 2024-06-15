@@ -1197,6 +1197,10 @@ button[type="submit"]:hover {
     padding: 5px 20px;
 }
 
+a:link, a:visited {
+    color: #ffffff;
+}
+
 /* --------------------FOOTER-------------------- */
 #footer {
     background-color: #000000;
