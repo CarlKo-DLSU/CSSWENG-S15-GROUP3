@@ -57,7 +57,7 @@
 
                 <p class="popup-text">Welcome back</p>
 
-                <form id="sign-in-form" action="/signin" method="post">
+                <form id="sign-in-form">
                     <input type="text" id="sign-in-email" name="email" placeholder="Email">
                     
                     <input type="password" id="sign-in-password" name="password" placeholder="Password">
@@ -111,25 +111,20 @@
 
         <div class="past-events-frame">
             <div id="past-events-header">
-                
                 <div id="past-search-container">
                     <div id="past-filter">
                         <img src="../images/2-events/past-filter.png" alt="filter icon" id="past-filter">
                     </div>
-    
                     <div id="past-search-bar">
                         <input type="text" id="past-search-input" placeholder="Search">
                         <img src="../images/2-events/past-search.png" alt="search icon" id="past-search-icon">
                     </div>
                 </div>
             </div>
-
             <p id="past-events-title">Past Events</p>
-
             <div class="pastEventList"></div>
-            
         </div>
-            
+
 
         <!--------------------PAST EVENTS POPUPS-------------------->
         <div id="past-event-popup" class="event-popup">
@@ -159,8 +154,8 @@
             </div>
         </div>
 
-        <script src="../js/1-index.js"></script>
         <script src="../js/2-events.js"></script>
+        <script src="../js/1-index.js"></script>
     </body>
 
 </html>

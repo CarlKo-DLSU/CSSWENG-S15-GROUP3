@@ -10,10 +10,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/1-index.css">
     </head>
-
-    <style>
-        
-    </style>
     <body>
         <!--------------------HEADER-------------------->
         <div id="header">   
@@ -35,13 +31,12 @@
                     <div id="nav-buttons">
                         <a href="4-admin-homepage.hbs">Home</a>
                         <a href="3-about.hbs">About Us</a>
-                        <a href="2-events.hbs">Events</a>
+                        <a href="5-admin-events.hbs">Events</a>
                         <a href="#">Bookings</a>
                         <a href="#">Merchandise</a>
                         <a href="#" id="sign-in-link">Sign In</a>
                         <a href="1-index.hbs">Log Out</a>
                     </div>
-                    
                 </div>
             </div>
             
@@ -111,25 +106,32 @@
 
         <div class="past-events-frame">
             <div id="past-events-header">
-                
                 <div id="past-search-container">
                     <div id="past-filter">
                         <img src="../images/2-events/past-filter.png" alt="filter icon" id="past-filter">
                     </div>
-    
                     <div id="past-search-bar">
                         <input type="text" id="past-search-input" placeholder="Search">
                         <img src="../images/2-events/past-search.png" alt="search icon" id="past-search-icon">
                     </div>
                 </div>
             </div>
-
             <p id="past-events-title">Past Events</p>
 
+            <!--------------------ADMIN: ADD PAST EVENT-------------------->
+            <div id="add-past-event">
+                <button id="add-past-event-btn">
+                    <img src="../images/1-index/plus.png" alt="add icon" id="add-icon-past">
+                        Create New Event Album
+                    </button>
+                </div>
+
+                <div class="pastEventList"></div>
+            
+            </div>
+
             <div class="pastEventList"></div>
-            
         </div>
-            
 
         <!--------------------PAST EVENTS POPUPS-------------------->
         <div id="past-event-popup" class="event-popup">
@@ -160,6 +162,7 @@
         </div>
 
         <script src="../js/2-events.js"></script>
+        <script src="../js/5-admin-events.js"></script>
         <script src="../js/1-index.js"></script>
         <script src="../js/login.js"></script>
     </body>

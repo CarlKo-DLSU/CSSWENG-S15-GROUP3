@@ -866,6 +866,34 @@ button[type="submit"]:hover {
 
 /* ------------------PAST EVENTS ---------------- */
 
+#add-past-event {
+    display: flex;
+    justify-content: center;
+    margin: 7px 0;
+}
+
+#add-past-event-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 94.3%;
+    max-width: 800px;
+    height: 33px;
+    background-color: #EA0029;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+#add-icon-past {
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+}
+
 .past-events-frame {
     border-top: 1px solid rgba(230,230,230,255);
     padding-bottom: 15px;
