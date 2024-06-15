@@ -1,33 +1,3 @@
-// ----------------------------------------NAV----------------------------------------
-const navPanel = document.getElementById("nav-panel");
-const hamburger = document.getElementById("nav-hamburger");
-
-// toggle navigation panel visibility on hamburger click
-hamburger.addEventListener("click", function () {
-    if (navPanel.style.display === "block") {
-        navPanel.classList.add("closing");
-        setTimeout(() => {
-            navPanel.style.display = "none";
-            navPanel.classList.remove("closing");
-        }, 300); 
-    } else {
-        navPanel.style.display = "block";
-    }    
-});
-
-// close navigation panel when clicking outside of it
-window.addEventListener("click", function(event) {
-    if (event.target !== navPanel && event.target !== hamburger) {
-        navPanel.classList.add("closing");
-        setTimeout(() => {
-            navPanel.style.display = "none";
-            navPanel.classList.remove("closing");
-        }, 300); 
-    }
-});
-
-
-
 // ----------------------------------------SLIDESHOW----------------------------------------
 
 let slideIndex = 0;
@@ -55,6 +25,7 @@ function showSlides() {
 }
 
 
+
 // ----------------------------------------HOMEPAGE SEARCH----------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("upcoming-search-input");
@@ -80,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// ----------------------------------------POPUP----------------------------------------
+// -------------------------------------EVENT-POPUP-------------------------------------
 
 // Function to open the popup when a slide is clicked
 function openPopup(slideNumber) {
@@ -96,76 +67,21 @@ function closePopup(slideNumber) {
     popup.style.display = "none";
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Sign In Popup
-    const signInLink = document.getElementById("sign-in-link");
-    const signInPopup = document.getElementById("sign-in-popup");
-    const navPanel = document.getElementById("nav-panel");
-
-    signInLink.addEventListener("click", function(event) {
-        event.preventDefault();
-        signInPopup.style.display = "flex";
-        navPanel.classList.add("closing"); 
-        setTimeout(() => {
-            navPanel.style.display = "none";
-            navPanel.classList.remove("closing");
-        }, 300);
+// event listeners on slides to open the respective popup
+var slides = document.querySelectorAll(".upcoming-slide");
+slides.forEach(function(slide, index) {
+    slide.addEventListener("click", function() {
+        openPopup(index + 1); // Slide numbers start from 1
     });
+});
 
-    signInPopup.querySelector(".close-btn").addEventListener("click", function() {
-        signInPopup.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target == signInPopup) {
-            signInPopup.style.display = "none";
+// Close popups when clicking outside the content
+window.addEventListener("click", function(event) {
+    var popups = document.querySelectorAll(".event-popup");
+    popups.forEach(function(popup, index) {
+        if (event.target == popup) {
+            closePopup(index + 1); // Slide numbers start from 1
         }
-    });
-
-    // Register Popup
-    const registerBtn = document.getElementById("to-register-btn");
-    const registerPopup = document.getElementById("register-popup");
-
-    registerBtn.addEventListener("click", function(event) {
-        event.preventDefault();
-        registerPopup.style.display = "flex";
-    });
-
-    registerPopup.querySelector(".close-btn").addEventListener("click", function() {
-        registerPopup.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target == registerPopup) {
-            registerPopup.style.display = "none";
-        }
-    });
-
-    // Back to Sign In from Register
-    const toSignInBtn = document.getElementById("to-sign-in-btn");
-
-    toSignInBtn.addEventListener("click", function(event) {
-        event.preventDefault();
-        signInPopup.style.display = "flex";
-        registerPopup.style.display = "none";
-    });
-
-    // event listeners on slides to open the respective popup
-    var slides = document.querySelectorAll(".upcoming-slide");
-    slides.forEach(function(slide, index) {
-        slide.addEventListener("click", function() {
-            openPopup(index + 1); // Slide numbers start from 1
-        });
-    });
-
-    // Close popups when clicking outside the content
-    window.addEventListener("click", function(event) {
-        var popups = document.querySelectorAll(".event-popup");
-        popups.forEach(function(popup, index) {
-            if (event.target == popup) {
-                closePopup(index + 1); // Slide numbers start from 1
-            }
-        });
     });
 });
 
