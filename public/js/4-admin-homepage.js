@@ -4,15 +4,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
     closeButton.addEventListener("click", function() {
         addEventPopup.style.display = "none";
+        resetAddEventForm();
     });
 
     var addButton = document.getElementById("add-upcoming-event-btn");
 
     addButton.addEventListener("click", function() {
         addEventPopup.style.display = "block";
+        resetAddEventForm();
     });
 
     var addEventForm = document.getElementById("add-upcoming-event-form");
+
+    document.getElementById('add-upcoming-cover-photo-img').addEventListener('click', function() {
+        document.getElementById('add-upcoming-cover-photo').click();
+    });
+
+    document.getElementById('add-upcoming-cover-photo').addEventListener('change', function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + e.target.result + ')';
+        };
+        reader.readAsDataURL(file);
+    });    
+
+    document.getElementById('edit-upcoming-cover-photo-preview').addEventListener('click', function() {
+        document.getElementById('edit-upcoming-cover-photo').click();
+    });   
 
     addEventForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -20,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var newSlide = document.createElement("div");
         newSlide.classList.add("upcoming-slide");
-        newSlide.setAttribute("data-title", formData.get("add-upcoming-title"));
+        newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
         newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
         newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
 
@@ -51,13 +70,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var previewTitle = document.createElement("p");
         previewTitle.classList.add("preview-title");
-        previewTitle.textContent = formData.get("add-upcoming-title");
+        previewTitle.innerHTML = formData.get("add-upcoming-title").replace(/\n/g, '<br>');
         previewText.appendChild(previewTitle);
-
-        var previewSubtitle = document.createElement("p");
-        previewSubtitle.classList.add("preview-subtitle");
-        previewSubtitle.textContent = formData.get("add-upcoming-subtitle");
-        previewText.appendChild(previewSubtitle);
 
         eventPreview.appendChild(previewText);
         newSlide.appendChild(eventPreview);
@@ -67,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         addEventPopup.style.display = "none";
         addEventForm.reset();
+        resetAddEventForm();
 
         var slideNumber = upcomingEventsSlider.children.length;
         createPopup(slideNumber, formData);
@@ -94,7 +109,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 popup.style.display = "none";
             }
         });
-    });    
+    });
+
+    function resetAddEventForm() {
+        document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + '../images/1-index/home-upload.png' + ')';
+        document.getElementById('add-upcoming-cover-photo').value = '';
+    }
 
     function createPopup(slideNumber, formData) {
         var popupId = "upcoming-event-popup-" + slideNumber;
@@ -119,12 +139,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var eventTitle = document.createElement("p");
         eventTitle.classList.add("event-title");
-        eventTitle.textContent = formData.get("add-upcoming-title");
+        eventTitle.textContent = formData.get("add-upcoming-title").split('\n')[0];
         eventDetails.appendChild(eventTitle);
 
         var eventDescription = document.createElement("p");
         eventDescription.classList.add("event-description");
-        eventDescription.textContent = formData.get("add-upcoming-description");
+        eventDescription.innerHTML = formData.get("add-upcoming-description").replace(/\n/g, '<br>');
         eventDetails.appendChild(eventDescription);
 
         var merchButton = document.createElement("button");
@@ -134,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
             window.open(formData.get("add-upcoming-merch-link"));
         };
         eventDetails.appendChild(merchButton);
+
 
         popupDetails.appendChild(eventDetails);
         popupContent.appendChild(popupDetails);
@@ -157,45 +178,47 @@ document.addEventListener("DOMContentLoaded", function() {
     function openEditPopup(slide, slideNumber) {
         var editPopup = document.getElementById("edit-upcoming-event-popup");
         editPopup.style.display = "block";
-    
+
         var editForm = document.getElementById("edit-upcoming-event-form");
-    
-        editForm["edit-upcoming-title"].value = slide.querySelector(".preview-title").textContent;
-        editForm["edit-upcoming-subtitle"].value = slide.querySelector(".preview-subtitle").textContent;
-        editForm["edit-upcoming-date"].value = slide.getAttribute("data-date");
-    
+
+        var title = slide.querySelector(".preview-title").innerHTML.replace(/<br\s*\/?>/mg, "\n");
+        var date = slide.getAttribute("data-date");
+        var location = slide.getAttribute("data-location");
         var popup = document.getElementById("upcoming-event-popup-" + slideNumber);
-    
-        editForm["edit-upcoming-description"].value = popup.querySelector(".event-description").textContent;
-        editForm["edit-upcoming-venue"].value = slide.getAttribute("data-location");
-        var merchLink = popup.querySelector(".merch-presale-btn").onclick.toString().match(/window\.open\(['"](.+?)['"]/);
+        var description = popup.querySelector(".event-description").innerHTML.replace(/<br\s*\/?>/mg, "\n");
+        var merchLink = popup.querySelector(".merch-presale-btn").getAttribute("onclick").match(/window\.open\(['"](.+?)['"]/);
+
+        editForm["edit-upcoming-title"].value = title.replace(/<br\s*\/?>/gi, "\n");
+        editForm["edit-upcoming-description"].value = description;
+        editForm["edit-upcoming-date"].value = date;
+        editForm["edit-upcoming-venue"].value = location;
         editForm["edit-upcoming-merch-link"].value = merchLink ? merchLink[1] : '';
-    
+
         var posterImage = slide.querySelector(".upcoming-poster").src;
         var posterPreview = document.getElementById("edit-upcoming-cover-photo-preview");
         posterPreview.src = posterImage;
-    
+
         var coverPhotoInput = editForm["edit-upcoming-cover-photo"];
         coverPhotoInput.onchange = function() {
             if (coverPhotoInput.files && coverPhotoInput.files[0]) {
                 posterPreview.src = URL.createObjectURL(coverPhotoInput.files[0]);
             }
         };
-    
+
         editForm.onsubmit = function(event) {
             event.preventDefault();
-    
+
             var formData = new FormData(editForm);
-            slide.setAttribute("data-title", formData.get("edit-upcoming-title"));
+            var firstLineTitle = formData.get("edit-upcoming-title").split('\n')[0]; // Extract first line
+            slide.setAttribute("data-title", formData.get("edit-upcoming-title").replace(/\n/g, '<br>'));
             slide.setAttribute("data-date", formData.get("edit-upcoming-date"));
             slide.setAttribute("data-location", formData.get("edit-upcoming-venue"));
-    
+
             var eventDate = new Date(formData.get("edit-upcoming-date"));
             var options = { year: 'numeric', month: 'long', day: 'numeric' };
             slide.querySelector(".preview-date").textContent = eventDate.toLocaleDateString("en-US", options).toUpperCase();
-            slide.querySelector(".preview-title").textContent = formData.get("edit-upcoming-title");
-            slide.querySelector(".preview-subtitle").textContent = formData.get("edit-upcoming-subtitle");
-    
+            slide.querySelector(".preview-title").innerHTML = formData.get("edit-upcoming-title").replace(/\n/g, '<br>'); // Convert line breaks to <br>
+
             // Check if a new poster image is provided
             var newPosterFile = formData.get("edit-upcoming-cover-photo");
             if (newPosterFile && newPosterFile.size > 0) {
@@ -203,38 +226,37 @@ document.addEventListener("DOMContentLoaded", function() {
                 slide.querySelector(".upcoming-poster").src = newPosterImage;
                 popup.querySelector(".upcoming-popup-poster").src = newPosterImage;
             }
-    
-            popup.querySelector(".event-title").textContent = formData.get("edit-upcoming-title");
-            popup.querySelector(".event-description").textContent = formData.get("edit-upcoming-description");
-    
+
+            popup.querySelector(".event-title").innerHTML = firstLineTitle
+            popup.querySelector(".event-description").innerHTML = formData.get("edit-upcoming-description").replace(/\n/g, '<br>');
+
             var merchButton = popup.querySelector(".merch-presale-btn");
             merchButton.onclick = function() {
                 window.open(formData.get("edit-upcoming-merch-link"));
             };
-    
+
             editPopup.style.display = "none";
         };
-        
-        var editCloseButton = document.getElementById("close-edit-popup-btn");
 
+        var editCloseButton = document.getElementById("close-edit-popup-btn");
         editCloseButton.addEventListener("click", function() {
             editPopup.style.display = "none";
         });
-    }    
-
+    }
+    
     var slides = document.querySelectorAll(".upcoming-slide");
     slides.forEach(function(slide, index) {
         slide.addEventListener("click", function() {
             openPopup(index + 1);
         });
-
+    
         var editIcon = slide.querySelector(".upcoming-edit-icon");
         editIcon.addEventListener("click", function(event) {
             event.stopPropagation();
             openEditPopup(slide, index + 1);
         });
     });
-
+    
     window.addEventListener("click", function(event) {
         var popups = document.querySelectorAll(".event-popup");
         popups.forEach(function(popup, index) {
@@ -243,38 +265,38 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
+    
     function createEditPopup(slideNumber, formData) {
         var popupId = "upcoming-event-popup-" + slideNumber;
         var popup = document.createElement("div");
         popup.id = popupId;
         popup.classList.add("event-popup");
-
+    
         var popupContent = document.createElement("div");
         popupContent.classList.add("event-popup-content");
-
+    
         var popupDetails = document.createElement("div");
         popupDetails.classList.add("popup-content-details");
-
+    
         var posterImage = document.createElement("img");
         posterImage.src = document.getElementById("edit-upcoming-cover-photo-preview").src;
         posterImage.alt = "Event Poster";
         posterImage.classList.add("upcoming-popup-poster");
         popupDetails.appendChild(posterImage);
-
+    
         var eventDetails = document.createElement("div");
         eventDetails.classList.add("upcoming-event-details");
-
+    
         var eventTitle = document.createElement("p");
-        eventTitle.classList.add("event-title");
+        eventTitle.classList.add("event-title", "preserve-whitespace");
         eventTitle.textContent = formData.get("edit-upcoming-title");
         eventDetails.appendChild(eventTitle);
-
+    
         var eventDescription = document.createElement("p");
         eventDescription.classList.add("event-description");
-        eventDescription.textContent = formData.get("edit-upcoming-description");
+        eventDescription.innerHTML = formData.get("edit-upcoming-description").replace(/\n/g, '<br>');
         eventDetails.appendChild(eventDescription);
-
+    
         var merchButton = document.createElement("button");
         merchButton.classList.add("merch-presale-btn");
         merchButton.textContent = "Merch Presale";
@@ -282,23 +304,23 @@ document.addEventListener("DOMContentLoaded", function() {
             window.open(formData.get("edit-upcoming-merch-link"));
         };
         eventDetails.appendChild(merchButton);
-
+    
         popupDetails.appendChild(eventDetails);
         popupContent.appendChild(popupDetails);
         popup.appendChild(popupContent);
-
+    
         document.body.appendChild(popup);
     }
-
+    
     document.getElementById("edit-upcoming-preview-popup-btn").addEventListener("click", function() {
         var editForm = document.getElementById("edit-upcoming-event-form");
         var formData = new FormData(editForm);
         var slideNumber = document.querySelectorAll(".event-popup").length + 1;
         createEditPopup(slideNumber, formData);
-    
+
         var popup = document.getElementById("upcoming-event-popup-" + slideNumber);
         popup.style.display = "flex";
-    
+
         window.addEventListener("click", function(event) {
             if (event.target == popup) {
                 popup.style.display = "none";

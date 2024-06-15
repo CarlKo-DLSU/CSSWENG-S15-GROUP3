@@ -197,16 +197,13 @@
 
                     <form id="add-upcoming-event-form">
                         <label for="add-upcoming-title">Event Title</label><br>
-                        <input type="text" id="add-upcoming-title" name="add-upcoming-title"><br>
-
-                        <label for="add-upcoming-subtitle">Event Subtitle</label><br>
-                        <input type="text" id="add-upcoming-subtitle" name="add-upcoming-subtitle"><br>
+                        <textarea type="text" id="add-upcoming-title" name="add-upcoming-title"></textarea><br>
                         
                         <label for="add-upcoming-date">Event Date</label><br>
                         <input type="date" id="add-upcoming-date" name="add-upcoming-date"><br>
 
                         <label for="add-upcoming-description">Event Description</label><br>
-                        <input type="text" id="add-upcoming-description" name="add-upcoming-description" maxlength="100"><br>
+                        <textarea type="text" id="add-upcoming-description" name="add-upcoming-description" maxlength="100"></textarea><br>
                         
                         <label for="add-upcoming-venue">Event Venue</label><br>
                         <input type="text" id="add-upcoming-venue" name="add-upcoming-venue"><br>
@@ -214,9 +211,10 @@
                         <label for="add-upcoming-merch-link">Merch Presale Link</label><br>
                         <input type="url" id="add-upcoming-merch-link" name="add-upcoming-merch-link"><br>
                         
-                        <label for="add-upcoming-cover-photo">Event Cover Photo</label><br>
-                        <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo"><br>
-                        
+                        <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Event Cover Photo</label>
+                        <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
+                        <div id="add-upcoming-cover-photo-img"></div>
+
                         <div class="add-upcoming-preview-buttons">
                             <button type="button" id="add-upcoming-preview-popup-btn">Preview event pop-up</button>
                             <button type="button" id="add-upcoming-preview-homepage-btn">Preview homepage</button>
@@ -237,16 +235,13 @@
                     
                     <form id="edit-upcoming-event-form">
                         <label for="edit-upcoming-title">Event Title</label><br>
-                        <input type="text" id="edit-upcoming-title" name="edit-upcoming-title"><br>
-
-                        <label for="edit-upcoming-subtitle">Event Subtitle</label><br>
-                        <input type="text" id="edit-upcoming-subtitle" name="edit-upcoming-subtitle"><br>
+                        <textarea type="text" id="edit-upcoming-title" name="edit-upcoming-title"></textarea><br>
                         
                         <label for="edit-upcoming-date">Event Date</label><br>
                         <input type="date" id="edit-upcoming-date" name="edit-upcoming-date"><br>
 
                         <label for="edit-upcoming-description">Event Description</label><br>
-                        <input type="text" id="edit-upcoming-description" name="edit-upcoming-description" maxlength="100"><br>
+                        <textarea type="text" id="edit-upcoming-description" name="edit-upcoming-description" maxlength="100"></textarea><br>
                         
                         <label for="edit-upcoming-venue">Event Venue</label><br>
                         <input type="text" id="edit-upcoming-venue" name="edit-upcoming-venue"><br>
@@ -255,7 +250,7 @@
                         <input type="url" id="edit-upcoming-merch-link" name="edit-upcoming-merch-link"><br>
                         
                         <label for="edit-upcoming-cover-photo">Event Cover Photo</label><br>
-                        <input type="file" id="edit-upcoming-cover-photo" name="edit-upcoming-cover-photo" accept="image/*"><br>
+                        <input type="file" id="edit-upcoming-cover-photo" name="edit-upcoming-cover-photo" accept="image/*">
                         <img id="edit-upcoming-cover-photo-preview" src="" alt="Cover Photo Preview">
                         
                         <div class="edit-upcoming-preview-buttons">
@@ -279,8 +274,7 @@
                     <div class="event-preview">
                         <div class="preview-text">
                             <p class="preview-date">SEPTEMBER 21, 2024</p>
-                            <p class="preview-title">Taylor Swift: The Eras Tour</p>
-                            <p class="preview-subtitle">Live in Manila!</p>
+                            <p class="preview-title">Taylor Swift: The Eras Tour<br>Live in Manila!</p>
                         </div>
                     </div>
 
@@ -293,8 +287,7 @@
                     <div class="event-preview">
                         <div class="preview-text">
                             <p class="preview-date">MARCH 16, 2024</p>
-                            <p class="preview-title">DLSU Chorale: Saliw Lasalyano</p>
-                            <p class="preview-subtitle">A Choral Festival</p>
+                            <p class="preview-title">DLSU Chorale: Saliw Lasalyano<br>A Choral Festival</p>
                         </div>
                     </div>
 
@@ -307,8 +300,7 @@
                     <div class="event-preview">
                         <div class="preview-text">
                             <p class="preview-date">APRIL 24, 2024</p>
-                            <p class="preview-title">The Hearth's Ashen Shadow</p>
-                            <p class="preview-subtitle">"Dire Balemoon" Arlecchino</p>
+                            <p class="preview-title">The Hearth's Ashen Shadow<br>"Dire Balemoon" Arlecchino</p>
                         </div>
                     </div>
 
@@ -327,7 +319,7 @@
 
                         <div class="upcoming-event-details">
                             <p class="event-title">Taylor Swift: The Eras Tour</p>
-                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
+                            <p class="event-description">This is 100 characters. This is 100 characters. This is 100 characters. This is 100 characters. This</p>
                             <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 
@@ -347,7 +339,7 @@
                         
                         <div class="upcoming-event-details">
                             <p class="event-title">DLSU Chorale: Saliw Lasalyano</p>
-                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
+                            <p class="event-description">This is 100 characters. This is 100 characters. This is 100 characters. This is 100 characters. This</p>
                             <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 
@@ -367,7 +359,7 @@
 
                         <div class="upcoming-event-details">
                             <p class="event-title">"The Hearth's Ashen Shadow"</p>
-                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
+                            <p class="event-description">This is 100 characters. This is 100 characters. This is 100 characters. This is 100 characters. This</p>
                             <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
 

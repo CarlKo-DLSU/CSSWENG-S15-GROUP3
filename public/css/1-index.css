@@ -537,13 +537,243 @@ button[type="submit"]:hover {
     cursor: pointer; /* Optional: Changes cursor to pointer on hover */
 }
 
-#add-upcoming-event {
+/* General popup styles */
+#add-upcoming-event-popup, #edit-upcoming-event-popup {
+    display: none;
+    position: fixed;
+    top: 124px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 75px);
+    background-color: white;
+    z-index: 1000;
+}
+
+/* Popup content container */
+#add-upcoming-event-popup-content, #edit-upcoming-event-popup-content {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: calc(100% - 60px); /* Adjust height as needed */
+    margin: 30px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    overflow: auto; /* Make the content scrollable */
+    box-sizing: border-box;
+}
+
+/* Close button */
+.close-popup-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-size: 25px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+/* Popup title */
+#popup-title {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+}
+
+#add-upcoming-event-form, #edit-upcoming-event-form {
+    width: 100%;
+}
+
+#add-upcoming-event-form label, #edit-upcoming-event-form label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+#add-upcoming-event-form input, 
+#edit-upcoming-event-form input {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#add-upcoming-title,
+#edit-upcoming-title {
+    height: 65px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#add-upcoming-description,
+#edit-upcoming-description {
+    height: 125px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* File input for Add Upcoming Event */
+#add-upcoming-cover-photo {
+    display: none; /* Hide the actual file input */
+}
+
+/* Label styling remains as text */
+#add-upcoming-cover-photo-label {
+    display: block;
+    margin-top: 10px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Div acting as image button */
+#add-upcoming-cover-photo-img {
+    width: auto;
+    max-width: 100%;
+    height: 500px; 
+    background-image: url('../images/1-index/home-upload.png');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    cursor: pointer;
+}
+
+/* File input for Edit Upcoming Event */
+#edit-upcoming-cover-photo {
+    display: none; 
+}
+
+/* Label styling remains as text */
+label[for="edit-upcoming-cover-photo"] {
+    display: block;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Image preview container */
+#edit-upcoming-cover-photo-preview {
+    width: auto;
+    max-width: 100%;
+    height: 500px;
+    border: 1px solid #ccc; /* Match the border style of input fields */
+    border-radius: 10px; 
+    cursor: pointer;
+}
+
+/* Preview buttons */
+.edit-upcoming-preview-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.edit-upcoming-preview-buttons button {
+    padding: 10px 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    background-color: #4A4A4A; /* Adjust background color as needed */
+    border: none;
+    border-radius: 4px; /* Added border-radius for rounded corners */
+    cursor: pointer;
+}
+
+.edit-upcoming-preview-buttons button:last-child {
+    background-color: #EA0029; /* Adjust background color for the second button */
+}
+
+/* File input and image preview */
+input[type="file"] {
+    position: relative;
+    opacity: 1;
+    cursor: pointer;
+}
+
+/* Preview buttons */
+.add-upcoming-preview-buttons, .edit-upcoming-preview-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 18px;
+}
+
+.add-upcoming-preview-buttons button, .edit-upcoming-preview-buttons button {
+    padding: 10px 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#add-upcoming-preview-popup-btn, #edit-upcoming-preview-popup-btn {
+    background-color: #4A4A4A;
+}
+
+#add-upcoming-preview-homepage-btn, #edit-upcoming-preview-homepage-btn {
+    background-color: #EA0029;
+}
+
+/* Submit buttons */
+input[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    background-color: #EA0029;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Buttons for adding and editing events */
+#add-upcoming-event, #edit-upcoming-event {
     display: flex;
     justify-content: center;
     margin: 7px 0;
 }
 
-#add-upcoming-event-btn {
+#add-upcoming-event-btn, #edit-upcoming-event-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -563,106 +793,6 @@ button[type="submit"]:hover {
     width: 12px;
     height: 12px;
     margin-right: 8px;
-}
-
-#add-upcoming-event-popup {
-    display: none;
-    position: fixed;
-    top: 124px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 75px);
-    background-color: white;
-    z-index: 1000;
-}
-
-.close-popup-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 5px;
-    background-color: transparent;
-    border: none;
-    color: black;
-    font-family: "Poppins", sans-serif;
-    font-size: 25px;
-    line-height: 20px;
-    cursor: pointer;
-}
-
-#popup-title {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: black;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 20px;
-}
-
-#add-upcoming-event-popup-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 400;
-}
-
-#edit-upcoming-event {
-    display: flex;
-    justify-content: center;
-    margin: 7px 0;
-}
-
-#edit-upcoming-event-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 94.3%;
-    max-width: 800px;
-    height: 33px;
-    background-color: #EA0029;
-    color: white;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-}
-
-#edit-upcoming-event-popup {
-    display: none;
-    position: fixed;
-    top: 124px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 75px);
-    background-color: white;
-    z-index: 1000;
-}
-
-#edit-upcoming-event-popup-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 400;
-}
-
-#edit-upcoming-cover-photo-preview {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: contain;
-    margin-top: 10px;
 }
 
 #upcoming-events-slider {
@@ -787,6 +917,7 @@ button[type="submit"]:hover {
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
     font-size: 14px;
+    word-wrap: break-word;
 }
 
 .merch-presale-btn {
