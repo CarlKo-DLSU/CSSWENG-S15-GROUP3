@@ -46,6 +46,10 @@ app.get('/5-editPastEvents.hbs', (req, res) => {
     res.render('5-editPastEvents');
 });
 
+app.get('/6-admin-about.hbs', (req, res) => {
+    res.render('6-admin-about');
+});
+
 app.post("/register", async(req,res)=>{
 
     const profile = {
