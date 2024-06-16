@@ -7,6 +7,7 @@ const mongo = require("./mongodb")
 const profiles = require("./models/Profile")
 const newEvents = require("./models/NewEvent")
 const oldEvents = require("./models/OldEvent")
+const aboutUs = require("./models/AboutUs")
 
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
