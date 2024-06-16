@@ -3,17 +3,37 @@ const app = express()
 const path = require("path")
 const hbs = require("hbs")
 const mongo = require("./mongodb")
+const mongoose = require("mongoose");
+const multer = require("multer");
+const bodyParser = require('body-parser');
+const fs = require('fs');
 
 const profiles = require("./models/Profile")
 const newEvents = require("./models/NewEvent")
 const oldEvents = require("./models/OldEvent")
 const aboutUs = require("./models/AboutUs")
+const UpcomingEvent = require("./models/UpcomingEvent");
 
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({extended:false}))
 app.set("view engine","hbs")
 app.set("views", __dirname + "/views")
+app.use(bodyParser.json());
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const uploadDir = 'uploads/';
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir);
+        }
+        cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Append timestamp to the original file name
+    }
+});
+const upload = multer({ storage: storage });
 
 app.get("/",(req,res)=>{
     res.render("1-index")
@@ -84,6 +104,56 @@ app.post("/signin", async(req,res)=>{
         res.send("Wrong Details")
     }
 })
+
+app.post('/api/events', async (req, res) => {
+    try {
+        const event = req.body;
+
+        await event.save();
+        res.status(200).json({ message: 'Event created successfully' });
+    } catch (error) {
+        console.error('Error creating event:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get("/api/events", async (req, res) => {
+    const events = await UpcomingEvent.find({});
+    res.json(events);
+});
+
+app.put("/api/events/:id", upload.single('coverPhoto'), async (req, res) => {
+    const { title, date, description, venue, merchLink } = req.body;
+    const coverPhoto = req.file ? req.file.path : null;
+
+    const event = await UpcomingEvent.findById(req.params.id);
+
+    if (event) {
+        event.title = title;
+        event.date = date;
+        event.description = description;
+        event.venue = venue;
+        event.merchLink = merchLink;
+        if (coverPhoto) {
+            event.coverPhoto = coverPhoto;
+        }
+
+        await event.save();
+        res.json(event);
+    } else {
+        res.status(404).send("Event not found");
+    }
+});
+
+app.delete("/api/events/:id", async (req, res) => {
+    const event = await UpcomingEvent.findById(req.params.id);
+    if (event) {
+        await event.remove();
+        res.status(204).send();
+    } else {
+        res.status(404).send("Event not found");
+    }
+});
 
 app.listen(3000,()=>{
     console.log("Port connected");

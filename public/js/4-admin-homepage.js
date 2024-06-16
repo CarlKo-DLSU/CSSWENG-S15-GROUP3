@@ -16,6 +16,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var addEventForm = document.getElementById("add-upcoming-event-form");
 
+    fetch('/api/events')
+        .then(response => response.json())
+        .then(events => {
+            events.forEach(event => {
+                createEventSlide(event);
+                createPopup(event);
+            });
+        });
+
     document.getElementById('add-upcoming-cover-photo-img').addEventListener('click', function() {
         document.getElementById('add-upcoming-cover-photo').click();
     });
@@ -33,9 +42,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('edit-upcoming-cover-photo').click();
     });   
 
-    addEventForm.addEventListener("submit", function(event) {
+    addEventForm.addEventListener("submit", async function(event) {
         event.preventDefault();
-        var formData = new FormData(addEventForm);
+        const formData = new FormData(addEventForm);
 
         var newSlide = document.createElement("div");
         newSlide.classList.add("upcoming-slide");
@@ -94,6 +103,62 @@ document.addEventListener("DOMContentLoaded", function() {
             event.stopPropagation();
             openEditPopup(newSlide, slideNumber);
         });
+
+        const eventData = {
+            title: formData.get('add-upcoming-title'),
+            date: formData.get('add-upcoming-date'),
+            description: formData.get('add-upcoming-description'),
+            venue: formData.get('add-upcoming-venue'),
+            merchLink: formData.get('add-upcoming-merch-link'),
+            coverPhoto: formData.get('add-upcoming-cover-photo')
+        };
+    
+        const file = formData.get('add-upcoming-cover-photo');
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = async function() {
+                eventData.coverPhoto = reader.result;
+    
+                try {
+                    const response = await fetch('http://localhost:3000/api/events', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(eventData)
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+    
+                    const responseData = await response.json();
+                    console.log('Success:', responseData);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+            reader.readAsDataURL(file);
+        } else {
+            try {
+                const response = await fetch('http://localhost:3000/api/events', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(eventData)
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+    
+                const responseData = await response.json();
+                console.log('Success:', responseData);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
     });
 
     document.getElementById("add-upcoming-preview-popup-btn").addEventListener("click", function() {
@@ -115,6 +180,62 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + '../images/1-index/home-upload.png' + ')';
         document.getElementById('add-upcoming-cover-photo').value = '';
     }
+
+    function createEventSlide(event) {
+        var newSlide = document.createElement("div");
+        newSlide.classList.add("upcoming-slide");
+        newSlide.setAttribute("data-title", event.title.replace(/\n/g, '<br>'));
+        newSlide.setAttribute("data-date", event.date);
+        newSlide.setAttribute("data-location", event.venue);
+    
+        var posterImage = document.createElement("img");
+        posterImage.src = 'uploads/' + event.coverPhoto; // Assuming the cover photo is saved in an 'uploads' folder
+        posterImage.alt = "Event Poster";
+        posterImage.classList.add("upcoming-poster");
+        newSlide.appendChild(posterImage);
+    
+        var editIcon = document.createElement("img");
+        editIcon.src = "../images/1-index/pencil.png";
+        editIcon.alt = "Edit Icon";
+        editIcon.classList.add("upcoming-edit-icon");
+        newSlide.appendChild(editIcon);
+    
+        var eventPreview = document.createElement("div");
+        eventPreview.classList.add("event-preview");
+    
+        var previewText = document.createElement("div");
+        previewText.classList.add("preview-text");
+    
+        var eventDate = new Date(event.date);
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        var previewDate = document.createElement("p");
+        previewDate.classList.add("preview-date");
+        previewDate.textContent = eventDate.toLocaleDateString("en-US", options).toUpperCase();
+        previewText.appendChild(previewDate);
+    
+        var previewTitle = document.createElement("p");
+        previewTitle.classList.add("preview-title");
+        previewTitle.innerHTML = event.title.replace(/\n/g, '<br>');
+        previewText.appendChild(previewTitle);
+    
+        eventPreview.appendChild(previewText);
+        newSlide.appendChild(eventPreview);
+    
+        var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
+        upcomingEventsSlider.appendChild(newSlide);
+    
+        // Add event listeners for the new slide and edit icon
+        var slideNumber = upcomingEventsSlider.children.length;
+    
+        newSlide.addEventListener("click", function() {
+            openPopup(slideNumber);
+        });
+    
+        editIcon.addEventListener("click", function(event) {
+            event.stopPropagation();
+            openEditPopup(newSlide, slideNumber);
+        });
+    }    
 
     function createPopup(slideNumber, formData) {
         var popupId = "upcoming-event-popup-" + slideNumber;
