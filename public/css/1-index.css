@@ -1228,14 +1228,23 @@ input[type="submit"] {
     padding: 30px;
 }
 
-.aboutUs-details{
+#edit-mission {
+    position: absolute;
+    z-index: 1;
+    width: 21px;
+    height: auto;
+    left: 87%;
+    margin: 15px;
+}
+
+#mission-details{
     background-color: #EA0029;
     font-family: "Poppins", sans-serif;
     font-size: 15px;
     font-weight: 400px;
     line-height: 22.5px;
     color: #FFFFFF;
-    padding: 50px 60px;
+    padding: 40px 60px;
     position: relative; /* Ensure z-index works */
     z-index: 0; /* Lower stacking order */
 }
@@ -1252,9 +1261,37 @@ input[type="submit"] {
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
-    padding: 30px 0px;
     text-align: center;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#adServiceTitle {
+    padding: 30px 0px 10px;
+}
+
+#regServiceTitle {
+    padding: 30px 0px 35px;
+}
+
+#serviceEdit {
+    position: relative;
+    width: 20px;
+    height: auto;
+    left: 76%;
+}
+
+#serviceMinus {
+    position: relative;
+    width: 20px;
+    height: auto;
+    left: 76%;
+}
+
+#servicePlus {
+    position: relative;
+    width: 20px;
+    height: auto;
+    left: 76%;
 }
 
 .service {
@@ -1322,6 +1359,11 @@ input[type="submit"] {
     object-fit: cover;
 }
 
+.aboutUs-visitTextFrame {
+    height: 400px;
+    width: 100%;
+}
+
 .aboutUs-visitText {
     font-family: "Open Sans";
     font-size: 13px;
@@ -1330,6 +1372,15 @@ input[type="submit"] {
     text-align: left;
     color: rgba(255, 242, 234, 1);
     padding: 40px 35px;
+}
+
+#aboutUs-visitEdit {
+    position: absolute;
+    z-index: 1;
+    width: 21px;
+    height: auto;
+    left: 87%;
+    margin: 15px;
 }
 
 #aboutUs-visitTextHeader {
