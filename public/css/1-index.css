@@ -1396,6 +1396,77 @@ input[type="submit"] {
     z-index: 2;
 }
 
+#delete-service {
+    visibility: hidden;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+#delete-service-popup {
+    background-color: #fefefe;
+    padding: 20px;
+    max-width: 370px;
+    border-radius: 13px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeInPopup 0.3s ease forwards;
+}
+
+#delete-service-prompt {
+    font-family: sans-serif;
+    font-size: 15px;
+    line-height: 20px;
+    text-align: center;
+}
+
+#delete-service-options {
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-between;
+    margin: 20px -10px -5px;
+}
+
+#delete-service-no {
+    height: 30px;
+    width: 48%;
+    background-color: rgba(153, 153, 153, 1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#delete-service-yes {
+    height: 30px;
+    width: 48%;
+    background-color: rgba(234, 0, 41, 1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #add-service {
     background-color: rgba(74, 74, 74, 0.26);
     width: 38%;

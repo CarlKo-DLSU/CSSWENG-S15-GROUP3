@@ -15,7 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
     updateServiceDetails(currentServiceIndex);
 
     document.querySelector(".arrow.left").addEventListener("click", function(e) {
-        if (serviceButtons.style.visibility === 'visible') {
+        try {
+            if (serviceButtons.style.visibility != 'hidden') {
+                if (currentServiceIndex == 0) {
+                    currentServiceIndex = services.length - 1;
+                } else {
+                    currentServiceIndex = (currentServiceIndex - 1) % services.length;
+                }        
+                updateServiceDetails(currentServiceIndex);
+            }
+        } catch (ReferenceError) {
             if (currentServiceIndex == 0) {
                 currentServiceIndex = services.length - 1;
             } else {
@@ -26,7 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.querySelector(".arrow.right").addEventListener("click", function(e) {
-        if (serviceButtons.style.visibility === 'visible') {
+        try {
+            if (serviceButtons.style.visibility != 'hidden') {
+                currentServiceIndex = (currentServiceIndex + 1) % services.length;
+                updateServiceDetails(currentServiceIndex);
+            }
+        } catch (ReferenceError) {
             currentServiceIndex = (currentServiceIndex + 1) % services.length;
             updateServiceDetails(currentServiceIndex);
         }
