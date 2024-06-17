@@ -1229,12 +1229,54 @@ input[type="submit"] {
 }
 
 #edit-mission {
+    background-color: rgba(74, 74, 74, 0.26);
+    width: 35%;
+    height: 23px;
     position: absolute;
     z-index: 1;
+    left: 58%;
+    margin: 15px;
+    border-radius: 20px;
+}
+
+#edit-mission-check {
+    width: 9px;
+    height: auto;
+    position: absolute;
+    top: 25%;
+    left: 25.5%;
+}
+
+#edit-mission-cross {
+    width: 13px;
+    height: auto;
+    position: absolute;
+    top: 19%;
+    left: 69.5%;
+}
+
+#edit-mission-text {
+    position: relative;
+    font-family: "Poppins";
+    font-size: 10px;
+    margin-left: 5%;
+    top: 1px;
+    color: #ffffff;
+    line-height: 15px;
+}
+
+.edit-mission-choice {
+    text-decoration: underline;
+}
+
+#edit-mission-button {
     width: 21px;
     height: auto;
-    left: 87%;
-    margin: 15px;
+    float: right;
+    margin-right: 5px;
+    margin-top: 1px;
+    visibility: visible;
+    z-index: 2;
 }
 
 #mission-details{
@@ -1381,6 +1423,7 @@ input[type="submit"] {
     height: auto;
     left: 87%;
     margin: 15px;
+    margin-top: 8px;
 }
 
 #aboutUs-visitTextHeader {
