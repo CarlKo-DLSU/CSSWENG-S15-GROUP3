@@ -39,6 +39,10 @@ app.get("/",(req,res)=>{
     res.render("1-index")
 })
 
+app.get("/1-index.hbs",(req,res)=>{
+    res.render("1-index")
+})
+
 app.get("/pastEvents",(req,res)=>{
     res.render("2-events")
 })
@@ -154,6 +158,34 @@ app.delete("/api/events/:id", async (req, res) => {
         res.status(404).send("Event not found");
     }
 });
+
+// app.post('/api/saveEvent', upload.fields([{ name: 'coverImage', maxCount: 1 }, { name: 'galleryImages', maxCount: 5 }]), (req, res) => {
+//     const { title } = req.body;
+//     const coverImage = req.files['coverImage'][0].path;
+//     const galleryImages = req.files['galleryImages'].map(file => file.path);
+
+//     // Create a new event instance
+//     const newEvent = new Event({
+//         title: title,
+//         coverImage: coverImage,
+//         galleryImages: galleryImages
+//     });
+
+//     // Save the event to MongoDB
+//     newEvent.save()
+//         .then(() => {
+//             // Clean up uploaded files after saving to database (optional)
+//             galleryImages.forEach(imagePath => {
+//                 fs.unlinkSync(imagePath);
+//             });
+//             fs.unlinkSync(coverImage);
+
+//             res.status(200).json({ message: 'Event saved successfully' });
+//         })
+//         .catch(err => {
+//             res.status(500).json({ error: err.message });
+//         });
+// });
 
 app.listen(3000,()=>{
     console.log("Port connected");
