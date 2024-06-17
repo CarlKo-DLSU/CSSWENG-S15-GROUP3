@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     var closeButton = document.getElementById("close-add-popup-btn");
     var addEventPopup = document.getElementById("add-upcoming-event-popup");
+    var editPopup = document.getElementById("edit-upcoming-event-popup");
 
     closeButton.addEventListener("click", function() {
         addEventPopup.style.display = "none";
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     var addEventForm = document.getElementById("add-upcoming-event-form");
+    var editForm = document.getElementById("edit-upcoming-event-form");
 
     document.getElementById('add-upcoming-cover-photo-img').addEventListener('click', function() {
         document.getElementById('add-upcoming-cover-photo').click();
@@ -37,8 +39,12 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         const formData = new FormData(addEventForm);
 
+        var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
+
         var newSlide = document.createElement("div");
         newSlide.classList.add("upcoming-slide");
+
+        newSlide.setAttribute("data-slide-number", upcomingEventsSlider.children.length + 1)
         newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
         newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
         newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
@@ -116,15 +122,18 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('add-upcoming-cover-photo').value = '';
     }
 
-    function createEventSlide(event) {
+    function createEventSlide(formData) {
+        var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
+
         var newSlide = document.createElement("div");
         newSlide.classList.add("upcoming-slide");
-        newSlide.setAttribute("data-title", event.title.replace(/\n/g, '<br>'));
-        newSlide.setAttribute("data-date", event.date);
-        newSlide.setAttribute("data-location", event.venue);
+        newSlide.setAttribute("data-slide-number", upcomingEventsSlider.children.length + 1)
+        newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
+        newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
+        newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
     
         var posterImage = document.createElement("img");
-        posterImage.src = 'uploads/' + event.coverPhoto; // Assuming the cover photo is saved in an 'uploads' folder
+        posterImage.src = URL.createObjectURL(formData.get("add-upcoming-cover-photo"));
         posterImage.alt = "Event Poster";
         posterImage.classList.add("upcoming-poster");
         newSlide.appendChild(posterImage);
@@ -141,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var previewText = document.createElement("div");
         previewText.classList.add("preview-text");
     
-        var eventDate = new Date(event.date);
+        var eventDate = new Date(formData.get("add-upcoming-date"));
         var options = { year: 'numeric', month: 'long', day: 'numeric' };
         var previewDate = document.createElement("p");
         previewDate.classList.add("preview-date");
@@ -150,26 +159,33 @@ document.addEventListener("DOMContentLoaded", function() {
     
         var previewTitle = document.createElement("p");
         previewTitle.classList.add("preview-title");
-        previewTitle.innerHTML = event.title.replace(/\n/g, '<br>');
+        previewTitle.innerHTML = formData.get("add-upcoming-title").replace(/\n/g, '<br>');
         previewText.appendChild(previewTitle);
     
         eventPreview.appendChild(previewText);
         newSlide.appendChild(eventPreview);
-    
+
         var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
         upcomingEventsSlider.appendChild(newSlide);
-    
-        // Add event listeners for the new slide and edit icon
+
+        addEventPopup.style.display = "none";
+        addEventForm.reset();
+        resetAddEventForm();
+
         var slideNumber = upcomingEventsSlider.children.length;
-    
+        createPopup(slideNumber, formData);
+
         newSlide.addEventListener("click", function() {
             openPopup(slideNumber);
         });
-    
+
         editIcon.addEventListener("click", function(event) {
             event.stopPropagation();
             openEditPopup(newSlide, slideNumber);
         });
+    
+        // Return the created slide for further use (e.g., previewing)
+        return newSlide;
     }    
 
     function createPopup(slideNumber, formData) {
@@ -203,14 +219,12 @@ document.addEventListener("DOMContentLoaded", function() {
         eventDescription.innerHTML = formData.get("add-upcoming-description").replace(/\n/g, '<br>');
         eventDetails.appendChild(eventDescription);
 
+        var merchLink = formData.get("add-upcoming-merch-link");
         var merchButton = document.createElement("button");
         merchButton.classList.add("merch-presale-btn");
         merchButton.textContent = "Merch Presale";
-        merchButton.onclick = function() {
-            window.open(formData.get("add-upcoming-merch-link"));
-        };
+        merchButton.setAttribute("onclick", `window.open('${merchLink}')`);
         eventDetails.appendChild(merchButton);
-
 
         popupDetails.appendChild(eventDetails);
         popupContent.appendChild(popupDetails);
@@ -231,11 +245,41 @@ document.addEventListener("DOMContentLoaded", function() {
         popup.style.display = "none";
     }
 
-    function openEditPopup(slide, slideNumber) {
-        var editPopup = document.getElementById("edit-upcoming-event-popup");
-        editPopup.style.display = "block";
+    document.getElementById("edit-upcoming-delete-event-btn").addEventListener("click", function() {
+        var confirmationPopup = document.getElementById("confirmationPopup");
+        confirmationPopup.style.display = "block";
 
-        var editForm = document.getElementById("edit-upcoming-event-form");
+        var confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        var cancelDeleteButton = document.getElementById("cancelDeleteButton");
+
+        confirmDeleteButton.onclick = function() {
+            var slideNumber = editForm.getAttribute("data-slide-number");
+            var slide = document.querySelector(`.upcoming-slide[data-slide-number='${slideNumber}']`);
+            var popup = document.getElementById("upcoming-event-popup-" + slideNumber);
+
+            if (slide && popup) {
+                slide.remove();
+                popup.remove();
+                editPopup.style.display = "none";
+            }
+            confirmationPopup.style.display = "none";
+        };
+
+        cancelDeleteButton.onclick = function() {
+            confirmationPopup.style.display = "none";
+        };
+
+        // Close the popup if the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == confirmationPopup) {
+                confirmationPopup.style.display = "none";
+            }
+        };
+    });
+
+    function openEditPopup(slide, slideNumber) {
+        editPopup.style.display = "block";
+        editForm.setAttribute("data-slide-number", slideNumber);
 
         var title = slide.querySelector(".preview-title").innerHTML.replace(/<br\s*\/?>/mg, "\n");
         var date = slide.getAttribute("data-date");
@@ -298,20 +342,27 @@ document.addEventListener("DOMContentLoaded", function() {
         editCloseButton.addEventListener("click", function() {
             editPopup.style.display = "none";
         });
+
+        return slide;
     }
     
-    var slides = document.querySelectorAll(".upcoming-slide");
-    slides.forEach(function(slide, index) {
+    var slider = document.getElementById("upcoming-events-slider");
+    var slides = slider.querySelectorAll(".upcoming-slide");
+
+    slides.forEach(function(slide) {
+        var slideNumber = slide.getAttribute("data-slide-number");
+
         slide.addEventListener("click", function() {
-            openPopup(index + 1);
+            openPopup(slideNumber);
         });
-    
+
         var editIcon = slide.querySelector(".upcoming-edit-icon");
         editIcon.addEventListener("click", function(event) {
             event.stopPropagation();
-            openEditPopup(slide, index + 1);
+            openEditPopup(slide, slideNumber);
         });
     });
+
     
     window.addEventListener("click", function(event) {
         var popups = document.querySelectorAll(".event-popup");
@@ -353,12 +404,11 @@ document.addEventListener("DOMContentLoaded", function() {
         eventDescription.innerHTML = formData.get("edit-upcoming-description").replace(/\n/g, '<br>');
         eventDetails.appendChild(eventDescription);
     
+        var merchLink = formData.get("edit-upcoming-merch-link");
         var merchButton = document.createElement("button");
         merchButton.classList.add("merch-presale-btn");
         merchButton.textContent = "Merch Presale";
-        merchButton.onclick = function() {
-            window.open(formData.get("edit-upcoming-merch-link"));
-        };
+        merchButton.setAttribute("onclick", `window.open('${merchLink}')`);
         eventDetails.appendChild(merchButton);
     
         popupDetails.appendChild(eventDetails);
@@ -369,7 +419,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     document.getElementById("edit-upcoming-preview-popup-btn").addEventListener("click", function() {
-        var editForm = document.getElementById("edit-upcoming-event-form");
         var formData = new FormData(editForm);
         var slideNumber = document.querySelectorAll(".event-popup").length + 1;
         createEditPopup(slideNumber, formData);
@@ -383,4 +432,34 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
+
+    document.getElementById("add-upcoming-preview-homepage-btn").addEventListener("click", function() {
+        var formData = new FormData(document.getElementById("add-upcoming-event-form"));
+        var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
+        
+        // Temporarily add the slide to the homepage for preview
+        var previewSlide = createEventSlide(formData);
+        upcomingEventsSlider.appendChild(previewSlide);
+
+        // turn upcoming-preview-buttons's display to flex so that it shows up
+        document.getElementById("upcoming-preview-buttons").style.display = "flex";
+
+        // Clicking the preview slide's edit button should also remove upcoming-preview-buttons
+        var editIcon = previewSlide.querySelector(".upcoming-edit-icon");
+        editIcon.addEventListener("click", function() {
+            document.getElementById("upcoming-preview-buttons").style.display = "none";
+        });
+
+        // clicking discard-upcoming-preview triggers upcomingEventsSlider.removeChild(previewSlide);
+        document.getElementById("discard-upcoming-preview").addEventListener("click", function() {
+            upcomingEventsSlider.removeChild(previewSlide);
+            document.getElementById("upcoming-preview-buttons").style.display = "none";
+        });
+
+        // clicking save-upcoming-preview turns removes upcoming-preview-buttons again
+        document.getElementById("save-upcoming-preview").addEventListener("click", function() {
+            document.getElementById("upcoming-preview-buttons").style.display = "none";
+        });
+    });
+    
 });

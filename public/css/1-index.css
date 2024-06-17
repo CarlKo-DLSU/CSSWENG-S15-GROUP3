@@ -26,9 +26,9 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    position: fixed; /* Fix the header position */
-    top: 0; /* Position it at the top of the viewport */
-    z-index: 1000; /* Ensure it's above other content */
+    position: fixed; 
+    top: 0; 
+    z-index: 1000; 
 }
 
 #current-events {
@@ -730,8 +730,9 @@ input[type="file"] {
 .add-upcoming-preview-buttons, .edit-upcoming-preview-buttons {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 15px;
     gap: 18px;
+    margin-bottom: 5px;
 }
 
 .add-upcoming-preview-buttons button, .edit-upcoming-preview-buttons button {
@@ -748,7 +749,7 @@ input[type="file"] {
     background-color: #4A4A4A;
 }
 
-#add-upcoming-preview-homepage-btn, #edit-upcoming-preview-homepage-btn {
+#add-upcoming-preview-homepage-btn, #edit-upcoming-delete-event-btn-btn {
     background-color: #EA0029;
 }
 
@@ -764,6 +765,7 @@ input[type="submit"] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 /* Buttons for adding and editing events */
@@ -787,6 +789,56 @@ input[type="submit"] {
     font-size: 15px;
     border: none;
     cursor: pointer;
+}
+
+.confirmation-popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.confirmation-popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 80%;
+    max-width: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.confirmation-popup-content p {
+    margin-bottom: 20px;
+}
+
+.confirm-btn, .cancel-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.confirm-btn {
+    background-color: #EA0029;
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #4A4A4A;
+    color: white;
 }
 
 #add-icon {
@@ -931,6 +983,36 @@ input[type="submit"] {
     text-decoration: underline;
     margin-top: 6px;
     margin-bottom: 10px;
+}
+
+#upcoming-preview-buttons {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed; 
+    bottom: 0; 
+    z-index: 1000;
+    background-color: white;
+    width: 100%;
+    padding: 10px 0;
+    padding-top: 12px;
+}
+
+#upcoming-preview-buttons button {
+    padding: 7px 15px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    background-color: #4A4A4A; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+#upcoming-preview-buttons button:last-child {
+    background-color: #B80022;
 }
 
 /* --------------------BOOKING SECTION-------------------- */
