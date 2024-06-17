@@ -1387,7 +1387,58 @@ input[type="submit"] {
     text-decoration: underline;
 }
 
-#edit-service-button {
+#edit-service-logo {
+    width: 17.5px;
+    height: auto;
+    float: right;
+    margin-right: 8px;
+    margin-top: 1px;
+    z-index: 2;
+}
+
+#add-service {
+    background-color: rgba(74, 74, 74, 0.26);
+    width: 38%;
+    height: 23px;
+    position: absolute;
+    z-index: 1;
+    left: 56%;
+    margin: 15px;
+    margin-top: -15px;
+    border-radius: 20px;
+}
+
+#add-service-check {
+    width: 9px;
+    height: auto;
+    position: absolute;
+    top: 25%;
+    left: 26%;
+}
+
+#add-service-cross {
+    width: 13px;
+    height: auto;
+    position: absolute;
+    top: 19%;
+    left: 70%;
+}
+
+#add-service-text {
+    position: relative;
+    font-family: "Poppins";
+    font-size: 10px;
+    margin-left: 5%;
+    top: 1px;
+    color: #ffffff;
+    line-height: 15px;
+}
+
+.add-service-choice {
+    text-decoration: underline;
+}
+
+#add-service-logo {
     width: 17.5px;
     height: auto;
     float: right;

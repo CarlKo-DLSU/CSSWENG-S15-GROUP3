@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     editMission.style.visibility = 'hidden';
     const editService = document.getElementById('edit-service');
     editService.style.visibility = 'hidden';
+    const addService = document.getElementById('add-service');
+    addService.style.visibility = 'hidden';
     const servicePictureEdit = document.getElementById('servicePictureEdit');
     servicePictureEdit.style.visibility = 'hidden';
     const editVisit = document.getElementById('edit-visit');
@@ -63,6 +65,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    document.querySelector("#servicePlus").addEventListener("click", function(e) {
+        const addService = document.getElementById('add-service');
+        if (addService.style.visibility === 'hidden') {
+            addService.style.visibility = 'visible';
+            serviceButtons.style.visibility = 'hidden';
+        }
+    });
+    
+    document.querySelector(".add-service-discard").addEventListener("click", function(e) {
+        const serviceButtons = document.getElementById('serviceButtons');
+        if (serviceButtons.style.visibility === 'hidden') {
+            addService.style.visibility = 'hidden';
+            serviceButtons.style.visibility = 'visible';
+        }
+    });
+
+    document.querySelector("#add-service-text").addEventListener("click", function(e) {
+        if (e.target.classList.contains("add-service-discard")) {
+            const serviceButtons = document.getElementById('serviceButtons');
+            if (serviceButtons.style.visibility === 'hidden') {
+                addService.style.visibility = 'hidden';
+                serviceButtons.style.visibility = 'visible';
+            }
+        }
+    });
+
     document.querySelector("#edit-visit-button").addEventListener("click", function(e) {
         const editVisit = document.getElementById('edit-visit');
         if (editVisit.style.visibility === 'hidden') {
@@ -89,19 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    document.querySelector("#serviceEdit").addEventListener("click", function(e) {
-
-    });
-
     document.querySelector("#serviceMinus").addEventListener("click", function(e) {
-
-    });
-
-    document.querySelector("#servicePlus").addEventListener("click", function(e) {
-
-    });
-
-    document.querySelector("#aboutUs-visitEdit").addEventListener("click", function(e) {
 
     });
 });
