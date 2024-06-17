@@ -16,15 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var addEventForm = document.getElementById("add-upcoming-event-form");
 
-    fetch('/api/events')
-        .then(response => response.json())
-        .then(events => {
-            events.forEach(event => {
-                createEventSlide(event);
-                createPopup(event);
-            });
-        });
-
     document.getElementById('add-upcoming-cover-photo-img').addEventListener('click', function() {
         document.getElementById('add-upcoming-cover-photo').click();
     });
@@ -103,62 +94,6 @@ document.addEventListener("DOMContentLoaded", function() {
             event.stopPropagation();
             openEditPopup(newSlide, slideNumber);
         });
-
-        const eventData = {
-            title: formData.get('add-upcoming-title'),
-            date: formData.get('add-upcoming-date'),
-            description: formData.get('add-upcoming-description'),
-            venue: formData.get('add-upcoming-venue'),
-            merchLink: formData.get('add-upcoming-merch-link'),
-            coverPhoto: formData.get('add-upcoming-cover-photo')
-        };
-    
-        const file = formData.get('add-upcoming-cover-photo');
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = async function() {
-                eventData.coverPhoto = reader.result;
-    
-                try {
-                    const response = await fetch('http://localhost:3000/api/events', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(eventData)
-                    });
-    
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-    
-                    const responseData = await response.json();
-                    console.log('Success:', responseData);
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            };
-            reader.readAsDataURL(file);
-        } else {
-            try {
-                const response = await fetch('http://localhost:3000/api/events', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(eventData)
-                });
-    
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-    
-                const responseData = await response.json();
-                console.log('Success:', responseData);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
     });
 
     document.getElementById("add-upcoming-preview-popup-btn").addEventListener("click", function() {
