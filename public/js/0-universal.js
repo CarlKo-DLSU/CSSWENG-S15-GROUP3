@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     registerBtn.addEventListener("click", function(event) {
         event.preventDefault();
+        signInPopup.style.display = "none";
         registerPopup.style.display = "flex";
     });
 

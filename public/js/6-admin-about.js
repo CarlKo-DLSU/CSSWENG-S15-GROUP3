@@ -65,6 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    document.querySelector("#serviceMinus").addEventListener("click", function(e) {
+        
+    });
+
     document.querySelector("#servicePlus").addEventListener("click", function(e) {
         const addService = document.getElementById('add-service');
         if (addService.style.visibility === 'hidden') {
@@ -115,9 +119,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 editVisitPicture.style.visibility = 'hidden';
             }
         }
-    });
-
-    document.querySelector("#serviceMinus").addEventListener("click", function(e) {
-
     });
 });
