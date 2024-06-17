@@ -118,12 +118,23 @@
 
         <div id="servicesFrame">
             <div id="adServiceTitle" class="serviceTitle">OUR SERVICES</div>
-            <img id="serviceEdit" src="../images/6-admin-aboutUs/edit.png">
-            <img id="serviceMinus" src="../images/6-admin-aboutUs/minus.png">
-            <img id="servicePlus" src="../images/6-admin-aboutUs/plus.png">
+            <div id="serviceButtons">
+                <img id="serviceEdit" src="../images/6-admin-aboutUs/edit.png">
+                <img id="serviceMinus" src="../images/6-admin-aboutUs/minus.png">
+                <img id="servicePlus" src="../images/6-admin-aboutUs/plus.png">
+            </div>
             <div class="service">
+                <div id="edit-service">
+                    <img id="edit-service-check" class="edit-service-save" src="../images/6-admin-aboutUs/check.png">
+                    <img id="edit-service-cross" class="edit-service-discard" src="../images/6-admin-aboutUs/cross.png">
+                    <img id="edit-service-button" src="../images/6-admin-aboutUs/edit-white.png" alt="Visit Edit">
+                    <span id="edit-service-text"><span class="edit-service-choice edit-service-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edit-service-choice edit-service-discard">Cancel</span></span>
+                </div>
                 <div class="arrow left"></div>
-                <img class="servicePicture" src="../images/3-aboutUs/service1.png" alt="Event Management & Live Staging">
+                <div class="servicePictureFrame">
+                    <img id="servicePictureEdit" src="../images/6-admin-aboutUs/editImg.png" alt="Edit Service Picture">
+                    <img class="servicePicture" src="../images/3-aboutUs/service1.png" alt="Event Management & Live Staging">
+                </div>
                 <div class="serviceDescription">Event Management & Live Staging</div>
                 <div class="arrow right"></div>
                 <div id="dots">
@@ -136,9 +147,15 @@
         
 
         <div class="aboutUs-visitFrame">
+            <img id="edit-visitPicture" src="../images/6-admin-aboutUs/newImg.png" alt="newVisitPicture">
             <img id="aboutUs-visitPicture" src="../images/3-aboutUs/tech-placeholder.jpg" alt="techtite">
             <div class="aboutUs-visitTextFrame">
-                <img id="aboutUs-visitEdit" src="../images/6-admin-aboutUs/pencil.png" alt="Edit Visit">
+                <div id="edit-visit">
+                    <img id="edit-visit-check" class="edit-visit-save" src="../images/6-admin-aboutUs/check.png">
+                    <img id="edit-visit-cross" class="edit-visit-discard" src="../images/6-admin-aboutUs/cross.png">
+                    <span id="edit-visit-text"><span class="edit-visit-choice edit-visit-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edit-visit-choice edit-visit-discard">Cancel</span></span>
+                    <img id="edit-visit-button" src="../images/6-admin-aboutUs/pencil.png" alt="Visit Edit">
+                </div>
                 <div class="aboutUs-visitText">
                     <span id="aboutUs-visitTextHeader">SX MANILA</span><br><br>
                     POST - a group that holds and organizes music event productions.<br><br>

@@ -1345,6 +1345,57 @@ input[type="submit"] {
     border-radius: 20px 20px 20px 20px;
 }
 
+#edit-service {
+    background-color: rgba(74, 74, 74, 0.26);
+    width: 38%;
+    height: 23px;
+    position: absolute;
+    z-index: 1;
+    left: 56%;
+    margin: 15px;
+    margin-top: -15px;
+    border-radius: 20px;
+}
+
+#edit-service-check {
+    width: 9px;
+    height: auto;
+    position: absolute;
+    top: 25%;
+    left: 26%;
+}
+
+#edit-service-cross {
+    width: 13px;
+    height: auto;
+    position: absolute;
+    top: 19%;
+    left: 70%;
+}
+
+#edit-service-text {
+    position: relative;
+    font-family: "Poppins";
+    font-size: 10px;
+    margin-left: 5%;
+    top: 1px;
+    color: #ffffff;
+    line-height: 15px;
+}
+
+.edit-service-choice {
+    text-decoration: underline;
+}
+
+#edit-service-button {
+    width: 17.5px;
+    height: auto;
+    float: right;
+    margin-right: 8px;
+    margin-top: 1px;
+    z-index: 2;
+}
+
 .arrow {
     position: absolute;
     top: 37%;
@@ -1370,13 +1421,28 @@ input[type="submit"] {
     filter: brightness(0%);
 }
 
-.servicePicture {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.servicePictureFrame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0px 20px;
-    width: 60%;
+    height: 146px;
+    width: auto;
     object-fit: cover;
+}
+
+#servicePictureEdit {
+    position: absolute;
+    width: 30px;
+    height: auto;
+    top: 55%;
+    left: 60%;
+}
+
+.servicePicture {
+    height: inherit;
+    width: auto;
+    margin: 0 auto;
 }
 
 .serviceDescription {
@@ -1395,6 +1461,13 @@ input[type="submit"] {
     background: rgba(184, 0, 34, 1);
 }
 
+#edit-visitPicture {
+    position: absolute;
+    width: 10%;
+    height: auto;
+    left: 89%;
+}
+
 #aboutUs-visitPicture {
     height: 240px;
     width: 100%;
@@ -1404,6 +1477,57 @@ input[type="submit"] {
 .aboutUs-visitTextFrame {
     height: 400px;
     width: 100%;
+}
+
+#edit-visit {
+    background-color: rgba(74, 74, 74, 0.26);
+    width: 35%;
+    height: 23px;
+    position: absolute;
+    z-index: 1;
+    left: 58%;
+    margin: 15px;
+    border-radius: 20px;
+}
+
+#edit-visit-check {
+    width: 9px;
+    height: auto;
+    position: absolute;
+    top: 25%;
+    left: 25.5%;
+}
+
+#edit-visit-cross {
+    width: 13px;
+    height: auto;
+    position: absolute;
+    top: 19%;
+    left: 69.5%;
+}
+
+#edit-visit-text {
+    position: relative;
+    font-family: "Poppins";
+    font-size: 10px;
+    margin-left: 5%;
+    top: 1px;
+    color: #ffffff;
+    line-height: 15px;
+}
+
+.edit-visit-choice {
+    text-decoration: underline;
+}
+
+#edit-visit-button {
+    width: 21px;
+    height: auto;
+    float: right;
+    margin-right: 5px;
+    margin-top: 1px;
+    visibility: visible;
+    z-index: 2;
 }
 
 .aboutUs-visitText {
