@@ -108,6 +108,7 @@
 
         <!-------------------- CREATE PAS EVENTPAST EVENTS-------------------->
 
+        <form action="addPastEvent" method ="post" enctype="multipart/form-data">
         <div class="editPastEvents">
 
             <!-- Divider for title and cover image -->
@@ -130,10 +131,10 @@
     
             <!-- Divider for gallery and sumbit buttons -->
     
-            <div class="divider divider-right">
+           <div class="divider divider-right">
                 Event Album images
                 <br>
-    
+
                 <!-- Gallery of Past Event -->
                 <div class="addImageGallery" id="addImageGallery">
                     <div class="hollow-box uploadImage-hollowbox" id="hollowBox2">
@@ -141,17 +142,19 @@
                         <input type="file" id="fileInput-gallery" accept="image/*">
                     </div>
                 </div>
-    
+
                 <!-- Submit and preview buttons -->
                 <div class="buttonContainer">
                     <div class="editPastEvent-button previewEventAlbum">Preview Event Album</div>
-                    <div class="editPastEvent-button publishEventAlbum">Publish Event Album</div>
+                    <input id="addPastEvent" type="submit" class="editPastEvent-button publishEventAlbum" style="margin-top: 0px;" value="Publish Event Album"/>
                 </div>
             </div>
+
         </div>
+        </form>
             
 
-        <!--------------------PAST EVENTS POPUPS-------------------->
+        <!--------------------EDIT PAST EVENTS POPUPS-------------------->
         <div id="past-event-popup" class="event-popup">
         <div class="event-popup-content past-event-popup-content">
             <div id="past-event-details" class="event-details"></div>
@@ -181,7 +184,6 @@
     <script src="../js/0-universal.js"></script>
     <script src="../js/1-index.js"></script>
     <script src="../js/5-editPastEvents.js"></script>
-    <script src="../js/login.js"></script>
 </body>
 
 </html>
