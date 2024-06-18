@@ -255,11 +255,19 @@
                         
                         <div class="edit-upcoming-preview-buttons">
                             <button type="button" id="edit-upcoming-preview-popup-btn">Preview event pop-up</button>
-                            <button type="button" id="edit-upcoming-preview-homepage-btn">Preview homepage</button>
+                            <button type="button" id="edit-upcoming-delete-event-btn">Delete event</button>
                         </div>
 
                         <input type="submit" value="Update event" id="update-event-btn">
                     </form>
+                </div>
+            </div>
+
+            <div id="confirmationPopup" class="confirmation-popup">
+                <div class="confirmation-popup-content">
+                    <p>Are you sure you want to delete this event?</p>
+                    <button id="confirmDeleteButton" class="confirm-btn">Yes</button>
+                    <button id="cancelDeleteButton" class="cancel-btn">No</button>
                 </div>
             </div>
                         
@@ -267,7 +275,7 @@
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
 
-                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
+                <div class="upcoming-slide" data-slide-number="1" data-title="Taylor Swift: The Eras Tour" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
                     <img src="../images/1-index/upcoming-eras.png" alt="eras" class="upcoming-poster">
                     <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
 
@@ -280,7 +288,7 @@
 
                 </div>
                 
-                <div class="upcoming-slide" data-title="DLSU Chorale: Saliw Lasalyano" data-date="2024-03-16" data-location="De La Salle University Manila, NCR" data-type="choral">
+                <div class="upcoming-slide" data-slide-number="2" data-title="DLSU Chorale: Saliw Lasalyano" data-date="2024-03-16" data-location="De La Salle University Manila, NCR" data-type="choral">
                     <img src="../images/1-index/upcoming-saliw.png" alt="saliw" class="upcoming-poster">
                     <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
 
@@ -293,7 +301,7 @@
 
                 </div>
 
-                <div class="upcoming-slide" data-title="Genshin Impact Character Event Wish: The Hearth's Ashen Shadow Dire Balemoon Arlecchino" data-date="2024-04-24" data-location="Teyvat" data-type="game">
+                <div class="upcoming-slide" data-slide-number="3" data-title="Genshin Impact Character Event Wish: The Hearth's Ashen Shadow Dire Balemoon Arlecchino" data-date="2024-04-24" data-location="Teyvat" data-type="game">
                     <img src="../images/1-index/upcoming-genshin.png" alt="genshin" class="upcoming-poster">
                     <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
 
@@ -367,6 +375,11 @@
 
                 </div>
 
+            </div>
+
+            <div id="upcoming-preview-buttons">
+                <button type="button" id="discard-upcoming-preview">Discard event</button>
+                <button type="button" id="save-upcoming-preview">Publish event</button>
             </div>
 
         </div>
