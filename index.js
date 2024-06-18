@@ -81,7 +81,7 @@ app.post("/register", async(req,res)=>{
     }
 
     await profiles.insertMany([profile])
-    res.render("/")
+    res.render("1-index")
 })
 
 app.post("/signin", async(req,res)=>{
@@ -93,12 +93,12 @@ app.post("/signin", async(req,res)=>{
                 res.render("4-admin-homepage")
                 console.log("Greetings Admin!")
             } else {
-                res.render("/")
+                res.render("1-index")
                 console.log("Greetings!")
             }
         }
         else {
-            res.render("/")
+            res.render("1-index")
         }
     } catch {
         res.send("Wrong Details")
