@@ -1,16 +1,17 @@
-[{
+{
   "_id": "6670245b5f7df0521eb25f56",
   "mission": "Delivering through with our\ncustomers and clients by\norganizing, planning, and executing\nsuccessful events.",
   "serviceImg": [
-    "service1",
-    "service2",
-    "service3"
+    "service1.png",
+    "service2.png",
+    "service3.png"
   ],
   "serviceDesc": [
     "Event Management & Live Staging",
     "Creative Conceptualization",
     "Audio-Visual Presentation"
   ],
+  "visitImage": "tech-placeholder.jpg",
   "visitTitle": "SX MANILA",
   "visitDesc": "POST - a group that holds and organizes music event productions.\n\nFrom electrifying concerts to soul-stirring festivals, our passion for music and dedication to innovation shine through every beat."
-}]
+}

@@ -44,7 +44,7 @@ app.get("/pastEvents",(req,res)=>{
 })
 
 app.get("/about",(req,res)=>{
-    res.render("3-about")
+    res.render("3-about");
 })
 
 app.get('/2-events.hbs', (req, res) => {
@@ -81,7 +81,7 @@ app.post("/register", async(req,res)=>{
     }
 
     await profiles.insertMany([profile])
-    res.render("1-index")
+    res.render("/")
 })
 
 app.post("/signin", async(req,res)=>{
@@ -93,12 +93,12 @@ app.post("/signin", async(req,res)=>{
                 res.render("4-admin-homepage")
                 console.log("Greetings Admin!")
             } else {
-                res.render("1-index")
+                res.render("/")
                 console.log("Greetings!")
             }
         }
         else {
-            res.render("1-index")
+            res.render("/")
         }
     } catch {
         res.send("Wrong Details")
