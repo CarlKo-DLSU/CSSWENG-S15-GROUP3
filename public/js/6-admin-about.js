@@ -1,69 +1,123 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const hiddenElem = document.getElementsByClassName("initHide");
+    for (let i = 0; i < hiddenElem.length; i++) {
+        hiddenElem[i].style.visibility = "hidden";
+    }
 
     // initialization of elements
     const editMission = document.getElementById('edit-mission');
-    editMission.style.visibility = 'hidden';
+    const missionText = document.getElementById('mission-details');
+    const editMissionText = document.getElementById('mission-field');
     const editService = document.getElementById('edit-service');
-    editService.style.visibility = 'hidden';
     const serviceButtons = document.getElementById('serviceButtons');
     const deleteService = document.getElementById('delete-service');
-    deleteService.style.visibility = 'hidden';
     const addService = document.getElementById('add-service');
-    addService.style.visibility = 'hidden';
     const servicePictureEdit = document.getElementById('servicePictureEdit');
-    servicePictureEdit.style.visibility = 'hidden';
+    const serviceDescription = document.getElementById('serviceDescription');
+    const editServiceDescription = document.getElementById('editServiceDescription');
     const editVisit = document.getElementById('edit-visit');
-    editVisit.style.visibility = 'hidden';
+    const visitHeaderText = document.getElementById('aboutUs-visitTextHeader');
+    const editVisitHeader = document.getElementById('aboutUs-editVisitHeader');
+    const visitDescription = document.getElementById('aboutUs-visitDescription');
+    const editVisitDescription = document.getElementById('aboutUs-editVisitDescription');
     const editVisitPicture = document.getElementById('edit-visitPicture');
-    editVisitPicture.style.visibility = 'hidden';
+
+    missionText.innerHTML = editMissionText.value
+    visitHeaderText.innerHTML = editVisitHeader.value;
+    visitDescription.innerHTML = editVisitDescription.value.replace(/\n/g, '<br>');
+    serviceDescription.innerHTML = editServiceDescription.value;
 
     // displays the edit mission elements
     document.querySelector("#edit-mission-button").addEventListener("click", function(e) {
         if (editMission.style.visibility === 'hidden') {
             editMission.style.visibility = 'visible';
+            editMissionText.style.visibility = 'visible';
+            missionText.style.visibility = 'hidden';
         }
     });
 
     // hides the edit mission elements
-    document.querySelector(".edit-mission-discard").addEventListener("click", function(e) {
-        if (editMission.style.visibility === 'visible') {
-            editMission.style.visibility = 'hidden';
-        }
+    document.querySelector("#edit-mission-cross").addEventListener("click", function(e) {
+        editMission.style.visibility = 'hidden';
+        editMissionText.style.visibility = 'hidden';
+        missionText.style.visibility = 'visible';
+        editMissionText.value = missionText.innerHTML;
     });
 
     document.querySelector("#edit-mission-text").addEventListener("click", function(e) {
         if (e.target.classList.contains("edit-mission-discard")) {
-            if (editMission.style.visibility === 'visible') {
-                editMission.style.visibility = 'hidden';
-            }
+            editMission.style.visibility = 'hidden';
+            editMissionText.style.visibility = 'hidden';
+            missionText.style.visibility = 'visible';
+            editMissionText.value = missionText.innerHTML;
+        }
+    });
+
+    // saves the changes made to the mission
+    document.querySelector("#edit-mission-check").addEventListener("click", function(e) {
+        editMission.style.visibility = 'hidden';
+        editMissionText.style.visibility = 'hidden';
+        missionText.style.visibility = 'visible';
+        missionText.innerHTML = editMissionText.value;
+    });
+
+    document.querySelector("#edit-mission-text").addEventListener("click", function(e) {
+        if (e.target.classList.contains("edit-mission-save")) {
+            editMission.style.visibility = 'hidden';
+            editMissionText.style.visibility = 'hidden';
+            missionText.style.visibility = 'visible';
+            missionText.innerHTML = editMissionText.value;
         }
     });
 
     // displays the edit service elements, while hiding the service buttons
     document.querySelector("#serviceEdit").addEventListener("click", function(e) {
-        if (editService.style.visibility === 'hidden') {
-            editService.style.visibility = 'visible';
-            servicePictureEdit.style.visibility = 'visible';
-            serviceButtons.style.visibility = 'hidden';
-        }
+        editService.style.visibility = 'visible';
+        servicePictureEdit.style.visibility = 'visible';
+        serviceButtons.style.visibility = 'hidden';
+        serviceDescription.style.visibility = 'hidden';
+        editServiceDescription.style.visibility = 'visible';
     });
     
-    // hides the edit service elements, while displaying the service buttons
+    // discards all edit changes, and hides the edit service elements, displaying the service buttons
     document.querySelector(".edit-service-discard").addEventListener("click", function(e) {
-        if (serviceButtons.style.visibility === 'hidden') {
-            editService.style.visibility = 'hidden';
-            servicePictureEdit.style.visibility = 'hidden';
-            serviceButtons.style.visibility = 'visible';
-        }
+        editService.style.visibility = 'hidden';
+        servicePictureEdit.style.visibility = 'hidden';
+        serviceButtons.style.visibility = 'visible';
+        serviceDescription.style.visibility = 'visible';
+        editServiceDescription.style.visibility = 'hidden';
+        editServiceDescription.value = serviceDescription.innerHTML.replace(/&amp;/g, '&');
     });
 
     document.querySelector("#edit-service-text").addEventListener("click", function(e) {
         if (e.target.classList.contains("edit-service-discard")) {
-            if (serviceButtons.style.visibility === 'hidden') {
-                editService.style.visibility = 'hidden';
-                servicePictureEdit.style.visibility = 'hidden';
-                serviceButtons.style.visibility = 'visible';
-            }
+            editService.style.visibility = 'hidden';
+            servicePictureEdit.style.visibility = 'hidden';
+            serviceButtons.style.visibility = 'visible';
+            serviceDescription.style.visibility = 'visible';
+            editServiceDescription.style.visibility = 'hidden';
+            editServiceDescription.value = serviceDescription.innerHTML.replace(/&amp;/g, '&');
+        }
+    });
+
+    // saves all edit changes, and hides the edit service elements, while displaying the service buttons
+    document.querySelector(".edit-service-save").addEventListener("click", function(e) {
+        editService.style.visibility = 'hidden';
+        servicePictureEdit.style.visibility = 'hidden';
+        serviceButtons.style.visibility = 'visible';
+        serviceDescription.style.visibility = 'visible';
+        editServiceDescription.style.visibility = 'hidden';
+        serviceDescription.innerHTML = editServiceDescription.value;
+    });
+
+    document.querySelector("#edit-service-text").addEventListener("click", function(e) {
+        if (e.target.classList.contains("edit-service-save")) {
+            editService.style.visibility = 'hidden';
+            servicePictureEdit.style.visibility = 'hidden';
+            serviceButtons.style.visibility = 'visible';
+            serviceDescription.style.visibility = 'visible';
+            editServiceDescription.style.visibility = 'hidden';
+            serviceDescription.innerHTML = editServiceDescription.value;
         }
     });
 
@@ -124,23 +178,59 @@ document.addEventListener("DOMContentLoaded", () => {
         if (editVisit.style.visibility === 'hidden') {
             editVisit.style.visibility = 'visible';
             editVisitPicture.style.visibility = 'visible';
+            editVisitHeader.style.visibility = 'visible';
+            visitHeaderText.style.visibility = 'hidden';
+            editVisitDescription.style.visibility = 'visible';
+            visitDescription.style.visibility = 'hidden';
         }
     });
 
     // hides the edit visit-area elements
     document.querySelector(".edit-visit-discard").addEventListener("click", function(e) {
-        if (editVisit.style.visibility === 'visible') {
-            editVisit.style.visibility = 'hidden';
-            editVisitPicture.style.visibility = 'hidden';
-        }
+        editVisit.style.visibility = 'hidden';
+        editVisitPicture.style.visibility = 'hidden';            
+        editVisitHeader.style.visibility = 'hidden';
+        visitHeaderText.style.visibility = 'visible';
+        editVisitDescription.style.visibility = 'hidden';
+        visitDescription.style.visibility = 'visible';
+        editVisitHeader.value = visitHeaderText.innerHTML;
+        editVisitDescription.value = visitDescription.innerHTML.replace(/<br\s*\/?>/gi, '\n');
     });
 
     document.querySelector("#edit-visit-text").addEventListener("click", function(e) {
         if (e.target.classList.contains("edit-visit-discard")) {
-            if (editVisit.style.visibility === 'visible') {
-                editVisit.style.visibility = 'hidden';
-                editVisitPicture.style.visibility = 'hidden';
-            }
+            editVisit.style.visibility = 'hidden';
+            editVisitPicture.style.visibility = 'hidden';
+            editVisitHeader.style.visibility = 'hidden';
+            visitHeaderText.style.visibility = 'visible';
+            editVisitDescription.style.visibility = 'hidden';
+            visitDescription.style.visibility = 'visible';
+            editVisitHeader.value = visitHeaderText.innerHTML;
+            editVisitDescription.value = visitDescription.innerHTML.replace(/<br\s*\/?>/gi, '\n');
+        }
+    });
+
+    document.querySelector(".edit-visit-save").addEventListener("click", function(e) {
+        editVisit.style.visibility = 'hidden';
+        editVisitPicture.style.visibility = 'hidden';            
+        editVisitHeader.style.visibility = 'hidden';
+        visitHeaderText.style.visibility = 'visible';
+        editVisitDescription.style.visibility = 'hidden';
+        visitDescription.style.visibility = 'visible';
+        visitHeaderText.innerHTML = editVisitHeader.value;
+        visitDescription.innerHTML = editVisitDescription.value.replace(/\n/g, '<br>');
+    });
+
+    document.querySelector("#edit-visit-text").addEventListener("click", function(e) {
+        if (e.target.classList.contains("edit-visit-save")) {
+            editVisit.style.visibility = 'hidden';
+            editVisitPicture.style.visibility = 'hidden';
+            editVisitHeader.style.visibility = 'hidden';
+            visitHeaderText.style.visibility = 'visible';
+            editVisitDescription.style.visibility = 'hidden';
+            visitDescription.style.visibility = 'visible';
+            visitHeaderText.innerHTML = editVisitHeader.value;
+            visitDescription.innerHTML = editVisitDescription.value.replace(/\n/g, '<br>');
         }
     });
 });
