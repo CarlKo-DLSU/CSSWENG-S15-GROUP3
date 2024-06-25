@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // initialization of elements
     const editMission = document.getElementById('edit-mission');
     editMission.style.visibility = 'hidden';
     const editService = document.getElementById('edit-service');
@@ -16,12 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const editVisitPicture = document.getElementById('edit-visitPicture');
     editVisitPicture.style.visibility = 'hidden';
 
+    // displays the edit mission elements
     document.querySelector("#edit-mission-button").addEventListener("click", function(e) {
         if (editMission.style.visibility === 'hidden') {
             editMission.style.visibility = 'visible';
         }
     });
 
+    // hides the edit mission elements
     document.querySelector(".edit-mission-discard").addEventListener("click", function(e) {
         if (editMission.style.visibility === 'visible') {
             editMission.style.visibility = 'hidden';
@@ -36,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // displays the edit service elements, while hiding the service buttons
     document.querySelector("#serviceEdit").addEventListener("click", function(e) {
         if (editService.style.visibility === 'hidden') {
             editService.style.visibility = 'visible';
@@ -44,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
     
+    // hides the edit service elements, while displaying the service buttons
     document.querySelector(".edit-service-discard").addEventListener("click", function(e) {
         if (serviceButtons.style.visibility === 'hidden') {
             editService.style.visibility = 'hidden';
@@ -62,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // displays the delete service popup
     document.querySelector("#serviceMinus").addEventListener("click", function(e) {
         if (deleteService.style.visibility === 'hidden') {
             deleteService.style.visibility = 'visible';
@@ -69,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // hides the delete service popup
     document.querySelector("#delete-service-no").addEventListener("click", function(e) {
         if (deleteService.style.visibility === 'visible') {
             deleteService.style.animation = 'fadeOutPopup 0.3s ease forwards';
@@ -87,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // displays the add service elements
     document.querySelector("#servicePlus").addEventListener("click", function(e) {
         if (addService.style.visibility === 'hidden') {
             addService.style.visibility = 'visible';
@@ -94,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
     
+    // hides the add service elements
     document.querySelector(".add-service-discard").addEventListener("click", function(e) {
         if (serviceButtons.style.visibility === 'hidden') {
             addService.style.visibility = 'hidden';
@@ -110,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // displays the edit visit-area elements
     document.querySelector("#edit-visit-button").addEventListener("click", function(e) {
         if (editVisit.style.visibility === 'hidden') {
             editVisit.style.visibility = 'visible';
@@ -117,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // hides the edit visit-area elements
     document.querySelector(".edit-visit-discard").addEventListener("click", function(e) {
         if (editVisit.style.visibility === 'visible') {
             editVisit.style.visibility = 'hidden';
