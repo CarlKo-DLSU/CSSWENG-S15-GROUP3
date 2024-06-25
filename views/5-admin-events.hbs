@@ -130,7 +130,14 @@
             
             </div>
 
-            <div class="pastEventList"></div>
+            {{!-- <div class="pastEventList"></div> --}}
+            {{#each oldEventsData}}
+                Title: {{this.title}} <br>
+                <img src='{{this.cover}}' height="240px" width="240px"/>
+                <br>
+            {{/each}}
+
+            <script>console.log("nyayayayay")</script>
         </div>
 
         <!--------------------PAST EVENTS POPUPS-------------------->

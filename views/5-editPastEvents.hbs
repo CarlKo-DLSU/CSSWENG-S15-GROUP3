@@ -108,51 +108,46 @@
 
         <!-------------------- CREATE PAS EVENTPAST EVENTS-------------------->
 
-        <form action="addPastEvent" method ="post" enctype="multipart/form-data">
-        <div class="editPastEvents">
-
-            <!-- Divider for title and cover image -->
-    
-            <div class="divider divider-left">
-                <p>Create album event</p>
-                <div class="editPastEventTitle">
-                    Event Title
-                    <br>
-                    <input type="text" id="event-title" style="font-size: 30px; width: 100%; border-radius: 10px;">
-                    <br>
-                    Event Cover Photo
-                    <br>                
-                </div>
-                <div class="coverImage-container">
-                    <img id="imagePlaceholder-cover" src="../images/2-events/uploadImage.png" alt="Upload Image">
-                    <input type="file" id="fileInput-cover" accept="image/*">
-                </div>
-            </div>
-    
-            <!-- Divider for gallery and sumbit buttons -->
-    
-           <div class="divider divider-right">
-                Event Album images
-                <br>
-
-                <!-- Gallery of Past Event -->
-                <div class="addImageGallery" id="addImageGallery">
-                    <div class="hollow-box uploadImage-hollowbox" id="hollowBox2">
-                        <img id="imagePlaceholder-gallery" class="hollowbox-picture" src="../images/2-events/uploadImage.png" alt="Upload Image">
-                        <input type="file" id="fileInput-gallery" accept="image/*">
+        <form action="/addPastEvent" method="post" enctype="multipart/form-data">
+            <div class="editPastEvents">
+                <!-- Divider for title and cover image -->
+                <div class="divider divider-left">
+                    <p>Create album event</p>
+                    <div class="editPastEventTitle">
+                        Event Title
+                        <br>
+                        <input type="text" id="event-title" name="title" style="font-size: 30px; width: 100%; border-radius: 10px;" />
+                        <br>
+                        Event Cover Photo
+                        <br>
+                        <div class="coverImage-container">
+                            <img id="imagePlaceholder-cover" src="../images/2-events/uploadImage.png" alt="Upload Image">
+                            <input type="file" id="fileInput-cover" name="cover" value="" />  
+                        </div>
                     </div>
                 </div>
 
-                <!-- Submit and preview buttons -->
-                <div class="buttonContainer">
-                    <div class="editPastEvent-button previewEventAlbum">Preview Event Album</div>
-                    <input id="addPastEvent" type="submit" class="editPastEvent-button publishEventAlbum" style="margin-top: 0px;" value="Publish Event Album"/>
+                <!-- Divider for gallery and submit buttons -->
+                <div class="divider divider-right">
+                    Event Album images
+                    <br>
+                    <!-- Gallery of Past Event -->
+                    <div class="addImageGallery" id="addImageGallery">
+                        <div class="hollow-box uploadImage-hollowbox" id="hollowBox2">
+                            <img id="imagePlaceholder-gallery" class="hollowbox-picture" src="../images/2-events/uploadImage.png" alt="Upload Image">
+                            <input type="file" id="fileInput-gallery" name="gallery" multiple /> 
+                            {{!-- <input type="hidden" id="galleryInput" name="gallery" multiple/>  --}}
+                        </div>
+                    </div>
+                    <!-- Submit and preview buttons -->
+                    <div class="buttonContainer">
+                        <div class="editPastEvent-button previewEventAlbum">Preview Event Album</div>
+                        <input type="submit" id="addPastEvent" class="editPastEvent-button publishEventAlbum" style="margin-top: 0px;" value="Publish Event Album"/>
+                    </div>
                 </div>
             </div>
-
-        </div>
         </form>
-            
+
 
         <!--------------------EDIT PAST EVENTS POPUPS-------------------->
         <div id="past-event-popup" class="event-popup">

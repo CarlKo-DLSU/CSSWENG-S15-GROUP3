@@ -23,55 +23,55 @@ fileInput.addEventListener('change', function(event) {
 const imagePlaceholderForGallery = document.getElementById('imagePlaceholder-gallery');
 const fileInput2 = document.getElementById('fileInput-gallery');
 const addImageGallery = document.getElementById('addImageGallery');
-const imageArray = []; // Array to store references to image elements
+let imageArray = []; // Array to store file paths
 
 imagePlaceholderForGallery.addEventListener('click', function() {
     fileInput2.click();
 });
 
 fileInput2.addEventListener('change', function(event) {
-    const file = event.target.files[0]; // Get the selected file
-    const reader = new FileReader(); // Create a FileReader object
+    const files = event.target.files; // Get all selected files
 
-    reader.onload = function() {
-        // Create a new hollow box for the uploaded image
+    // Loop through each selected file
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        // Construct a unique filename or identifier for each file
+        const filename = Date.now() + '-' + file.name; // Example: 1719346610310.png
+        const filePath = '/uploads/' + filename; // Example: /uploads/1719346610310.png
+
+        // Push the filePath to the imageArray
+        imageArray.push(filePath);
+
+        // Create elements to display the uploaded image
         const newHollowBox = document.createElement('div');
         newHollowBox.classList.add('hollow-box');
 
-        // Create a new image element and set its source to the uploaded image
         const newImage = document.createElement('img');
-        newImage.src = reader.result;
+        newImage.src = filePath; // Use filePath directly
         newImage.alt = 'Uploaded Image';
         newImage.classList.add('hollowbox-picture');
 
-        // Create a new image element for the delete button
         const deleteButton = document.createElement('img');
         deleteButton.src = '../images/2-events/deleteIcon.png'; // Adjust path as necessary
         deleteButton.classList.add('hollowbox-deleteIcon');
         deleteButton.addEventListener('click', function() {
-            // Remove the hollow box and its contents from the DOM
             newHollowBox.remove();
-
-            // Remove the image reference from the array
-            const index = imageArray.indexOf(newImage);
+            // Find the index of the deleted filePath and remove it from imageArray
+            const index = imageArray.indexOf(filePath);
             if (index !== -1) {
                 imageArray.splice(index, 1);
             }
         });
 
-        // Append the image and the delete button to the hollow box
         newHollowBox.appendChild(newImage);
         newHollowBox.appendChild(deleteButton);
-
-        // Append the new hollow box to the gallery
         addImageGallery.appendChild(newHollowBox);
 
-        // Add the new image element to the imageArray
-        imageArray.push(newImage);
-    };
-
-    reader.readAsDataURL(file); // Read the selected file as a data URL
+        console.log(imageArray); // Check imageArray contents after each upload
+    }
 });
+
 
 
 //////////////////////// POPUP FUNCTIONS

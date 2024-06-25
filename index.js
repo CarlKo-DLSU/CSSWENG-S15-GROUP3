@@ -35,6 +35,46 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+app.post("/addPastEvent", upload.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
+    const { title } = req.body;
+    const cover = req.files['cover'] ? '/uploads/' + req.files['cover'][0].filename : null;
+    const gallery = req.files['gallery'] ? req.files['gallery'].map(file => '/uploads/' + file.filename) : [];
+
+    if (!title) {
+        return res.status(400).send("Error: 'title' is required.");
+    }
+
+    console.log(title);
+    console.log(cover);
+    console.log(gallery);
+
+    try {
+        // Create new old Event
+        await oldEvents.create({
+            title: title,
+            cover: cover,
+            gallery: gallery
+        });
+
+        res.render("5-admin-events");
+    } catch (error) {
+        console.error("Error creating old Event:", error);
+        res.status(500).send("Error creating old Event.");
+    }
+});
+
+app.get('/5-admin-events', async (req, res) => {
+    try {
+        const eventsData = await oldEvents.find({}); // Use a different variable name, like eventsData
+        console.log("Fetched old events successfully:", eventsData);
+        res.render('5-admin-events', { oldEventsData: eventsData }); // Pass eventsData to the template
+    } catch (error) {
+        console.error("Error fetching old events:", error);
+        res.status(500).send("Error fetching old events.");
+    }
+});
+
+
 app.get("/",(req,res)=>{
     res.render("1-index")
 })
@@ -70,6 +110,33 @@ app.get('/5-editPastEvents.hbs', (req, res) => {
 app.get('/6-admin-about.hbs', (req, res) => {
     res.render('6-admin-about');
 });
+
+// app.post("/addPastEvent", upload.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
+//     const { title } = req.body;
+//     const cover = req.files['cover'] ? '/uploads/' + req.files['cover'][0].filename : null;
+//     const gallery = req.files['gallery'] ? req.files['gallery'].map(file => '/uploads/' + file.filename) : [];
+
+//     if (!title) {
+//         return res.status(400).send("Error: 'title' is required.");
+//     }
+
+//     console.log(title);
+
+//     try {
+//         // Create new old Event
+//         await oldEvents.create({
+//             title: title,
+//             cover: cover,
+//             gallery: gallery
+//         });
+
+//         res.render("5-admin-events");
+//     } catch (error) {
+//         console.error("Error creating old Event:", error);
+//         res.status(500).send("Error creating old Event.");
+//     }
+// });
+
 
 app.post("/register", async(req,res)=>{
 
