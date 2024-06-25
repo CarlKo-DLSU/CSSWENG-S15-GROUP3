@@ -84,7 +84,7 @@ app.get("/pastEvents",(req,res)=>{
 })
 
 app.get("/about",(req,res)=>{
-    res.render("3-about")
+    res.render("3-about");
 })
 
 app.get('/2-events.hbs', (req, res) => {
