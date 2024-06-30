@@ -133,10 +133,12 @@
                     <br>
                     <!-- Gallery of Past Event -->
                     <div class="addImageGallery" id="addImageGallery">
-                        <div class="hollow-box uploadImage-hollowbox" id="hollowBox2">
-                            <img id="imagePlaceholder-gallery" class="hollowbox-picture" src="../images/2-events/uploadImage.png" alt="Upload Image">
-                            <input type="file" id="fileInput-gallery" name="gallery" multiple /> 
-                            {{!-- <input type="hidden" id="galleryInput" name="gallery" multiple/>  --}}
+                        <!-- Placeholder container for images -->
+                        <div class="hollow-box uploadImage-hollowbox" id="imageContainer">
+                            <!-- Button to add more images -->
+                            <button type="button" id="addImage" style="border: none; background: none; padding: 0;">
+                                <img class="hollowbox-picture" src="../images/2-events/uploadImage.png" alt="Upload Image">
+                            </button>
                         </div>
                     </div>
                     <!-- Submit and preview buttons -->

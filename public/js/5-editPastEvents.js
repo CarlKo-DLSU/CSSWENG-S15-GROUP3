@@ -2,10 +2,12 @@
 const imagePlaceholderForCover = document.getElementById('imagePlaceholder-cover');
 const fileInput = document.getElementById('fileInput-cover');
 
+// When the placeholder image is clicked, trigger the file input click event
 imagePlaceholderForCover.addEventListener('click', function() {
     fileInput.click();
 });
 
+// When a file is selected, update the placeholder image to display the selected image
 fileInput.addEventListener('change', function(event) {
     const file = event.target.files[0]; // Get the selected file
     const reader = new FileReader(); // Create a FileReader object
@@ -19,59 +21,65 @@ fileInput.addEventListener('change', function(event) {
 });
 
 ///////////////////////////// GALLERY JAVASCRIPT
+document.addEventListener('DOMContentLoaded', () => {
+    // Get the "Add Image" button element
+    const addImageButton = document.getElementById('addImage');
+    // Get the container where images will be displayed
+    const imageContainer = document.getElementById('imageContainer');
+    const addImageGallery = document.getElementById('addImageGallery');
 
-const imagePlaceholderForGallery = document.getElementById('imagePlaceholder-gallery');
-const fileInput2 = document.getElementById('fileInput-gallery');
-const addImageGallery = document.getElementById('addImageGallery');
-let imageArray = []; // Array to store file paths
+    // Add event listener for the "Add Image" button
+    addImageButton.addEventListener('click', () => {
+        // Create a new input element for file selection
+        const newImageInput = document.createElement('input');
+        newImageInput.type = 'file'; // Set the input type to 'file'
+        newImageInput.name = 'gallery'; // Set the name attribute
+        newImageInput.accept = 'image/*'; // Accept only image files
+        newImageInput.style.display = 'none';  // Hide the input field
 
-imagePlaceholderForGallery.addEventListener('click', function() {
-    fileInput2.click();
-});
+        // Append the hidden file input to the addImageGallery
+        addImageGallery.appendChild(newImageInput);
 
-fileInput2.addEventListener('change', function(event) {
-    const files = event.target.files; // Get all selected files
+        // Programmatically trigger the file selection dialog
+        newImageInput.click();
 
-    // Loop through each selected file
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
+        // Add an event listener to handle file selection
+        newImageInput.addEventListener('change', () => {
+            // Check if any file is selected
+            if (newImageInput.files.length > 0) {
+                const file = newImageInput.files[0]; // Get the selected file
+                const reader = new FileReader();
 
-        // Construct a unique filename or identifier for each file
-        const filename = Date.now() + '-' + file.name; // Example: 1719346610310.png
-        const filePath = '/uploads/' + filename; // Example: /uploads/1719346610310.png
+                // Define the load event for the FileReader
+                reader.onload = function(e) {
+                    // Create a div to hold the image preview and remove button
+                    const imagePreview = document.createElement('div');
+                    imagePreview.classList.add('hollow-box');
+                    // Set the inner HTML to include the image and remove button
+                    imagePreview.innerHTML = `
+                        <img src="${e.target.result}" alt="Image Preview" class="hollowbox-picture">
+                        <img src="../images/2-events/deleteIcon.png" class="hollowbox-deleteIcon">
+                    `;
 
-        // Push the filePath to the imageArray
-        imageArray.push(filePath);
+                    // Append the preview div to the end of the addImageGallery
+                    addImageGallery.appendChild(imagePreview);
 
-        // Create elements to display the uploaded image
-        const newHollowBox = document.createElement('div');
-        newHollowBox.classList.add('hollow-box');
+                    // Add an event listener to the remove button to delete the image
+                    imagePreview.querySelector('.hollowbox-deleteIcon').addEventListener('click', () => {
+                        addImageGallery.removeChild(imagePreview); // Remove the preview
+                        addImageGallery.removeChild(newImageInput); // Remove the input field
+                    });
+                }
 
-        const newImage = document.createElement('img');
-        newImage.src = filePath; // Use filePath directly
-        newImage.alt = 'Uploaded Image';
-        newImage.classList.add('hollowbox-picture');
-
-        const deleteButton = document.createElement('img');
-        deleteButton.src = '../images/2-events/deleteIcon.png'; // Adjust path as necessary
-        deleteButton.classList.add('hollowbox-deleteIcon');
-        deleteButton.addEventListener('click', function() {
-            newHollowBox.remove();
-            // Find the index of the deleted filePath and remove it from imageArray
-            const index = imageArray.indexOf(filePath);
-            if (index !== -1) {
-                imageArray.splice(index, 1);
+                // Read the selected file as a Data URL
+                reader.readAsDataURL(file);
+            } else {
+                // If no file is selected, remove the input field
+                addImageGallery.removeChild(newImageInput);
             }
         });
-
-        newHollowBox.appendChild(newImage);
-        newHollowBox.appendChild(deleteButton);
-        addImageGallery.appendChild(newHollowBox);
-
-        console.log(imageArray); // Check imageArray contents after each upload
-    }
+    });
 });
-
 
 
 //////////////////////// POPUP FUNCTIONS
