@@ -23,6 +23,7 @@ fileInput.addEventListener('change', function(event) {
 ///////////////////////////// GALLERY JAVASCRIPT
 document.addEventListener('DOMContentLoaded', () => {
     // Get the "Add Image" button element
+    const previewGalleryImages = [];
     const addImageButton = document.getElementById('addImage');
     // Get the container where images will be displayed
     const imageContainer = document.getElementById('imageContainer');
@@ -63,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Append the preview div to the end of the addImageGallery
                     addImageGallery.appendChild(imagePreview);
+                    previewGalleryImages.push(e.target.result);
 
                     // Add an event listener to the remove button to delete the image
                     imagePreview.querySelector('.hollowbox-deleteIcon').addEventListener('click', () => {
@@ -78,79 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 addImageGallery.removeChild(newImageInput);
             }
         });
+
+        
     });
 });
 
-
-//////////////////////// POPUP FUNCTIONS
-
-// // Function to open event popup
-// function openPastEventPopup(details, imageSrc, images) {
-//     var popup = document.getElementById("past-event-popup");
-//     var detailsElement = document.getElementById("past-event-details");
-//     var imageElement = document.getElementById("past-event-image");
-
-//     if (popup && detailsElement && imageElement) {
-//         detailsElement.textContent = details;
-//         imageElement.src = imageSrc;
-//         popup.style.display = "flex";
-
-//         // Initialize the image list and index for the current event
-//         currentEventImages = images;
-//         currentImageIndex = 0;
-//         updateEventPopup();
-
-//         // Set up arrow event listeners
-//         setupArrowEventListeners();
-//     } else {
-//         console.error("Popup elements not found.");
-//     }
-// }
-
-// // Function to update the event popup image
-// function updateEventPopup() {
-//     if (currentEventImages.length > 0) {
-//         const eventImage = `../images/2-events/${currentEventImages[currentImageIndex]}`;
-//         document.getElementById("past-event-image").src = eventImage;
-//     }
-// }
-
-// // Function to set up arrow event listeners
-// function setupArrowEventListeners() {
-//     const leftArrow = document.querySelector('.arrowPopup.left');
-//     const rightArrow = document.querySelector('.arrowPopup.right');
-
-//     leftArrow.addEventListener('click', function() {
-//         currentImageIndex = (currentImageIndex === 0) ? currentEventImages.length - 1 : currentImageIndex - 1;
-//         updateEventPopup();
-//     });
-
-//     rightArrow.addEventListener('click', function() {
-//         currentImageIndex = (currentImageIndex === currentEventImages.length - 1) ? 0 : currentImageIndex + 1;
-//         updateEventPopup();
-//     });
-
-//     // Close popup when clicking outside of it
-//     var pastEventPopup = document.getElementById("past-event-popup");
-
-//     if (pastEventPopup) {
-//         window.addEventListener("click", function(event) {
-//             if (event.target === pastEventPopup) {
-//                 closePastEventPopup();
-//                 currentImageIndex = 0;
-//             }
+// previewGalleryImages 
+//         previewPastEvent.addEventListener('change', () => {
+//             const eventTitle = localStorage.getItem('event-title');
+//             const eventCover = fileInput;
+//             const galleryImages = JSON.parse(localStorage.getItem('galleryImages'));
 //         });
-//     } else {
-//         console.error("Past event popup element not found.");
-//     }
-// }
-
-// // Function to close the event popup
-// function closePastEventPopup() {
-//     var popup = document.getElementById("past-event-popup");
-//     if (popup) {
-//         popup.style.display = "none";
-//     } else {
-//         console.error("Popup element not found.");
-//     }
-// }
