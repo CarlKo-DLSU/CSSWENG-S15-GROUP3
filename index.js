@@ -14,11 +14,14 @@ const UpcomingEvent = require("./models/UpcomingEvent")
 const PastEvent = require("./models/PastEvent")
 
 app.use(express.json())
-app.use(express.static(__dirname + '/public'))
-app.use(express.urlencoded({extended:false}))
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
+//app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: true }))
 app.set("view engine","hbs")
 app.set("views", __dirname + "/views")
 app.use(bodyParser.json());
+
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -86,10 +89,6 @@ app.get("/pastEvents",(req,res)=>{
 app.get("/about",(req,res)=>{
     res.render("3-about");
 })
-
-app.get('/2-events.hbs', (req, res) => {
-    res.render('2-events');
-});
 
 app.get('/3-about.hbs', (req, res) => {
     res.render('3-about');
@@ -177,11 +176,23 @@ app.post("/addPastEvent", upload.fields([{ name: 'cover', maxCount: 1 }, { name:
     }
 });
 
-app.get('/2-events', async(req,res) => {
-    const eventsData = await PastEvent.find({})
-    console.log(eventsData)
-    res.render('2-events',{eventsData})
-})
+app.get('/2-events.hbs', async (req, res) => {
+    console.log("It went to index.js");
+    try {
+        const eventsData = await PastEvent.find({});
+        console.log("Fetched past events successfully:", eventsData); // Check if data is fetched correctly
+        res.render('2-events', { eventsData: eventsData });
+    } catch (error) {
+        console.error("Error fetching past events:", error);
+        res.status(500).send("Error fetching past events.");
+    }
+});
+
+
+app.get('/test', (req, res) => {
+    console.log("Test route hit");
+    res.send("Test route hit");
+});
 
 
 app.listen(3000,()=>{
