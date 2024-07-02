@@ -27,6 +27,27 @@ document.addEventListener("DOMContentLoaded", () => {
     visitDescription.innerHTML = editVisitDescription.value.replace(/\n/g, '<br>');
     serviceDescription.innerHTML = editServiceDescription.value;
 
+    const updateAboutUsData = async (data) => {
+        try {
+            const response = await fetch('updateAboutUs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update About Us data');
+            }
+
+            alert('About Us data updated successfully.');
+        } catch (error) {
+            console.error(error);
+            alert('Error updating About Us data.');
+        }
+    };
+
     // displays the edit mission elements
     document.querySelector("#edit-mission-button").addEventListener("click", function(e) {
         if (editMission.style.visibility === 'hidden') {
@@ -59,6 +80,14 @@ document.addEventListener("DOMContentLoaded", () => {
         editMissionText.style.visibility = 'hidden';
         missionText.style.visibility = 'visible';
         missionText.innerHTML = editMissionText.value;
+
+        updateAboutUsData({
+            mission: editMissionText.value,
+            serviceDesc: editServiceDescription.value,
+            visitTitle: editVisitHeader.value,
+            visitDesc: editVisitDescription.value,
+            visitImage: document.getElementById('aboutUs-visitPicture').src.split('/').pop()
+        });
     });
 
     document.querySelector("#edit-mission-text").addEventListener("click", function(e) {
@@ -67,6 +96,14 @@ document.addEventListener("DOMContentLoaded", () => {
             editMissionText.style.visibility = 'hidden';
             missionText.style.visibility = 'visible';
             missionText.innerHTML = editMissionText.value;
+            
+            updateAboutUsData({
+                mission: editMissionText.value,
+                serviceDesc: editServiceDescription.value,
+                visitTitle: editVisitHeader.value,
+                visitDesc: editVisitDescription.value,
+                visitImage: document.getElementById('aboutUs-visitPicture').src.split('/').pop()
+            });
         }
     });
 
@@ -108,6 +145,14 @@ document.addEventListener("DOMContentLoaded", () => {
         serviceDescription.style.visibility = 'visible';
         editServiceDescription.style.visibility = 'hidden';
         serviceDescription.innerHTML = editServiceDescription.value;
+
+        updateAboutUsData({
+            mission: editMissionText.value,
+            serviceDesc: editServiceDescription.value,
+            visitTitle: editVisitHeader.value,
+            visitDesc: editVisitDescription.value,
+            visitImage: document.getElementById('aboutUs-visitPicture').src.split('/').pop()
+        });
     });
 
     document.querySelector("#edit-service-text").addEventListener("click", function(e) {
@@ -118,6 +163,14 @@ document.addEventListener("DOMContentLoaded", () => {
             serviceDescription.style.visibility = 'visible';
             editServiceDescription.style.visibility = 'hidden';
             serviceDescription.innerHTML = editServiceDescription.value;
+
+            updateAboutUsData({
+                mission: editMissionText.value,
+                serviceDesc: editServiceDescription.value,
+                visitTitle: editVisitHeader.value,
+                visitDesc: editVisitDescription.value,
+                visitImage: document.getElementById('aboutUs-visitPicture').src.split('/').pop()
+            });
         }
     });
 
@@ -219,6 +272,14 @@ document.addEventListener("DOMContentLoaded", () => {
         visitDescription.style.visibility = 'visible';
         visitHeaderText.innerHTML = editVisitHeader.value;
         visitDescription.innerHTML = editVisitDescription.value.replace(/\n/g, '<br>');
+
+        updateAboutUsData({
+            mission: editMissionText.value,
+            serviceDesc: editServiceDescription.value,
+            visitTitle: editVisitHeader.value,
+            visitDesc: editVisitDescription.value,
+            visitImage: document.getElementById('aboutUs-visitPicture').src.split('/').pop()
+        });
     });
 
     document.querySelector("#edit-visit-text").addEventListener("click", function(e) {
@@ -231,6 +292,14 @@ document.addEventListener("DOMContentLoaded", () => {
             visitDescription.style.visibility = 'visible';
             visitHeaderText.innerHTML = editVisitHeader.value;
             visitDescription.innerHTML = editVisitDescription.value.replace(/\n/g, '<br>');
+
+            updateAboutUsData({
+                mission: editMissionText.value,
+                serviceDesc: editServiceDescription.value,
+                visitTitle: editVisitHeader.value,
+                visitDesc: editVisitDescription.value,
+                visitImage: document.getElementById('aboutUs-visitPicture').src.split('/').pop()
+            });
         }
     });
 });
