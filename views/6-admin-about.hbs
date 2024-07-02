@@ -109,88 +109,89 @@
             <img class="aboutUs-framePicture" src="../images/3-aboutUs/performer-placeholder.jpg" alt="BOCCHI THE ROCK!">
             <span class="aboutUs-frameTitle">SOUND.<br>EXPERIENCE.<br>MANILA.</span>
         </div>
-
-        <!--------------------MISSION-------------------->
-        <div id="edit-mission" class="initHide">
-            <img id="edit-mission-check" class="edit-mission-save" src="../images/6-admin-aboutUs/check.png">
-            <img id="edit-mission-cross" class="edit-mission-discard" src="../images/6-admin-aboutUs/cross.png">
-            <span id="edit-mission-text"><span class="edit-mission-choice edit-mission-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edit-mission-choice edit-mission-discard">Cancel</span></span>
-            <img id="edit-mission-button" src="../images/6-admin-aboutUs/pencil.png" alt="Mission Edit">
-        </div>
-        <div id="mission-frame">
-            <p id="mission-details"></p>
-            <textarea id="mission-field" class="initHide" rows="4" maxlength="120">Delivering through with our customers and clients by organizing, planning, and executing successful events.</textarea>
-        </div>
-
-        <!--------------------SERVICES-------------------->
-        <div id="servicesFrame">
-            <div id="adServiceTitle" class="serviceTitle">OUR SERVICES</div>
-            <div id="serviceButtons">
-                <img id="serviceEdit" src="../images/6-admin-aboutUs/edit.png">
-                <img id="serviceMinus" src="../images/6-admin-aboutUs/minus.png">
-                <img id="servicePlus" src="../images/6-admin-aboutUs/plus.png">
+        {{#with currAbout}}
+            <!--------------------MISSION-------------------->
+            <div id="edit-mission" class="initHide">
+                <img id="edit-mission-check" class="edit-mission-save" src="../images/6-admin-aboutUs/check.png">
+                <img id="edit-mission-cross" class="edit-mission-discard" src="../images/6-admin-aboutUs/cross.png">
+                <span id="edit-mission-text"><span class="edit-mission-choice edit-mission-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edit-mission-choice edit-mission-discard">Cancel</span></span>
+                <img id="edit-mission-button" src="../images/6-admin-aboutUs/pencil.png" alt="Mission Edit">
             </div>
-            <div class="service">
-                <div id="edit-service" class="initHide">
-                    <img id="edit-service-check" class="edit-service-save" src="../images/6-admin-aboutUs/check.png">
-                    <img id="edit-service-cross" class="edit-service-discard" src="../images/6-admin-aboutUs/cross.png">
-                    <img id="edit-service-logo" src="../images/6-admin-aboutUs/edit-white.png" alt="Visit Edit">
-                    <span id="edit-service-text"><span class="edit-service-choice edit-service-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edit-service-choice edit-service-discard">Cancel</span></span>
+            <div id="mission-frame">
+                <p id="mission-details"></p>
+                <textarea id="mission-field" class="initHide" rows="4" maxlength="120">{{mission}}</textarea>
+            </div>
+
+            <!--------------------SERVICES-------------------->
+            <div id="servicesFrame">
+                <div id="adServiceTitle" class="serviceTitle">OUR SERVICES</div>
+                <div id="serviceButtons">
+                    <img id="serviceEdit" src="../images/6-admin-aboutUs/edit.png">
+                    <img id="serviceMinus" src="../images/6-admin-aboutUs/minus.png">
+                    <img id="servicePlus" src="../images/6-admin-aboutUs/plus.png">
                 </div>
-                <div id="delete-service" class="initHide">
-                    <div id="delete-service-popup">
-                        <span id="delete-service-prompt">This permanently deletes the service frame.<br>Do you wish to proceed?</span>
-                        <div id="delete-service-options">
-                            <div id="delete-service-no">No, keep the frame</div>
-                            <div id="delete-service-yes">Yes, delete this frame</div>
+                <div class="service">
+                    <div id="edit-service" class="initHide">
+                        <img id="edit-service-check" class="edit-service-save" src="../images/6-admin-aboutUs/check.png">
+                        <img id="edit-service-cross" class="edit-service-discard" src="../images/6-admin-aboutUs/cross.png">
+                        <img id="edit-service-logo" src="../images/6-admin-aboutUs/edit-white.png" alt="Visit Edit">
+                        <span id="edit-service-text"><span class="edit-service-choice edit-service-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edit-service-choice edit-service-discard">Cancel</span></span>
+                    </div>
+                    <div id="delete-service" class="initHide">
+                        <div id="delete-service-popup">
+                            <span id="delete-service-prompt">This permanently deletes the service frame.<br>Do you wish to proceed?</span>
+                            <div id="delete-service-options">
+                                <div id="delete-service-no">No, keep the frame</div>
+                                <div id="delete-service-yes">Yes, delete this frame</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="add-service" class="initHide">
+                        <img id="add-service-check" class="add-service-save" src="../images/6-admin-aboutUs/check.png">
+                        <img id="add-service-cross" class="add-service-discard" src="../images/6-admin-aboutUs/cross.png">
+                        <img id="add-service-logo" src="../images/6-admin-aboutUs/plus-white.png" alt="Visit Edit">
+                        <span id="add-service-text"><span class="add-service-choice add-service-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="add-service-choice add-service-discard">Cancel</span></span>
+                    </div>
+                    <div class="arrow left"></div>
+                    <div class="servicePictureFrame">
+                        <img id="servicePictureEdit" class="initHide" src="../images/6-admin-aboutUs/editImg.png" alt="Edit Service Picture">
+                        <img class="servicePicture" src="../images/3-aboutUs/service1.png" alt="Event Management & Live Staging">
+                    </div>
+                    <div id="serviceDescription"></div>
+                        <textarea id="editServiceDescription" class="initHide">{{{serviceDesc.[0]}}}</textarea>
+                    <div class="arrow right"></div>
+                    <div id="dots">
+                        <div class="dot" id="dot1"></div>
+                        <div class="dot" id="dot2"></div>
+                        <div class="dot" id="dot3"></div>
+                    </div>
+                </div>
+            </div>
+        
+            <!--------------------VISIT-------------------->
+            <div class="aboutUs-visitFrame">
+                <img id="edit-visitPicture" class="initHide" src="../images/6-admin-aboutUs/newImg.png" alt="newVisitPicture">
+                <img id="aboutUs-visitPicture" src="../images/3-aboutUs/{{visitImage}}" alt="techtite">
+                <div class="aboutUs-visitTextFrame">
+                    <div id="edit-visit" class="initHide">
+                        <img id="edit-visit-check" class="edit-visit-save" src="../images/6-admin-aboutUs/check.png">
+                        <img id="edit-visit-cross" class="edit-visit-discard" src="../images/6-admin-aboutUs/cross.png">
+                        <span id="edit-visit-text"><span class="edit-visit-choice edit-visit-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edit-visit-choice edit-visit-discard">Cancel</span></span>
+                        <img id="edit-visit-button" src="../images/6-admin-aboutUs/pencil.png" alt="Visit Edit">
+                    </div>
+                    <div class="aboutUs-visitText">
+                        <span id="aboutUs-visitTextHeader"></span>
+                        <textarea id="aboutUs-editVisitHeader" class="initHide">{{visitTitle}}</textarea><br><br><br><br><br>
+                        <p id="aboutUs-visitDescription"></p>
+                        <textarea id="aboutUs-editVisitDescription" class="initHide" rows="6" maxlength="220">{{{visitDesc}}}</textarea>
+                        <br><br><br><br><br><br>
+                        <div id="aboutUs-visitButton">
+                            <a href="https://www.facebook.com/sxmanila/" target="_blank" id="aboutUs-visitButtonText">VISIT FB PAGE</a>
                         </div>
                     </div>
                 </div>
-                <div id="add-service" class="initHide">
-                    <img id="add-service-check" class="add-service-save" src="../images/6-admin-aboutUs/check.png">
-                    <img id="add-service-cross" class="add-service-discard" src="../images/6-admin-aboutUs/cross.png">
-                    <img id="add-service-logo" src="../images/6-admin-aboutUs/plus-white.png" alt="Visit Edit">
-                    <span id="add-service-text"><span class="add-service-choice add-service-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="add-service-choice add-service-discard">Cancel</span></span>
-                </div>
-                <div class="arrow left"></div>
-                <div class="servicePictureFrame">
-                    <img id="servicePictureEdit" class="initHide" src="../images/6-admin-aboutUs/editImg.png" alt="Edit Service Picture">
-                    <img class="servicePicture" src="../images/3-aboutUs/service1.png" alt="Event Management & Live Staging">
-                </div>
-                <div id="serviceDescription"></div>
-                    <textarea id="editServiceDescription" class="initHide">Event Management & Live Staging</textarea>
-                <div class="arrow right"></div>
-                <div id="dots">
-                    <div class="dot" id="dot1"></div>
-                    <div class="dot" id="dot2"></div>
-                    <div class="dot" id="dot3"></div>
-                </div>
             </div>
-        </div>
-    
-        <!--------------------VISIT-------------------->
-        <div class="aboutUs-visitFrame">
-            <img id="edit-visitPicture" class="initHide" src="../images/6-admin-aboutUs/newImg.png" alt="newVisitPicture">
-            <img id="aboutUs-visitPicture" src="../images/3-aboutUs/tech-placeholder.jpg" alt="techtite">
-            <div class="aboutUs-visitTextFrame">
-                <div id="edit-visit" class="initHide">
-                    <img id="edit-visit-check" class="edit-visit-save" src="../images/6-admin-aboutUs/check.png">
-                    <img id="edit-visit-cross" class="edit-visit-discard" src="../images/6-admin-aboutUs/cross.png">
-                    <span id="edit-visit-text"><span class="edit-visit-choice edit-visit-save">Save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edit-visit-choice edit-visit-discard">Cancel</span></span>
-                    <img id="edit-visit-button" src="../images/6-admin-aboutUs/pencil.png" alt="Visit Edit">
-                </div>
-                <div class="aboutUs-visitText">
-                    <span id="aboutUs-visitTextHeader"></span>
-                    <textarea id="aboutUs-editVisitHeader" class="initHide">SX MANILA</textarea><br><br><br><br><br>
-                    <p id="aboutUs-visitDescription"></p>
-                    <textarea id="aboutUs-editVisitDescription" class="initHide" rows="6" maxlength="220">POST - a group that holds and organizes music event productions.&#13;&#10;&#13;&#10;From electrifying concerts to soul-stirring festivals, our passion for music and dedication to innovation shine through every beat.</textarea>
-                    <br><br><br><br><br><br>
-                    <div id="aboutUs-visitButton">
-                        <a href="https://www.facebook.com/sxmanila/" target="_blank" id="aboutUs-visitButtonText">VISIT FB PAGE</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{/with}}
         
         <!--------------------FOOTER-------------------->
         <div id="footer">

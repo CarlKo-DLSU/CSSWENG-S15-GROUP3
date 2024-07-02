@@ -101,10 +101,6 @@ app.get('/5-editPastEvents.hbs', (req, res) => {
     res.render('5-editPastEvents');
 });
 
-app.get('/6-admin-about.hbs', (req, res) => {
-    res.render('6-admin-about');
-});
-
 
 //Register and login db
 app.post("/register", async(req,res)=>{
@@ -192,6 +188,36 @@ app.get('/3-about.hbs', async (req, res) => {
     } catch (error) {
         console.error("Error fetching about us data:", error);
         res.status(500).send("Error fetching about us page.");
+    }
+});
+
+app.get('/6-admin-about.hbs', async (req, res) => {
+    console.log("It went to index.js");
+    try {
+        const currAbout = await aboutUs.findOne({});
+        console.log("Fetched about us data:", currAbout); // Log to check the data
+        res.render('6-admin-about', { currAbout: currAbout });
+    } catch (error) {
+        console.error("Error fetching about us data:", error);
+        res.status(500).send("Error fetching about us page.");
+    }
+});
+
+app.post('/updateAboutUs', async (req, res) => {
+    const { mission, serviceDesc, visitTitle, visitDesc, visitImage } = req.body;
+
+    try {
+        await aboutUs.updateOne({}, {
+            mission: mission,
+            serviceDesc: serviceDesc,
+            visitTitle: visitTitle,
+            visitDesc: visitDesc,
+            visitImage: visitImage
+        });
+
+    } catch (error) {
+        console.error("Error updating About Us data:", error);
+        res.status(500).send("Error updating About Us data.");
     }
 });
 
