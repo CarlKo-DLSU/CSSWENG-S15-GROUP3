@@ -28,14 +28,17 @@ hbs.registerHelper('nl2br', function(text) {
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadDir = 'uploads/';
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir);
-        }
-        cb(null, uploadDir);
+        const uploadDir = path.join(__dirname, 'public', 'uploads');
+        // Check if the directory exists, otherwise create it
+        fs.mkdir(uploadDir, { recursive: true }, (err) => {
+            if (err) {
+                console.error("Error creating uploads directory:", err);
+            }
+            cb(null, uploadDir);
+        });
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Append timestamp to the original file name
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
@@ -145,8 +148,8 @@ app.post("/signin", async(req,res)=>{
 //ADD PAST EVENT DB
 app.post("/addPastEvent", upload.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
     const { title } = req.body;
-    const cover = req.files['cover'] ? '/uploads/' + req.files['cover'][0].filename : null;
-    const gallery = req.files['gallery'] ? req.files['gallery'].map(file => '/uploads/' + file.filename) : [];
+    const cover = req.files['cover'] ? 'uploads/' + req.files['cover'][0].filename : null;
+    const gallery = req.files['gallery'] ? req.files['gallery'].map(file => 'uploads/' + file.filename) : [];
 
     if (!title) {
         return res.status(400).send("Error: 'title' is required.");
