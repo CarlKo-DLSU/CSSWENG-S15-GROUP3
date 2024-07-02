@@ -1,109 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> SX Manila | About Us </title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/1-index.css">
-    </head>
-
-    <body>
-        <!--------------------HEADER-------------------->
-        <div id="header">   
-            <div id="current-events">
-                <div id="text-container">
-                    <p id="live-events">Show here current live events</p>
-                    <p id="more-info">For more information <span class="highlight" style="cursor: pointer;" onclick="window.location.href='2-events.hbs';">Click Here</span></p>
-                </div>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SX Manila | About Us </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/1-index.css">
+</head>
+<body>
+    <!--------------------HEADER-------------------->
+    <div id="header">   
+        <div id="current-events">
+            <div id="text-container">
+                <p id="live-events">Show here current live events</p>
+                <p id="more-info">For more information <span class="highlight" style="cursor: pointer;" onclick="window.location.href='2-events.hbs';">Click Here</span></p>
             </div>
+        </div>
 
-            <div id="nav">
-                <a href="/">
-                    <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
-                </a>
-                
-                <img id="nav-hamburger" src="../images/1-index/nav-hamburger.png" alt="menu hamburger">
-        
-                <div id="nav-panel">
-                    <div id="nav-buttons">
-                        <a href="/">Home</a>
-                        <a href="3-about.hbs">About Us</a>
-                        <a href="2-events.hbs">Events</a>
-                        <a href="#">Bookings</a>
-                        <a href="#">Merchandise</a>
-                        <a href="#" id="sign-in-link">Sign In</a>
-                        <a href="/">Log Out</a>
-                    </div>
-                    
-                </div>
-            </div>
+        <div id="nav">
+            <a href="/">
+                <img id="nav-logo" src="../images/1-index/nav-logo.png" alt="logo">
+            </a>
             
-            <div class="red-bar bottom-bar"></div>
-        </div>
-
-        <!--------------------SIGN IN-------------------->
-        <div id="sign-in-popup" class="popup">
-            <div class="popup-content">
-                <span class="close-btn">&times;</span>
-
-                <img id="sign-in-logo" src="../images/1-index/nav-logo.png" alt="logo">
-
-                <p class="popup-text">Welcome back</p>
-
-                <form id="sign-in-form" action="/signin" method="post">
-                    <input type="text" id="sign-in-email" name="email" placeholder="Email">
-                    
-                    <input type="password" id="sign-in-password" name="password" placeholder="Password">
-                    
-                    <label for="remember-me">
-                        <input type="checkbox" id="remember-me" name="remember-me"> Remember me
-                    </label>
-                    
-                    <button type="submit" id="sign-in-btn">Sign In</button>
-                </form>
-
-                <div id="to-register-container">
-                    <p>No account yet? <button id="to-register-btn">Register</button>.</p>
+            <img id="nav-hamburger" src="../images/1-index/nav-hamburger.png" alt="menu hamburger">
+    
+            <div id="nav-panel">
+                <div id="nav-buttons">
+                    <a href="/">Home</a>
+                    <a href="3-about.hbs">About Us</a>
+                    <a href="2-events.hbs">Events</a>
+                    <a href="#">Bookings</a>
+                    <a href="#">Merchandise</a>
+                    <a href="#" id="sign-in-link">Sign In</a>
+                    <a href="/">Log Out</a>
                 </div>
             </div>
         </div>
+        
+        <div class="red-bar bottom-bar"></div>
+    </div>
 
-        <!--------------------REGISTER-------------------->
-        <div id="register-popup" class="popup">
-            <div class="popup-content">
-                <span class="close-btn">&times;</span>
-
-                <p class="popup-text">Register</p>
-
-                <form id="register-form" action="/register" method="post">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name">
-
-                    <label for="register-email">Email</label>
-                    <input type="text" id="register-email" name="email">
-
-                    <label for="contact-number">Contact Number</label>
-                    <input type="text" id="contact-number" name="contactNumber">
-
-                    <label for="register-password">Password</label>
-                    <input type="password" id="register-password" name="password">
-
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password">
-
-                    <button type="submit" id="register-btn">Register</button>
-                </form>
-
-                <div id="to-sign-in-container">
-                    <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
-                </div>
+    <!--------------------SIGN IN-------------------->
+    <div id="sign-in-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <img id="sign-in-logo" src="../images/1-index/nav-logo.png" alt="logo">
+            <p class="popup-text">Welcome back</p>
+            <form id="sign-in-form" action="/signin" method="post">
+                <input type="text" id="sign-in-email" name="email" placeholder="Email">
+                <input type="password" id="sign-in-password" name="password" placeholder="Password">
+                <label for="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me"> Remember me
+                </label>
+                <button type="submit" id="sign-in-btn">Sign In</button>
+            </form>
+            <div id="to-register-container">
+                <p>No account yet? <button id="to-register-btn">Register</button>.</p>
             </div>
         </div>
+    </div>
 
+    <!--------------------REGISTER-------------------->
+    <div id="register-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p class="popup-text">Register</p>
+            <form id="register-form" action="/register" method="post">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+                <label for="register-email">Email</label>
+                <input type="text" id="register-email" name="email">
+                <label for="contact-number">Contact Number</label>
+                <input type="text" id="contact-number" name="contactNumber">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" name="password">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password">
+                <button type="submit" id="register-btn">Register</button>
+            </form>
+            <div id="to-sign-in-container">
+                <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
+            </div>
+        </div>
+    </div>
+
+    {{#with currAbout}}
         <!--------------------MAIN FRAME-------------------->
         <div id="aboutUs-frame">
             <img class="aboutUs-framePicture" src="../images/3-aboutUs/performer-placeholder.jpg" alt="BOCCHI THE ROCK!">
@@ -112,7 +95,7 @@
 
         <!--------------------MISSION-------------------->
         <div id="mission-frame">
-            <div id="mission-details">Delivering through with our<br>customers and clients by<br>organizing, planning, and executing<br>successful events.</div>
+            <div id="mission-details">{{mission}}</div>
         </div>
 
         <!--------------------SERVICES-------------------->
@@ -121,9 +104,9 @@
             <div class="service">
                 <div class="arrow left"></div>
                 <div class="servicePictureFrame">
-                    <img class="servicePicture" src="../images/3-aboutUs/service1.png" alt="Event Management & Live Staging">
+                    <img class="servicePicture">
                 </div>
-                <div class="serviceDescription">Event Management & Live Staging</div>
+                <div id="serviceDescription">{{{serviceDesc.[0]}}}</div>
                 <div class="arrow right"></div>
                 <div id="dots">
                     <div class="dot" id="dot1"></div>
@@ -135,34 +118,32 @@
         
         <!--------------------VISIT-------------------->
         <div class="aboutUs-visitFrame">
-            <img id="aboutUs-visitPicture" src="../images/3-aboutUs/tech-placeholder.jpg" alt="techtite">
+            <img id="aboutUs-visitPicture" src="../images/3-aboutUs/{{{visitImage}}}" alt="techtite">
             <div class="aboutUs-visitText">
-                <span id="aboutUs-visitTextHeader">SX MANILA</span><br><br>
-                POST - a group that holds and organizes music event productions.<br><br>
-                From electrifying concerts to soul-stirring festivals, our passion for music and dedication to innovation shine through every beat.<br>
+                <span id="aboutUs-visitTextHeader">{{visitTitle}}</span><br><br><br><br><br>
+                {{{nl2br visitDesc}}}
                 <div id="aboutUs-visitButton">
                     <a href="https://www.facebook.com/sxmanila/" target="_blank" id="aboutUs-visitButtonText">VISIT FB PAGE</a>
                 </div>
             </div>
         </div>
-        
-        <!--------------------FOOTER-------------------->
-        <div id="footer">
-            <p id="contact-us">CONTACT US</p>
+    {{/with}}
 
-            <div id="contact-details">
-                <p>example@gmail.com</p>
-                <p>+63 9XX XXXX</p>
-            </div>
-
-            <div id="socials">
-                <a href="https://www.facebook.com/sxmanila/" target="_blank"><img src="../images/1-index/footer-fb.png" id="fb-icon" class="socials-icon"></a>
-                <a href="https://www.instagram.com/sxmanila/" target="_blank"><img src="../images/1-index/footer-ig.png" id="ig-icon" class="socials-icon"></a>
-                <a href="https://x.com/sxmanila" target="_blank"><img src="../images/1-index/footer-x.png" id="x-icon" class="socials-icon"></a>
-            </div>
+    <!--------------------FOOTER-------------------->
+    <div id="footer">
+        <p id="contact-us">CONTACT US</p>
+        <div id="contact-details">
+            <p>example@gmail.com</p>
+            <p>+63 9XX XXXX</p>
         </div>
+        <div id="socials">
+            <a href="https://www.facebook.com/sxmanila/" target="_blank"><img src="../images/1-index/footer-fb.png" id="fb-icon" class="socials-icon"></a>
+            <a href="https://www.instagram.com/sxmanila/" target="_blank"><img src="../images/1-index/footer-ig.png" id="ig-icon" class="socials-icon"></a>
+            <a href="https://x.com/sxmanila" target="_blank"><img src="../images/1-index/footer-x.png" id="x-icon" class="socials-icon"></a>
+        </div>
+    </div>
 
-        <script src="../js/0-universal.js"></script>
-        <script src="../js/3-about.js"></script>
-    </body>
+    <script src="../js/0-universal.js"></script>
+    <script src="../js/3-about.js"></script>
+</body>
 </html>

@@ -22,6 +22,9 @@ app.set("view engine","hbs")
 app.set("views", __dirname + "/views")
 app.use(bodyParser.json());
 
+hbs.registerHelper('nl2br', function(text) {
+    return text.replace(/\n/g, '<br>');
+});
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -85,14 +88,6 @@ app.get("/",(req,res)=>{
 app.get("/pastEvents",(req,res)=>{
     res.render("2-events")
 })
-
-app.get("/about",(req,res)=>{
-    res.render("3-about");
-})
-
-app.get('/3-about.hbs', (req, res) => {
-    res.render('3-about');
-});
 
 app.get('/4-admin-homepage.hbs', (req, res) => {
     res.render('4-admin-homepage');
@@ -188,6 +183,17 @@ app.get('/2-events.hbs', async (req, res) => {
     }
 });
 
+app.get('/3-about.hbs', async (req, res) => {
+    console.log("It went to index.js");
+    try {
+        const currAbout = await aboutUs.findOne({});
+        console.log("Fetched about us data:", currAbout); // Log to check the data
+        res.render('3-about', { currAbout: currAbout });
+    } catch (error) {
+        console.error("Error fetching about us data:", error);
+        res.status(500).send("Error fetching about us page.");
+    }
+});
 
 app.get('/test', (req, res) => {
     console.log("Test route hit");
