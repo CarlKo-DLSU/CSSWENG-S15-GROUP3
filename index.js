@@ -26,63 +26,6 @@ hbs.registerHelper('nl2br', function(text) {
     return text.replace(/\n/g, '<br>');
 });
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadDir = path.join(__dirname, 'public', 'uploads');
-        // Check if the directory exists, otherwise create it
-        fs.mkdir(uploadDir, { recursive: true }, (err) => {
-            if (err) {
-                console.error("Error creating uploads directory:", err);
-            }
-            cb(null, uploadDir);
-        });
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({ storage: storage });
-
-app.post("/addPastEvent", upload.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
-    const { title } = req.body;
-    const cover = req.files['cover'] ? '/uploads/' + req.files['cover'][0].filename : null;
-    const gallery = req.files['gallery'] ? req.files['gallery'].map(file => '/uploads/' + file.filename) : [];
-
-    if (!title) {
-        return res.status(400).send("Error: 'title' is required.");
-    }
-
-    console.log(title);
-    console.log(cover);
-    console.log(gallery);
-
-    try {
-        // Create new old Event
-        await PastEvent.create({
-            title: title,
-            cover: cover,
-            gallery: gallery
-        });
-
-        res.render("5-admin-events");
-    } catch (error) {
-        console.error("Error creating old Event:", error);
-        res.status(500).send("Error creating old Event.");
-    }
-});
-
-app.get('/5-admin-events', async (req, res) => {
-    try {
-        const eventsData = await PastEvent.find({}); // Use a different variable name, like eventsData
-        console.log("Fetched old events successfully:", eventsData);
-        res.render('5-admin-events', { PastEventData: eventsData }); // Pass eventsData to the template
-    } catch (error) {
-        console.error("Error fetching old events:", error);
-        res.status(500).send("Error fetching old events.");
-    }
-});
-
 
 app.get("/",(req,res)=>{
     res.render("1-index")
@@ -144,12 +87,31 @@ app.post("/signin", async(req,res)=>{
     }
 })
 
+//////////////////////ADD PAST EVENT DB
+const storagePastEvent = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const uploadDir = path.join(__dirname, 'public', 'images', '2-events');
+        // Check if the directory exists, otherwise create it
+        fs.mkdir(uploadDir, { recursive: true }, (err) => {
+            if (err) {
+                console.error("Error creating uploads directory:", err);
+                cb(err, uploadDir); // Pass error to callback
+            } else {
+                cb(null, uploadDir);
+            }
+        });
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
 
-//ADD PAST EVENT DB
-app.post("/addPastEvent", upload.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
+const uploadPastEvent = multer({ storage: storagePastEvent }); 
+
+app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
     const { title } = req.body;
-    const cover = req.files['cover'] ? 'uploads/' + req.files['cover'][0].filename : null;
-    const gallery = req.files['gallery'] ? req.files['gallery'].map(file => 'uploads/' + file.filename) : [];
+    const cover = req.files['cover'] ? '/images/2-events/' + req.files['cover'][0].filename : null;
+    const gallery = req.files['gallery'] ? req.files['gallery'].map(file => '/images/2-events/' + file.filename) : [];
 
     if (!title) {
         return res.status(400).send("Error: 'title' is required.");
@@ -160,7 +122,7 @@ app.post("/addPastEvent", upload.fields([{ name: 'cover', maxCount: 1 }, { name:
     console.log(gallery);
 
     try {
-        // Create new Past Event
+        // Create new old Event
         await PastEvent.create({
             title: title,
             cover: cover,
@@ -169,13 +131,12 @@ app.post("/addPastEvent", upload.fields([{ name: 'cover', maxCount: 1 }, { name:
 
         res.render("5-admin-events");
     } catch (error) {
-        console.error("Error creating Past Event:", error);
-        res.status(500).send("Error creating Past Event.");
+        console.error("Error creating old Event:", error);
+        res.status(500).send("Error creating old Event.");
     }
 });
 
 app.get('/2-events.hbs', async (req, res) => {
-    console.log("It went to index.js");
     try {
         const eventsData = await PastEvent.find({});
         console.log("Fetched past events successfully:", eventsData); // Check if data is fetched correctly
@@ -186,6 +147,8 @@ app.get('/2-events.hbs', async (req, res) => {
     }
 });
 
+
+//////////////////////ABOUT US PAGE DATABASE
 app.get('/3-about.hbs', async (req, res) => {
     console.log("It went to index.js");
     try {
@@ -202,7 +165,6 @@ app.get('/test', (req, res) => {
     console.log("Test route hit");
     res.send("Test route hit");
 });
-
 
 app.listen(3000,()=>{
     console.log("Port connected");
