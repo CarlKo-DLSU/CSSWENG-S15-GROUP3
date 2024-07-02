@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Update service picture
         let servicePicture = document.querySelector(".servicePicture");
-        servicePicture.src = `../images/3-aboutUs/service${index + 1}`;
+        servicePicture.src = `../images/3-aboutUs/service${index + 1}.png`;
 
         // Update service description
         let serviceDescription = document.querySelector(".serviceDescription");
