@@ -1,3 +1,31 @@
+// document.addEventListener('DOMContentLoaded', () => {
+//     // Get the event ID from the URL
+//     const params = new URLSearchParams(window.location.search);
+//     const eventId = params.get('id');
+
+//     if (eventId) {
+//         // Fetch the event data from the server
+//         fetch(`/getEventById?id=${eventId}`)
+//             .then(response => response.json())
+//             .then(data => {
+//                 document.getElementById('event-title').value = data.title;
+//                 document.getElementById('imagePlaceholder-cover').src = data.cover;
+
+//                 // Populate gallery images
+//                 const gallery = data.gallery;
+//                 const addImageGallery = document.getElementById('addImageGallery');
+
+//                 gallery.forEach(image => {
+//                     const imgElement = document.createElement('img');
+//                     imgElement.src = image;
+//                     imgElement.classList.add('hollowbox-picture');
+//                     addImageGallery.insertBefore(imgElement, document.getElementById('imageContainer'));
+//                 });
+//             })
+//             .catch(error => console.error('Error fetching event data:', error));
+//     }
+// });
+
 // JavaScript to replace placeholder image with uploaded image for imagePlaceholder-cover
 const imagePlaceholderForCover = document.getElementById('imagePlaceholder-cover');
 const fileInput = document.getElementById('fileInput-cover');
@@ -23,11 +51,21 @@ fileInput.addEventListener('change', function(event) {
 ///////////////////////////// GALLERY JAVASCRIPT
 document.addEventListener('DOMContentLoaded', () => {
     // Get the "Add Image" button element
-    const previewGalleryImages = [];
     const addImageButton = document.getElementById('addImage');
     // Get the container where images will be displayed
     const imageContainer = document.getElementById('imageContainer');
     const addImageGallery = document.getElementById('addImageGallery');
+    // const getImagesButton = document.getElementById('getImages'); // Button to get image sources
+
+    // // Function to get the src of all gallery images
+    // function getAllGalleryImageSrc() {
+    //     const imageSrcs = [];
+    //     const galleryImages = addImageGallery.querySelectorAll('img.hollowbox-picture');
+    //     galleryImages.forEach(img => {
+    //         imageSrcs.push(img.src);
+    //     });
+    //     return imageSrcs;
+    // }
 
     // Add event listener for the "Add Image" button
     addImageButton.addEventListener('click', () => {
@@ -64,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Append the preview div to the end of the addImageGallery
                     addImageGallery.appendChild(imagePreview);
-                    previewGalleryImages.push(e.target.result);
 
                     // Add an event listener to the remove button to delete the image
                     imagePreview.querySelector('.hollowbox-deleteIcon').addEventListener('click', () => {
@@ -80,10 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 addImageGallery.removeChild(newImageInput);
             }
         });
+    });
 
-        
+    // Example usage: Get all image sources when the "Get Images" button is clicked
+    getImagesButton.addEventListener('click', () => {
+        const allImageSrcs = getAllGalleryImageSrc();
+        console.log(allImageSrcs); // Print the image sources to the console or use them as needed
     });
 });
+
 
 // previewGalleryImages 
 //         previewPastEvent.addEventListener('change', () => {

@@ -1179,10 +1179,20 @@ input[type="submit"] {
     cursor: pointer; /* Optional: Changes cursor to pointer on hover */
 }
 
+.pastEventList {
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 20px; /* Adds space between items */
+    padding: 20px; /* Adds padding around the container */
+}
+
 .pastEvent {
     width: 340px;
     padding: 15px 25px;
     align-items: center;
+    display: flex;
+    flex-direction: column; /* Centers children vertically */
 }
 
 .pastEvent-image {

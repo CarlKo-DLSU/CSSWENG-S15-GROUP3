@@ -39,10 +39,6 @@ app.get('/4-admin-homepage.hbs', (req, res) => {
     res.render('4-admin-homepage');
 });
 
-app.get('/5-admin-events.hbs', (req, res) => {
-    res.render('5-admin-events');
-});
-
 app.get('/5-editPastEvents.hbs', (req, res) => {
     res.render('5-editPastEvents');
 });
@@ -137,6 +133,17 @@ app.get('/2-events.hbs', async (req, res) => {
         const eventsData = await PastEvent.find({});
         console.log("Fetched past events successfully:", eventsData); // Check if data is fetched correctly
         res.render('2-events', { eventsData: eventsData });
+    } catch (error) {
+        console.error("Error fetching past events:", error);
+        res.status(500).send("Error fetching past events.");
+    }
+});
+
+app.get('/5-admin-events.hbs', async (req, res) => {
+    try {
+        const eventsData = await PastEvent.find({});
+        console.log("Fetched past events successfully:", eventsData); // Check if data is fetched correctly
+        res.render('5-admin-events', { eventsData: eventsData });
     } catch (error) {
         console.error("Error fetching past events:", error);
         res.status(500).send("Error fetching past events.");
