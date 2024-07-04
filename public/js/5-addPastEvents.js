@@ -119,11 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Example usage: Get all image sources when the "Get Images" button is clicked
-    getImagesButton.addEventListener('click', () => {
-        const allImageSrcs = getAllGalleryImageSrc();
-        console.log(allImageSrcs); // Print the image sources to the console or use them as needed
-    });
+    // // Example usage: Get all image sources when the "Get Images" button is clicked
+    // getImagesButton.addEventListener('click', () => {
+    //     const allImageSrcs = getAllGalleryImageSrc();
+    //     console.log(allImageSrcs); // Print the image sources to the console or use them as needed
+    // });
 });
 
 

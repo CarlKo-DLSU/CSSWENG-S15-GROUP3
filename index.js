@@ -39,11 +39,6 @@ app.get('/4-admin-homepage.hbs', (req, res) => {
     res.render('4-admin-homepage');
 });
 
-app.get('/5-editPastEvents.hbs', (req, res) => {
-    res.render('5-editPastEvents');
-});
-
-
 //Register and login db
 app.post("/register", async(req,res)=>{
 
@@ -79,7 +74,16 @@ app.post("/signin", async(req,res)=>{
     }
 })
 
+//////////////////////EDIT PAST EVENT DB
+app.get('/5-editPastEvents.hbs', (req, res) => {
+    res.render('5-editPastEvents');
+});
+
 //////////////////////ADD PAST EVENT DB
+app.get('/5-addPastEvents.hbs', (req, res) => {
+    res.render('5-addPastEvents');
+});
+
 const storagePastEvent = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadDir = path.join(__dirname, 'public', 'images', '2-events');
@@ -121,7 +125,7 @@ app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }
             gallery: gallery
         });
 
-        res.render("5-admin-events");
+        res.redirect("5-admin-events.hbs");
     } catch (error) {
         console.error("Error creating old Event:", error);
         res.status(500).send("Error creating old Event.");

@@ -206,34 +206,23 @@
                         <img src="../images/2-events/ryo5.jpg" alt="Event Image 5">
                     </div>
                 </div>
-                <script>console.log("zerochekcpoint")</script>
                 {{#each eventsData}}
-                    <script>console.log("firstchekcpoint")</script>
                     <div class="pastEvent">
-                        <script>console.log("second")</script>
+                        <div id="eventId" style="display: none;">{{this.id}}</div>
                         <img class="pastEvent-image" src="{{this.cover}}" alt="{{this.title}}">
                         <img src="../images/1-index/pencil.png" alt="edit icon" class="past-edit-icon" data-id="{{this.id}}">
                         <div class="pastEvent-detailBox">
                             <span class="pastEvent-details">{{this.title}}</span>
                         </div>
                         <!-- Gallery for event images -->
-                        <script>console.log("third")</script>
                         <div class="event-gallery">
                         {{#each this.gallery}}
                                 <img src="{{this}}" alt="Event Image">
                         {{/each}}
                         </div>
-                        <script>console.log("last")</script>
                     </div>
                 {{/each}}
             </div>
-            {{!-- {{#each oldEventsData}}
-                Title: {{this.title}} <br>
-                <img src='{{this.cover}}' height="240px" width="240px"/>
-                <br>
-            {{/each}} --}}
-
-            <script>console.log("nyayayayay")</script>
         </div>
 
         <!--------------------PAST EVENTS POPUPS-------------------->
