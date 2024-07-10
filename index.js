@@ -198,6 +198,26 @@ app.post('/updateAboutUs', async (req, res) => {
     }
 });
 
+// Endpoint to get past event by ID
+app.get('/5-editPastEvents.hbs', async (req, res) => {
+    const eventId = req.query.id;
+    console.log(eventId);
+    try {
+        const event = await PastEvent.findById(eventId);
+        if (event) {
+            res.json({
+                title: event.title,
+                cover: event.cover,
+                gallery: event.gallery
+            });
+        } else {
+            res.status(404).send('Event not found');
+        }
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+});
+
 app.get('/test', (req, res) => {
     console.log("Test route hit");
     res.send("Test route hit");

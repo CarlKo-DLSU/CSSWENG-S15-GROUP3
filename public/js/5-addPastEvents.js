@@ -1,30 +1,26 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     // Get the event ID from the URL
-//     const params = new URLSearchParams(window.location.search);
-//     const eventId = params.get('id');
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const eventId = params.get('id');
 
-//     if (eventId) {
-//         // Fetch the event data from the server
-//         fetch(`/getEventById?id=${eventId}`)
-//             .then(response => response.json())
-//             .then(data => {
-//                 document.getElementById('event-title').value = data.title;
-//                 document.getElementById('imagePlaceholder-cover').src = data.cover;
+    console.log(eventId);
+    if (eventId) {
+        fetch(`/5-editPastEvents.hbs?id=${eventId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('event-title').value = data.title;
+                document.getElementById('imagePlaceholder-cover').src = data.cover;
+            })
+            .catch(error => {
+                console.error('Error fetching event data:', error);
+            });
+    }
+});
 
-//                 // Populate gallery images
-//                 const gallery = data.gallery;
-//                 const addImageGallery = document.getElementById('addImageGallery');
-
-//                 gallery.forEach(image => {
-//                     const imgElement = document.createElement('img');
-//                     imgElement.src = image;
-//                     imgElement.classList.add('hollowbox-picture');
-//                     addImageGallery.insertBefore(imgElement, document.getElementById('imageContainer'));
-//                 });
-//             })
-//             .catch(error => console.error('Error fetching event data:', error));
-//     }
-// });
 
 // JavaScript to replace placeholder image with uploaded image for imagePlaceholder-cover
 const imagePlaceholderForCover = document.getElementById('imagePlaceholder-cover');
@@ -56,16 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageContainer = document.getElementById('imageContainer');
     const addImageGallery = document.getElementById('addImageGallery');
     // const getImagesButton = document.getElementById('getImages'); // Button to get image sources
-
-    // // Function to get the src of all gallery images
-    // function getAllGalleryImageSrc() {
-    //     const imageSrcs = [];
-    //     const galleryImages = addImageGallery.querySelectorAll('img.hollowbox-picture');
-    //     galleryImages.forEach(img => {
-    //         imageSrcs.push(img.src);
-    //     });
-    //     return imageSrcs;
-    // }
 
     // Add event listener for the "Add Image" button
     addImageButton.addEventListener('click', () => {
