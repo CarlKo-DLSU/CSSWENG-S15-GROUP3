@@ -10,10 +10,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/1-index.css">
     </head>
-
-    <style>
-        
-    </style>
     <body>
         <!--------------------HEADER-------------------->
         <div id="header">   
@@ -178,7 +174,6 @@
                         <img src="../images/2-events/ryo3.jpg" alt="Event Image 3">
                         <img src="../images/2-events/ryo4.jpg" alt="Event Image 4">
                         <img src="../images/2-events/ryo5.jpg" alt="Event Image 5">
-                        <img src="../images/2-events/ryo6.jpg" alt="Event Image 5">
                     </div>
                 </div>
                 <script>console.log("zerochekcpoint")</script>
@@ -186,7 +181,7 @@
                     <script>console.log("firstchekcpoint")</script>
                     <div class="pastEvent">
                         <script>console.log("second")</script>
-                        <img class="pastEvent-image" src="..{{this.cover}}" alt="{{this.title}}">
+                        <img class="pastEvent-image" src="{{this.cover}}" alt="{{this.title}}">
                         <div class="pastEvent-detailBox">
                             <span class="pastEvent-details">{{this.title}}</span>
                         </div>
@@ -194,7 +189,7 @@
                         <script>console.log("third")</script>
                         <div class="event-gallery">
                         {{#each this.gallery}}
-                                <img src="..{{this}}" alt="Event Image">
+                                <img src="{{this}}" alt="Event Image">
                         {{/each}}
                         </div>
                         <script>console.log("last")</script>
