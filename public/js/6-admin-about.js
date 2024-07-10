@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const visitDescription = document.getElementById('aboutUs-visitDescription');
     const editVisitDescription = document.getElementById('aboutUs-editVisitDescription');
     const editVisitPicture = document.getElementById('edit-visitPicture');
+    const visitImageInput = document.getElementById("visitImageInput");
 
     missionText.innerHTML = editMissionText.value
     visitHeaderText.innerHTML = editVisitHeader.value;
@@ -47,6 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
             alert('Error updating About Us data.');
         }
     };
+
+    visitImageInput.addEventListener("change", function(e) {
+        
+    });
 
     // displays the edit mission elements
     document.querySelector("#edit-mission-button").addEventListener("click", function(e) {
@@ -261,6 +266,10 @@ document.addEventListener("DOMContentLoaded", () => {
             editVisitHeader.value = visitHeaderText.innerHTML;
             editVisitDescription.value = visitDescription.innerHTML.replace(/<br\s*\/?>/gi, '\n');
         }
+    });
+
+    document.querySelector("#edit-visitPicture").addEventListener("click", function(e) {
+        visitImageInput.click();
     });
 
     document.querySelector(".edit-visit-save").addEventListener("click", function(e) {

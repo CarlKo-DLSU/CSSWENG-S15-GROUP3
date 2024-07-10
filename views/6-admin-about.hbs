@@ -155,7 +155,7 @@
                     <div class="arrow left"></div>
                     <div class="servicePictureFrame">
                         <img id="servicePictureEdit" class="initHide" src="../images/6-admin-aboutUs/editImg.png" alt="Edit Service Picture">
-                        <img class="servicePicture" src="../images/3-aboutUs/service1.png" alt="Event Management & Live Staging">
+                        <img class="servicePicture" src="../images/3-aboutUs/{{{../serviceImg.[0]}}}" alt="Event Management & Live Staging">
                     </div>
                     <div id="serviceDescription"></div>
                         <textarea id="editServiceDescription" class="initHide">{{{serviceDesc.[0]}}}</textarea>
@@ -170,6 +170,7 @@
         
             <!--------------------VISIT-------------------->
             <div class="aboutUs-visitFrame">
+                <input type="file" id="visitImageInput" accept="image/*">
                 <img id="edit-visitPicture" class="initHide" src="../images/6-admin-aboutUs/newImg.png" alt="newVisitPicture">
                 <img id="aboutUs-visitPicture" src="../images/3-aboutUs/{{visitImage}}" alt="techtite">
                 <div class="aboutUs-visitTextFrame">

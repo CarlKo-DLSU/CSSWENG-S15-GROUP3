@@ -1713,6 +1713,10 @@ input[type="submit"] {
     background: rgba(184, 0, 34, 1);
 }
 
+#visitImageInput {
+    height: 0px;
+}
+
 #edit-visitPicture {
     position: absolute;
     width: 10%;

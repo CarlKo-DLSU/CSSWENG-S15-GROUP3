@@ -13,73 +13,67 @@ const aboutUs = require("./models/AboutUs")
 const UpcomingEvent = require("./models/UpcomingEvent")
 const PastEvent = require("./models/PastEvent")
 
-app.use(express.json())
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
 //app.use(express.urlencoded({extended:false}))
-app.use(express.urlencoded({ extended: true }))
-app.set("view engine","hbs")
-app.set("views", __dirname + "/views")
+app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "hbs");
+app.set("views", __dirname + "/views");
 app.use(bodyParser.json());
 
 hbs.registerHelper('nl2br', function(text) {
     return text.replace(/\n/g, '<br>');
 });
 
+app.get("/", (req, res) => {
+    res.render("1-index");
+});
 
-app.get("/",(req,res)=>{
-    res.render("1-index")
-})
-
-app.get("/pastEvents",(req,res)=>{
-    res.render("2-events")
-})
+app.get("/pastEvents", (req, res) => {
+    res.render("2-events");
+});
 
 app.get('/4-admin-homepage.hbs', (req, res) => {
     res.render('4-admin-homepage');
 });
 
-//Register and login db
-app.post("/register", async(req,res)=>{
-
+app.post("/register", async (req, res) => {
     const profile = {
-        name:req.body.name,
-        email:req.body.email,
-        phone:req.body.contactNumber,
-        password:req.body.password
-    }
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.contactNumber,
+        password: req.body.password
+    };
 
-    await profiles.insertMany([profile])
-    res.render("1-index")
-})
+    await profiles.insertMany([profile]);
+    res.render("1-index");
+});
 
-app.post("/signin", async(req,res)=>{
+app.post("/signin", async (req, res) => {
     try {
-        const check = await profiles.findOne({email:req.body.email})
+        const check = await profiles.findOne({ email: req.body.email });
 
-        if(check.password === req.body.password){
-            if(req.body.email === "admin@gmail.com") {
-                res.render("4-admin-homepage")
-                console.log("Greetings Admin!")
+        if (check.password === req.body.password) {
+            if (req.body.email === "admin@gmail.com") {
+                res.render("4-admin-homepage");
+                console.log("Greetings Admin!");
             } else {
-                res.render("1-index")
-                console.log("Greetings!")
+                res.render("1-index");
+                console.log("Greetings!");
             }
-        }
-        else {
-            res.render("1-index")
+        } else {
+            res.render("1-index");
         }
     } catch {
-        res.send("Wrong Details")
+        res.send("Wrong Details");
     }
-})
+});
 
-//////////////////////EDIT PAST EVENT DB
 app.get('/5-editPastEvents.hbs', (req, res) => {
     res.render('5-editPastEvents');
 });
 
-//////////////////////ADD PAST EVENT DB
 app.get('/5-addPastEvents.hbs', (req, res) => {
     res.render('5-addPastEvents');
 });
@@ -87,11 +81,10 @@ app.get('/5-addPastEvents.hbs', (req, res) => {
 const storagePastEvent = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadDir = path.join(__dirname, 'public', 'images', '2-events');
-        // Check if the directory exists, otherwise create it
         fs.mkdir(uploadDir, { recursive: true }, (err) => {
             if (err) {
                 console.error("Error creating uploads directory:", err);
-                cb(err, uploadDir); // Pass error to callback
+                cb(err, uploadDir);
             } else {
                 cb(null, uploadDir);
             }
@@ -102,7 +95,7 @@ const storagePastEvent = multer.diskStorage({
     }
 });
 
-const uploadPastEvent = multer({ storage: storagePastEvent }); 
+const uploadPastEvent = multer({ storage: storagePastEvent });
 
 app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
     const { title } = req.body;
@@ -113,12 +106,7 @@ app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }
         return res.status(400).send("Error: 'title' is required.");
     }
 
-    console.log(title);
-    console.log(cover);
-    console.log(gallery);
-
     try {
-        // Create new old Event
         await PastEvent.create({
             title: title,
             cover: cover,
@@ -135,7 +123,6 @@ app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }
 app.get('/2-events.hbs', async (req, res) => {
     try {
         const eventsData = await PastEvent.find({});
-        console.log("Fetched past events successfully:", eventsData); // Check if data is fetched correctly
         res.render('2-events', { eventsData: eventsData });
     } catch (error) {
         console.error("Error fetching past events:", error);
@@ -146,7 +133,6 @@ app.get('/2-events.hbs', async (req, res) => {
 app.get('/5-admin-events.hbs', async (req, res) => {
     try {
         const eventsData = await PastEvent.find({});
-        console.log("Fetched past events successfully:", eventsData); // Check if data is fetched correctly
         res.render('5-admin-events', { eventsData: eventsData });
     } catch (error) {
         console.error("Error fetching past events:", error);
@@ -154,13 +140,18 @@ app.get('/5-admin-events.hbs', async (req, res) => {
     }
 });
 
+// Read aboutUs.json and render the page
+const getAboutUsData = () => {
+    const filePath = path.join(__dirname, 'populate', 'aboutUs.json');
+    const jsonData = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(jsonData);
+};
 
-//////////////////////ABOUT US PAGE DATABASE
-app.get('/3-about.hbs', async (req, res) => {
+app.get('/3-about.hbs', (req, res) => {
     console.log("It went to index.js");
     try {
-        const currAbout = await aboutUs.findOne({});
-        console.log("Fetched about us data:", currAbout); // Log to check the data
+        const currAbout = getAboutUsData();
+        console.log("Fetched about us data:", currAbout);
         res.render('3-about', { currAbout: currAbout });
     } catch (error) {
         console.error("Error fetching about us data:", error);
@@ -168,11 +159,11 @@ app.get('/3-about.hbs', async (req, res) => {
     }
 });
 
-app.get('/6-admin-about.hbs', async (req, res) => {
+app.get('/6-admin-about.hbs', (req, res) => {
     console.log("It went to index.js");
     try {
-        const currAbout = await aboutUs.findOne({});
-        console.log("Fetched about us data:", currAbout); // Log to check the data
+        const currAbout = getAboutUsData();
+        console.log("Fetched about us data:", currAbout);
         res.render('6-admin-about', { currAbout: currAbout });
     } catch (error) {
         console.error("Error fetching about us data:", error);
@@ -181,17 +172,19 @@ app.get('/6-admin-about.hbs', async (req, res) => {
 });
 
 app.post('/updateAboutUs', async (req, res) => {
-    const { mission, serviceDesc, visitTitle, visitDesc, visitImage } = req.body;
-
+    const { mission, visitTitle, visitDesc, visitImage } = req.body;
     try {
-        await aboutUs.updateOne({}, {
+        const filePath = path.join(__dirname, 'populate', 'aboutUs.json');
+        const updatedAboutUs = {
             mission: mission,
+            serviceImg: serviceImg,
             serviceDesc: serviceDesc,
             visitTitle: visitTitle,
             visitDesc: visitDesc,
             visitImage: visitImage
-        });
-
+        };
+        fs.writeFileSync(filePath, JSON.stringify(updatedAboutUs, null, 2));
+        res.redirect('/6-admin-about.hbs');
     } catch (error) {
         console.error("Error updating About Us data:", error);
         res.status(500).send("Error updating About Us data.");
@@ -223,6 +216,6 @@ app.get('/test', (req, res) => {
     res.send("Test route hit");
 });
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log("Port connected");
-})
+});
