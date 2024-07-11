@@ -113,13 +113,13 @@
                     <div class="editPastEventTitle">
                         Event Title
                         <br>
-                        <input type="text" id="event-title" name="title" style="font-size: 30px; width: 100%; border-radius: 10px;" />
+                        <input type="text" id="event-title" name="title" style="font-size: 30px; width: 100%; border-radius: 10px;" value="{{title}}" />
                         <br>
                         Event Cover Photo
                         <br>
                         <div class="coverImage-container">
-                            <img id="imagePlaceholder-cover" src="../images/2-events/uploadImage.png" alt="Upload Image">
-                            <input type="file" id="fileInput-cover" name="cover" value="" />  
+                            <img id="imagePlaceholder-cover" src="{{cover}}" alt="Upload Image">
+                            <input type="file" id="fileInput-cover" name="cover" />  
                         </div>
                     </div>
                 </div>
@@ -136,12 +136,20 @@
                             <button type="button" id="addImage" style="border: none; background: none; padding: 0;">
                                 <img class="hollowbox-picture" src="../images/2-events/uploadImage.png" alt="Upload Image">
                             </button>
+                            <div class="image-preview-container">
+                            {{#each gallery}}
+                                
+                                    <img src="{{this}}" alt="Image Preview" class="hollowbox-picture">
+                                    <img src="../images/2-events/deleteIcon.png" class="hollowbox-deleteIcon">
+                                
+                            {{/each}}
+                            </div>
                         </div>
                     </div>
                     <!-- Submit and preview buttons -->
                     <div class="buttonContainer">
                         <div class="editPastEvent-button previewEventAlbum">Preview Event Album</div>
-                        <input type="submit" id="addPastEvent" class="editPastEvent-button publishEventAlbum" style="margin-top: 0px;" value="Publish Event Album"/>
+                        <input type="submit" id="addPastEvent" class="editPastEvent-button publishEventAlbum" style="margin-top: 0px;" value="Publish Event Album" />
                     </div>
                 </div>
             </div>
@@ -177,7 +185,7 @@
 
     <script src="../js/0-universal.js"></script>
     <script src="../js/1-index.js"></script>
-    <script src="../js/5-addPastEvents.js"></script>
+    <script src="../js/5-editPastEvents.js"></script>
 </body>
 
 </html>

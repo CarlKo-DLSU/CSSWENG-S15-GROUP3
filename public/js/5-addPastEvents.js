@@ -1,27 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const eventId = params.get('id');
-
-    console.log(eventId);
-    if (eventId) {
-        fetch(`/5-editPastEvents.hbs?id=${eventId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById('event-title').value = data.title;
-                document.getElementById('imagePlaceholder-cover').src = data.cover;
-            })
-            .catch(error => {
-                console.error('Error fetching event data:', error);
-            });
-    }
-});
-
-
 // JavaScript to replace placeholder image with uploaded image for imagePlaceholder-cover
 const imagePlaceholderForCover = document.getElementById('imagePlaceholder-cover');
 const fileInput = document.getElementById('fileInput-cover');
