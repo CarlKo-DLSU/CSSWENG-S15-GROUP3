@@ -196,17 +196,22 @@ app.get('/6-admin-about.hbs', async (req, res) => {
 });
 
 app.post('/updateAboutUs', async (req, res) => {
-    const { mission, serviceDesc, visitTitle, visitDesc, visitImage } = req.body;
-
+    const { mission, visitTitle, visitDesc, visitImage } = req.body;
     try {
-        await aboutUs.updateOne({}, {
+        const filePath = path.join(__dirname, 'populate', 'aboutUs.json');
+        const existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        
+        const updatedAboutUs = {
+            ...existingData,
             mission: mission,
-            serviceDesc: serviceDesc,
             visitTitle: visitTitle,
             visitDesc: visitDesc,
             visitImage: visitImage
-        });
-
+        };
+        
+        fs.writeFileSync(filePath, JSON.stringify(updatedAboutUs, null, 2));
+        
+        res.redirect('/6-admin-about.hbs');
     } catch (error) {
         console.error("Error updating About Us data:", error);
         res.status(500).send("Error updating About Us data.");
