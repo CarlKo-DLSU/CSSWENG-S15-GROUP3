@@ -203,12 +203,17 @@ app.get('/5-admin-events.hbs', async (req, res) => {
     }
 });
 
+const getAboutUsData = () => {
+    const filePath = path.join(__dirname, 'populate', 'aboutUs.json');
+    const jsonData = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(jsonData);
+};
 
 //////////////////////ABOUT US PAGE DATABASE
 app.get('/3-about.hbs', async (req, res) => {
     console.log("It went to index.js");
     try {
-        const currAbout = await aboutUs.findOne({});
+        const currAbout = getAboutUsData();
         console.log("Fetched about us data:", currAbout); // Log to check the data
         res.render('3-about', { currAbout: currAbout });
     } catch (error) {
@@ -220,7 +225,7 @@ app.get('/3-about.hbs', async (req, res) => {
 app.get('/6-admin-about.hbs', async (req, res) => {
     console.log("It went to index.js");
     try {
-        const currAbout = await aboutUs.findOne({});
+        const currAbout = getAboutUsData();
         console.log("Fetched about us data:", currAbout); // Log to check the data
         res.render('6-admin-about', { currAbout: currAbout });
     } catch (error) {
@@ -244,7 +249,6 @@ app.post('/updateAboutUs', async (req, res) => {
         };
         
         fs.writeFileSync(filePath, JSON.stringify(updatedAboutUs, null, 2));
-        
         res.redirect('/6-admin-about.hbs');
     } catch (error) {
         console.error("Error updating About Us data:", error);
