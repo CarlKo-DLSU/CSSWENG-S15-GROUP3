@@ -106,6 +106,7 @@
         <!-------------------- CREATE PAS EVENTPAST EVENTS-------------------->
 
         <form action="/editPastEvent" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{{id}}">
             <div class="editPastEvents">
                 <!-- Divider for title and cover image -->
                 <div class="divider divider-left">
@@ -119,7 +120,7 @@
                         <br>
                         <div class="coverImage-container">
                             <img id="imagePlaceholder-cover" src="{{cover}}" alt="Upload Image">
-                            <input type="file" id="fileInput-cover" name="cover" />  
+                            <input type="file" id="fileInput-cover" name="cover" style="display: none;" />
                         </div>
                     </div>
                 </div>
@@ -138,8 +139,11 @@
                             </button>
                             <div class="image-preview-container">
                             {{#each gallery}}
-                                    <img src="{{this}}" alt="Image Preview" class="hollowbox-picture">
+                                <div class="hollow-box">
+                                    <img src="{{this}}" alt="Image Preview" class="hollowbox-picture existing-image">
                                     <img src="../images/2-events/deleteIcon.png" class="hollowbox-deleteIcon">
+                                    <input type="hidden" name="existingGallery[]" value="{{this}}">
+                                </div>
                             {{/each}}
                             </div>
                         </div>

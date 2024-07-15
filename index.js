@@ -74,31 +74,7 @@ app.post("/signin", async(req,res)=>{
     }
 })
 
-//////////////////////EDIT PAST EVENT DB
-app.get('/5-editPastEvents.hbs', async (req, res) => {
-    const eventId = req.query.id;
-    try {
-        const event = await PastEvent.findById(eventId);
-        if (event) {
-            res.render('5-editPastEvents', {
-                title: event.title,
-                cover: event.cover,
-                gallery: event.gallery
-            });
-        } else {
-            res.status(404).send('Event not found');
-        }
-    } catch (error) {
-        res.status(500).send('Server error');
-    }
-});
-
-//////////////////////ADD PAST EVENT DB
-app.get('/5-addPastEvents.hbs',(req, res) => {
-    res.render('5-addPastEvents');
-});
-
-
+//UPLOAD FOR PAST EVENT
 const storagePastEvent = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadDir = path.join(__dirname, 'public', 'images', '2-events');
@@ -117,7 +93,65 @@ const storagePastEvent = multer.diskStorage({
     }
 });
 
+//////////////////////EDIT PAST EVENT DB
+app.get('/5-editPastEvents.hbs', async (req, res) => {
+    const eventId = req.query.id;
+    try {
+        const event = await PastEvent.findById(eventId);
+        if (event) {
+            res.render('5-editPastEvents', {
+                id: event.id,
+                title: event.title,
+                cover: event.cover,
+                gallery: event.gallery
+            });
+        } else {
+            res.status(404).send('Event not found');
+        }
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+});
+
 const uploadPastEvent = multer({ storage: storagePastEvent }); 
+
+app.post('/editPastEvent', uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery' }]), (req, res) => {
+    const { id, title } = req.body;
+    const coverImage = req.files['cover'] ? '/images/2-events/' + req.files['cover'][0].filename : null;
+    const galleryImages = req.files['gallery'] ? req.files['gallery'].map(file => '/images/2-events/' + file.filename) : [];
+
+    console.log(title);
+    console.log(id);
+
+    // Handle updating the event in the database using the provided id
+    // Assuming you have a function updateEvent(id, title, coverImage, galleryImages)
+    updateEvent(id, title, coverImage, galleryImages)
+        .then(() => {
+            console.log("Successful edit");
+            //res.redirect(`/5-admin-events.hbs`);
+        })
+        .catch((err) => {
+            res.status(500).send(err.message);
+        });
+});
+
+function updateEvent(id, title, coverImage, galleryImages) {
+    // Logic to update the event in the database
+    // Replace this with your actual implementation
+    return new Promise((resolve, reject) => {
+        // For example purposes only
+        console.log('Event ID:', id);
+        console.log('Title:', title);
+        console.log('Cover Image:', coverImage);
+        console.log('Gallery Images:', galleryImages);
+        resolve();
+    });
+}
+
+//////////////////////ADD PAST EVENT DB
+app.get('/5-addPastEvents.hbs',(req, res) => {
+    res.render('5-addPastEvents');
+});
 
 app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
     const { title } = req.body;
@@ -216,11 +250,6 @@ app.post('/updateAboutUs', async (req, res) => {
         console.error("Error updating About Us data:", error);
         res.status(500).send("Error updating About Us data.");
     }
-});
-
-app.get('/test', (req, res) => {
-    console.log("Test route hit");
-    res.send("Test route hit");
 });
 
 app.listen(3000,()=>{
