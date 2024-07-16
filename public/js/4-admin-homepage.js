@@ -3,11 +3,13 @@ document.addEventListener("DOMContentLoaded", function() {
     var addEventPopup = document.getElementById("add-upcoming-event-popup");
     var editPopup = document.getElementById("edit-upcoming-event-popup");
 
+    // close "add upcoming event" popup and reset form
     closeButton.addEventListener("click", function() {
         addEventPopup.style.display = "none";
         resetAddEventForm();
     });
 
+    // display "add upcoming event" popup and reset form
     var addButton = document.getElementById("add-upcoming-event-btn");
 
     addButton.addEventListener("click", function() {
@@ -15,13 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
         resetAddEventForm();
     });
 
-    var addEventForm = document.getElementById("add-upcoming-event-form");
-    var editForm = document.getElementById("edit-upcoming-event-form");
-
     document.getElementById('add-upcoming-cover-photo-img').addEventListener('click', function() {
         document.getElementById('add-upcoming-cover-photo').click();
     });
 
+    // change cover photo image to file input
     document.getElementById('add-upcoming-cover-photo').addEventListener('change', function() {
         var file = this.files[0];
         var reader = new FileReader();
@@ -33,16 +33,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById('edit-upcoming-cover-photo-preview').addEventListener('click', function() {
         document.getElementById('edit-upcoming-cover-photo').click();
-    });   
+    });
 
+    // "add upcoming event" form submission
+    var addEventForm = document.getElementById("add-upcoming-event-form");
     addEventForm.addEventListener("submit", async function(event) {
         event.preventDefault();
         const formData = new FormData(addEventForm);
 
-        var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
-
+        // create slide with event details
         var newSlide = document.createElement("div");
         newSlide.classList.add("upcoming-slide");
+        
+        var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
 
         newSlide.setAttribute("data-slide-number", upcomingEventsSlider.children.length + 1)
         newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
@@ -85,23 +88,28 @@ document.addEventListener("DOMContentLoaded", function() {
         var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
         upcomingEventsSlider.appendChild(newSlide);
 
+        // hide add event popup and reset form
         addEventPopup.style.display = "none";
         addEventForm.reset();
         resetAddEventForm();
 
         var slideNumber = upcomingEventsSlider.children.length;
+        // create popup for new event
         createPopup(slideNumber, formData);
 
+        // clicking on new slide opens its popup
         newSlide.addEventListener("click", function() {
             openPopup(slideNumber);
         });
 
+        // clicking edit icon on new slide opens edit popup
         editIcon.addEventListener("click", function(event) {
             event.stopPropagation();
             openEditPopup(newSlide, slideNumber);
         });
     });
 
+    // preview popup creation for ADD
     document.getElementById("add-upcoming-preview-popup-btn").addEventListener("click", function() {
         var formData = new FormData(addEventForm);
         var slideNumber = document.querySelectorAll(".event-popup").length + 1;
@@ -123,8 +131,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function createEventSlide(formData) {
+        // create elements for new slide
         var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
-
         var newSlide = document.createElement("div");
         newSlide.classList.add("upcoming-slide");
         newSlide.setAttribute("data-slide-number", upcomingEventsSlider.children.length + 1)
@@ -132,24 +140,27 @@ document.addEventListener("DOMContentLoaded", function() {
         newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
         newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
     
+        // poster image
         var posterImage = document.createElement("img");
         posterImage.src = URL.createObjectURL(formData.get("add-upcoming-cover-photo"));
         posterImage.alt = "Event Poster";
         posterImage.classList.add("upcoming-poster");
         newSlide.appendChild(posterImage);
     
+        // edit icon
         var editIcon = document.createElement("img");
         editIcon.src = "../images/1-index/pencil.png";
         editIcon.alt = "Edit Icon";
         editIcon.classList.add("upcoming-edit-icon");
         newSlide.appendChild(editIcon);
     
+        // preview
         var eventPreview = document.createElement("div");
         eventPreview.classList.add("event-preview");
-    
         var previewText = document.createElement("div");
         previewText.classList.add("preview-text");
     
+        // date
         var eventDate = new Date(formData.get("add-upcoming-date"));
         var options = { year: 'numeric', month: 'long', day: 'numeric' };
         var previewDate = document.createElement("p");
@@ -157,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
         previewDate.textContent = eventDate.toLocaleDateString("en-US", options).toUpperCase();
         previewText.appendChild(previewDate);
     
+        // title
         var previewTitle = document.createElement("p");
         previewTitle.classList.add("preview-title");
         previewTitle.innerHTML = formData.get("add-upcoming-title").replace(/\n/g, '<br>');
@@ -194,31 +206,38 @@ document.addEventListener("DOMContentLoaded", function() {
         popup.id = popupId;
         popup.classList.add("event-popup");
 
+        // content
         var popupContent = document.createElement("div");
         popupContent.classList.add("event-popup-content");
 
+        // details
         var popupDetails = document.createElement("div");
         popupDetails.classList.add("popup-content-details");
 
+        // poster
         var posterImage = document.createElement("img");
         posterImage.src = URL.createObjectURL(formData.get("add-upcoming-cover-photo"));
         posterImage.alt = "Event Poster";
         posterImage.classList.add("upcoming-popup-poster");
         popupDetails.appendChild(posterImage);
 
+        // popup details
         var eventDetails = document.createElement("div");
         eventDetails.classList.add("upcoming-event-details");
 
+        // title
         var eventTitle = document.createElement("p");
         eventTitle.classList.add("event-title");
         eventTitle.textContent = formData.get("add-upcoming-title").split('\n')[0];
         eventDetails.appendChild(eventTitle);
 
+        // description
         var eventDescription = document.createElement("p");
         eventDescription.classList.add("event-description");
         eventDescription.innerHTML = formData.get("add-upcoming-description").replace(/\n/g, '<br>');
         eventDetails.appendChild(eventDescription);
 
+        // pre-sale
         var merchLink = formData.get("add-upcoming-merch-link");
         var merchButton = document.createElement("button");
         merchButton.classList.add("merch-presale-btn");
@@ -244,7 +263,8 @@ document.addEventListener("DOMContentLoaded", function() {
         var popup = document.getElementById(popupId);
         popup.style.display = "none";
     }
-
+    
+    var editForm = document.getElementById("edit-upcoming-event-form");
     document.getElementById("edit-upcoming-delete-event-btn").addEventListener("click", function() {
         var confirmationPopup = document.getElementById("confirmationPopup");
         confirmationPopup.style.display = "block";
@@ -281,6 +301,7 @@ document.addEventListener("DOMContentLoaded", function() {
         editPopup.style.display = "block";
         editForm.setAttribute("data-slide-number", slideNumber);
 
+        // retrieve details from slide and popup
         var title = slide.querySelector(".preview-title").innerHTML.replace(/<br\s*\/?>/mg, "\n");
         var date = slide.getAttribute("data-date");
         var location = slide.getAttribute("data-location");
@@ -288,16 +309,19 @@ document.addEventListener("DOMContentLoaded", function() {
         var description = popup.querySelector(".event-description").innerHTML.replace(/<br\s*\/?>/mg, "\n");
         var merchLink = popup.querySelector(".merch-presale-btn").getAttribute("onclick").match(/window\.open\(['"](.+?)['"]/);
 
+        // populate fields with retrieved details
         editForm["edit-upcoming-title"].value = title.replace(/<br\s*\/?>/gi, "\n");
         editForm["edit-upcoming-description"].value = description;
         editForm["edit-upcoming-date"].value = date;
         editForm["edit-upcoming-venue"].value = location;
         editForm["edit-upcoming-merch-link"].value = merchLink ? merchLink[1] : '';
 
+        // display current poster in edit popup
         var posterImage = slide.querySelector(".upcoming-poster").src;
         var posterPreview = document.getElementById("edit-upcoming-cover-photo-preview");
         posterPreview.src = posterImage;
 
+        // upload input image file
         var coverPhotoInput = editForm["edit-upcoming-cover-photo"];
         coverPhotoInput.onchange = function() {
             if (coverPhotoInput.files && coverPhotoInput.files[0]) {
@@ -305,6 +329,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
 
+        // form submission for EDIT
         editForm.onsubmit = function(event) {
             event.preventDefault();
 
@@ -338,6 +363,7 @@ document.addEventListener("DOMContentLoaded", function() {
             editPopup.style.display = "none";
         };
 
+        // close button
         var editCloseButton = document.getElementById("close-edit-popup-btn");
         editCloseButton.addEventListener("click", function() {
             editPopup.style.display = "none";
@@ -346,6 +372,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return slide;
     }
     
+    // add event listeners for opening and editing popups
     var slider = document.getElementById("upcoming-events-slider");
     var slides = slider.querySelectorAll(".upcoming-slide");
 
@@ -363,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    
+    // close popup when clicking outside popup
     window.addEventListener("click", function(event) {
         var popups = document.querySelectorAll(".event-popup");
         popups.forEach(function(popup, index) {
@@ -418,6 +445,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.appendChild(popup);
     }
     
+    // edit form's preview popup button
     document.getElementById("edit-upcoming-preview-popup-btn").addEventListener("click", function() {
         var formData = new FormData(editForm);
         var slideNumber = document.querySelectorAll(".event-popup").length + 1;
@@ -433,18 +461,19 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    // add form's preview homepage button
     document.getElementById("add-upcoming-preview-homepage-btn").addEventListener("click", function() {
         var formData = new FormData(document.getElementById("add-upcoming-event-form"));
         var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
         
-        // Temporarily add the slide to the homepage for preview
+        // temporarily add the slide to the homepage for preview
         var previewSlide = createEventSlide(formData);
         upcomingEventsSlider.appendChild(previewSlide);
 
         // turn upcoming-preview-buttons's display to flex so that it shows up
         document.getElementById("upcoming-preview-buttons").style.display = "flex";
 
-        // Clicking the preview slide's edit button should also remove upcoming-preview-buttons
+        // clicking the preview slide's edit button should also remove upcoming-preview-buttons
         var editIcon = previewSlide.querySelector(".upcoming-edit-icon");
         editIcon.addEventListener("click", function() {
             document.getElementById("upcoming-preview-buttons").style.display = "none";
