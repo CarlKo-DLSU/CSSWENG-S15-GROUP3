@@ -7,3 +7,5 @@ mongoose.connect("mongodb+srv://fionaamaiatano:d1JEp35Kb3NIgiEM@sxmanila.e4vygj7
 .catch(()=>{
     console.log("Failed to connect to MongoDB!");
 })
+
+var db = mongoose.connection;
