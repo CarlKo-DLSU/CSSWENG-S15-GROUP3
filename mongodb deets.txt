@@ -1,0 +1,7 @@
+mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB
+
+fionaamaiatano
+6LLVUQb8qmcjCDEv
+
+MONGOD_CONNECT_URI
+mongodb+srv://fionaamaiatano:d1JEp35Kb3NIgiEM@sxmanila.e4vygj7.mongodb.net/?retryWrites=true&w=majority&appName=SXManila
