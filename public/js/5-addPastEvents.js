@@ -80,18 +80,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // // Example usage: Get all image sources when the "Get Images" button is clicked
-    // getImagesButton.addEventListener('click', () => {
-    //     const allImageSrcs = getAllGalleryImageSrc();
-    //     console.log(allImageSrcs); // Print the image sources to the console or use them as needed
-    // });
 });
-
-
-// previewGalleryImages 
-//         previewPastEvent.addEventListener('change', () => {
-//             const eventTitle = localStorage.getItem('event-title');
-//             const eventCover = fileInput;
-//             const galleryImages = JSON.parse(localStorage.getItem('galleryImages'));
-//         });
