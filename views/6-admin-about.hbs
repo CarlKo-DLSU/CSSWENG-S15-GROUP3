@@ -1,3 +1,4 @@
+<!-->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,6 +14,7 @@
 
     <body>
         <!--------------------HEADER-------------------->
+        <!--
         <div id="header">   
             <div id="current-events">
                 <div id="text-container">
@@ -43,9 +45,11 @@
             </div>
             
             <div class="red-bar bottom-bar"></div>
-        </div>
+        </div> -->
+        {{>header}}
 
         <!--------------------SIGN IN-------------------->
+        <!--
         <div id="sign-in-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -70,9 +74,11 @@
                     <p>No account yet? <button id="to-register-btn">Register</button>.</p>
                 </div>
             </div>
-        </div>
+        </div> -->
+        {{>signin}}
 
         <!--------------------REGISTER-------------------->
+        <!--
         <div id="register-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -102,7 +108,8 @@
                     <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
                 </div>
             </div>
-        </div>
+        </div>-->
+        {{>register}}            
 
         <!--------------------MAIN FRAME-------------------->
         <div id="aboutUs-frame">
@@ -195,6 +202,7 @@
         {{/with}}
         
         <!--------------------FOOTER-------------------->
+        <!--
         <div id="footer">
             <p id="contact-us">CONTACT US</p>
 
@@ -208,10 +216,13 @@
                 <a href="https://www.instagram.com/sxmanila/" target="_blank"><img src="../images/1-index/footer-ig.png" id="ig-icon" class="socials-icon"></a>
                 <a href="https://x.com/sxmanila" target="_blank"><img src="../images/1-index/footer-x.png" id="x-icon" class="socials-icon"></a>
             </div>
-        </div>
-
+         </div>-->
+        {{>footer}}
         <script src="../js/0-universal.js"></script>
         <script src="../js/3-about.js"></script>
         <script src="../js/6-admin-about.js"></script>
+<!--
     </body>
+
 </html>
+-->
