@@ -597,7 +597,8 @@ button[type="submit"]:hover {
     width: 100%;
 }
 
-#add-upcoming-event-form label, #edit-upcoming-event-form label {
+#add-upcoming-event-form label, 
+#edit-upcoming-event-form label {
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -615,6 +616,15 @@ button[type="submit"]:hover {
     border-radius: 4px;
     width: 100%;
     box-sizing: border-box;
+}
+
+#add-upcoming-event-form select,
+#add-upcoming-event-form input[type="text"],
+#edit-upcoming-event-form select,
+#edit-upcoming-event-form input[type="text"] {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
 }
 
 #add-upcoming-title,

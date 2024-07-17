@@ -17,6 +17,24 @@ document.addEventListener("DOMContentLoaded", function() {
         resetAddEventForm();
     });
 
+    // show/hide new event type input in add form
+    document.getElementById("add-upcoming-event-type").addEventListener("change", function() {
+        if (this.value === "new") {
+            document.getElementById("new-event-type").style.display = "block";
+        } else {
+            document.getElementById("new-event-type").style.display = "none";
+        }
+    });
+
+    // show/hide new event type input in edit form
+    document.getElementById("edit-upcoming-event-type").addEventListener("change", function() {
+        if (this.value === "new") {
+            document.getElementById("edit-new-event-type").style.display = "block";
+        } else {
+            document.getElementById("edit-new-event-type").style.display = "none";
+        }
+    });
+
     document.getElementById('add-upcoming-cover-photo-img').addEventListener('click', function() {
         document.getElementById('add-upcoming-cover-photo').click();
     });
@@ -41,6 +59,38 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         const formData = new FormData(addEventForm);
 
+        let eventType = formData.get("add-upcoming-event-type");
+        if (eventType === "new") {
+            eventType = formData.get("new-event-type");
+
+            // Update the select options for add and edit forms
+            var addTypeSelect = document.getElementById("add-upcoming-event-type");
+            var editTypeSelect = document.getElementById("edit-upcoming-event-type");
+            var newOption = new Option(eventType, eventType);
+            addTypeSelect.add(newOption, addTypeSelect.options[addTypeSelect.length - 1]);
+            editTypeSelect.add(newOption.cloneNode(true), editTypeSelect.options[editTypeSelect.length - 1]);
+            
+            // Update the event type options in the filter
+            var eventTypeCheckboxes = document.getElementById("event-type-checkboxes");
+
+            // Create a new checkbox input and label for the new eventType
+            var newCheckbox = document.createElement("input");
+            newCheckbox.type = "checkbox";
+            newCheckbox.id = eventType.toLowerCase(); // Assuming the ID should be lowercase for consistency
+            newCheckbox.name = "event-type";
+            newCheckbox.value = eventType;
+
+            var newLabel = document.createElement("label");
+            newLabel.setAttribute("for", eventType.toLowerCase()); // Match the ID for the label
+            newLabel.textContent = eventType;
+
+            // Append the new checkbox and label to the checkboxes container
+            eventTypeCheckboxes.appendChild(newCheckbox);
+            eventTypeCheckboxes.appendChild(newLabel);
+
+            eventTypeCheckboxes.appendChild(document.createElement("br"));
+        }
+
         // create slide with event details
         var newSlide = document.createElement("div");
         newSlide.classList.add("upcoming-slide");
@@ -51,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
         newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
         newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
         newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
+        newSlide.setAttribute("data-type", eventType);
 
         var posterImage = document.createElement("img");
         posterImage.src = URL.createObjectURL(formData.get("add-upcoming-cover-photo"));
@@ -131,6 +182,38 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function createEventSlide(formData) {
+        let eventType = formData.get("add-upcoming-event-type");
+        if (eventType === "new") {
+            eventType = formData.get("new-event-type");
+
+            // Update the select options for add and edit forms
+            var addTypeSelect = document.getElementById("add-upcoming-event-type");
+            var editTypeSelect = document.getElementById("edit-upcoming-event-type");
+            var newOption = new Option(eventType, eventType);
+            addTypeSelect.add(newOption, addTypeSelect.options[addTypeSelect.length - 1]);
+            editTypeSelect.add(newOption.cloneNode(true), editTypeSelect.options[editTypeSelect.length - 1]);
+            
+            // Update the event type options in the filter
+            var eventTypeCheckboxes = document.getElementById("event-type-checkboxes");
+
+            // Create a new checkbox input and label for the new eventType
+            var newCheckbox = document.createElement("input");
+            newCheckbox.type = "checkbox";
+            newCheckbox.id = eventType.toLowerCase(); // Assuming the ID should be lowercase for consistency
+            newCheckbox.name = "event-type";
+            newCheckbox.value = eventType;
+
+            var newLabel = document.createElement("label");
+            newLabel.setAttribute("for", eventType.toLowerCase()); // Match the ID for the label
+            newLabel.textContent = eventType;
+
+            // Append the new checkbox and label to the checkboxes container
+            eventTypeCheckboxes.appendChild(newCheckbox);
+            eventTypeCheckboxes.appendChild(newLabel);
+
+            eventTypeCheckboxes.appendChild(document.createElement("br"));
+        }
+
         // create elements for new slide
         var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
         var newSlide = document.createElement("div");
@@ -139,6 +222,7 @@ document.addEventListener("DOMContentLoaded", function() {
         newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
         newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
         newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
+        newSlide.setAttribute("data-type", eventType);
     
         // poster image
         var posterImage = document.createElement("img");
@@ -305,6 +389,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var title = slide.querySelector(".preview-title").innerHTML.replace(/<br\s*\/?>/mg, "\n");
         var date = slide.getAttribute("data-date");
         var location = slide.getAttribute("data-location");
+        var type = slide.getAttribute("data-type");
         var popup = document.getElementById("upcoming-event-popup-" + slideNumber);
         var description = popup.querySelector(".event-description").innerHTML.replace(/<br\s*\/?>/mg, "\n");
         var merchLink = popup.querySelector(".merch-presale-btn").getAttribute("onclick").match(/window\.open\(['"](.+?)['"]/);
@@ -312,6 +397,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // populate fields with retrieved details
         editForm["edit-upcoming-title"].value = title.replace(/<br\s*\/?>/gi, "\n");
         editForm["edit-upcoming-description"].value = description;
+        editForm["edit-upcoming-event-type"].value = type;
         editForm["edit-upcoming-date"].value = date;
         editForm["edit-upcoming-venue"].value = location;
         editForm["edit-upcoming-merch-link"].value = merchLink ? merchLink[1] : '';
@@ -334,10 +420,44 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault();
 
             var formData = new FormData(editForm);
+
+            let eventType = formData.get("edit-upcoming-event-type");
+            if (eventType === "new") {
+                eventType = formData.get("edit-new-event-type");
+
+                // Update the select options for add and edit forms
+                var addTypeSelect = document.getElementById("add-upcoming-event-type");
+                var editTypeSelect = document.getElementById("edit-upcoming-event-type");
+                var newOption = new Option(eventType, eventType);
+                addTypeSelect.add(newOption, addTypeSelect.options[addTypeSelect.length - 1]);
+                editTypeSelect.add(newOption.cloneNode(true), editTypeSelect.options[editTypeSelect.length - 1]);
+                
+                // Update the event type options in the filter
+                var eventTypeCheckboxes = document.getElementById("event-type-checkboxes");
+
+                // Create a new checkbox input and label for the new eventType
+                var newCheckbox = document.createElement("input");
+                newCheckbox.type = "checkbox";
+                newCheckbox.id = eventType.toLowerCase(); // Assuming the ID should be lowercase for consistency
+                newCheckbox.name = "event-type";
+                newCheckbox.value = eventType;
+
+                var newLabel = document.createElement("label");
+                newLabel.setAttribute("for", eventType.toLowerCase()); // Match the ID for the label
+                newLabel.textContent = eventType;
+
+                // Append the new checkbox and label to the checkboxes container
+                eventTypeCheckboxes.appendChild(newCheckbox);
+                eventTypeCheckboxes.appendChild(newLabel);
+
+                eventTypeCheckboxes.appendChild(document.createElement("br"));
+            }
+
             var firstLineTitle = formData.get("edit-upcoming-title").split('\n')[0]; // Extract first line
             slide.setAttribute("data-title", formData.get("edit-upcoming-title").replace(/\n/g, '<br>'));
             slide.setAttribute("data-date", formData.get("edit-upcoming-date"));
             slide.setAttribute("data-location", formData.get("edit-upcoming-venue"));
+            slide.setAttribute("data-type", eventType);
 
             var eventDate = new Date(formData.get("edit-upcoming-date"));
             var options = { year: 'numeric', month: 'long', day: 'numeric' };
