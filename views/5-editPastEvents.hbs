@@ -121,6 +121,7 @@
                         <div class="coverImage-container">
                             <img id="imagePlaceholder-cover" src="{{cover}}" alt="Upload Image">
                             <input type="file" id="fileInput-cover" name="cover" style="display: none;" />
+                            <input type="hidden" name="existingCover" value="{{cover}}">
                         </div>
                     </div>
                 </div>
@@ -138,13 +139,13 @@
                                 <img class="hollowbox-picture" src="../images/2-events/uploadImage.png" alt="Upload Image">
                             </button>
                             <div class="image-preview-container">
-                            {{#each gallery}}
-                                <div class="hollow-box">
-                                    <img src="{{this}}" alt="Image Preview" class="hollowbox-picture existing-image">
-                                    <img src="../images/2-events/deleteIcon.png" class="hollowbox-deleteIcon">
-                                    <input type="hidden" name="existingGallery[]" value="{{this}}">
-                                </div>
-                            {{/each}}
+                                {{#each gallery}}
+                                    <div class="hollow-box">
+                                        <img src="{{this}}" alt="Image Preview" class="hollowbox-picture existing-image">
+                                        <img src="../images/2-events/deleteIcon.png" class="hollowbox-deleteIcon">
+                                        <input type="hidden" name="existingGallery[]" value="{{this}}">
+                                    </div>
+                                {{/each}}
                             </div>
                         </div>
                     </div>
@@ -156,6 +157,7 @@
                 </div>
             </div>
         </form>
+
 
 
         <!--------------------EDIT PAST EVENTS POPUPS-------------------->

@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <img src="${src}" alt="Image Preview" class="hollowbox-picture">
             <img src="../images/2-events/deleteIcon.png" class="hollowbox-deleteIcon">
         `;
+
         addImageGallery.appendChild(imagePreview);
 
         // Add hidden input for new images
@@ -42,7 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add event listener for delete icon
         imagePreview.querySelector('.hollowbox-deleteIcon').addEventListener('click', () => {
-            addImageGallery.removeChild(imagePreview);
+            imagePreview.remove();
+            if (isExisting) {
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'deletedGallery[]';
+                hiddenInput.value = src;
+                addImageGallery.appendChild(hiddenInput);
+            }
         });
     }
 

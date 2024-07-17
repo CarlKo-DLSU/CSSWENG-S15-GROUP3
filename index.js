@@ -35,7 +35,7 @@ app.get("/pastEvents",(req,res)=>{
     res.render("2-events")
 })
 
-app.get('/4-admin-homepage.hbs', (req, res) => {
+app.get('/4-admin-homepage', (req, res) => {
     res.render('4-admin-homepage');
 });
 
@@ -59,6 +59,7 @@ app.post("/signin", async(req,res)=>{
 
         if(check.password === req.body.password){
             if(req.body.email === "admin@gmail.com") {
+                console.log("it went here");
                 res.render("4-admin-homepage")
                 console.log("Greetings Admin!")
             } else {
@@ -93,6 +94,8 @@ const storagePastEvent = multer.diskStorage({
     }
 });
 
+const uploadPastEvent = multer({ storage: storagePastEvent }); 
+
 //////////////////////EDIT PAST EVENT DB
 app.get('/5-editPastEvents.hbs', async (req, res) => {
     const eventId = req.query.id;
@@ -113,40 +116,51 @@ app.get('/5-editPastEvents.hbs', async (req, res) => {
     }
 });
 
-const uploadPastEvent = multer({ storage: storagePastEvent }); 
-
-app.post('/editPastEvent', uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery' }]), (req, res) => {
+app.post("/editPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
     const { id, title } = req.body;
-    const coverImage = req.files['cover'] ? '/images/2-events/' + req.files['cover'][0].filename : null;
-    const galleryImages = req.files['gallery'] ? req.files['gallery'].map(file => '/images/2-events/' + file.filename) : [];
+    const existingCover = req.body.existingCover;
+    const existingGallery = req.body.existingGallery ? Array.isArray(req.body.existingGallery) ? req.body.existingGallery : [req.body.existingGallery] : [];
+    const deletedGallery = req.body.deletedGallery ? Array.isArray(req.body.deletedGallery) ? req.body.deletedGallery : [req.body.deletedGallery] : [];
 
-    console.log(title);
-    console.log(id);
+    try {
+        const eventToUpdate = await PastEvent.findById(id);
 
-    // Handle updating the event in the database using the provided id
-    // Assuming you have a function updateEvent(id, title, coverImage, galleryImages)
-    updateEvent(id, title, coverImage, galleryImages)
-        .then(() => {
-            console.log("Successful edit");
-            //res.redirect(`/5-admin-events.hbs`);
-        })
-        .catch((err) => {
-            res.status(500).send(err.message);
-        });
+        if (!eventToUpdate) {
+            return res.status(404).send('Event not found');
+        }
+
+        // Update the event title
+        eventToUpdate.title = title;
+
+        // Handle cover image
+        if (req.files['cover'] && req.files['cover'][0]) {
+            const coverPath = '/images/2-events/' + req.files['cover'][0].filename;
+            eventToUpdate.cover = coverPath;
+        } else {
+            eventToUpdate.cover = existingCover;
+        }
+
+        // Handle gallery images
+        let gallery = existingGallery;
+
+        // Remove deleted images from gallery
+        gallery = gallery.filter(img => !deletedGallery.includes(img));
+
+        // Add new images to gallery
+        if (req.files['gallery']) {
+            const newGalleryImages = req.files['gallery'].map(file => '/images/2-events/' + file.filename);
+            gallery = gallery.concat(newGalleryImages);
+        }
+
+        eventToUpdate.gallery = gallery;
+
+        await eventToUpdate.save();
+        res.send("<script>alert('Edit was successful.'); window.location.href = '5-admin-events.hbs'; </script>");
+    } catch (error) {
+        console.error("Error updating event:", error);
+        res.status(500).send("Error updating event.");
+    }
 });
-
-function updateEvent(id, title, coverImage, galleryImages) {
-    // Logic to update the event in the database
-    // Replace this with your actual implementation
-    return new Promise((resolve, reject) => {
-        // For example purposes only
-        console.log('Event ID:', id);
-        console.log('Title:', title);
-        console.log('Cover Image:', coverImage);
-        console.log('Gallery Images:', galleryImages);
-        resolve();
-    });
-}
 
 //////////////////////ADD PAST EVENT DB
 app.get('/5-addPastEvents.hbs',(req, res) => {

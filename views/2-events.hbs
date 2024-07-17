@@ -120,79 +120,18 @@
             <p id="past-events-title">Past Events</p>
             <div class="pastEventList">
             <!-- Hard-coded events based on JavaScript data -->
-                <div class="pastEvent">
-                    <img class="pastEvent-image" src="../images/2-events/bocchi-event.jpg" alt="Hitori Gotoh - Lead Guitarist">
-                    <div class="pastEvent-detailBox">
-                        <span class="pastEvent-details">Hitori Gotoh - Lead Guitarist</span>
-                    </div>
-                    <!-- Gallery for event images -->
-                    <div class="event-gallery">
-                        <img src="../images/2-events/bocchi1.jpg" alt="Event Image 1">
-                        <img src="../images/2-events/bocchi2.jpg" alt="Event Image 2">
-                        <img src="../images/2-events/bocchi3.jpg" alt="Event Image 3">
-                        <img src="../images/2-events/bocchi4.jpg" alt="Event Image 4">
-                        <img src="../images/2-events/bocchi5.jpg" alt="Event Image 5">
-                    </div>
-                </div>
-                <div class="pastEvent">
-                    <img class="pastEvent-image" src="../images/2-events/kita-event.jpg" alt="Ikuyo Kita - Vocalist/Guitarist">
-                    <div class="pastEvent-detailBox">
-                        <span class="pastEvent-details">Ikuyo Kita - Vocalist/Guitarist</span>
-                    </div>
-                    <!-- Gallery for event images -->
-                    <div class="event-gallery">
-                        <img src="../images/2-events/kita1.jpg" alt="Event Image 1">
-                        <img src="../images/2-events/kita2.jpg" alt="Event Image 2">
-                        <img src="../images/2-events/kita3.jpg" alt="Event Image 3">
-                        <img src="../images/2-events/kita4.jpg" alt="Event Image 4">
-                        <img src="../images/2-events/kita5.jpg" alt="Event Image 5">
-                    </div>
-                </div>
-                <div class="pastEvent">
-                    <img class="pastEvent-image" src="../images/2-events/nijika-event.jpg" alt="Nijika Ijichi - Drummer">
-                    <div class="pastEvent-detailBox">
-                        <span class="pastEvent-details">Nijika Ijichi - Drummer</span>
-                    </div>
-                    <!-- Gallery for event images -->
-                    <div class="event-gallery">
-                        <img src="../images/2-events/nijika1.jpg" alt="Event Image 1">
-                        <img src="../images/2-events/nijika2.jpg" alt="Event Image 2">
-                        <img src="../images/2-events/nijika3.jpg" alt="Event Image 3">
-                        <img src="../images/2-events/nijika4.jpg" alt="Event Image 4">
-                        <img src="../images/2-events/nijika5.jpg" alt="Event Image 5">
-                    </div>
-                </div>
-                <div class="pastEvent">
-                    <img class="pastEvent-image" src="../images/2-events/ryo-event.webp" alt="Ryo Yamada - Bassist">
-                    <div class="pastEvent-detailBox">
-                        <span class="pastEvent-details">Ryo Yamada - Bassist</span>
-                    </div>
-                    <!-- Gallery for event images -->
-                    <div class="event-gallery">
-                        <img src="../images/2-events/ryo1.jpg" alt="Event Image 1">
-                        <img src="../images/2-events/ryo2.jpg" alt="Event Image 2">
-                        <img src="../images/2-events/ryo3.jpg" alt="Event Image 3">
-                        <img src="../images/2-events/ryo4.jpg" alt="Event Image 4">
-                        <img src="../images/2-events/ryo5.jpg" alt="Event Image 5">
-                    </div>
-                </div>
-                <script>console.log("zerochekcpoint")</script>
                 {{#each eventsData}}
-                    <script>console.log("firstchekcpoint")</script>
                     <div class="pastEvent">
-                        <script>console.log("second")</script>
                         <img class="pastEvent-image" src="{{this.cover}}" alt="{{this.title}}">
                         <div class="pastEvent-detailBox">
                             <span class="pastEvent-details">{{this.title}}</span>
                         </div>
                         <!-- Gallery for event images -->
-                        <script>console.log("third")</script>
                         <div class="event-gallery">
                         {{#each this.gallery}}
                                 <img src="{{this}}" alt="Event Image">
                         {{/each}}
                         </div>
-                        <script>console.log("last")</script>
                     </div>
                 {{/each}}
             </div>
