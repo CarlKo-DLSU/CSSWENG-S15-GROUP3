@@ -125,11 +125,31 @@ app.post("/signin", async(req,res)=>{
     }
 })
 
+const storageUpcomingEvent = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const uploadDir = path.join(__dirname, 'public', 'images', '1-index');
+        // Check if the directory exists, otherwise create it
+        fs.mkdir(uploadDir, { recursive: true }, (err) => {
+            if (err) {
+                console.error("Error creating uploads directory:", err);
+                cb(err, uploadDir); // Pass error to callback
+            } else {
+                cb(null, uploadDir);
+            }
+        });
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const uploadUpcomingEvent = multer({ storage: storageUpcomingEvent });
+
 app.get('/4-admin-homepage.hbs', (req, res) => {
     res.render('4-admin-homepage');
 });
 
-app.post("/addUpcomingEvent", upload.fields([{ name: 'coverPhoto', maxCount: 1 }]), async (req, res) => {
+app.post("/addUpcomingEvent", uploadUpcomingEvent.fields([{ name: 'coverPhoto', maxCount: 1 }]), async (req, res) => {
     const { title, description, date, venue, merchLink } = req.body;
     const coverPhoto = req.files['coverPhoto'] ? '/images/1-index/' + req.files['coverPhoto'][0].filename : null;
 
