@@ -22,22 +22,51 @@ app.set("view engine","hbs")
 app.set("views", __dirname + "/views")
 app.use(bodyParser.json());
 
+hbs.registerPartials(__dirname + '/views/partials');
+
+
+
 hbs.registerHelper('nl2br', function(text) {
     return text.replace(/\n/g, '<br>');
 });
 
-
+/*
 app.get("/",(req,res)=>{
     res.render("1-index")
 })
+*/
 
-app.get("/pastEvents",(req,res)=>{
-    res.render("2-events")
+app.get("/",(req,res)=>{
+    res.render('1-index', {
+        layout: '/layouts/index',
+        title: 'SX Manila | Homepage',
+        filename: '1-index'
+    })
 })
 
-app.get('/4-admin-homepage.hbs', (req, res) => {
-    res.render('4-admin-homepage');
-});
+
+/* 
+app.get("/pastEvents",(req,res)=>{
+    res.render("2-events")
+})*/
+
+ 
+app.get("/pastEvents",(req,res)=>{
+    res.render('2-events', {
+        layout: '/layouts/index',
+        title: 'SX Manila | Events',
+        filename: '1-index'
+    })
+})
+
+
+app.get("/4-admin-homepage.hbs",(req,res)=>{
+    res.render('4-admin-homepage', {
+        layout: '/layouts/index',
+        title: 'SX Manila | Admin Homepage',
+        filename: '1-index'
+    })
+})
 
 //Register and login db
 app.post("/register", async(req,res)=>{
@@ -50,7 +79,12 @@ app.post("/register", async(req,res)=>{
     }
 
     await profiles.insertMany([profile])
-    res.render("1-index")
+    //res.render("1-index")
+    res.render('1-index', {
+        layout: '/layouts/index',
+        title: 'SX Manila | Homepage',
+        filename: '1-index'
+    })
 })
 
 app.post("/signin", async(req,res)=>{
@@ -59,15 +93,32 @@ app.post("/signin", async(req,res)=>{
 
         if(check.password === req.body.password){
             if(req.body.email === "admin@gmail.com") {
-                res.render("4-admin-homepage")
+
+                console.log("it went here");
+                //res.render("4-admin-homepage")
+                res.render('4-admin-homepage', {
+                    layout: '/layouts/index',
+                    title: 'SX Manila | Admin Homepage',
+                    filename: '1-index'
+                })
                 console.log("Greetings Admin!")
             } else {
-                res.render("1-index")
+                //res.render("1-index")
+                res.render('1-index', {
+                    layout: '/layouts/index',
+                    title: 'SX Manila | Homepage',
+                    filename: '1-index'
+                })
                 console.log("Greetings!")
             }
         }
         else {
-            res.render("1-index")
+            //res.render("1-index")
+            res.render('1-index', {
+                layout: '/layouts/index',
+                title: 'SX Manila | Homepage',
+                filename: '1-index'
+            })
         }
     } catch {
         res.send("Wrong Details")
@@ -126,14 +177,18 @@ const storagePastEvent = multer.diskStorage({
     }
 });
 
+const uploadPastEvent = multer({ storage: storagePastEvent }); 
+
 //////////////////////EDIT PAST EVENT DB
 app.get('/5-editPastEvents.hbs', async (req, res) => {
     const eventId = req.query.id;
     try {
         const event = await PastEvent.findById(eventId);
         if (event) {
+            
             res.render('5-editPastEvents', {
                 id: event.id,
+                //IDK HOW TO RESOLVE THIS BC TITLE HERE IS THE SAME AS THE TITLE IN THE PARTIALS WKADJSAKDJKS: TO FIX NALANG LMAO
                 title: event.title,
                 cover: event.cover,
                 gallery: event.gallery
@@ -146,44 +201,70 @@ app.get('/5-editPastEvents.hbs', async (req, res) => {
     }
 });
 
-const uploadPastEvent = multer({ storage: storagePastEvent }); 
-
-app.post('/editPastEvent', uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery' }]), (req, res) => {
+app.post("/editPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
     const { id, title } = req.body;
-    const coverImage = req.files['cover'] ? '/images/2-events/' + req.files['cover'][0].filename : null;
-    const galleryImages = req.files['gallery'] ? req.files['gallery'].map(file => '/images/2-events/' + file.filename) : [];
+    const existingCover = req.body.existingCover;
+    const existingGallery = req.body.existingGallery ? (Array.isArray(req.body.existingGallery) ? req.body.existingGallery : [req.body.existingGallery]) : [];
+    const deletedGallery = req.body.deletedGallery ? (Array.isArray(req.body.deletedGallery) ? req.body.deletedGallery : [req.body.deletedGallery]) : [];
 
-    console.log(title);
-    console.log(id);
+    console.log("Here is gallery");
+    console.log(existingGallery);
+    console.log("Here is deleted");
+    console.log(deletedGallery);
+    console.log("Here is added");
+    console.log(req.files['gallery']);
+    
+    try {
+        const eventToUpdate = await PastEvent.findById(id);
 
-    // Handle updating the event in the database using the provided id
-    // Assuming you have a function updateEvent(id, title, coverImage, galleryImages)
-    updateEvent(id, title, coverImage, galleryImages)
-        .then(() => {
-            console.log("Successful edit");
-            //res.redirect(`/5-admin-events.hbs`);
-        })
-        .catch((err) => {
-            res.status(500).send(err.message);
-        });
+        if (!eventToUpdate) {
+            return res.status(404).send('Event not found');
+        }
+
+        // Update the event title
+        eventToUpdate.title = title;
+
+        // Handle cover image
+        if (req.files['cover'] && req.files['cover'][0]) {
+            const coverPath = '/images/2-events/' + req.files['cover'][0].filename;
+            eventToUpdate.cover = coverPath;
+        } else {
+            eventToUpdate.cover = existingCover;
+        }
+
+        // Handle gallery images
+        let gallery = existingGallery;
+
+        // Remove deleted images from gallery
+        gallery = gallery.filter(img => !deletedGallery.includes(img));
+
+        console.log("Here are the images left in the gallery");
+        console.log(gallery);
+
+        // Add new images to gallery
+        if (req.files['gallery']) {
+            const newGalleryImages = req.files['gallery'].map(file => 'images/2-events/' + file.filename);
+            gallery = gallery.concat(newGalleryImages);
+        }
+
+        eventToUpdate.gallery = gallery;
+
+        await eventToUpdate.save();
+        res.send("<script>alert('Edit was successful.'); window.location.href = '5-admin-events.hbs'; </script>");
+    } catch (error) {
+        console.error("Error updating event:", error);
+        res.status(500).send("Error updating event.");
+    }
 });
-
-function updateEvent(id, title, coverImage, galleryImages) {
-    // Logic to update the event in the database
-    // Replace this with your actual implementation
-    return new Promise((resolve, reject) => {
-        // For example purposes only
-        console.log('Event ID:', id);
-        console.log('Title:', title);
-        console.log('Cover Image:', coverImage);
-        console.log('Gallery Images:', galleryImages);
-        resolve();
-    });
-}
 
 //////////////////////ADD PAST EVENT DB
 app.get('/5-addPastEvents.hbs',(req, res) => {
-    res.render('5-addPastEvents');
+    //res.render('5-addPastEvents');
+    res.render('5-addPastEvents', {
+        layout: '/layouts/index',
+        title: 'SX Manila | Events',
+        filename: '1-index'
+    })
 });
 
 app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
@@ -218,7 +299,12 @@ app.get('/2-events.hbs', async (req, res) => {
     try {
         const eventsData = await PastEvent.find({});
         console.log("Fetched past events successfully:", eventsData); // Check if data is fetched correctly
-        res.render('2-events', { eventsData: eventsData });
+        res.render('2-events', { 
+            eventsData: eventsData ,
+            layout: '/layouts/index',
+            title: 'SX Manila | Events',
+            filename: '1-index'
+        });
     } catch (error) {
         console.error("Error fetching past events:", error);
         res.status(500).send("Error fetching past events.");
@@ -229,7 +315,11 @@ app.get('/5-admin-events.hbs', async (req, res) => {
     try {
         const eventsData = await PastEvent.find({});
         console.log("Fetched past events successfully:", eventsData);
-        res.render('5-admin-events', { eventsData: eventsData });
+        res.render('5-admin-events', {
+            eventsData: eventsData ,
+            layout: '/layouts/index',
+            title: 'SX Manila | Events',
+            filename: '1-index' });
     } catch (error) {
         console.error("Error fetching past events:", error);
         res.status(500).send("Error fetching past events.");
@@ -248,7 +338,11 @@ app.get('/3-about.hbs', async (req, res) => {
     try {
         const currAbout = getAboutUsData();
         console.log("Fetched about us data:", currAbout); // Log to check the data
-        res.render('3-about', { currAbout: currAbout });
+        res.render('3-about', { 
+            currAbout: currAbout,
+            layout: '/layouts/index',
+            title: 'SX Manila | About Us',
+            filename: '1-index' });
     } catch (error) {
         console.error("Error fetching about us data:", error);
         res.status(500).send("Error fetching about us page.");
@@ -260,7 +354,12 @@ app.get('/6-admin-about.hbs', async (req, res) => {
     try {
         const currAbout = getAboutUsData();
         console.log("Fetched about us data:", currAbout); // Log to check the data
-        res.render('6-admin-about', { currAbout: currAbout });
+        res.render('6-admin-about', {
+            currAbout: currAbout ,
+            layout: '/layouts/index',
+            title: 'SX Manila | About Us',
+            filename: '1-index'
+        });
     } catch (error) {
         console.error("Error fetching about us data:", error);
         res.status(500).send("Error fetching about us page.");

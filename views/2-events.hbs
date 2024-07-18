@@ -1,17 +1,22 @@
+<!--
 <!DOCTYPE html>
 <html>
 
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> SX Manila | Events </title>
+        {{#> layout}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        {{/layout}}
+        
         <link rel="stylesheet" href="../css/1-index.css">
     </head>
-    <body>
+    <body>-->
         <!--------------------HEADER-------------------->
+        <!--
         <div id="header">   
             <div id="current-events">
                 <div id="text-container">
@@ -42,9 +47,12 @@
             </div>
             
             <div class="red-bar bottom-bar"></div>
-        </div>
+        </div>-->
+
+        {{>header}}
 
         <!--------------------SIGN IN-------------------->
+        <!--
         <div id="sign-in-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -69,9 +77,11 @@
                     <p>No account yet? <button id="to-register-btn">Register</button>.</p>
                 </div>
             </div>
-        </div>
+        </div>-->
+        {{>signin}}
 
         <!--------------------REGISTER-------------------->
+        <!--
         <div id="register-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -101,7 +111,8 @@
                     <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
                 </div>
             </div>
-        </div>
+        </div>-->
+        {{>register}}
 
         <!--------------------PAST EVENTS-------------------->
 
@@ -120,79 +131,18 @@
             <p id="past-events-title">Past Events</p>
             <div class="pastEventList">
             <!-- Hard-coded events based on JavaScript data -->
-                <div class="pastEvent">
-                    <img class="pastEvent-image" src="../images/2-events/bocchi-event.jpg" alt="Hitori Gotoh - Lead Guitarist">
-                    <div class="pastEvent-detailBox">
-                        <span class="pastEvent-details">Hitori Gotoh - Lead Guitarist</span>
-                    </div>
-                    <!-- Gallery for event images -->
-                    <div class="event-gallery">
-                        <img src="../images/2-events/bocchi1.jpg" alt="Event Image 1">
-                        <img src="../images/2-events/bocchi2.jpg" alt="Event Image 2">
-                        <img src="../images/2-events/bocchi3.jpg" alt="Event Image 3">
-                        <img src="../images/2-events/bocchi4.jpg" alt="Event Image 4">
-                        <img src="../images/2-events/bocchi5.jpg" alt="Event Image 5">
-                    </div>
-                </div>
-                <div class="pastEvent">
-                    <img class="pastEvent-image" src="../images/2-events/kita-event.jpg" alt="Ikuyo Kita - Vocalist/Guitarist">
-                    <div class="pastEvent-detailBox">
-                        <span class="pastEvent-details">Ikuyo Kita - Vocalist/Guitarist</span>
-                    </div>
-                    <!-- Gallery for event images -->
-                    <div class="event-gallery">
-                        <img src="../images/2-events/kita1.jpg" alt="Event Image 1">
-                        <img src="../images/2-events/kita2.jpg" alt="Event Image 2">
-                        <img src="../images/2-events/kita3.jpg" alt="Event Image 3">
-                        <img src="../images/2-events/kita4.jpg" alt="Event Image 4">
-                        <img src="../images/2-events/kita5.jpg" alt="Event Image 5">
-                    </div>
-                </div>
-                <div class="pastEvent">
-                    <img class="pastEvent-image" src="../images/2-events/nijika-event.jpg" alt="Nijika Ijichi - Drummer">
-                    <div class="pastEvent-detailBox">
-                        <span class="pastEvent-details">Nijika Ijichi - Drummer</span>
-                    </div>
-                    <!-- Gallery for event images -->
-                    <div class="event-gallery">
-                        <img src="../images/2-events/nijika1.jpg" alt="Event Image 1">
-                        <img src="../images/2-events/nijika2.jpg" alt="Event Image 2">
-                        <img src="../images/2-events/nijika3.jpg" alt="Event Image 3">
-                        <img src="../images/2-events/nijika4.jpg" alt="Event Image 4">
-                        <img src="../images/2-events/nijika5.jpg" alt="Event Image 5">
-                    </div>
-                </div>
-                <div class="pastEvent">
-                    <img class="pastEvent-image" src="../images/2-events/ryo-event.webp" alt="Ryo Yamada - Bassist">
-                    <div class="pastEvent-detailBox">
-                        <span class="pastEvent-details">Ryo Yamada - Bassist</span>
-                    </div>
-                    <!-- Gallery for event images -->
-                    <div class="event-gallery">
-                        <img src="../images/2-events/ryo1.jpg" alt="Event Image 1">
-                        <img src="../images/2-events/ryo2.jpg" alt="Event Image 2">
-                        <img src="../images/2-events/ryo3.jpg" alt="Event Image 3">
-                        <img src="../images/2-events/ryo4.jpg" alt="Event Image 4">
-                        <img src="../images/2-events/ryo5.jpg" alt="Event Image 5">
-                    </div>
-                </div>
-                <script>console.log("zerochekcpoint")</script>
                 {{#each eventsData}}
-                    <script>console.log("firstchekcpoint")</script>
                     <div class="pastEvent">
-                        <script>console.log("second")</script>
                         <img class="pastEvent-image" src="{{this.cover}}" alt="{{this.title}}">
                         <div class="pastEvent-detailBox">
                             <span class="pastEvent-details">{{this.title}}</span>
                         </div>
                         <!-- Gallery for event images -->
-                        <script>console.log("third")</script>
                         <div class="event-gallery">
                         {{#each this.gallery}}
                                 <img src="{{this}}" alt="Event Image">
                         {{/each}}
                         </div>
-                        <script>console.log("last")</script>
                     </div>
                 {{/each}}
             </div>
@@ -211,7 +161,7 @@
             </div>
         </div>
         
-
+    <!--
         <div id="footer">
             <p id="contact-us">CONTACT US</p>
 
@@ -225,8 +175,8 @@
                 <a href="https://www.instagram.com/sxmanila/" target="_blank"><img src="../images/1-index/footer-ig.png" id="ig-icon" class="socials-icon"></a>
                 <a href="https://x.com/sxmanila" target="_blank"><img src="../images/1-index/footer-x.png" id="x-icon" class="socials-icon"></a>
             </div>
-        </div>
-
+        </div>-->
+        {{>footer}}
         <script src="../js/0-universal.js"></script>
         <script src="../js/2-events.js"></script>
     </body>

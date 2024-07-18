@@ -1,23 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Cover image handling
-    const imagePlaceholderForCover = document.getElementById('imagePlaceholder-cover');
-    const fileInput = document.getElementById('fileInput-cover');
-
-    imagePlaceholderForCover.addEventListener('click', function() {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function() {
-            imagePlaceholderForCover.src = reader.result;
-        };
-
-        reader.readAsDataURL(file);
-    });
-
     // Gallery handling
     const addImageButton = document.getElementById('addImage');
     const addImageGallery = document.getElementById('addImageGallery');
@@ -29,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <img src="${src}" alt="Image Preview" class="hollowbox-picture">
             <img src="../images/2-events/deleteIcon.png" class="hollowbox-deleteIcon">
         `;
+
         addImageGallery.appendChild(imagePreview);
 
         // Add hidden input for new images
@@ -36,13 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'newGallery[]';
+            input.value = src; // Ensure src is correctly passed here
+            imagePreview.appendChild(input);
+        } else {
+            // For existing images, keep hidden input if not deleted
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'existingGallery[]';
             input.value = src;
             imagePreview.appendChild(input);
         }
 
         // Add event listener for delete icon
         imagePreview.querySelector('.hollowbox-deleteIcon').addEventListener('click', () => {
-            addImageGallery.removeChild(imagePreview);
+            imagePreview.remove();
+            if (isExisting) {
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'deletedGallery[]';
+                hiddenInput.value = src;
+                addImageGallery.appendChild(hiddenInput);
+            }
         });
     }
 
@@ -54,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle new image uploads
     addImageButton.addEventListener('click', () => {
+        console.log("It got a new image 1");
         const newImageInput = document.createElement('input');
         newImageInput.type = 'file';
         newImageInput.name = 'gallery';
@@ -65,15 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         newImageInput.addEventListener('change', () => {
             if (newImageInput.files.length > 0) {
+                console.log("It got a new image 2");
                 const file = newImageInput.files[0];
                 const reader = new FileReader();
 
                 reader.onload = function(e) {
-                    createImagePreview(e.target.result);
+                    createImagePreview(e.target.result); // Pass e.target.result as src
 
-                    // Remove the input element after use
-                    newImageInput.remove();
-                }
+                };
 
                 reader.readAsDataURL(file);
             } else {

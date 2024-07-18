@@ -1,3 +1,4 @@
+<!-->
 <!DOCTYPE html>
 <html>
 
@@ -13,6 +14,7 @@
 
     <body>
         <!--------------------HEADER-------------------->
+        <!--
         <div id="header">   
             <div id="current-events">
                 <div id="text-container">
@@ -43,8 +45,11 @@
             
             <div class="red-bar bottom-bar"></div>
         </div>
+        -->
+        {{>header}}
 
         <!--------------------SIGN IN-------------------->
+        <!--
         <div id="sign-in-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -69,9 +74,11 @@
                     <p>No account yet? <button id="to-register-btn">Register</button>.</p>
                 </div>
             </div>
-        </div>
+        </div> -->
+        {{>signin}}
 
         <!--------------------REGISTER-------------------->
+        <!--
         <div id="register-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -101,7 +108,8 @@
                     <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
                 </div>
             </div>
-        </div>
+        </div>-->
+        {{>register}}
 
         <!-------------------- CREATE PAS EVENTPAST EVENTS-------------------->
 
@@ -178,6 +186,8 @@
     <script src="../js/0-universal.js"></script>
     <script src="../js/1-index.js"></script>
     <script src="../js/5-addPastEvents.js"></script>
-</body>
+<!--
+    </body>
 
 </html>
+-->
