@@ -171,9 +171,16 @@ app.get('/5-editPastEvents.hbs', async (req, res) => {
 app.post("/editPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
     const { id, title } = req.body;
     const existingCover = req.body.existingCover;
-    const existingGallery = req.body.existingGallery ? Array.isArray(req.body.existingGallery) ? req.body.existingGallery : [req.body.existingGallery] : [];
-    const deletedGallery = req.body.deletedGallery ? Array.isArray(req.body.deletedGallery) ? req.body.deletedGallery : [req.body.deletedGallery] : [];
+    const existingGallery = req.body.existingGallery ? (Array.isArray(req.body.existingGallery) ? req.body.existingGallery : [req.body.existingGallery]) : [];
+    const deletedGallery = req.body.deletedGallery ? (Array.isArray(req.body.deletedGallery) ? req.body.deletedGallery : [req.body.deletedGallery]) : [];
 
+    console.log("Here is gallery");
+    console.log(existingGallery);
+    console.log("Here is deleted");
+    console.log(deletedGallery);
+    console.log("Here is added");
+    console.log(req.files['gallery']);
+    
     try {
         const eventToUpdate = await PastEvent.findById(id);
 
@@ -198,9 +205,12 @@ app.post("/editPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 
         // Remove deleted images from gallery
         gallery = gallery.filter(img => !deletedGallery.includes(img));
 
+        console.log("Here are the images left in the gallery");
+        console.log(gallery);
+
         // Add new images to gallery
         if (req.files['gallery']) {
-            const newGalleryImages = req.files['gallery'].map(file => '/images/2-events/' + file.filename);
+            const newGalleryImages = req.files['gallery'].map(file => 'images/2-events/' + file.filename);
             gallery = gallery.concat(newGalleryImages);
         }
 
