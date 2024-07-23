@@ -537,7 +537,7 @@ button[type="submit"]:hover {
 }
 
 /* General popup styles */
-#add-upcoming-event-popup, #edit-upcoming-event-popup {
+#add-upcoming-event-popup, #edit-upcoming-event-popup, #edit-slide-popup {
     display: none;
     position: fixed;
     top: 124px;
@@ -669,18 +669,90 @@ button[type="submit"]:hover {
     font-weight: 400;
 }
 
+/*BRUTE FORCE WAY WAKDJKSAJDK*/
 /* Div acting as image button */
 #add-upcoming-cover-photo-img {
     width: auto;
     max-width: 100%;
-    height: 500px; 
-    background-image: url('../images/1-index/home-upload.png');
-    background-size: cover;
+    height: 212px; 
+    background-image: url('../images/1-index/add-image.png');
+    background-size: 100%;
     background-position: center;
+    background-repeat: no-repeat;
     border: 1px solid #ccc;
     border-radius: 10px; 
     cursor: pointer;
+    margin: 10px; /*SEND HELP WHY IS THIS NOT WORKING T-T*/
 }
+
+#add-upcoming-cover-photo-img1 {
+    width: auto;
+    max-width: 100%;
+    height: 212px; 
+    background-image: url('../images/1-index/slideshow-eras.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    cursor: pointer;
+    margin: 10px 0px 20px;
+}
+
+#add-upcoming-cover-photo-img2 {
+    width: auto;
+    max-width: 100%;
+    height: 212px; 
+    background-image: url('../images/1-index/slideshow-bewitched.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    cursor: pointer;
+    margin: 20px 0px;
+}
+
+#add-upcoming-cover-photo-img3 {
+    width: auto;
+    max-width: 100%;
+    height: 212px; 
+    background-image: url('../images/1-index/slideshow-genshin.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    cursor: pointer;
+    margin: 20px 0px;
+}
+
+.icon-images {
+    display: inline;
+    width: 43.18px;
+    height: 43.18px;
+    margin: 10px;
+}
+
+#edit-image-icon {
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#trash-icon {
+    margin-top: 5px;
+}
+
+/*
+.slide-circle {
+    position: relative;
+    background-color: #B80022;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+}*/
+
 
 /* File input for Edit Upcoming Event */
 #edit-upcoming-cover-photo {
@@ -777,11 +849,18 @@ input[type="submit"] {
 }
 
 /* Buttons for adding and editing events */
-#add-upcoming-event, #edit-upcoming-event {
+#add-upcoming-event {
     display: flex;
     justify-content: center;
     margin: 7px 0;
 }
+
+#edit-upcoming-event {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 13px;
+}
+
 
 #add-upcoming-event-btn, #edit-upcoming-event-btn {
     display: flex;

@@ -10,7 +10,7 @@
     <body>-->
         <!--------------------HEADER-------------------->
         <script>console.log("it got in admin home page")</script>
-        <!--
+        
         <div id="header">   
             <div id="current-events">
                 <div id="text-container">
@@ -38,10 +38,13 @@
                     </div>
                 </div>
             </div>
-            
             <div class="red-bar bottom-bar"></div>
-        </div>-->
-        {{>header}}
+        </div>
+
+        <!--------------------ADMIN: EDIT SLIDESHOW EVENTS-------------------->
+
+        
+        <!--{{>header}}-->
 
         <!--------------------SIGN IN-------------------->
         <!--
@@ -111,8 +114,16 @@
 
         <!--------------------PAST EVENTS-------------------->
         <div id="past-events">
+
+            <div id="edit-upcoming-event">
+                <button id="edit-upcoming-event-btn">
+                    <img src="../images/1-index/plus.png" alt="add icon" id="add-icon">
+                    Edit Event Slideshow
+                </button>
+            </div>
+
             <div id="slides-container">
-                
+                <div class="red-bar top-bar"></div>
                 <div class="slides">
                     <img src="../images/1-index/slideshow-eras.png">
                 </div>
@@ -132,6 +143,71 @@
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
+            </div>
+
+            <!--------------------EDIT EVENT EVENT POPUP-------------------->
+            <div id="edit-slide-popup">
+                <button id="close-slide-popup-btn" class="close-popup-btn">&lt;</button>
+
+                <div id="popup-title">Edit event slideshow</div>
+
+                <div id="add-upcoming-event-popup-content">
+
+                    <form id="add-upcoming-event-form">
+                        
+                        <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Event Cover Photo</label>
+
+                        <div id="edit-slide-image-container">
+                            
+                            <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Slide1</label>
+                            <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
+                            <div id="add-upcoming-cover-photo-img1">
+                                
+                                <div class="icon-images">
+                                    <img id="trash-icon" src="../images/1-index/trash-icon.png">
+                                    <img id="edit-image-icon" src="../images/1-index/edit-image-icon.png">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="edit-slide-image-container">
+                            <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Slide2</label>
+                            <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
+                            <div id="add-upcoming-cover-photo-img2">
+                                
+                                <div class="icon-images">
+                                    <img id="trash-icon" src="../images/1-index/trash-icon.png">
+                                    <img id="edit-image-icon" src="../images/1-index/edit-image-icon.png">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="edit-slide-image-container">
+                            <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Slide3</label>
+                            <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
+                            <div id="add-upcoming-cover-photo-img3">
+                                
+                                <div class="icon-images">
+                                    <img id="trash-icon" src="../images/1-index/trash-icon.png">
+                                    <img id="edit-image-icon" src="../images/1-index/edit-image-icon.png">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="edit-slide-image-container">
+                            <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Add New Slide</label>
+                            <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
+                            <div id="add-upcoming-cover-photo-img">
+                            </div>
+                        </div>
+
+                        <div class="add-upcoming-preview-buttons">
+                            <button type="button" id="add-upcoming-preview-homepage-btn">Preview homepage</button>
+                        </div>
+
+                        <input type="submit" value="Publish new event">
+                    </form>
+                </div>
             </div>
 
         </div>
