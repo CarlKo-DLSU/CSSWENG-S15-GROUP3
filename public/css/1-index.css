@@ -553,7 +553,7 @@ button[type="submit"]:hover {
     position: relative;
     width: 100%;
     max-width: 600px;
-    height: calc(100% - 60px); /* Adjust height as needed */
+    height: calc(100% - 60px);
     margin: 30px auto;
     padding: 20px;
     display: flex;
@@ -1252,6 +1252,18 @@ input[type="submit"] {
     font-family: "Poppins", sans-serif;
     font-size: 18px;
     font-weight: 700;
+}
+
+.event-desc {
+    background-color: red;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 450;
 }
 
 .event-image {
