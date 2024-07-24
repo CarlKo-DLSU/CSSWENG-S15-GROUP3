@@ -196,7 +196,7 @@
 
                 <div id="add-upcoming-event-popup-content">
 
-                    <form id="add-upcoming-event-form">
+                    <form id="add-upcoming-event-form" action="/addUpcomingEvent" method="post" enctype="multipart/form-data">
                         <label for="add-upcoming-title">Event Title</label><br>
                         <textarea type="text" id="add-upcoming-title" name="add-upcoming-title"></textarea><br>
                         
@@ -333,6 +333,20 @@
 
                 </div>
 
+                {{#each events}}
+                    <div class="upcoming-slide" data-slide-number="{{@index}}" data-title="{{this.title}}" data-date="{{this.date}}" data-location="{{this.venue}}" data-type="concert">
+                        <img src="{{this.coverPhoto}}" alt="eras" class="upcoming-poster">
+                        <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
+
+                        <div class="event-preview">
+                            <div class="preview-text">
+                                <p class="preview-date">{{this.date}}</p>
+                                <p class="preview-title">{{this.title}}<br>{{this.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+
             </div>
 
             <!--------------------UPCOMING EVENTS POPUPS-------------------->
@@ -440,7 +454,7 @@
         <script src="../js/1-index.js"></script>
         <script src="../js/login.js"></script>
         <script src="../js/4-admin-homepage.js"></script>
-
+        
     </body>
 
 </html>

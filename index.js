@@ -27,7 +27,7 @@ hbs.registerHelper('nl2br', function(text) {
 });
 
 
-app.get("/",(req,res)=>{
+app.get("/", async(req,res)=>{
     res.render("1-index")
 })
 
@@ -56,11 +56,12 @@ app.post("/register", async(req,res)=>{
 app.post("/signin", async(req,res)=>{
     try {
         const check = await profiles.findOne({email:req.body.email})
-
+        const UE_data = await UpcomingEvent.find({});
+        //const UE_data = 'test';
         if(check.password === req.body.password){
             if(req.body.email === "admin@gmail.com") {
                 console.log("it went here");
-                res.render("4-admin-homepage")
+                res.render("4-admin-homepage", {events: UE_data})
                 console.log("Greetings Admin!")
             } else {
                 res.render("1-index")
@@ -99,29 +100,13 @@ app.get('/4-admin-homepage.hbs', (req, res) => {
     res.render('4-admin-homepage');
 });
 
-app.post("/addUpcomingEvent", uploadUpcomingEvent.fields([{ name: 'coverPhoto', maxCount: 1 }]), async (req, res) => {
-    const { title, description, date, venue, merchLink } = req.body;
-    const coverPhoto = req.files['coverPhoto'] ? '/images/1-index/' + req.files['coverPhoto'][0].filename : null;
-
-    console.log(title);
-    console.log(description);
-    console.log(date);
-    console.log(venue);
-    console.log(merchLink);
-    console.log(coverPhoto);
+app.post("/addUpcomingEvent", async (req, res) => {
+    const UE_data = await UpcomingEvent.find({});   
+    console.log('Hello')
 
     try {
-        // Create new Upcoming Event
-        await UpcomingEvent.create({
-            title: title,
-            description: description,
-            date: new Date(date),
-            venue: venue,
-            merchLink: merchLink,
-            coverPhoto: coverPhoto
-        });
 
-        res.redirect("4-admin-homepage.hbs");
+        res.redirect("4-admin-homepage.hbs", {events: UE_data});
     } catch (error) {
         console.error("Error creating upcoming event:", error);
         res.status(500).send("Error creating upcoming event.");
