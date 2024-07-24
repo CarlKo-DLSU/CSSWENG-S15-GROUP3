@@ -40,14 +40,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // change cover photo image to file input
-    document.getElementById('add-upcoming-cover-photo').addEventListener('change', function() {
-        var file = this.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + e.target.result + ')';
-        };
-        reader.readAsDataURL(file);
-    });    
+    // document.getElementById('add-upcoming-cover-photo').addEventListener('change', function() {
+    //     var file = this.files[0];
+    //     var reader = new FileReader();
+    //     reader.onload = function(e) {
+    //         document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + e.target.result + ')';
+    //     };
+    //     reader.readAsDataURL(file);
+    // });    
 
     document.getElementById('edit-upcoming-cover-photo-preview').addEventListener('click', function() {
         document.getElementById('edit-upcoming-cover-photo').click();
@@ -408,12 +408,12 @@ document.addEventListener("DOMContentLoaded", function() {
         posterPreview.src = posterImage;
 
         // upload input image file
-        var coverPhotoInput = editForm["edit-upcoming-cover-photo"];
-        coverPhotoInput.onchange = function() {
-            if (coverPhotoInput.files && coverPhotoInput.files[0]) {
-                posterPreview.src = URL.createObjectURL(coverPhotoInput.files[0]);
-            }
-        };
+        // var coverPhotoInput = editForm["edit-upcoming-cover-photo"];
+        // coverPhotoInput.onchange = function() {
+        //     if (coverPhotoInput.files && coverPhotoInput.files[0]) {
+        //         posterPreview.src = URL.createObjectURL(coverPhotoInput.files[0]);
+        //     }
+        // };
 
         // form submission for EDIT
         editForm.onsubmit = function(event) {
@@ -465,12 +465,12 @@ document.addEventListener("DOMContentLoaded", function() {
             slide.querySelector(".preview-title").innerHTML = formData.get("edit-upcoming-title").replace(/\n/g, '<br>'); // Convert line breaks to <br>
 
             // Check if a new poster image is provided
-            var newPosterFile = formData.get("edit-upcoming-cover-photo");
-            if (newPosterFile && newPosterFile.size > 0) {
-                var newPosterImage = URL.createObjectURL(newPosterFile);
-                slide.querySelector(".upcoming-poster").src = newPosterImage;
-                popup.querySelector(".upcoming-popup-poster").src = newPosterImage;
-            }
+            // var newPosterFile = formData.get("edit-upcoming-cover-photo");
+            // if (newPosterFile && newPosterFile.size > 0) {
+            //     var newPosterImage = URL.createObjectURL(newPosterFile);
+            //     slide.querySelector(".upcoming-poster").src = newPosterImage;
+            //     popup.querySelector(".upcoming-popup-poster").src = newPosterImage;
+            // }
 
             popup.querySelector(".event-title").innerHTML = firstLineTitle
             popup.querySelector(".event-description").innerHTML = formData.get("edit-upcoming-description").replace(/\n/g, '<br>');
