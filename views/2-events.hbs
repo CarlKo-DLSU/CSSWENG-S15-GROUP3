@@ -125,6 +125,7 @@
                         <img class="pastEvent-image" src="{{this.cover}}" alt="{{this.title}}">
                         <div class="pastEvent-detailBox">
                             <span class="pastEvent-details">{{this.title}}</span>
+                            <span class="pastEvent-desc" hidden>{{this.description}}</span>
                         </div>
                         <!-- Gallery for event images -->
                         <div class="event-gallery">
@@ -147,9 +148,7 @@
                     <img id="past-event-image" class="event-image" src="" alt="Past Event Image">
                     <div class="arrowPopup right"></div>
                 </div>
-                <div class="event-desc">
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, turpis sit amet blandit lobortis.</span>
-                </div>
+                <div class="event-desc" id="past-event-desc"></div>
             </div>
         </div>
         
