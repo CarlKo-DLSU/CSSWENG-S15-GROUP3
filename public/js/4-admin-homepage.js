@@ -40,14 +40,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // change cover photo image to file input
-    document.getElementById('add-upcoming-cover-photo').addEventListener('change', function() {
-        var file = this.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + e.target.result + ')';
-        };
-        reader.readAsDataURL(file);
-    });    
+    // document.getElementById('add-upcoming-cover-photo').addEventListener('change', function() {
+    //     var file = this.files[0];
+    //     var reader = new FileReader();
+    //     reader.onload = function(e) {
+    //         document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + e.target.result + ')';
+    //     };
+    //     reader.readAsDataURL(file);
+    // });    
 
     document.getElementById('edit-upcoming-cover-photo-preview').addEventListener('click', function() {
         document.getElementById('edit-upcoming-cover-photo').click();
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var addEventForm = document.getElementById("add-upcoming-event-form");
     addEventForm.addEventListener("submit", async function(event) {
         event.preventDefault();
-        const formData = new FormData(addEventForm);
+        var formData = new FormData(addEventForm);
 
         const eventData = {
             title: formData.get("add-upcoming-title"),
@@ -100,101 +100,87 @@ document.addEventListener("DOMContentLoaded", function() {
             eventTypeCheckboxes.appendChild(document.createElement("br"));
         }
 
-        const serverFormData = new FormData();
-        serverFormData.append("title", eventData.title);
-        serverFormData.append("description", eventData.description);
-        serverFormData.append("date", eventData.date);
-        serverFormData.append("venue", eventData.venue);
-        serverFormData.append("merchLink", eventData.merchLink);
-        serverFormData.append("coverPhoto", eventData.coverPhoto);
-
         try {
-            console.log("Sending data to server:", serverFormData);
-            const response = await fetch("/addUpcomingEvent", {
+            let response = await fetch("/addUpcomingEvent", {
                 method: "POST",
-                body: serverFormData
+                body: formData
             });
 
             if (response.ok) {
-                const result = await response.json();
-                if (result.success) {
-                    console.log("Event added successfully:", result);
+                alert("Event added successfully");
 
-                    // create slide with event details
-                    var newSlide = document.createElement("div");
-                    newSlide.classList.add("upcoming-slide");
-                    
-                    var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
+                // create slide with event details
+                var newSlide = document.createElement("div");
+                newSlide.classList.add("upcoming-slide");
+                
+                var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
 
-                    newSlide.setAttribute("data-slide-number", upcomingEventsSlider.children.length + 1)
-                    newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
-                    newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
-                    newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
-                    newSlide.setAttribute("data-type", eventType);
+                newSlide.setAttribute("data-slide-number", upcomingEventsSlider.children.length + 1)
+                newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
+                newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
+                newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
+                newSlide.setAttribute("data-type", eventType);
 
-                    var posterImage = document.createElement("img");
-                    posterImage.src = URL.createObjectURL(formData.get("add-upcoming-cover-photo"));
-                    posterImage.alt = "Event Poster";
-                    posterImage.classList.add("upcoming-poster");
-                    newSlide.appendChild(posterImage);
+                var posterImage = document.createElement("img");
+                posterImage.src = URL.createObjectURL(formData.get("add-upcoming-cover-photo"));
+                posterImage.alt = "Event Poster";
+                posterImage.classList.add("upcoming-poster");
+                newSlide.appendChild(posterImage);
 
-                    var editIcon = document.createElement("img");
-                    editIcon.src = "../images/1-index/pencil.png";
-                    editIcon.alt = "Edit Icon";
-                    editIcon.classList.add("upcoming-edit-icon");
-                    newSlide.appendChild(editIcon);
+                var editIcon = document.createElement("img");
+                editIcon.src = "../images/1-index/pencil.png";
+                editIcon.alt = "Edit Icon";
+                editIcon.classList.add("upcoming-edit-icon");
+                newSlide.appendChild(editIcon);
 
-                    var eventPreview = document.createElement("div");
-                    eventPreview.classList.add("event-preview");
+                var eventPreview = document.createElement("div");
+                eventPreview.classList.add("event-preview");
 
-                    var previewText = document.createElement("div");
-                    previewText.classList.add("preview-text");
+                var previewText = document.createElement("div");
+                previewText.classList.add("preview-text");
 
-                    var eventDate = new Date(formData.get("add-upcoming-date"));
-                    var options = { year: 'numeric', month: 'long', day: 'numeric' };
-                    var previewDate = document.createElement("p");
-                    previewDate.classList.add("preview-date");
-                    previewDate.textContent = eventDate.toLocaleDateString("en-US", options).toUpperCase();
-                    previewText.appendChild(previewDate);
+                var eventDate = new Date(formData.get("add-upcoming-date"));
+                var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                var previewDate = document.createElement("p");
+                previewDate.classList.add("preview-date");
+                previewDate.textContent = eventDate.toLocaleDateString("en-US", options).toUpperCase();
+                previewText.appendChild(previewDate);
 
-                    var previewTitle = document.createElement("p");
-                    previewTitle.classList.add("preview-title");
-                    previewTitle.innerHTML = formData.get("add-upcoming-title").replace(/\n/g, '<br>');
-                    previewText.appendChild(previewTitle);
+                var previewTitle = document.createElement("p");
+                previewTitle.classList.add("preview-title");
+                previewTitle.innerHTML = formData.get("add-upcoming-title").replace(/\n/g, '<br>');
+                previewText.appendChild(previewTitle);
 
-                    eventPreview.appendChild(previewText);
-                    newSlide.appendChild(eventPreview);
+                eventPreview.appendChild(previewText);
+                newSlide.appendChild(eventPreview);
 
-                    var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
-                    upcomingEventsSlider.appendChild(newSlide);
+                var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
+                upcomingEventsSlider.appendChild(newSlide);
 
-                    // hide add event popup and reset form
-                    addEventPopup.style.display = "none";
-                    addEventForm.reset();
-                    resetAddEventForm();
+                // hide add event popup and reset form
+                addEventPopup.style.display = "none";
+                addEventForm.reset();
+                resetAddEventForm();
 
-                    var slideNumber = upcomingEventsSlider.children.length;
-                    // create popup for new event
-                    createPopup(slideNumber, formData);
+                var slideNumber = upcomingEventsSlider.children.length;
+                // create popup for new event
+                createPopup(slideNumber, formData);
 
-                    // clicking on new slide opens its popup
-                    newSlide.addEventListener("click", function() {
-                        openPopup(slideNumber);
-                    });
+                // clicking on new slide opens its popup
+                newSlide.addEventListener("click", function() {
+                    openPopup(slideNumber);
+                });
 
-                    // clicking edit icon on new slide opens edit popup
-                    editIcon.addEventListener("click", function(event) {
-                        event.stopPropagation();
-                        openEditPopup(newSlide, slideNumber);
-                    });
-                } else {
-                    console.error("Failed to add event: ", result.error);
-                }
+                // clicking edit icon on new slide opens edit popup
+                editIcon.addEventListener("click", function(event) {
+                    event.stopPropagation();
+                    openEditPopup(newSlide, slideNumber);
+                });
             } else {
-                console.error("Failed to add event, response not ok.");
+                alert("Error adding event");
             }
         } catch (error) {
-            console.error("Failed to add event: ", error);
+            console.error("Error:", error);
         }
     });
 
@@ -446,12 +432,12 @@ document.addEventListener("DOMContentLoaded", function() {
         posterPreview.src = posterImage;
 
         // upload input image file
-        var coverPhotoInput = editForm["edit-upcoming-cover-photo"];
-        coverPhotoInput.onchange = function() {
-            if (coverPhotoInput.files && coverPhotoInput.files[0]) {
-                posterPreview.src = URL.createObjectURL(coverPhotoInput.files[0]);
-            }
-        };
+        // var coverPhotoInput = editForm["edit-upcoming-cover-photo"];
+        // coverPhotoInput.onchange = function() {
+        //     if (coverPhotoInput.files && coverPhotoInput.files[0]) {
+        //         posterPreview.src = URL.createObjectURL(coverPhotoInput.files[0]);
+        //     }
+        // };
 
         // form submission for EDIT
         editForm.onsubmit = function(event) {
@@ -503,12 +489,12 @@ document.addEventListener("DOMContentLoaded", function() {
             slide.querySelector(".preview-title").innerHTML = formData.get("edit-upcoming-title").replace(/\n/g, '<br>'); // Convert line breaks to <br>
 
             // Check if a new poster image is provided
-            var newPosterFile = formData.get("edit-upcoming-cover-photo");
-            if (newPosterFile && newPosterFile.size > 0) {
-                var newPosterImage = URL.createObjectURL(newPosterFile);
-                slide.querySelector(".upcoming-poster").src = newPosterImage;
-                popup.querySelector(".upcoming-popup-poster").src = newPosterImage;
-            }
+            // var newPosterFile = formData.get("edit-upcoming-cover-photo");
+            // if (newPosterFile && newPosterFile.size > 0) {
+            //     var newPosterImage = URL.createObjectURL(newPosterFile);
+            //     slide.querySelector(".upcoming-poster").src = newPosterImage;
+            //     popup.querySelector(".upcoming-popup-poster").src = newPosterImage;
+            // }
 
             popup.querySelector(".event-title").innerHTML = firstLineTitle
             popup.querySelector(".event-description").innerHTML = formData.get("edit-upcoming-description").replace(/\n/g, '<br>');
