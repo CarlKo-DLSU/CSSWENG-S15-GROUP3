@@ -21,10 +21,6 @@ const newEventSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    link: {
-        type: String,
-        required: true
-    },
     poster: {
         type: String,
         default: "placeholder.img"

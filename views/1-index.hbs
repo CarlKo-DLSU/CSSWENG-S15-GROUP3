@@ -189,45 +189,20 @@
 
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
-
-                <div class="upcoming-slide" data-title="Taylor Swift: The Eras Tour" data-date="2024-09-21" data-location="Mall of Asia MOA Arena, Pasay, NCR" data-type="concert">
-                    <img src="../images/1-index/upcoming-eras.png" alt="eras" class="upcoming-poster">
+                {{#each newEventsData}}
+                <div class="upcoming-slide" data-title={{this.title}} data-date={{this.date}} data-location={{this.venue}} data-type="concert">
+                    <img src={{this.poster}} class="upcoming-poster">
 
                     <div class="event-preview">
                         <div class="preview-text">
-                            <p class="preview-date">SEPTEMBER 21, 2024</p>
-                            <p class="preview-title">Taylor Swift: The Eras Tour</p>
-                            <p class="preview-subtitle">Live in Manila!</p>
+                            <p class="preview-date">{{this.date}}</p>
+                            <p class="preview-title">{{this.title}}</p>
+                            <p class="preview-subtitle">{{this.subtitle}}</p>
                         </div>
                     </div>
 
                 </div>
-                
-                <div class="upcoming-slide" data-title="DLSU Chorale: Saliw Lasalyano" data-date="2024-03-16" data-location="De La Salle University Manila, NCR" data-type="choral">
-                    <img src="../images/1-index/upcoming-saliw.png" alt="saliw" class="upcoming-poster">
-
-                    <div class="event-preview">
-                        <div class="preview-text">
-                            <p class="preview-date">MARCH 16, 2024</p>
-                            <p class="preview-title">DLSU Chorale: Saliw Lasalyano</p>
-                            <p class="preview-subtitle">A Choral Festival</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="upcoming-slide" data-title="Genshin Impact Character Event Wish: The Hearth's Ashen Shadow Dire Balemoon Arlecchino" data-date="2024-04-24" data-location="Teyvat" data-type="game">
-                    <img src="../images/1-index/upcoming-genshin.png" alt="genshin" class="upcoming-poster">
-
-                    <div class="event-preview">
-                        <div class="preview-text">
-                            <p class="preview-date">APRIL 24, 2024</p>
-                            <p class="preview-title">The Hearth's Ashen Shadow</p>
-                            <p class="preview-subtitle">"Dire Balemoon" Arlecchino</p>
-                        </div>
-                    </div>
-
-                </div>
+                {{/each}}
 
             </div>
 

@@ -28,8 +28,10 @@ hbs.registerHelper('nl2br', function(text) {
 });
 
 
-app.get("/",(req,res)=>{
-    res.render("1-index")
+app.get("/",async (req,res)=>{
+    const newEventsData = await NewEvent.find({});
+    console.log(newEventsData)
+    return res.render("1-index", {newEventsData})
 })
 
 app.get("/pastEvents",(req,res)=>{
@@ -51,7 +53,8 @@ app.post("/register", async(req,res)=>{
     }
 
     await profiles.insertMany([profile])
-    res.render("1-index")
+    const newEventsData = await NewEvent.find({});
+    return res.render("1-index", {newEventsData})
 })
 
 app.post("/signin", async(req,res)=>{
@@ -64,12 +67,14 @@ app.post("/signin", async(req,res)=>{
                 res.render("4-admin-homepage")
                 console.log("Greetings Admin!")
             } else {
-                res.render("1-index")
+                const newEventsData = await NewEvent.find({});
+                return res.render("1-index", {newEventsData})
                 console.log("Greetings!")
             }
         }
         else {
-            res.render("1-index")
+            const newEventsData = await NewEvent.find({});
+            return res.render("1-index", {newEventsData})
         }
     } catch {
         res.send("Wrong Details")
@@ -283,7 +288,8 @@ app.post('/updateAboutUs', async (req, res) => {
 
 app.get('/search', async (req, res) => {
     if (!req.query.unisearch) {
-        return res.render("1-index.hbs");
+        const newEventsData = await NewEvent.find({});
+        return res.render("1-index", {newEventsData})
     }
     else {
     const existPastEvent = await PastEvent.find({title: {$regex: req.query.unisearch, $options: "i"}}).collation({ locale: "en" }).sort({ title: 1 })
