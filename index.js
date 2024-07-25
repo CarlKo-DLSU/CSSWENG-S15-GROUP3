@@ -24,10 +24,11 @@ app.use(bodyParser.json());
 
 hbs.registerPartials(__dirname + '/views/partials');
 
+
+
 hbs.registerHelper('nl2br', function(text) {
     return text.replace(/\n/g, '<br>');
 });
-
 
 /*
 app.get("/",(req,res)=>{
@@ -92,6 +93,7 @@ app.post("/signin", async(req,res)=>{
 
         if(check.password === req.body.password){
             if(req.body.email === "admin@gmail.com") {
+
                 console.log("it went here");
                 //res.render("4-admin-homepage")
                 res.render('4-admin-homepage', {
@@ -150,6 +152,7 @@ app.get('/5-editPastEvents.hbs', async (req, res) => {
     try {
         const event = await PastEvent.findById(eventId);
         if (event) {
+            
             res.render('5-editPastEvents', {
                 id: event.id,
                 //IDK HOW TO RESOLVE THIS BC TITLE HERE IS THE SAME AS THE TITLE IN THE PARTIALS WKADJSAKDJKS: TO FIX NALANG LMAO
