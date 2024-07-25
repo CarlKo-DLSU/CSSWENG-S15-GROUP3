@@ -293,8 +293,9 @@ app.get('/search', async (req, res) => {
     }
     else {
     const existPastEvent = await PastEvent.find({title: {$regex: req.query.unisearch, $options: "i"}}).collation({ locale: "en" }).sort({ title: 1 })
+    const existNewEvent = await NewEvent.find({title: {$regex: req.query.unisearch, $options: "i"}}).collation({ locale: "en" }).sort({ title: 1 })
     const name = req.query.unisearch;
-    return res.render("7-search.hbs", {name, existPastEvent});
+    return res.render("7-search.hbs", {name, existPastEvent, existNewEvent});
     }
 })
 

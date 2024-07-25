@@ -111,6 +111,32 @@
             <div id="past-events-header">
             </div>
             <p id="search-results-title">Results found for "{{name}}":</p>
+            <p id="past-events-title">Upcoming Events</p>
+            {{#if existNewEvent}}
+            <div class="pastEventList">
+            <!-- Hard-coded events based on JavaScript data -->
+                <div id="upcoming-events-slider">
+                {{#each existNewEvent}}
+                <div class="upcoming-slide" data-title={{this.title}} data-date={{this.date}} data-location={{this.venue}} data-type="concert">
+                    <img src={{this.poster}} class="upcoming-poster">
+
+                    <div class="event-preview">
+                        <div class="preview-text">
+                            <p class="preview-date">{{this.date}}</p>
+                            <p class="preview-title">{{this.title}}</p>
+                            <p class="preview-subtitle">{{this.subtitle}}</p>
+                        </div>
+                    </div>
+
+                </div>
+                {{/each}}
+
+            </div>
+            </div>
+            {{else}}
+            <p id="none-found">No upcoming events found.</p>
+            {{/if}}
+
             {{#if existPastEvent}}
             <p id="past-events-title">Past Events</p>
             <div class="pastEventList">
@@ -132,7 +158,7 @@
                 {{/each}}
             </div>
             {{else}}
-            <p id="none-found">No events found.</p>
+            <p id="none-found">No past events found.</p>
             {{/if}}
         </div>
 
