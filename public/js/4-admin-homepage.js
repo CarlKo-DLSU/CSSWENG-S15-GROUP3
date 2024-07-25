@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var closeButton = document.getElementById("close-add-popup-btn");
     var addEventPopup = document.getElementById("add-upcoming-event-popup");
     var editPopup = document.getElementById("edit-upcoming-event-popup");
-    
+
     var editSlidePopup = document.getElementById("edit-slide-popup");
     var closeSlideButton = document.getElementById("close-slide-popup-btn");
 
@@ -20,14 +20,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // display "add upcoming event" popup and reset form
     var addButton = document.getElementById("add-upcoming-event-btn");
-    var editSlideBtn = document.getElementById("edit-upcoming-event-btn");
+    var editSlideBtn = document.getElementById("edit-upcoming-event-btn");    
 
     addButton.addEventListener("click", function() {
         addEventPopup.style.display = "block";
         resetAddEventForm();
     });
 
-    
     editSlideBtn.addEventListener("click", function() {
         editSlidePopup.style.display = "block";
         //editSlidePopup.style.display = "block";

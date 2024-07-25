@@ -1,4 +1,3 @@
-<!-->
 <!DOCTYPE html>
 <html>
 
@@ -10,11 +9,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/1-index.css">
+        <link id="favicon" rel="icon" href="images/1-index/favicon.png" type="image/png">
     </head>
 
     <body>
         <!--------------------HEADER-------------------->
-        
         <div id="header">   
             <div id="current-events">
                 <div id="text-container">
@@ -45,10 +44,8 @@
             
             <div class="red-bar bottom-bar"></div>
         </div>
-        <!--{{>header}}-->
 
         <!--------------------SIGN IN-------------------->
-        <!--
         <div id="sign-in-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -73,11 +70,9 @@
                     <p>No account yet? <button id="to-register-btn">Register</button>.</p>
                 </div>
             </div>
-        </div> -->
-        {{>signin}}
+        </div>
 
         <!--------------------REGISTER-------------------->
-        <!--
         <div id="register-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -107,8 +102,7 @@
                     <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
                 </div>
             </div>
-        </div>-->
-        {{>register}}
+        </div>
 
         <!-------------------- CREATE PAS EVENTPAST EVENTS-------------------->
 
@@ -121,6 +115,10 @@
                         Event Title
                         <br>
                         <input type="text" id="event-title" name="title" style="font-size: 30px; width: 100%; border-radius: 10px;" />
+                        <br>
+                        Event Description
+                        <br>
+                        <textarea id="event-desc" name="description" rows="4" cols="50" style="font-size: 20px; width: 100%; border-radius: 10px;"></textarea>
                         <br>
                         Event Cover Photo
                         <br>
@@ -185,8 +183,6 @@
     <script src="../js/0-universal.js"></script>
     <script src="../js/1-index.js"></script>
     <script src="../js/5-addPastEvents.js"></script>
-<!--
-    </body>
+</body>
 
 </html>
--->

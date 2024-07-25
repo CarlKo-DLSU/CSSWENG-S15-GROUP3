@@ -12,22 +12,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = event.querySelector('.pastEvent-details').textContent.trim(); 
         const images = Array.from(event.querySelectorAll('.event-gallery img')).map(img => img.src);
         const image = event.querySelector('.pastEvent-image');
+        const desc = event.querySelector('.pastEvent-desc').textContent.trim(); 
 
         image.addEventListener('click', function() {
-            openPastEventPopup(title, images[0], images);
+            openPastEventPopup(title, images[0], images, desc);
         });
     });
 
     // Function to open event popup
-    function openPastEventPopup(details, imageSrc, images) {
+    function openPastEventPopup(details, imageSrc, images, desc) {
         var popup = document.getElementById("past-event-popup");
         var detailsElement = document.getElementById("past-event-details");
         var imageElement = document.getElementById("past-event-image");
+        var descElement = document.getElementById("past-event-desc");
 
         if (popup && detailsElement && imageElement) {
             detailsElement.textContent = details;
             imageElement.src = imageSrc;
             popup.style.display = "flex";
+            descElement.textContent = desc;
 
             // Initialize the image list and index for the current event
             currentEventImages = images;
