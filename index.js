@@ -100,18 +100,26 @@ app.get('/4-admin-homepage.hbs', (req, res) => {
     res.render('4-admin-homepage');
 });
 
-app.post("/addUpcomingEvent", async (req, res) => {
-    const UE_data = await UpcomingEvent.find({});   
-    console.log('Hello')
+app.post("/addUpcomingEvent"), async (req, res) => {
+    const { title, description, date, venue, merchLink } = req.body;
+
+    const newEvent = new UpcomingEvent({
+        title: title,
+        description: description,
+        date: new Date(date),
+        venue: venue,
+        merchLink: merchLink
+        // coverPhoto: req.file ? req.file.path : ''
+    });
 
     try {
-
-        res.redirect("4-admin-homepage.hbs", {events: UE_data});
+        await newEvent.save();
+        res.redirect('/4-admin-homepage.hbs'); // Adjust this path as needed
     } catch (error) {
         console.error("Error creating upcoming event:", error);
         res.status(500).send("Error creating upcoming event.");
     }
-});
+};
 
 //UPLOAD FOR PAST EVENT
 const storagePastEvent = multer.diskStorage({

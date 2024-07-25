@@ -6,7 +6,7 @@ const upcomingEventSchema = new mongoose.Schema({
     date: { type: Date, required: true },
     venue: { type: String, required: true },
     merchLink: { type: String, required: true },
-    coverPhoto: { type: String, required: true } // New field for cover photo path
+    coverPhoto: { type: String, required: true } 
 });
 
 const UpcomingEvent = mongoose.model("UpcomingEvent", upcomingEventSchema);
