@@ -1207,6 +1207,13 @@ input[type="submit"] {
     color: #000000;
 }
 
+.search-frame {
+    border-top: 1px solid rgba(230,230,230,255);
+    padding-bottom: 15px;
+    color: #000000;
+    min-height: 100%;
+}
+
 #past-events-header {
     margin-top:110px;
     display: flex;
@@ -1219,6 +1226,22 @@ input[type="submit"] {
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-size: 20px;
+    color: #151515;
+    margin-left: 18px;
+}
+
+#none-found {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #151515;
+    margin-left: 18px;
+}
+
+#search-results-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 25px;
     color: #151515;
     margin-left: 18px;
 }
