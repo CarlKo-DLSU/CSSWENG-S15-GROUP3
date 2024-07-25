@@ -1,22 +1,18 @@
-<!--
 <!DOCTYPE html>
 <html>
 
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> SX Manila | Events </title>
-        {{#> layout}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        {{/layout}}
-        
         <link rel="stylesheet" href="../css/1-index.css">
+        <link id="favicon" rel="icon" href="images/1-index/favicon.png" type="image/png">
     </head>
-    <body>-->
+    <body>
         <!--------------------HEADER-------------------->
-        
         <div id="header">   
             <div id="current-events">
                 <div id="text-container">
@@ -49,10 +45,7 @@
             <div class="red-bar bottom-bar"></div>
         </div>
 
-        <!--{{>header}}-->
-
         <!--------------------SIGN IN-------------------->
-        <!--
         <div id="sign-in-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -77,11 +70,9 @@
                     <p>No account yet? <button id="to-register-btn">Register</button>.</p>
                 </div>
             </div>
-        </div>-->
-        {{>signin}}
+        </div>
 
         <!--------------------REGISTER-------------------->
-        <!--
         <div id="register-popup" class="popup">
             <div class="popup-content">
                 <span class="close-btn">&times;</span>
@@ -111,8 +102,7 @@
                     <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
                 </div>
             </div>
-        </div>-->
-        {{>register}}
+        </div>
 
         <!--------------------PAST EVENTS-------------------->
 
@@ -136,6 +126,7 @@
                         <img class="pastEvent-image" src="{{this.cover}}" alt="{{this.title}}">
                         <div class="pastEvent-detailBox">
                             <span class="pastEvent-details">{{this.title}}</span>
+                            <span class="pastEvent-desc" hidden>{{this.description}}</span>
                         </div>
                         <!-- Gallery for event images -->
                         <div class="event-gallery">
@@ -158,10 +149,11 @@
                     <img id="past-event-image" class="event-image" src="" alt="Past Event Image">
                     <div class="arrowPopup right"></div>
                 </div>
+                <div class="event-desc" id="past-event-desc"></div>
             </div>
         </div>
         
-    <!--
+
         <div id="footer">
             <p id="contact-us">CONTACT US</p>
 
@@ -175,8 +167,8 @@
                 <a href="https://www.instagram.com/sxmanila/" target="_blank"><img src="../images/1-index/footer-ig.png" id="ig-icon" class="socials-icon"></a>
                 <a href="https://x.com/sxmanila" target="_blank"><img src="../images/1-index/footer-x.png" id="x-icon" class="socials-icon"></a>
             </div>
-        </div>-->
-        {{>footer}}
+        </div>
+
         <script src="../js/0-universal.js"></script>
         <script src="../js/2-events.js"></script>
     </body>
