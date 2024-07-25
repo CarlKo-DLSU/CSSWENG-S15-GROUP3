@@ -280,6 +280,20 @@ app.post('/updateAboutUs', async (req, res) => {
     }
 });
 
+app.get('/search', async (req, res) => {
+    if (!req.query.unisearch) {
+        return res.render("1-index.hbs");
+    }
+    else {
+    const existPastEvent = await PastEvent.find({title: {$regex: req.query.unisearch, $options: "i"}}).collation({ locale: "en" }).sort({ title: 1 })
+    const name = req.query.unisearch;
+    console.log("Searching...")
+    console.log(existPastEvent);
+    console.log(name);
+    return res.render("7-search.hbs", {name, existPastEvent});
+    }
+})
+
 app.listen(3000,()=>{
     console.log("Port connected");
 })
