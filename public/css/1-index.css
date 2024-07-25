@@ -593,7 +593,7 @@ button[type="submit"]:hover {
 }
 
 /* General popup styles */
-#add-upcoming-event-popup, #edit-upcoming-event-popup {
+#add-upcoming-event-popup, #edit-upcoming-event-popup, #edit-slide-popup {
     display: none;
     position: fixed;
     top: 124px;
@@ -732,11 +732,35 @@ button[type="submit"]:hover {
     height: 500px; 
     background-image: url('../images/1-index/home-upload.png');
     background-size: cover;
+    height: 212px; 
+    background-image: url('../images/1-index/add-image.png');
+    background-size: 100%;
     background-position: center;
+    background-repeat: no-repeat;
     border: 1px solid #ccc;
     border-radius: 10px; 
     cursor: pointer;
+    margin: 10px; /*SEND HELP WHY IS THIS NOT WORKING T-T*/
 }
+
+#edit-image-icon {
+float: right;
+margin-top: 5px;
+margin-right: 5px;
+}
+
+#trash-icon {
+margin-top: 5px;
+}
+
+/*
+.slide-circle {
+position: relative;
+background-color: #B80022;
+border-radius: 50%;
+width: 56px;
+height: 56px;
+}*/
 
 /* File input for Edit Upcoming Event */
 #edit-upcoming-cover-photo {
@@ -833,10 +857,16 @@ input[type="submit"] {
 }
 
 /* Buttons for adding and editing events */
-#add-upcoming-event, #edit-upcoming-event {
+#add-upcoming-event {
     display: flex;
     justify-content: center;
     margin: 7px 0;
+}
+
+#edit-upcoming-event {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 13px;
 }
 
 #add-upcoming-event-btn, #edit-upcoming-event-btn {

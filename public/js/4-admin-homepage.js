@@ -3,18 +3,34 @@ document.addEventListener("DOMContentLoaded", function() {
     var addEventPopup = document.getElementById("add-upcoming-event-popup");
     var editPopup = document.getElementById("edit-upcoming-event-popup");
 
+    var editSlidePopup = document.getElementById("edit-slide-popup");
+    var closeSlideButton = document.getElementById("close-slide-popup-btn");
+
     // close "add upcoming event" popup and reset form
     closeButton.addEventListener("click", function() {
         addEventPopup.style.display = "none";
         resetAddEventForm();
     });
 
+    // close "add upcoming event" popup and reset form
+    
+    closeSlideButton.addEventListener("click", function() {
+        editSlidePopup.style.display = "none";
+    });
+
     // display "add upcoming event" popup and reset form
     var addButton = document.getElementById("add-upcoming-event-btn");
+    var editSlideBtn = document.getElementById("edit-upcoming-event-btn");    
 
     addButton.addEventListener("click", function() {
         addEventPopup.style.display = "block";
         resetAddEventForm();
+    });
+
+    editSlideBtn.addEventListener("click", function() {
+        editSlidePopup.style.display = "block";
+        //editSlidePopup.style.display = "block";
+        //resetAddEventForm();
     });
 
     // show/hide new event type input in add form
