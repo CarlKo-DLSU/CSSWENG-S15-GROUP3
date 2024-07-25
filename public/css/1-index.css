@@ -22,6 +22,7 @@ body {
 }
 
 /* --------------------HEADER-------------------- */
+
 #universal-search {
     position: relative;
     transition: all 1s;
@@ -77,6 +78,7 @@ body {
     background: #f81b1b;
     color: white;
   }
+/* ------------------------------------------- */
 
 #header {
     width: 100%;
@@ -609,7 +611,7 @@ button[type="submit"]:hover {
     position: relative;
     width: 100%;
     max-width: 600px;
-    height: calc(100% - 60px);
+    height: calc(100% - 60px); /* Adjust height as needed */
     margin: 30px auto;
     padding: 20px;
     display: flex;
@@ -725,13 +727,11 @@ button[type="submit"]:hover {
     font-weight: 400;
 }
 
+/*BRUTE FORCE WAY WAKDJKSAJDK*/
 /* Div acting as image button */
 #add-upcoming-cover-photo-img {
     width: auto;
     max-width: 100%;
-    height: 500px; 
-    background-image: url('../images/1-index/home-upload.png');
-    background-size: cover;
     height: 212px; 
     background-image: url('../images/1-index/add-image.png');
     background-size: 100%;
@@ -743,24 +743,74 @@ button[type="submit"]:hover {
     margin: 10px; /*SEND HELP WHY IS THIS NOT WORKING T-T*/
 }
 
+#add-upcoming-cover-photo-img1 {
+    width: auto;
+    max-width: 100%;
+    height: 212px; 
+    background-image: url('../images/1-index/slideshow-eras.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    cursor: pointer;
+    margin: 10px 0px 20px;
+}
+
+#add-upcoming-cover-photo-img2 {
+    width: auto;
+    max-width: 100%;
+    height: 212px; 
+    background-image: url('../images/1-index/slideshow-bewitched.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    cursor: pointer;
+    margin: 20px 0px;
+}
+
+#add-upcoming-cover-photo-img3 {
+    width: auto;
+    max-width: 100%;
+    height: 212px; 
+    background-image: url('../images/1-index/slideshow-genshin.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    cursor: pointer;
+    margin: 20px 0px;
+}
+
+.icon-images {
+    display: inline;
+    width: 43.18px;
+    height: 43.18px;
+    margin: 10px;
+}
+
 #edit-image-icon {
-float: right;
-margin-top: 5px;
-margin-right: 5px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
 }
 
 #trash-icon {
-margin-top: 5px;
+    margin-top: 5px;
 }
 
 /*
 .slide-circle {
-position: relative;
-background-color: #B80022;
-border-radius: 50%;
-width: 56px;
-height: 56px;
+    position: relative;
+    background-color: #B80022;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
 }*/
+
 
 /* File input for Edit Upcoming Event */
 #edit-upcoming-cover-photo {
@@ -868,6 +918,7 @@ input[type="submit"] {
     justify-content: center;
     margin-bottom: 13px;
 }
+
 
 #add-upcoming-event-btn, #edit-upcoming-event-btn {
     display: flex;
@@ -1338,18 +1389,6 @@ input[type="submit"] {
     font-family: "Poppins", sans-serif;
     font-size: 18px;
     font-weight: 700;
-}
-
-.event-desc {
-    background-color: red;
-    color: white;
-    text-align: left;
-    padding: 10px;
-    box-sizing: border-box;
-    width: 100%;
-    font-family: "Poppins", sans-serif;
-    font-size: 15px;
-    font-weight: 450;
 }
 
 .event-image {

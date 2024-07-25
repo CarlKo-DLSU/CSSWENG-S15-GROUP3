@@ -1,0 +1,30 @@
+<div id="register-popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+
+                <p class="popup-text">Register</p>
+
+                <form id="register-form" action="/register" method="post">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+
+                    <label for="register-email">Email</label>
+                    <input type="text" id="register-email" name="email">
+
+                    <label for="contact-number">Contact Number</label>
+                    <input type="text" id="contact-number" name="contactNumber">
+
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password">
+
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+
+                    <button type="submit" id="register-btn">Register</button>
+                </form>
+
+                <div id="to-sign-in-container">
+                    <p>Have an account already? <button id="to-sign-in-btn">Sign In</button>.</p>
+                </div>
+            </div>
+        </div>
