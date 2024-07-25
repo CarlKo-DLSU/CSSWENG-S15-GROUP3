@@ -11,6 +11,7 @@ const fs = require('fs');
 const profiles = require("./models/Profile")
 const aboutUs = require("./models/AboutUs")
 const UpcomingEvent = require("./models/UpcomingEvent")
+const NewEvent = require("./models/NewEvent")
 const PastEvent = require("./models/PastEvent")
 
 app.use(express.json())
@@ -287,9 +288,6 @@ app.get('/search', async (req, res) => {
     else {
     const existPastEvent = await PastEvent.find({title: {$regex: req.query.unisearch, $options: "i"}}).collation({ locale: "en" }).sort({ title: 1 })
     const name = req.query.unisearch;
-    console.log("Searching...")
-    console.log(existPastEvent);
-    console.log(name);
     return res.render("7-search.hbs", {name, existPastEvent});
     }
 })

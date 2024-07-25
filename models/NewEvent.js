@@ -19,7 +19,7 @@ const newEventSchema = new mongoose.Schema({
     },
     venue: {
         type: String,
-        requied: true
+        required: true
     },
     link: {
         type: String,
