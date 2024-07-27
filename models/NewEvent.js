@@ -24,6 +24,13 @@ const newEventSchema = new mongoose.Schema({
     poster: {
         type: String,
         default: "placeholder.img"
+    },
+    num_index: {
+        type: String
+    }
+    ,
+    event_type: {
+        type: String
     }
 })
 
