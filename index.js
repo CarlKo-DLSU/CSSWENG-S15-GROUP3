@@ -30,6 +30,7 @@ hbs.registerHelper('nl2br', function(text) {
 
 app.get("/",async (req,res)=>{
     const newEventsData = await NewEvent.find({});
+    console.log(newEventsData);
     return res.render("1-index", {newEventsData})
 })
 

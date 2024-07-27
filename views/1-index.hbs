@@ -207,68 +207,21 @@
             </div>
 
             <!--------------------UPCOMING EVENTS POPUPS-------------------->
-            <div id="upcoming-event-popup-1" class="event-popup">
-
+            {{#each newEventsData}}
+            <div id="upcoming-event-popup-{{this.num_index}}" class="event-popup">
                 <div class="event-popup-content">
-
                     <div class="popup-content-details">
-
-                        <img src="../images/1-index/upcoming-popup-eras.png" class="upcoming-popup-poster" alt="popup poster">
+                        <img src={{this.poster}} class="upcoming-popup-poster" alt="popup poster">
 
                         <div class="upcoming-event-details">
-                            <p class="event-title">Taylor Swift: The Eras Tour</p>
-                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
+                            <p class="event-title">{{this.title}}</p>
+                            <p class="event-description">{{this.description}}</p>
                             <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
                         </div>
-
                     </div>
-                    
                 </div>
-
             </div>
-            
-            <div id="upcoming-event-popup-2" class="event-popup">
-
-                <div class="event-popup-content">
-
-                    <div class="popup-content-details">
-
-                        <img src="../images/1-index/upcoming-popup-saliw.png" class="upcoming-popup-poster" alt="popup poster">
-                        
-                        <div class="upcoming-event-details">
-                            <p class="event-title">DLSU Chorale: Saliw Lasalyano</p>
-                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div id="upcoming-event-popup-3" class="event-popup">
-
-                <div class="event-popup-content">
-
-                    <div class="popup-content-details">
-
-                        <img src="../images/1-index/upcoming-popup-genshin.png" class="upcoming-popup-poster" alt="popup poster">
-
-                        <div class="upcoming-event-details">
-                            <p class="event-title">"The Hearth's Ashen Shadow"</p>
-                            <p class="event-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            <button class="merch-presale-btn" onclick="window.open('https://example.com')">Merch Presale</button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+            {{/each}}
         <!--------------------BOOKING SECTION-------------------->
         <div id="booking">
             <div id="red-rectangle"></div>

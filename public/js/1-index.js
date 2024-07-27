@@ -57,7 +57,11 @@ document.addEventListener("DOMContentLoaded", function() {
 function openPopup(slideNumber) {
     var popupId = "upcoming-event-popup-" + slideNumber;
     var popup = document.getElementById(popupId);
-    popup.style.display = "flex";
+    if (popup){
+        popup.style.display = "flex";
+    } else {
+        console.error('Popup with ID ' + popupId + ' not found.');
+    }
 }
 
 // Function to close the popup
