@@ -13,6 +13,7 @@ const aboutUs = require("./models/AboutUs")
 const UpcomingEvent = require("./models/UpcomingEvent")
 const NewEvent = require("./models/NewEvent")
 const PastEvent = require("./models/PastEvent")
+const slideshow = require("./models/EventSlideshow")
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,7 +32,8 @@ hbs.registerHelper('nl2br', function(text) {
 app.get("/",async (req,res)=>{
     const newEventsData = await NewEvent.find({});
     console.log(newEventsData);
-    return res.render("1-index", {newEventsData})
+    const slideshowData = await slideshow.find({});
+    return res.render("1-index", {newEventsData}) // add in {slideshowData} when schema is populated, else error
 })
 
 app.get("/pastEvents",(req,res)=>{
