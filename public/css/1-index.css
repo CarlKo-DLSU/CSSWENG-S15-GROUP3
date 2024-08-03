@@ -593,7 +593,7 @@ button[type="submit"]:hover {
 }
 
 /* General popup styles */
-#add-upcoming-event-popup, #edit-upcoming-event-popup, #edit-slide-popup {
+#add-upcoming-event-popup, #edit-upcoming-event-popup, #edit-slide-popup, #preview-changes-popup {
     display: none;
     position: fixed;
     top: 124px;
@@ -622,7 +622,7 @@ button[type="submit"]:hover {
 }
 
 /* Close button */
-.close-popup-btn {
+.close-popup-btn, #close-slide-popup-btn-preview {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -634,6 +634,7 @@ button[type="submit"]:hover {
     font-size: 25px;
     line-height: 20px;
     cursor: pointer;
+    z-index: 999;
 }
 
 /* Popup title */
