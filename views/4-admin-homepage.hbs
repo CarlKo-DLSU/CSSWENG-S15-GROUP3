@@ -318,7 +318,9 @@
 
                 <div id="edit-upcoming-event-popup-content">
                     
-                    <form id="edit-upcoming-event-form">
+                    <form id="edit-upcoming-event-form" action="/editNewEvent" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="num_index" value="4" />
+
                         <label for="edit-upcoming-title">Event Title</label><br>
                         <textarea type="text" id="edit-upcoming-title" name="edit-upcoming-title" maxlength="29"></textarea><br>
 
@@ -347,7 +349,7 @@
                         <input type="url" id="edit-upcoming-merch-link" name="edit-upcoming-merch-link"><br>
                         
                         <label for="edit-upcoming-cover-photo">Event Cover Photo</label><br>
-                        <input type="file" id="edit-upcoming-cover-photo" name="edit-upcoming-cover-photo" accept="image/*">
+                        <input type="file" id="edit-upcoming-cover-photo" name="edit-upcoming-cover-photo" >
                         <img id="edit-upcoming-cover-photo-preview" src="" alt="Cover Photo Preview">
                         
                         <div class="edit-upcoming-preview-buttons">
@@ -399,6 +401,7 @@
                         <div class="upcoming-event-details">
                             <p class="event-title">{{this.title}}</p>
                             <p class="event-description">{{this.description}}</p>
+                            <button class="merch-presale-btn" onclick="window.open('{{this.merch_link}}')">Merch Presale</button>
                         </div>
                     </div>
                 </div>

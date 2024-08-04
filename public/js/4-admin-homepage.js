@@ -468,7 +468,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     
         var descriptionElem = popup.querySelector(".event-description");
-        // var merchLinkElem = popup.querySelector(".merch-presale-btn");
+        var merchLinkElem = popup.querySelector(".merch-presale-btn");
     
         if (!descriptionElem) {
             console.error("Description or merch link element is missing in the popup!");
@@ -476,7 +476,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     
         var description = descriptionElem.innerHTML.replace(/<br\s*\/?>/mg, "\n");
-        // var merchLink = merchLinkElem.getAttribute("onclick").match(/window\.open\(['"](.+?)['"]/);
+        var merchLink = merchLinkElem.getAttribute("onclick").match(/window\.open\(['"](.+?)['"]/);
     
         // Populate fields with retrieved details
         editForm["edit-upcoming-title"].value = title.replace(/<br\s*\/?>/gi, "\n");
@@ -485,7 +485,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // editForm["edit-upcoming-event-type"].value = type;
         // editForm["edit-upcoming-date"].value = date;
         editForm["edit-upcoming-venue"].value = location;
-        // editForm["edit-upcoming-merch-link"].value = merchLink ? merchLink[1] : '';
+        editForm["edit-upcoming-merch-link"].value = merchLink ? merchLink[1] : '';
 
         // Ensure date is not null or undefined before setting it
         if (date) {
@@ -577,47 +577,29 @@ document.addEventListener("DOMContentLoaded", function() {
                 eventTypeCheckboxes.appendChild(document.createElement("br"));
             }
     
-            var num_index = slideNumber; // Ensure you have the num_index in your form
-            var title = formData.get("edit-upcoming-title");
-            var subtitle = formData.get("edit-upcoming-subtitle");
-            var date = formData.get("edit-upcoming-date");
-            var venue = formData.get("edit-upcoming-venue");
-            var poster = formData.get("edit-upcoming-cover-photo");
-            var description = formData.get("edit-upcoming-description");
-            var merch_link = formData.get("edit-upcoming-merch-link");
+            var num_index = slideNumber; 
+
+            formData.append("num_index", num_index);
 
             fetch('/editNewEvent', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    num_index: num_index,
-                    title: title,
-                    subtitle: subtitle,
-                    date: date,
-                    venue: venue,
-                    poster: poster, // Handle poster if needed
-                    description: description,
-                    event_type: eventType,
-                    merch_link: merch_link
-                })
+                body: formData
             })
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
                 if (data.message === "Event updated successfully") {
-                    alert("Event updated successfully");
-                    // Optionally refresh the page or update the UI
+                    console.log("Event updated successfully");
                 } else {
-                    alert("Error updating event: " + data.message);
+                    console.log("Error updating event: " + data.message);
                 }
             })
             .catch(error => {
                 console.error("Error updating event:", error);
-                alert("Error updating event: " + error.message);
+                console.log("Error updating event: " + error.message);
             });
 
             editPopup.style.display = "none";
+            window.location.reload();
         };
 
         return slide;

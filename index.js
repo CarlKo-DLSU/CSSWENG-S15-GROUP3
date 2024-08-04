@@ -332,8 +332,53 @@ app.delete('/deleteNewEvent', async (req, res) => {
     }
 });
 
-app.post('/editNewEvent', async (req, res) => {
-    const { num_index, title, subtitle, date, description, venue, poster, event_type, merch_link } = req.body;
+function formatDate(inputDate) {
+    const date = new Date(inputDate);
+
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric'
+    };
+    
+    return new Intl.DateTimeFormat('en-US', options).format(date).toUpperCase();
+}
+
+
+const storageNewEvent = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const uploadDir = path.join(__dirname, 'public', 'images', '1-index');
+        console.log(uploadDir);
+        // Check if the directory exists, otherwise create it
+        fs.mkdir(uploadDir, { recursive: true }, (err) => {
+            if (err) {
+                console.error("Error creating uploads directory:", err);
+                cb(err, uploadDir); // Pass error to callback
+            } else {
+                cb(null, uploadDir);
+            }
+        });
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const uploadNewEvent = multer({ storage: storageNewEvent }); 
+
+app.post('/editNewEvent', uploadNewEvent.single('edit-upcoming-cover-photo'), async (req, res) => {
+    console.log("Multer middleware executed");
+    console.log("Request body:", req.body);
+    console.log("Request file:", req.file);
+
+    const num_index = req.body['num_index'];
+    const title = req.body['edit-upcoming-title'];
+    const subtitle = req.body['edit-upcoming-subtitle'];
+    const date = formatDate(req.body['edit-upcoming-date']);
+    const venue = req.body['edit-upcoming-venue'];
+    const description = req.body['edit-upcoming-description'];
+    const event_type = req.body['edit-upcoming-event-type'];
+    const merch_link = req.body['edit-upcoming-merch-link'];
 
     try {
         const event = await NewEvent.findOne({ num_index: num_index });
@@ -344,7 +389,15 @@ app.post('/editNewEvent', async (req, res) => {
             event.date = date;
             event.description = description;
             event.venue = venue;
-            // event.poster = poster; 
+
+            if (req.file) {
+                const posterPath = '/images/1-index/' + req.file.filename;
+                console.log("Poster Path:", posterPath);
+                event.poster = posterPath;
+            } else {
+                console.log("No file uploaded");
+            }
+
             event.event_type = event_type;
             event.merch_link = merch_link;
 
@@ -355,7 +408,7 @@ app.post('/editNewEvent', async (req, res) => {
         }
     } catch (error) {
         console.error("Error updating event:", error);
-        res.status(500).send({ message: "Error updating event" });
+        res.status(500).send({ message: "Error updating event: " + error.message });
     }
 });
 
