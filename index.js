@@ -332,7 +332,7 @@ app.delete('/deleteNewEvent', async (req, res) => {
     }
 });
 
-app.post('/editNewEvent', upload.single('poster'), async (req, res) => {
+app.post('/editNewEvent', async (req, res) => {
     const { num_index, title, subtitle, date, description, venue, poster, event_type, merch_link } = req.body;
 
     try {
@@ -344,7 +344,7 @@ app.post('/editNewEvent', upload.single('poster'), async (req, res) => {
             event.date = date;
             event.description = description;
             event.venue = venue;
-            event.poster = poster; 
+            // event.poster = poster; 
             event.event_type = event_type;
             event.merch_link = merch_link;
 
