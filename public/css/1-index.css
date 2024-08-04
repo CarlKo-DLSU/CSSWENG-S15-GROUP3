@@ -685,7 +685,21 @@ button[type="submit"]:hover {
 
 #add-upcoming-title,
 #edit-upcoming-title {
-    height: 65px;
+    height: 40px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#add-upcoming-subtitle,
+#edit-upcoming-subtitle {
+    height: 40px;
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: 400;

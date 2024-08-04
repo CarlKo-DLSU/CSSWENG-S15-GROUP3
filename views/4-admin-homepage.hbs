@@ -224,12 +224,12 @@
                             <form id="upcoming-filter-form">
                                 <label for="event-type" class="filter-option-title">Event Type</label>
                                 <div id="event-type-checkboxes">
-                                    <input type="checkbox" id="concert" name="event-type" value="concert">
-                                    <label for="concert">Concert</label><br>
-                                    <input type="checkbox" id="choral" name="event-type" value="choral">
-                                    <label for="choral">Choral</label><br>
-                                    <input type="checkbox" id="game" name="event-type" value="game">
-                                    <label for="game">Game</label><br>
+                                    <input type="checkbox" id="concert" name="event-type" value="Concert">
+                                    <label for="Concert">Concert</label><br>
+                                    <input type="checkbox" id="choral" name="event-type" value="Choral">
+                                    <label for="Choral">Choral</label><br>
+                                    <input type="checkbox" id="game" name="event-type" value="Game">
+                                    <label for="Game">Game</label><br>
                                 </div>
 
                                 <label for="location" class="filter-option-title">Location</label>
@@ -270,7 +270,10 @@
 
                     <form id="add-upcoming-event-form">
                         <label for="add-upcoming-title">Event Title</label><br>
-                        <textarea type="text" id="add-upcoming-title" name="add-upcoming-title"></textarea><br>
+                        <textarea type="text" id="add-upcoming-title" name="add-upcoming-title" maxlength="29"></textarea><br>
+
+                        <label for="add-upcoming-subtitle">Event Subtitle</label><br>
+                        <textarea type="text" id="add-upcoming-subtitle" name="add-upcoming-subtitle" maxlength="29"></textarea><br>
                         
                         <label for="add-upcoming-date">Event Date</label><br>
                         <input type="date" id="add-upcoming-date" name="add-upcoming-date"><br>
@@ -317,7 +320,10 @@
                     
                     <form id="edit-upcoming-event-form">
                         <label for="edit-upcoming-title">Event Title</label><br>
-                        <textarea type="text" id="edit-upcoming-title" name="edit-upcoming-title"></textarea><br>
+                        <textarea type="text" id="edit-upcoming-title" name="edit-upcoming-title" maxlength="29"></textarea><br>
+
+                        <label for="edit-upcoming-subtitle">Event Subtitle</label><br>
+                        <textarea type="text" id="edit-upcoming-subtitle" name="edit-upcoming-subtitle" maxlength="29"></textarea><br>
                         
                         <label for="edit-upcoming-date">Event Date</label><br>
                         <input type="date" id="edit-upcoming-date" name="edit-upcoming-date"><br>
@@ -366,7 +372,7 @@
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
                 {{#each newEventsData}}
-                <div class="upcoming-slide" data-slide-number="{{this.num_index}}" data-title="{{this.title}}" data-date="{{this.date}}" data-location="{{this.venue}}" data-type="{{this.event_type}}">
+                <div class="upcoming-slide" data-slide-number="{{this.num_index}}" data-title="{{this.title}}" data-subtitle="{{this.subtitle}}" data-date="{{this.date}}" data-location="{{this.venue}}" data-type="{{this.event_type}}">
                     <img src={{this.poster}} class="upcoming-poster">
                     <img src="../images/1-index/pencil.png" alt="edit icon" class="upcoming-edit-icon">
 

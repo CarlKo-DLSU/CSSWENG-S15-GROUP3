@@ -115,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         newSlide.setAttribute("data-slide-number", upcomingEventsSlider.children.length + 1)
         newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
+        newSlide.setAttribute("data-subtitle", formData.get("add-upcoming-subtitle").replace(/\n/g, '<br>'));
         newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
         newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
         newSlide.setAttribute("data-type", eventType);
@@ -148,6 +149,11 @@ document.addEventListener("DOMContentLoaded", function() {
         previewTitle.classList.add("preview-title");
         previewTitle.innerHTML = formData.get("add-upcoming-title").replace(/\n/g, '<br>');
         previewText.appendChild(previewTitle);
+
+        var previewSubtitle = document.createElement("p");
+        previewSubtitle.classList.add("preview-subtitle");
+        previewSubtitle.innerHTML = formData.get("add-upcoming-subtitle").replace(/\n/g, '<br>');
+        previewText.appendChild(previewSubtitle);
 
         eventPreview.appendChild(previewText);
         newSlide.appendChild(eventPreview);
@@ -236,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
         newSlide.classList.add("upcoming-slide");
         newSlide.setAttribute("data-slide-number", upcomingEventsSlider.children.length + 1)
         newSlide.setAttribute("data-title", formData.get("add-upcoming-title").replace(/\n/g, '<br>'));
+        newSlide.setAttribute("data-subtitle", formData.get("add-upcoming-subtitle").replace(/\n/g, '<br>'));
         newSlide.setAttribute("data-date", formData.get("add-upcoming-date"));
         newSlide.setAttribute("data-location", formData.get("add-upcoming-venue"));
         newSlide.setAttribute("data-type", eventType);
@@ -273,6 +280,11 @@ document.addEventListener("DOMContentLoaded", function() {
         previewTitle.classList.add("preview-title");
         previewTitle.innerHTML = formData.get("add-upcoming-title").replace(/\n/g, '<br>');
         previewText.appendChild(previewTitle);
+
+        var previewSubtitle = document.createElement("p");
+        previewSubtitle.classList.add("preview-subtitle");
+        previewSubtitle.innerHTML = formData.get("add-upcoming-subtitle").replace(/\n/g, '<br>');
+        previewText.appendChild(previewSubtitle);
     
         eventPreview.appendChild(previewText);
         newSlide.appendChild(eventPreview);
@@ -436,8 +448,15 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Title element is missing in the slide!");
             return;
         }
+
+        var subtitleElem = slide.querySelector(".preview-subtitle");
+        if (!subtitleElem) {
+            console.error("Subtitle element is missing in the slide!");
+            return;
+        }
     
         var title = titleElem.innerHTML.replace(/<br\s*\/?>/mg, "\n");
+        var subtitle = subtitleElem.innerHTML.replace(/<br\s*\/?>/mg, "\n");
         var date = slide.getAttribute("data-date");
         var location = slide.getAttribute("data-location");
         var type = slide.getAttribute("data-type");
@@ -461,6 +480,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         // Populate fields with retrieved details
         editForm["edit-upcoming-title"].value = title.replace(/<br\s*\/?>/gi, "\n");
+        editForm["edit-upcoming-subtitle"].value = subtitle.replace(/<br\s*\/?>/gi, "\n");
         editForm["edit-upcoming-description"].value = description;
         // editForm["edit-upcoming-event-type"].value = type;
         // editForm["edit-upcoming-date"].value = date;
@@ -470,11 +490,12 @@ document.addEventListener("DOMContentLoaded", function() {
         // Ensure date is not null or undefined before setting it
         if (date) {
             var parsedDate = new Date(date);
+            parsedDate.setDate(parsedDate.getDate() + 1); // Add one day
             var formattedDate = parsedDate.toISOString().split('T')[0]; // Format to YYYY-MM-DD
             editForm["edit-upcoming-date"].value = formattedDate;
         } else {
             console.warn("Date is missing or invalid!");
-        }
+        }        
 
         // Ensure type is not null or undefined before setting it
         if (type) {
@@ -501,6 +522,27 @@ document.addEventListener("DOMContentLoaded", function() {
                 posterPreview.src = URL.createObjectURL(coverPhotoInput.files[0]);
             }
         };
+
+        // close button
+        var editCloseButton = document.getElementById("close-edit-popup-btn");
+
+        if (!editCloseButton) {
+            console.error("Close edit button not found");
+        } else {
+            console.log("Close edit button found");
+        }
+    
+        if (!editPopup) {
+            console.error("Edit popup not found");
+        } else {
+            console.log("Edit popup found");
+        }
+
+        editCloseButton.addEventListener("click", function() {
+            console.log("Close button clicked");
+            editPopup.style.display = "none";
+            console.log("Popup display set to none");
+        });
     
         // Form submission for EDIT
         editForm.onsubmit = function(event) {
@@ -535,56 +577,48 @@ document.addEventListener("DOMContentLoaded", function() {
                 eventTypeCheckboxes.appendChild(document.createElement("br"));
             }
     
-            slide.setAttribute("data-title", formData.get("edit-upcoming-title").replace(/\n/g, '<br>'));
-            slide.setAttribute("data-date", formData.get("edit-upcoming-date"));
-            slide.setAttribute("data-location", formData.get("edit-upcoming-venue"));
-            slide.setAttribute("data-type", eventType);
-    
-            var previewTitle = slide.querySelector(".preview-title");
-            if (previewTitle) {
-                previewTitle.innerHTML = formData.get("edit-upcoming-title").replace(/\n/g, '<br>');
-            }
-    
-            var previewDate = slide.querySelector(".preview-date");
-            if (previewDate) {
-                previewDate.textContent = new Date(formData.get("edit-upcoming-date")).toLocaleDateString("en-US", options).toUpperCase();
-            }
-    
-            if (posterImageElem && formData.get("edit-upcoming-cover-photo").name) {
-                posterImageElem.src = URL.createObjectURL(formData.get("edit-upcoming-cover-photo"));
-            }
-    
-            if (descriptionElem) {
-                descriptionElem.innerHTML = formData.get("edit-upcoming-description").replace(/\n/g, '<br>');
-            }
-    
-            // if (merchLinkElem) {
-            //     merchLinkElem.setAttribute("onclick", `window.open('${formData.get("edit-upcoming-merch-link")}')`);
-            // }
-    
+            var num_index = slideNumber; // Ensure you have the num_index in your form
+            var title = formData.get("edit-upcoming-title");
+            var subtitle = formData.get("edit-upcoming-subtitle");
+            var date = formData.get("edit-upcoming-date");
+            var venue = formData.get("edit-upcoming-venue");
+            var poster = formData.get("edit-upcoming-cover-photo");
+            var description = formData.get("edit-upcoming-description");
+            var merch_link = formData.get("edit-upcoming-merch-link");
+
+            fetch('/editNewEvent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    num_index: num_index,
+                    title: title,
+                    subtitle: subtitle,
+                    date: date,
+                    venue: venue,
+                    poster: poster, // Handle poster if needed
+                    description: description,
+                    event_type: eventType,
+                    merch_link: merch_link
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Event updated successfully") {
+                    alert("Event updated successfully");
+                    // Optionally refresh the page or update the UI
+                } else {
+                    alert("Error updating event: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error updating event:", error);
+                alert("Error updating event: " + error.message);
+            });
+
             editPopup.style.display = "none";
         };
-
-        // close button
-        var editCloseButton = document.getElementById("close-edit-popup-btn");
-
-        if (!editCloseButton) {
-            console.error("Close edit button not found");
-        } else {
-            console.log("Close edit button found");
-        }
-    
-        if (!editPopup) {
-            console.error("Edit popup not found");
-        } else {
-            console.log("Edit popup found");
-        }
-
-        editCloseButton.addEventListener("click", function() {
-            console.log("Close button clicked");
-            editPopup.style.display = "none";
-            console.log("Popup display set to none");
-        });
 
         return slide;
     }    
@@ -642,6 +676,11 @@ document.addEventListener("DOMContentLoaded", function() {
         eventTitle.classList.add("event-title", "preserve-whitespace");
         eventTitle.textContent = formData.get("edit-upcoming-title");
         eventDetails.appendChild(eventTitle);
+        
+        var eventSubtitle = document.createElement("p");
+        eventSubtitle.classList.add("event-subtitle", "preserve-whitespace");
+        eventSubtitle.textContent = formData.get("edit-upcoming-subtitle");
+        eventDetails.appendChild(eventSubtitle);
     
         var eventDescription = document.createElement("p");
         eventDescription.classList.add("event-description");

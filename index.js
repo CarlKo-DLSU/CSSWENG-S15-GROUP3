@@ -332,6 +332,33 @@ app.delete('/deleteNewEvent', async (req, res) => {
     }
 });
 
+app.post('/editNewEvent', upload.single('poster'), async (req, res) => {
+    const { num_index, title, subtitle, date, description, venue, poster, event_type, merch_link } = req.body;
+
+    try {
+        const event = await NewEvent.findOne({ num_index: num_index });
+
+        if (event) {
+            event.title = title;
+            event.subtitle = subtitle;
+            event.date = date;
+            event.description = description;
+            event.venue = venue;
+            event.poster = poster; 
+            event.event_type = event_type;
+            event.merch_link = merch_link;
+
+            await event.save();
+            res.status(200).send({ message: "Event updated successfully" });
+        } else {
+            res.status(404).send({ message: "Event not found" });
+        }
+    } catch (error) {
+        console.error("Error updating event:", error);
+        res.status(500).send({ message: "Error updating event" });
+    }
+});
+
 app.listen(3000,()=>{
     console.log("Port connected");
 })
