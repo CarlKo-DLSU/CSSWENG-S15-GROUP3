@@ -27,9 +27,11 @@ const newEventSchema = new mongoose.Schema({
     },
     num_index: {
         type: String
-    }
-    ,
+    },
     event_type: {
+        type: String
+    },
+    merch_link: {
         type: String
     }
 })

@@ -398,115 +398,179 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function openEditPopup(slide, slideNumber) {
+        console.log("Opening edit popup for slide number:", slideNumber);
+        
+        if (!editPopup || !editForm) {
+            console.error("Edit popup or form is missing!");
+            return;
+        }
+    
         editPopup.style.display = "block";
         editForm.setAttribute("data-slide-number", slideNumber);
-
-        // retrieve details from slide and popup
-        var title = slide.querySelector(".preview-title").innerHTML.replace(/<br\s*\/?>/mg, "\n");
+    
+        // Check if slide exists
+        if (!slide) {
+            console.error("Slide element is missing!");
+            return;
+        }
+    
+        var titleElem = slide.querySelector(".preview-title");
+        if (!titleElem) {
+            console.error("Title element is missing in the slide!");
+            return;
+        }
+    
+        var title = titleElem.innerHTML.replace(/<br\s*\/?>/mg, "\n");
         var date = slide.getAttribute("data-date");
         var location = slide.getAttribute("data-location");
         var type = slide.getAttribute("data-type");
+    
         var popup = document.getElementById("upcoming-event-popup-" + slideNumber);
-        var description = popup.querySelector(".event-description").innerHTML.replace(/<br\s*\/?>/mg, "\n");
-        var merchLink = popup.querySelector(".merch-presale-btn").getAttribute("onclick").match(/window\.open\(['"](.+?)['"]/);
-
-        // populate fields with retrieved details
+        if (!popup) {
+            console.error("Popup element is missing!");
+            return;
+        }
+    
+        var descriptionElem = popup.querySelector(".event-description");
+        // var merchLinkElem = popup.querySelector(".merch-presale-btn");
+    
+        if (!descriptionElem) {
+            console.error("Description or merch link element is missing in the popup!");
+            return;
+        }
+    
+        var description = descriptionElem.innerHTML.replace(/<br\s*\/?>/mg, "\n");
+        // var merchLink = merchLinkElem.getAttribute("onclick").match(/window\.open\(['"](.+?)['"]/);
+    
+        // Populate fields with retrieved details
         editForm["edit-upcoming-title"].value = title.replace(/<br\s*\/?>/gi, "\n");
         editForm["edit-upcoming-description"].value = description;
-        editForm["edit-upcoming-event-type"].value = type;
-        editForm["edit-upcoming-date"].value = date;
+        // editForm["edit-upcoming-event-type"].value = type;
+        // editForm["edit-upcoming-date"].value = date;
         editForm["edit-upcoming-venue"].value = location;
-        editForm["edit-upcoming-merch-link"].value = merchLink ? merchLink[1] : '';
+        // editForm["edit-upcoming-merch-link"].value = merchLink ? merchLink[1] : '';
 
-        // display current poster in edit popup
-        var posterImage = slide.querySelector(".upcoming-poster").src;
+        // Ensure date is not null or undefined before setting it
+        if (date) {
+            var parsedDate = new Date(date);
+            var formattedDate = parsedDate.toISOString().split('T')[0]; // Format to YYYY-MM-DD
+            editForm["edit-upcoming-date"].value = formattedDate;
+        } else {
+            console.warn("Date is missing or invalid!");
+        }
+
+        // Ensure type is not null or undefined before setting it
+        if (type) {
+            editForm["edit-upcoming-event-type"].value = type;
+        } else {
+            console.warn("Type is missing or invalid!");
+        }
+    
+        // Display current poster in edit popup
+        var posterImageElem = slide.querySelector(".upcoming-poster");
+        if (!posterImageElem) {
+            console.error("Poster image element is missing in the slide!");
+            return;
+        }
+    
+        var posterImage = posterImageElem.src;
         var posterPreview = document.getElementById("edit-upcoming-cover-photo-preview");
         posterPreview.src = posterImage;
-
-        // upload input image file
+    
+        // Upload input image file
         var coverPhotoInput = editForm["edit-upcoming-cover-photo"];
         coverPhotoInput.onchange = function() {
             if (coverPhotoInput.files && coverPhotoInput.files[0]) {
                 posterPreview.src = URL.createObjectURL(coverPhotoInput.files[0]);
             }
         };
-
-        // form submission for EDIT
+    
+        // Form submission for EDIT
         editForm.onsubmit = function(event) {
             event.preventDefault();
-
+    
             var formData = new FormData(editForm);
-
+    
             let eventType = formData.get("edit-upcoming-event-type");
             if (eventType === "new") {
                 eventType = formData.get("edit-new-event-type");
-
-                // Update the select options for add and edit forms
+    
                 var addTypeSelect = document.getElementById("add-upcoming-event-type");
                 var editTypeSelect = document.getElementById("edit-upcoming-event-type");
                 var newOption = new Option(eventType, eventType);
                 addTypeSelect.add(newOption, addTypeSelect.options[addTypeSelect.length - 1]);
                 editTypeSelect.add(newOption.cloneNode(true), editTypeSelect.options[editTypeSelect.length - 1]);
-                
-                // Update the event type options in the filter
+    
                 var eventTypeCheckboxes = document.getElementById("event-type-checkboxes");
-
-                // Create a new checkbox input and label for the new eventType
+    
                 var newCheckbox = document.createElement("input");
                 newCheckbox.type = "checkbox";
-                newCheckbox.id = eventType.toLowerCase(); // Assuming the ID should be lowercase for consistency
+                newCheckbox.id = eventType.toLowerCase();
                 newCheckbox.name = "event-type";
                 newCheckbox.value = eventType;
-
+    
                 var newLabel = document.createElement("label");
-                newLabel.setAttribute("for", eventType.toLowerCase()); // Match the ID for the label
+                newLabel.setAttribute("for", eventType.toLowerCase());
                 newLabel.textContent = eventType;
-
-                // Append the new checkbox and label to the checkboxes container
+    
                 eventTypeCheckboxes.appendChild(newCheckbox);
                 eventTypeCheckboxes.appendChild(newLabel);
-
                 eventTypeCheckboxes.appendChild(document.createElement("br"));
             }
-
-            var firstLineTitle = formData.get("edit-upcoming-title").split('\n')[0]; // Extract first line
+    
             slide.setAttribute("data-title", formData.get("edit-upcoming-title").replace(/\n/g, '<br>'));
             slide.setAttribute("data-date", formData.get("edit-upcoming-date"));
             slide.setAttribute("data-location", formData.get("edit-upcoming-venue"));
             slide.setAttribute("data-type", eventType);
-
-            var eventDate = new Date(formData.get("edit-upcoming-date"));
-            var options = { year: 'numeric', month: 'long', day: 'numeric' };
-            slide.querySelector(".preview-date").textContent = eventDate.toLocaleDateString("en-US", options).toUpperCase();
-            slide.querySelector(".preview-title").innerHTML = formData.get("edit-upcoming-title").replace(/\n/g, '<br>'); // Convert line breaks to <br>
-
-            // Check if a new poster image is provided
-            var newPosterFile = formData.get("edit-upcoming-cover-photo");
-            if (newPosterFile && newPosterFile.size > 0) {
-                var newPosterImage = URL.createObjectURL(newPosterFile);
-                slide.querySelector(".upcoming-poster").src = newPosterImage;
-                popup.querySelector(".upcoming-popup-poster").src = newPosterImage;
+    
+            var previewTitle = slide.querySelector(".preview-title");
+            if (previewTitle) {
+                previewTitle.innerHTML = formData.get("edit-upcoming-title").replace(/\n/g, '<br>');
             }
-
-            popup.querySelector(".event-title").innerHTML = firstLineTitle
-            popup.querySelector(".event-description").innerHTML = formData.get("edit-upcoming-description").replace(/\n/g, '<br>');
-
-            var merchButton = popup.querySelector(".merch-presale-btn");
-            merchButton.onclick = function() {
-                window.open(formData.get("edit-upcoming-merch-link"));
-            };
-
+    
+            var previewDate = slide.querySelector(".preview-date");
+            if (previewDate) {
+                previewDate.textContent = new Date(formData.get("edit-upcoming-date")).toLocaleDateString("en-US", options).toUpperCase();
+            }
+    
+            if (posterImageElem && formData.get("edit-upcoming-cover-photo").name) {
+                posterImageElem.src = URL.createObjectURL(formData.get("edit-upcoming-cover-photo"));
+            }
+    
+            if (descriptionElem) {
+                descriptionElem.innerHTML = formData.get("edit-upcoming-description").replace(/\n/g, '<br>');
+            }
+    
+            // if (merchLinkElem) {
+            //     merchLinkElem.setAttribute("onclick", `window.open('${formData.get("edit-upcoming-merch-link")}')`);
+            // }
+    
             editPopup.style.display = "none";
         };
 
         // close button
         var editCloseButton = document.getElementById("close-edit-popup-btn");
+
+        if (!editCloseButton) {
+            console.error("Close edit button not found");
+        } else {
+            console.log("Close edit button found");
+        }
+    
+        if (!editPopup) {
+            console.error("Edit popup not found");
+        } else {
+            console.log("Edit popup found");
+        }
+
         editCloseButton.addEventListener("click", function() {
+            console.log("Close button clicked");
             editPopup.style.display = "none";
+            console.log("Popup display set to none");
         });
 
         return slide;
-    }
+    }    
     
     // add event listeners for opening and editing popups
     var slider = document.getElementById("upcoming-events-slider");

@@ -40,8 +40,11 @@ app.get("/pastEvents",(req,res)=>{
     res.render("2-events")
 })
 
-app.get('/4-admin-homepage', (req, res) => {
-    res.render('4-admin-homepage');
+app.get('/4-admin-homepage',async (req, res) => {
+    const newEventsData = await NewEvent.find({});
+    console.log(newEventsData);
+    const slideshowData = await slideshow.find({});
+    return res.render('4-admin-homepage', {newEventsData});
 });
 
 //Register and login db
@@ -62,14 +65,14 @@ app.post("/register", async(req,res)=>{
 app.post("/signin", async(req,res)=>{
     try {
         const check = await profiles.findOne({email:req.body.email})
+        const newEventsData = await NewEvent.find({});
 
         if(check.password === req.body.password){
             if(req.body.email === "admin@gmail.com") {
                 console.log("it went here");
-                res.render("4-admin-homepage")
+                return res.render("4-admin-homepage", {newEventsData})
                 console.log("Greetings Admin!")
             } else {
-                const newEventsData = await NewEvent.find({});
                 return res.render("1-index", {newEventsData})
                 console.log("Greetings!")
             }
