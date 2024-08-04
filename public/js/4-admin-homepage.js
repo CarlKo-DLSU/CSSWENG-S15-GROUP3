@@ -372,15 +372,32 @@ document.addEventListener("DOMContentLoaded", function() {
         var confirmDeleteButton = document.getElementById("confirmDeleteButton");
         var cancelDeleteButton = document.getElementById("cancelDeleteButton");
 
-        confirmDeleteButton.onclick = function() {
+        confirmDeleteButton.onclick = async function() {
             var slideNumber = editForm.getAttribute("data-slide-number");
+            console.log(slideNumber);
             var slide = document.querySelector(`.upcoming-slide[data-slide-number='${slideNumber}']`);
             var popup = document.getElementById("upcoming-event-popup-" + slideNumber);
 
             if (slide && popup) {
-                slide.remove();
-                popup.remove();
-                editPopup.style.display = "none";
+                try {
+                    let response = await fetch('/deleteNewEvent', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ num_index: slideNumber })
+                    });
+    
+                    if (response.ok) {
+                        slide.remove();
+                        popup.remove();
+                        editPopup.style.display = "none";
+                    } else {
+                        console.error('Failed to delete the event from the database.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
             confirmationPopup.style.display = "none";
         };

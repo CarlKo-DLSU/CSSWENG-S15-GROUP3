@@ -73,9 +73,11 @@ function closePopup(slideNumber) {
 
 // event listeners on slides to open the respective popup
 var slides = document.querySelectorAll(".upcoming-slide");
-slides.forEach(function(slide, index) {
+slides.forEach(function(slide) {
     slide.addEventListener("click", function() {
-        openPopup(index + 1); // Slide numbers start from 1
+        var slideNumber = slide.getAttribute("data-slide-number");
+        console.log(slideNumber);
+        openPopup(slideNumber);
     });
 });
 

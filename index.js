@@ -304,6 +304,34 @@ app.get('/search', async (req, res) => {
     }
 })
 
+app.delete('/deleteNewEvent', async (req, res) => {
+    const { num_index } = req.body;
+
+    console.log('Delete request received');
+    console.log('num_index:', num_index);
+
+    if (!num_index) {
+        console.error('num_index is missing in the request body');
+        return res.status(400).send('num_index is required');
+    }
+
+    try {
+        console.log('Attempting to delete event with num_index:', num_index);
+        const result = await NewEvent.findOneAndDelete({ num_index: num_index });
+
+        if (result) {
+            console.log('Event deleted successfully:', result);
+            res.status(200).send('Event deleted successfully');
+        } else {
+            console.error('Event not found');
+            res.status(404).send('Event not found');
+        }
+    } catch (error) {
+        console.error('Error deleting the event:', error.message);
+        res.status(500).send('Error deleting the event');
+    }
+});
+
 app.listen(3000,()=>{
     console.log("Port connected");
 })
