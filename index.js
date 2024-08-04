@@ -412,6 +412,52 @@ app.post('/editNewEvent', uploadNewEvent.single('edit-upcoming-cover-photo'), as
     }
 });
 
+app.post('/addNewEvent', uploadNewEvent.single('add-upcoming-cover-photo'), async(req, res) =>{
+    console.log("I'm in addNewEvent")
+
+    const title = req.body['add-upcoming-title']
+    const subtitle = req.body['add-upcoming-subtitle']
+    const date = req.body['add-upcoming-date']
+    const description = req.body['add-upcoming-description']
+    const eventType = req.body['add-upcoming-event-type']
+    const venue = req.body['add-upcoming-venue']
+    const newEventType = req.body['new-event-type']
+    const merchLink = req.body['add-upcoming-merch-link']
+    const coverPhoto = req.file ? '/images/1-index/' + req.file.filename : null;
+
+    const maxNumIndexEvent = await NewEvent.findOne().sort('-num_index').exec();
+    const maxNumIndex = maxNumIndexEvent ? parseInt(maxNumIndexEvent.num_index) : 0;
+    const newNumIndex = maxNumIndex + 1;
+
+    try{
+        const maxNumIndexEvent = await NewEvent.findOne().sort('-num_index').exec();
+        const maxNumIndex = maxNumIndexEvent ? parseInt(maxNumIndexEvent.num_index) : 0;
+        const newNumIndex = maxNumIndex + 1;
+
+        const newEvent = new NewEvent({
+            title: title,
+            subtitle: subtitle,
+            date: date,
+            description: description,
+            venue: venue,
+            poster: coverPhoto,
+            num_index: newNumIndex,
+            eventType: eventType,
+            merch_link: merchLink
+        })
+
+
+        console.log(newEvent)
+        await newEvent.save();
+
+        const newEventsData = await NewEvent.find({});
+        return res.render('4-admin-homepage', {newEventsData});
+    } catch(error) {
+        console.error("Error adding event:", error)
+        res.status(500).send({ message: "Error updating event: " + error.message });
+    }
+})
+
 app.listen(3000,()=>{
     console.log("Port connected");
 })
