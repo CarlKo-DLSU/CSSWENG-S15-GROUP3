@@ -44,7 +44,7 @@ app.get('/4-admin-homepage',async (req, res) => {
     const newEventsData = await NewEvent.find({});
     console.log(newEventsData);
     const slideshowData = await slideshow.find({});
-    return res.render('4-admin-homepage', {newEventsData});
+    return res.render('4-admin-homepage', {newEventsData, slideshowData});
 });
 
 //Register and login db
@@ -71,7 +71,8 @@ app.post("/signin", async(req,res)=>{
         if(check.password === req.body.password){
             if(req.body.email === "admin@gmail.com") {
                 console.log("it went here");
-                return res.render("4-admin-homepage", {newEventsData})
+                const slideshowData = await slideshow.find({});
+                return res.render('4-admin-homepage', {newEventsData, slideshowData});
                 console.log("Greetings Admin!")
             } else {
                 const slideshowData = await slideshow.find({});
@@ -455,7 +456,8 @@ app.post('/addNewEvent', uploadNewEvent.single('add-upcoming-cover-photo'), asyn
         await newEvent.save();
 
         const newEventsData = await NewEvent.find({});
-        return res.render('4-admin-homepage', {newEventsData});
+        const slideshowData = await slideshow.find({});
+        return res.render('4-admin-homepage', {newEventsData, slideshowData});
     } catch(error) {
         console.error("Error adding event:", error)
         res.status(500).send({ message: "Error updating event: " + error.message });

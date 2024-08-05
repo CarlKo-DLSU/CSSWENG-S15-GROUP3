@@ -111,27 +111,23 @@
                     Edit Event Slideshow
                 </button>
             </div>
-            <div id="slides-container">
-                <div class="red-bar top-bar"></div>
-                <div class="slides">
-                    <img src="../images/1-index/slideshow-eras.png">
+            <div id="past-events">
+                <div id="slides-container">
+                    {{#each slideshowData}}
+                    <div class="slides">
+                        <img src={{this.slideshowImg}}>
+                    </div>
+                    {{/each}}
+
+                    <div class="red-bar bottom-bar"></div>
                 </div>
-    
-                <div class="slides">
-                    <img src="../images/1-index/slideshow-bewitched.png">
+            
+                <div id="dots">
+                    {{#each slideshowData}}
+                    <span class="dot"></span>
+                    {{/each}}
                 </div>
 
-                <div class="slides">
-                    <img src="../images/1-index/slideshow-genshin.png">
-                </div>
-
-                <div class="red-bar bottom-bar"></div>
-            </div>
-        
-            <div id="dots">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
             </div>
 
             <!--------------------EDIT EVENT EVENT POPUP-------------------->
