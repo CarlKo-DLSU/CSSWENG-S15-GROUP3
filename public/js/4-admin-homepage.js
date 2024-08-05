@@ -105,6 +105,19 @@ document.addEventListener("DOMContentLoaded", function() {
         //resetAddEventForm();
     });
 
+    var previewHomepage = document.getElementById("add-upcoming-preview-homepage-btn");
+    var previewPopup = document.getElementById("preview-changes-popup");
+
+    previewHomepage.addEventListener("click", function() {
+        previewPopup.style.display = "block";
+    });
+
+    var previewPopupBtn = document.getElementById("close-slide-popup-btn-preview");
+
+    previewPopupBtn.addEventListener("click", function() {
+        previewPopup.style.display = "none";
+    });
+
     // show/hide new event type input in add form
     document.getElementById("add-upcoming-event-type").addEventListener("change", function() {
         if (this.value === "new") {
