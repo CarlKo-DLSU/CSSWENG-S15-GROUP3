@@ -7,26 +7,45 @@ document.addEventListener("DOMContentLoaded", function() {
     var closeSlideButton = document.getElementById("close-slide-popup-btn");
     const trashIcons = document.querySelectorAll('.trash-icon');
 
+    const publishButton = document.getElementById('publish-slideshow-button');
+    let itemsToDelete = [];
+
     trashIcons.forEach(icon => {
         icon.addEventListener('click', function() {
             const parentContainer = this.closest('#edit-slide-image-container');
             const documentId = parentContainer.getAttribute('data-id');
 
             if (documentId) {
-                fetch(`/delete-slide/${documentId}`, {
-                    method: 'DELETE'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        parentContainer.remove();
-                    } else {
-                        console.error('Failed to delete document');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+                // Add the document ID to the itemsToDelete array
+                itemsToDelete.push(documentId);
+
+                // Hide the parent container
+                parentContainer.style.display = 'none';
             }
         });
+    });
+
+    publishButton.addEventListener('click', () => {
+        if (itemsToDelete.length > 0) {
+            fetch('/delete-slides', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ids: itemsToDelete })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/4-admin-homepage';
+                } else {
+                    console.error('Failed to delete documents');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            window.location.href = '/4-admin-homepage';
+        }
     });
 
     // close "add upcoming event" popup and reset form

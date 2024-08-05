@@ -465,15 +465,19 @@ app.post('/addNewEvent', uploadNewEvent.single('add-upcoming-cover-photo'), asyn
     }
 })
 
-app.delete('/delete-slide/:id', async (req, res) => {
+app.post('/delete-slides', async (req, res) => {
     try {
-        const id = req.params.id;
-        await slideshow.findByIdAndDelete(id);
+        const ids = req.body.ids;
+        await slideshow.deleteMany({ _id: { $in: ids } });
         res.json({ success: true });
     } catch (error) {
-        console.error('Error deleting document:', error);
+        console.error('Error deleting documents:', error);
         res.status(500).json({ success: false });
     }
+
+    const newEventsData = await NewEvent.find({});
+    const slideshowData = await slideshow.find({});
+    return res.render('4-admin-homepage', {newEventsData, slideshowData});
 });
 
 app.listen(3000,()=>{
