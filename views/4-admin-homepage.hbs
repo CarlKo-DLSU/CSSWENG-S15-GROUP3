@@ -140,13 +140,13 @@
 
                     <form id="add-upcoming-event-form">
                         
-                        <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Event Cover Photo</label>
+                        <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Event Cover Photos</label>
 
+                        {{#each slideshowData}}
                         <div id="edit-slide-image-container">
                             
-                            <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Slide1</label>
                             <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
-                            <div id="add-upcoming-cover-photo-img1">
+                            <div id="add-upcoming-cover-photo-img" style="background-image: url({{this.slideshowImg}});">
                                 
                                 <div class="icon-images">
                                     <img id="trash-icon" src="../images/1-index/trash-icon.png">
@@ -154,30 +154,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div id="edit-slide-image-container">
-                            <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Slide2</label>
-                            <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
-                            <div id="add-upcoming-cover-photo-img2">
-                                
-                                <div class="icon-images">
-                                    <img id="trash-icon" src="../images/1-index/trash-icon.png">
-                                    <img id="edit-image-icon" src="../images/1-index/edit-image-icon.png">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="edit-slide-image-container">
-                            <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Slide3</label>
-                            <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
-                            <div id="add-upcoming-cover-photo-img3">
-                                
-                                <div class="icon-images">
-                                    <img id="trash-icon" src="../images/1-index/trash-icon.png">
-                                    <img id="edit-image-icon" src="../images/1-index/edit-image-icon.png">
-                                </div>
-                            </div>
-                        </div>
+                        {{/each}}
 
                         <div id="edit-slide-image-container">
                             <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Add New Slide</label>
