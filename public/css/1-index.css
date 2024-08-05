@@ -1035,6 +1035,8 @@ input[type="submit"] {
 
 .upcoming-poster {
     height: 400px;
+    width: 300px;
+    object-fit:scale-down;
 }
 
 .event-preview {
