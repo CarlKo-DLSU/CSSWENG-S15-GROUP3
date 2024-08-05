@@ -183,7 +183,7 @@
             <!--------------------UPCOMING EVENTS SLIDER-------------------->
             <div id="upcoming-events-slider">
                 {{#each newEventsData}}
-                <div class="upcoming-slide" data-title="{{this.title}}" data-date="{{this.date}}" data-location="{{this.venue}}" data-type="{{this.event_type}}">
+                <div class="upcoming-slide" data-slide-number="{{this.num_index}}" data-date="{{this.date}}" data-location="{{this.venue}}" data-type="{{this.event_type}}">
                     <img src={{this.poster}} class="upcoming-poster">
 
                     <div class="event-preview">
