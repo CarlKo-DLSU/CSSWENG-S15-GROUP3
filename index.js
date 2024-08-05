@@ -33,7 +33,7 @@ app.get("/",async (req,res)=>{
     const newEventsData = await NewEvent.find({});
     console.log(newEventsData);
     const slideshowData = await slideshow.find({});
-    return res.render("1-index", {newEventsData}) // add in {slideshowData} when schema is populated, else error
+    return res.render("1-index", {newEventsData, slideshowData}) // add in {slideshowData} when schema is populated, else error
 })
 
 app.get("/pastEvents",(req,res)=>{
@@ -59,7 +59,8 @@ app.post("/register", async(req,res)=>{
 
     await profiles.insertMany([profile])
     const newEventsData = await NewEvent.find({});
-    return res.render("1-index", {newEventsData})
+    const slideshowData = await slideshow.find({});
+    return res.render("1-index", {newEventsData, slideshowData})
 })
 
 app.post("/signin", async(req,res)=>{
@@ -73,13 +74,15 @@ app.post("/signin", async(req,res)=>{
                 return res.render("4-admin-homepage", {newEventsData})
                 console.log("Greetings Admin!")
             } else {
-                return res.render("1-index", {newEventsData})
+                const slideshowData = await slideshow.find({});
+                return res.render("1-index", {newEventsData, slideshowData})
                 console.log("Greetings!")
             }
         }
         else {
             const newEventsData = await NewEvent.find({});
-            return res.render("1-index", {newEventsData})
+            const slideshowData = await slideshow.find({});
+            return res.render("1-index", {newEventsData, slideshowData})
         }
     } catch {
         res.send("Wrong Details")
@@ -294,7 +297,8 @@ app.post('/updateAboutUs', async (req, res) => {
 app.get('/search', async (req, res) => {
     if (!req.query.unisearch) {
         const newEventsData = await NewEvent.find({});
-        return res.render("1-index", {newEventsData})
+        const slideshowData = await slideshow.find({});
+        return res.render("1-index", {newEventsData, slideshowData})
     }
     else {
     const existPastEvent = await PastEvent.find({title: {$regex: req.query.unisearch, $options: "i"}}).collation({ locale: "en" }).sort({ title: 1 })

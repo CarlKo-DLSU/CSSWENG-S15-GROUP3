@@ -112,26 +112,19 @@
         <!--------------------PAST EVENTS-------------------->
         <div id="past-events">
             <div id="slides-container">
-                
+                {{#each slideshowData}}
                 <div class="slides">
-                    <img src="/images/1-index/slideshow-eras.png">
+                    <img src={{this.slideshowImg}}>
                 </div>
-    
-                <div class="slides">
-                    <img src="/images/1-index/slideshow-bewitched.png">
-                </div>
-
-                <div class="slides">
-                    <img src="/images/1-index/slideshow-genshin.png">
-                </div>
+                {{/each}}
 
                 <div class="red-bar bottom-bar"></div>
             </div>
         
             <div id="dots">
+                {{#each slideshowData}}
                 <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+                {{/each}}
             </div>
 
         </div>
