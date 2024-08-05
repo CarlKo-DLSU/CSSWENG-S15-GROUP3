@@ -5,6 +5,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var editSlidePopup = document.getElementById("edit-slide-popup");
     var closeSlideButton = document.getElementById("close-slide-popup-btn");
+    const trashIcons = document.querySelectorAll('.trash-icon');
+
+    trashIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            // Find the parent container and remove it
+            const parentContainer = this.closest('#edit-slide-image-container');
+            if (parentContainer) {
+                parentContainer.remove();
+            }
+        });
+    });
 
     // close "add upcoming event" popup and reset form
     closeButton.addEventListener("click", function() {
