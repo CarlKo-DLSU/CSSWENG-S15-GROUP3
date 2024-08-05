@@ -6,9 +6,11 @@ document.addEventListener("DOMContentLoaded", function() {
     var editSlidePopup = document.getElementById("edit-slide-popup");
     var closeSlideButton = document.getElementById("close-slide-popup-btn");
     const trashIcons = document.querySelectorAll('.trash-icon');
+    const editIcons = document.querySelectorAll('.edit-image-icon');
 
     const publishButton = document.getElementById('publish-slideshow-button');
     let itemsToDelete = [];
+    let itemsToEdit = [];
 
     trashIcons.forEach(icon => {
         icon.addEventListener('click', function() {
@@ -16,36 +18,64 @@ document.addEventListener("DOMContentLoaded", function() {
             const documentId = parentContainer.getAttribute('data-id');
 
             if (documentId) {
-                // Add the document ID to the itemsToDelete array
                 itemsToDelete.push(documentId);
-
-                // Hide the parent container
                 parentContainer.style.display = 'none';
             }
         });
     });
 
-    publishButton.addEventListener('click', () => {
-        if (itemsToDelete.length > 0) {
-            fetch('/delete-slides', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ ids: itemsToDelete })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = '/4-admin-homepage';
-                } else {
-                    console.error('Failed to delete documents');
+    editIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const parentContainer = this.closest('#edit-slide-image-container');
+            const fileInput = parentContainer.querySelector('.edit-image-input');
+            fileInput.click();
+
+            fileInput.addEventListener('change', function(event) {
+                const documentId = parentContainer.getAttribute('data-id');
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        parentContainer.querySelector('#add-upcoming-cover-photo-i').style.backgroundImage = `url(${e.target.result})`;
+                    };
+                    reader.readAsDataURL(file);
+                    
+                    const existingEdit = itemsToEdit.find(item => item.id === documentId);
+                    if (existingEdit) {
+                        existingEdit.file = file;
+                    } else {
+                        itemsToEdit.push({ id: documentId, file });
+                    }
                 }
-            })
-            .catch(error => console.error('Error:', error));
-        } else {
-            window.location.href = '/4-admin-homepage';
-        }
+            });
+        });
+    });
+
+    publishButton.addEventListener('click', () => {
+        const formData = new FormData();
+
+        itemsToDelete.forEach(id => {
+            formData.append('deleteIds[]', id);
+        });
+
+        itemsToEdit.forEach(item => {
+            formData.append('editIds[]', item.id);
+            formData.append('files[]', item.file);
+        });
+
+        fetch('/publish-changes', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = '/4-admin-homepage';
+            } else {
+                console.error('Failed to publish changes');
+            }
+        })
+        .catch(error => console.error('Error:', error));
     });
 
     // close "add upcoming event" popup and reset form

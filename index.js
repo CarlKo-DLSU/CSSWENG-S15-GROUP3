@@ -32,7 +32,6 @@ hbs.registerHelper('nl2br', function(text) {
 
 app.get("/",async (req,res)=>{
     const newEventsData = await NewEvent.find({});
-    console.log(newEventsData);
     const slideshowData = await slideshow.find({});
     return res.render("1-index", {newEventsData, slideshowData}) // add in {slideshowData} when schema is populated, else error
 })
@@ -43,7 +42,6 @@ app.get("/pastEvents",(req,res)=>{
 
 app.get('/4-admin-homepage',async (req, res) => {
     const newEventsData = await NewEvent.find({});
-    console.log(newEventsData);
     const slideshowData = await slideshow.find({});
     return res.render('4-admin-homepage', {newEventsData, slideshowData});
 });
@@ -465,19 +463,32 @@ app.post('/addNewEvent', uploadNewEvent.single('add-upcoming-cover-photo'), asyn
     }
 })
 
-app.post('/delete-slides', async (req, res) => {
+app.post('/publish-changes', uploadNewEvent.array('files[]'), async (req, res) => {
     try {
-        const ids = req.body.ids;
-        await slideshow.deleteMany({ _id: { $in: ids } });
+        const deleteIds = req.body['deleteIds'];
+        const editIds = req.body['editIds'];
+        const files = req.files;
+
+        if (deleteIds) {
+            await slideshow.deleteMany({ _id: { $in: deleteIds } });
+        }
+
+        if (editIds && files) {
+            for (let i = 0; i < editIds.length; i++) {
+                const id = editIds[i];
+                const file = files[i];
+
+                const fileUrl = `/images/1-index/${file.filename}`;
+
+                await slideshow.findByIdAndUpdate(id, { slideshowImg: fileUrl });
+            }
+        }
+
         res.json({ success: true });
     } catch (error) {
-        console.error('Error deleting documents:', error);
+        console.error('Error publishing changes:', error);
         res.status(500).json({ success: false });
     }
-
-    const newEventsData = await NewEvent.find({});
-    const slideshowData = await slideshow.find({});
-    return res.render('4-admin-homepage', {newEventsData, slideshowData});
 });
 
 app.listen(3000,()=>{

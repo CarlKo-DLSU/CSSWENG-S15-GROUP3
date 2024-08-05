@@ -144,13 +144,12 @@
 
                         {{#each slideshowData}}
                         <div id="edit-slide-image-container" data-id="{{this._id}}">
-                            
-                            <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
+                            <input type="file" class="edit-image-input" style="display: none;">
                             <div id="add-upcoming-cover-photo-i" style="background-image: url({{this.slideshowImg}});">
                                 
                                 <div class="icon-images">
                                     <img class="trash-icon" src="../images/1-index/trash-icon.png">
-                                    <img id="edit-image-icon" src="../images/1-index/edit-image-icon.png">
+                                    <img class="edit-image-icon" src="../images/1-index/edit-image-icon.png">
                                 </div>
                             </div>
                         </div>
