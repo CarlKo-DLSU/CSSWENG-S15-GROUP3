@@ -726,7 +726,7 @@ button[type="submit"]:hover {
 }
 
 /* File input for Add Upcoming Event */
-#add-upcoming-cover-photo {
+#add-upcoming-cover-photo, #add-upcoming-cover-photo-2 {
     display: none; /* Hide the actual file input */
 }
 
@@ -741,7 +741,7 @@ button[type="submit"]:hover {
 
 /*BRUTE FORCE WAY WAKDJKSAJDK*/
 /* Div acting as image button */
-#add-upcoming-cover-photo-img {
+#add-upcoming-cover-photo-img, #add-upcoming-cover-photo-img-2 {
     width: auto;
     max-width: 100%;
     height: 212px; 

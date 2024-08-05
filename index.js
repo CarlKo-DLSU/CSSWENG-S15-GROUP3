@@ -427,7 +427,7 @@ app.post('/addNewEvent', uploadNewEvent.single('add-upcoming-cover-photo'), asyn
     const venue = req.body['add-upcoming-venue']
     const newEventType = req.body['new-event-type']
     const merchLink = req.body['add-upcoming-merch-link']
-    const coverPhoto = req.file ? '/images/1-index/' + req.file.filename : null;
+    const coverPhoto = '/images/1-index/' + req.file.filename;
 
     const maxNumIndexEvent = await NewEvent.findOne().sort('-num_index').exec();
     const maxNumIndex = maxNumIndexEvent ? parseInt(maxNumIndexEvent.num_index) : 0;

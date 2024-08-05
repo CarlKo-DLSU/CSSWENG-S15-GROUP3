@@ -127,6 +127,19 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('add-upcoming-cover-photo').click();
     });
 
+    document.getElementById('add-upcoming-cover-photo-img-2').addEventListener('click', function() {
+        document.getElementById('add-upcoming-cover-photo-2').click();
+    });
+
+    document.getElementById('add-upcoming-cover-photo-2').addEventListener('change', function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('add-upcoming-cover-photo-img-2').style.backgroundImage = 'url(' + e.target.result + ')';
+        };
+        reader.readAsDataURL(file);
+    }); 
+
     // change cover photo image to file input
     document.getElementById('add-upcoming-cover-photo').addEventListener('change', function() {
         var file = this.files[0];
