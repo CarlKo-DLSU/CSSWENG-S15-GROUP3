@@ -878,7 +878,7 @@ input[type="file"] {
 }
 
 /* Preview buttons */
-.add-upcoming-preview-buttons {
+.add-upcoming-preview-buttons, #add-upcoming-preview-homepage-btn-edit {
     display: flex;
     justify-content: space-around;
     margin-top: 15px;
@@ -886,7 +886,7 @@ input[type="file"] {
     margin-bottom: 5px;
 }
 
-.add-upcoming-preview-buttons button {
+#add-upcoming-preview-homepage-btn-edit, .add-upcoming-preview-buttons button {
     padding: 10px 20px;
     font-family: "Poppins", sans-serif;
     font-size: 14px;
@@ -900,7 +900,7 @@ input[type="file"] {
     background-color: #4A4A4A;
 }
 
-#add-upcoming-preview-homepage-btn, #edit-upcoming-delete-event-btn-btn {
+#add-upcoming-preview-homepage-btn, #edit-upcoming-delete-event-btn-btn, #add-upcoming-preview-homepage-btn-edit {
     background-color: #EA0029;
 }
 

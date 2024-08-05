@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //resetAddEventForm();
     });
 
-    var previewHomepage = document.getElementById("add-upcoming-preview-homepage-btn");
+    var previewHomepage = document.getElementById("add-upcoming-preview-homepage-btn-edit");
     var previewPopup = document.getElementById("preview-changes-popup");
 
     previewHomepage.addEventListener("click", function() {
@@ -295,6 +295,46 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
+
+    // EDITING INNER HTML
+    document.getElementById('add-upcoming-preview-homepage-btn-edit').addEventListener("click", function(){
+        console.log("Preview clicked!");
+        const fileInput = document.getElementById('add-upcoming-cover-photo'); // gets the photo uploaded by the user
+        const file = fileInput.files[0];
+        if (file) {
+            console.log("Located file!");
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Create new slide
+                const newSlide = document.createElement('div'); // create new div for the preview
+                newSlide.classList.add('slides'); // adds class to the div
+                const newImage = document.createElement('img');
+                newImage.src = e.target.result;
+                newSlide.appendChild(newImage);
+
+                // Prepend the new slide to the slides container
+                const slidesContainer = document.getElementById('slides-container');
+                slidesContainer.insertBefore(newSlide, slidesContainer.firstChild);
+                console.log("Added test image to slides container")
+
+                // Create new dot
+                const newDot = document.createElement('span');
+                newDot.classList.add('dot');
+
+                // Prepend the new dot to the dots container
+                const dotsContainer = document.getElementById('dots');
+                dotsContainer.insertBefore(newDot, dotsContainer.firstChild);
+                console.log("Added dot")
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("Please select an image file first.");
+        }
+    });
+
+    function resetPreview() {
+
+    }
 
     function resetAddEventForm() {
         document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + '../images/1-index/home-upload.png' + ')';
@@ -798,7 +838,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // add form's preview homepage button
-    document.getElementById("add-upcoming-preview-homepage-btn").addEventListener("click", function() {
+    document.getElementById('add-upcoming-preview-homepage-btn').addEventListener("click", function() {
         var formData = new FormData(document.getElementById("add-upcoming-event-form"));
         var upcomingEventsSlider = document.getElementById("upcoming-events-slider");
         
@@ -825,6 +865,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("save-upcoming-preview").addEventListener("click", function() {
             document.getElementById("upcoming-preview-buttons").style.display = "none";
         });
+
     });
     
 });

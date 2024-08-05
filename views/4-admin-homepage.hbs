@@ -163,7 +163,7 @@
                         </div>
 
                         <div class="add-upcoming-preview-buttons">
-                            <button type="button" id="add-upcoming-preview-homepage-btn">Preview homepage</button>
+                            <button type="button" id="add-upcoming-preview-homepage-btn-edit">Preview homepage</button>
                         </div>
 
                         <input id="publish-slideshow-button" type="submit" value="Publish slideshow">
@@ -176,28 +176,20 @@
 
                 <button id="close-slide-popup-btn-preview" class="close-popup-btn">&lt;</button>
 
-                <!-- This should eventually be replaced with handlebars to signify that it is reading from the db? -->
-                    <div id="slides-container">
-                    <div class="red-bar top-bar"></div>
+                <div id="slides-container">
+                    {{#each slideshowData}}
                     <div class="slides">
-                        <img src="../images/1-index/slideshow-eras.png">
+                        <img src={{this.slideshowImg}}>
                     </div>
-        
-                    <div class="slides">
-                        <img src="../images/1-index/slideshow-bewitched.png">
-                    </div>
-
-                    <div class="slides">
-                        <img src="../images/1-index/slideshow-genshin.png">
-                    </div>
+                    {{/each}}
 
                     <div class="red-bar bottom-bar"></div>
                 </div>
         
                 <div id="dots">
+                    {{#each slideshowData}}
                     <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+                    {{/each}}
                 </div>
 
             </div>
