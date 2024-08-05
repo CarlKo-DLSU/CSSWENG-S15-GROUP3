@@ -9,10 +9,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
     trashIcons.forEach(icon => {
         icon.addEventListener('click', function() {
-            // Find the parent container and remove it
             const parentContainer = this.closest('#edit-slide-image-container');
-            if (parentContainer) {
-                parentContainer.remove();
+            const documentId = parentContainer.getAttribute('data-id');
+
+            if (documentId) {
+                fetch(`/delete-slide/${documentId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        parentContainer.remove();
+                    } else {
+                        console.error('Failed to delete document');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
             }
         });
     });

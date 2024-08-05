@@ -143,7 +143,7 @@
                         <label for="add-upcoming-cover-photo" id="add-upcoming-cover-photo-label">Event Cover Photos</label>
 
                         {{#each slideshowData}}
-                        <div id="edit-slide-image-container">
+                        <div id="edit-slide-image-container" data-id="{{this._id}}">
                             
                             <input type="file" id="add-upcoming-cover-photo" name="add-upcoming-cover-photo">
                             <div id="add-upcoming-cover-photo-i" style="background-image: url({{this.slideshowImg}});">

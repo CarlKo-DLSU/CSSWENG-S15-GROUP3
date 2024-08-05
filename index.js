@@ -14,6 +14,7 @@ const UpcomingEvent = require("./models/UpcomingEvent")
 const NewEvent = require("./models/NewEvent")
 const PastEvent = require("./models/PastEvent")
 const slideshow = require("./models/EventSlideshow")
+const { appendFile } = require("fs/promises")
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')));
@@ -463,6 +464,17 @@ app.post('/addNewEvent', uploadNewEvent.single('add-upcoming-cover-photo'), asyn
         res.status(500).send({ message: "Error updating event: " + error.message });
     }
 })
+
+app.delete('/delete-slide/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        await slideshow.findByIdAndDelete(id);
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error deleting document:', error);
+        res.status(500).json({ success: false });
+    }
+});
 
 app.listen(3000,()=>{
     console.log("Port connected");
