@@ -32,10 +32,11 @@
                     <a href="/">Home</a>
                     <a href="3-about.hbs">About Us</a>
                     <a href="2-events.hbs">Events</a>
-                    <a href="#">Bookings</a>
-                    <a href="#">Merchandise</a>
-                    <a href="#" id="sign-in-link">Sign In</a>
-                    <a href="/">Log Out</a>
+                    {{#if isLoggedIn}}
+                        <a href="/" id="logout-link">Log Out</a>
+                    {{else}}
+                        <a href="#" id="sign-in-link">Sign In</a>
+                    {{/if}}
                 </div>
             </div>
         </div>

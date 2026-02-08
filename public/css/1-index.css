@@ -2226,16 +2226,16 @@ a:link, a:visited {
     line-height: 10px;
 }
 .previewEventAlbum {
-    background-color: #4A4A4A;
+    background-color: #EA0029;
     font-family: "Poppins", sans-serif;
     font-size: 12px;
     font-weight: 700;
     color: white;
 }
 .publishEventAlbum {
-    background-color: #EA0029;
-    font-family: "Poppins", sans-serif;
-    font-size: 12px;
+    background-color: #4A4A4A !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 12px !important;
     font-weight: 700;
     color: white;
 }

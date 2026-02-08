@@ -77,4 +77,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Handle delete past event button
+    const deleteButton = document.getElementById('deletePastEvent');
+    if (deleteButton) {
+        deleteButton.addEventListener('click', async () => {
+            const eventId = document.querySelector('input[name="id"]').value;
+            
+            if (confirm('Are you sure you want to delete this past event? This action cannot be undone.')) {
+                try {
+                    const response = await fetch('/deletePastEvent', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ id: eventId })
+                    });
+
+                    if (response.ok) {
+                        alert('Past event deleted successfully.');
+                        window.location.href = '5-admin-events.hbs';
+                    } else {
+                        const errorMessage = await response.text();
+                        alert('Error deleting past event: ' + errorMessage);
+                    }
+                } catch (error) {
+                    console.error('Error deleting past event:', error);
+                    alert('Error deleting past event. Please try again.');
+                }
+            }
+        });
+    }
 });

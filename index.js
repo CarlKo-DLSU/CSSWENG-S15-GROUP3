@@ -15,6 +15,7 @@ const NewEvent = require("./models/NewEvent")
 const PastEvent = require("./models/PastEvent")
 const slideshow = require("./models/EventSlideshow")
 const { appendFile } = require("fs/promises")
+const session = require('express-session');
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,6 +26,13 @@ app.set("view engine","hbs")
 app.set("views", __dirname + "/views")
 app.use(bodyParser.json());
 
+app.use(session({
+    secret: 'your-secret-key-here', // Change this to a secure random string
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // Set to true if using HTTPS
+}));
+
 hbs.registerHelper('nl2br', function(text) {
     return text.replace(/\n/g, '<br>');
 });
@@ -33,7 +41,8 @@ hbs.registerHelper('nl2br', function(text) {
 app.get("/",async (req,res)=>{
     const newEventsData = await NewEvent.find({});
     const slideshowData = await slideshow.find({});
-    return res.render("1-index", {newEventsData, slideshowData}) // add in {slideshowData} when schema is populated, else error
+    const isLoggedIn = req.session.isLoggedIn || false;
+    return res.render("1-index", {newEventsData, slideshowData, isLoggedIn})
 })
 
 app.get("/pastEvents",(req,res)=>{
@@ -43,7 +52,8 @@ app.get("/pastEvents",(req,res)=>{
 app.get('/4-admin-homepage',async (req, res) => {
     const newEventsData = await NewEvent.find({});
     const slideshowData = await slideshow.find({});
-    return res.render('4-admin-homepage', {newEventsData, slideshowData});
+    const isLoggedIn = req.session.isLoggedIn || false;
+    return res.render('4-admin-homepage', {newEventsData, slideshowData, isLoggedIn});
 });
 
 //Register and login db
@@ -67,27 +77,33 @@ app.post("/signin", async(req,res)=>{
         const check = await profiles.findOne({email:req.body.email})
         const newEventsData = await NewEvent.find({});
 
-        if(check.password === req.body.password){
+        if(check && check.password === req.body.password){
+            req.session.isLoggedIn = true; // Add this
+            req.session.userEmail = req.body.email; // Add this
+            
             if(req.body.email === "admin@gmail.com") {
                 console.log("it went here");
                 const slideshowData = await slideshow.find({});
-                return res.render('4-admin-homepage', {newEventsData, slideshowData});
-                console.log("Greetings Admin!")
+                return res.render('4-admin-homepage', {newEventsData, slideshowData, isLoggedIn: true});
             } else {
                 const slideshowData = await slideshow.find({});
-                return res.render("1-index", {newEventsData, slideshowData})
-                console.log("Greetings!")
+                return res.render("1-index", {newEventsData, slideshowData, isLoggedIn: true})
             }
         }
         else {
             const newEventsData = await NewEvent.find({});
             const slideshowData = await slideshow.find({});
-            return res.render("1-index", {newEventsData, slideshowData})
+            return res.render("1-index", {newEventsData, slideshowData, isLoggedIn: false})
         }
     } catch {
         res.send("Wrong Details")
     }
 })
+
+app.post("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+});
 
 //UPLOAD FOR PAST EVENT
 const storagePastEvent = multer.diskStorage({
@@ -183,6 +199,34 @@ app.post("/editPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 
     } catch (error) {
         console.error("Error updating event:", error);
         res.status(500).send("Error updating event.");
+    }
+});
+
+app.delete('/deletePastEvent', async (req, res) => {
+    const { id } = req.body;
+
+    console.log('Delete past event request received');
+    console.log('id:', id);
+
+    if (!id) {
+        console.error('id is missing in the request body');
+        return res.status(400).send('id is required');
+    }
+
+    try {
+        console.log('Attempting to delete past event with id:', id);
+        const result = await PastEvent.findByIdAndDelete(id);
+
+        if (result) {
+            console.log('Past event deleted successfully:', result);
+            res.status(200).send('Past event deleted successfully');
+        } else {
+            console.error('Past event not found');
+            res.status(404).send('Past event not found');
+        }
+    } catch (error) {
+        console.error('Error deleting the past event:', error.message);
+        res.status(500).send('Error deleting the past event');
     }
 });
 

@@ -81,3 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+const cancelButton = document.getElementById('cancelAddEvent');
+if (cancelButton) {
+    cancelButton.addEventListener('click', () => {
+        window.location.href = '5-admin-events.hbs';
+    });
+}
