@@ -35,7 +35,9 @@
                         <a href="6-admin-about.hbs">About Us</a>
                         <a href="5-admin-events.hbs">Events</a>
                         {{#if isLoggedIn}}
-                            <a href="/" id="logout-link">Log Out</a>
+                            <form action="/logout" method="post" style="display: inline;">
+                                <button type="submit" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer; padding: 0; text-decoration: underline;">Log Out</button>
+                            </form>
                         {{else}}
                             <a href="#" id="sign-in-link">Sign In</a>
                         {{/if}}
