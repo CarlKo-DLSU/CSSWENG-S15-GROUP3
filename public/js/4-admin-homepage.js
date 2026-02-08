@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const publishButton = document.getElementById('publish-slideshow-button');
     let itemsToDelete = [];
     let itemsToEdit = [];
+    let itemsToAdd = [];
 
     trashIcons.forEach(icon => {
         icon.addEventListener('click', function() {
@@ -51,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    publishButton.addEventListener('click', () => {
+    publishButton.addEventListener('click', (e) => {
+        e.preventDefault();
         const formData = new FormData();
 
         itemsToDelete.forEach(id => {
@@ -61,6 +63,10 @@ document.addEventListener("DOMContentLoaded", function() {
         itemsToEdit.forEach(item => {
             formData.append('editIds[]', item.id);
             formData.append('files[]', item.file);
+        });
+
+        itemsToAdd.forEach(file => {
+            formData.append('newFiles[]', file);
         });
 
         fetch('/publish-changes', {
@@ -88,6 +94,13 @@ document.addEventListener("DOMContentLoaded", function() {
     
     closeSlideButton.addEventListener("click", function() {
         editSlidePopup.style.display = "none";
+        // Reset arrays when closing
+        itemsToAdd = [];
+        itemsToDelete = [];
+        itemsToEdit = [];
+        // Reset the file input
+        document.getElementById('add-upcoming-cover-photo').value = '';
+        document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + '../images/1-index/home-upload.png' + ')';
     });
 
     // display "add upcoming event" popup and reset form
@@ -156,11 +169,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // change cover photo image to file input
     document.getElementById('add-upcoming-cover-photo').addEventListener('change', function() {
         var file = this.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + e.target.result + ')';
-        };
-        reader.readAsDataURL(file);
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('add-upcoming-cover-photo-img').style.backgroundImage = 'url(' + e.target.result + ')';
+            };
+            reader.readAsDataURL(file);
+            
+            // Add file to itemsToAdd array
+            itemsToAdd.push(file);
+        }
     });    
 
     document.getElementById('edit-upcoming-cover-photo-preview').addEventListener('click', function() {

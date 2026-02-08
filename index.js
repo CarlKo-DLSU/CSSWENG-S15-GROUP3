@@ -507,24 +507,40 @@ app.post('/addNewEvent', uploadNewEvent.single('add-upcoming-cover-photo'), asyn
     }
 })
 
-app.post('/publish-changes', uploadNewEvent.array('files[]'), async (req, res) => {
+app.post('/publish-changes', uploadNewEvent.fields([
+    { name: 'files[]', maxCount: 10 },
+    { name: 'newFiles[]', maxCount: 10 }
+]), async (req, res) => {
     try {
         const deleteIds = req.body['deleteIds'];
         const editIds = req.body['editIds'];
-        const files = req.files;
+        const editFiles = req.files['files[]'] || [];
+        const newFiles = req.files['newFiles[]'] || [];
 
+        // Delete slides
         if (deleteIds) {
             await slideshow.deleteMany({ _id: { $in: deleteIds } });
         }
 
-        if (editIds && files) {
+        // Update existing slides
+        if (editIds && editFiles) {
             for (let i = 0; i < editIds.length; i++) {
                 const id = editIds[i];
-                const file = files[i];
+                const file = editFiles[i];
 
+                if (file) {
+                    const fileUrl = `/images/1-index/${file.filename}`;
+                    await slideshow.findByIdAndUpdate(id, { slideshowImg: fileUrl });
+                }
+            }
+        }
+
+        // Add new slides
+        if (newFiles && newFiles.length > 0) {
+            for (let i = 0; i < newFiles.length; i++) {
+                const file = newFiles[i];
                 const fileUrl = `/images/1-index/${file.filename}`;
-
-                await slideshow.findByIdAndUpdate(id, { slideshowImg: fileUrl });
+                await slideshow.create({ slideshowImg: fileUrl });
             }
         }
 

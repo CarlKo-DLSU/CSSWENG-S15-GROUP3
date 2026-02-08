@@ -418,6 +418,9 @@ button[type="submit"]:hover {
 
 #slides-container {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .red-bar {
@@ -438,14 +441,23 @@ button[type="submit"]:hover {
 .slides {
     animation: fadeInSlideshow 1s ease forwards;
     max-width: 100%;
-    margin: 0;
+    max-height: 500px;
+    margin: 0 auto;
     overflow: hidden;
     transform: translateY(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slides img {
     max-width: 100%;
+    max-height: 500px;
     height: auto; /* Maintain aspect ratio */
+    width: auto;
+    object-fit: contain; /* Ensure image fits within the container */
+    display: block;
+    margin: 0 auto;
 }
 
 @keyframes fadeInSlideshow {
