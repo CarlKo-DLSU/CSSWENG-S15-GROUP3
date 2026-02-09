@@ -7,19 +7,35 @@ function showSlides() {
     const slides = document.getElementsByClassName("slides");
     const dots = document.getElementsByClassName("dot");
 
+    // Check if there are any slides - if not, don't do anything
+    if (slides.length === 0) {
+        setTimeout(showSlides, 3000);
+        return;
+    }
+
+    // Hide all slides
     for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";  
     }
 
+    // Increment and loop back to start
     slideIndex++;
     if (slideIndex > slides.length) {
-        slideIndex = 1
+        slideIndex = 1;
     }
-    for (i = 0; i < dots.length; i++) {
+
+    // Remove active class from all dots
+    for (let i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
+
+    // Show the current slide and activate its dot (with bounds checking)
+    if (slideIndex > 0 && slideIndex <= slides.length) {
+        slides[slideIndex - 1].style.display = "block";
+        if (dots.length > 0 && slideIndex <= dots.length) {
+            dots[slideIndex - 1].className += " active";
+        }
+    }
     
     setTimeout(showSlides, 3000);
 }

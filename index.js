@@ -45,11 +45,13 @@ app.get("/",async (req,res)=>{
     return res.render("1-index", {newEventsData, slideshowData, isLoggedIn})
 })
 
-app.get("/pastEvents",(req,res)=>{
-    res.render("2-events")
+app.get("/pastEvents", async (req,res)=>{
+    const isLoggedIn = req.session.isLoggedIn || false;
+    const eventsData = await PastEvent.find({});
+    res.render("2-events", { eventsData, isLoggedIn })
 })
 
-app.get('/4-admin-homepage',async (req, res) => {
+app.get('/4-admin-homepage.hbs',async (req, res) => {
     const newEventsData = await NewEvent.find({});
     const slideshowData = await slideshow.find({});
     const isLoggedIn = req.session.isLoggedIn || false;
@@ -129,6 +131,7 @@ const uploadPastEvent = multer({ storage: storagePastEvent });
 //////////////////////EDIT PAST EVENT DB
 app.get('/5-editPastEvents.hbs', async (req, res) => {
     const eventId = req.query.id;
+    const isLoggedIn = req.session.isLoggedIn || false;
     try {
         const event = await PastEvent.findById(eventId);
         if (event) {
@@ -136,7 +139,8 @@ app.get('/5-editPastEvents.hbs', async (req, res) => {
                 id: event.id,
                 title: event.title,
                 cover: event.cover,
-                gallery: event.gallery
+                gallery: event.gallery,
+                isLoggedIn
             });
         } else {
             res.status(404).send('Event not found');
@@ -232,7 +236,8 @@ app.delete('/deletePastEvent', async (req, res) => {
 
 //////////////////////ADD PAST EVENT DB
 app.get('/5-addPastEvents.hbs',(req, res) => {
-    res.render('5-addPastEvents');
+    const isLoggedIn = req.session.isLoggedIn || false;
+    res.render('5-addPastEvents', { isLoggedIn });
 });
 
 app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }, { name: 'gallery', maxCount: 10 }]), async (req, res) => {
@@ -264,10 +269,11 @@ app.post("/addPastEvent", uploadPastEvent.fields([{ name: 'cover', maxCount: 1 }
 });
 
 app.get('/2-events.hbs', async (req, res) => {
+    const isLoggedIn = req.session.isLoggedIn || false;
     try {
         const eventsData = await PastEvent.find({});
         console.log("Fetched past events successfully:", eventsData); // Check if data is fetched correctly
-        res.render('2-events', { eventsData: eventsData });
+        res.render('2-events', { eventsData: eventsData, isLoggedIn });
     } catch (error) {
         console.error("Error fetching past events:", error);
         res.status(500).send("Error fetching past events.");
@@ -275,10 +281,11 @@ app.get('/2-events.hbs', async (req, res) => {
 });
 
 app.get('/5-admin-events.hbs', async (req, res) => {
+    const isLoggedIn = req.session.isLoggedIn || false;
     try {
         const eventsData = await PastEvent.find({});
         console.log("Fetched past events successfully:", eventsData);
-        res.render('5-admin-events', { eventsData: eventsData });
+        res.render('5-admin-events', { eventsData: eventsData, isLoggedIn });
     } catch (error) {
         console.error("Error fetching past events:", error);
         res.status(500).send("Error fetching past events.");
@@ -293,11 +300,12 @@ const getAboutUsData = () => {
 
 //////////////////////ABOUT US PAGE DATABASE
 app.get('/3-about.hbs', async (req, res) => {
+    const isLoggedIn = req.session.isLoggedIn || false;
     console.log("It went to index.js");
     try {
         const currAbout = getAboutUsData();
         console.log("Fetched about us data:", currAbout); // Log to check the data
-        res.render('3-about', { currAbout: currAbout });
+        res.render('3-about', { currAbout: currAbout, isLoggedIn });
     } catch (error) {
         console.error("Error fetching about us data:", error);
         res.status(500).send("Error fetching about us page.");
@@ -305,11 +313,12 @@ app.get('/3-about.hbs', async (req, res) => {
 });
 
 app.get('/6-admin-about.hbs', async (req, res) => {
+    const isLoggedIn = req.session.isLoggedIn || false;
     console.log("It went to index.js");
     try {
         const currAbout = getAboutUsData();
         console.log("Fetched about us data:", currAbout); // Log to check the data
-        res.render('6-admin-about', { currAbout: currAbout });
+        res.render('6-admin-about', { currAbout: currAbout, isLoggedIn });
     } catch (error) {
         console.error("Error fetching about us data:", error);
         res.status(500).send("Error fetching about us page.");
@@ -339,16 +348,17 @@ app.post('/updateAboutUs', async (req, res) => {
 });
 
 app.get('/search', async (req, res) => {
+    const isLoggedIn = req.session.isLoggedIn || false;
     if (!req.query.unisearch) {
         const newEventsData = await NewEvent.find({});
         const slideshowData = await slideshow.find({});
-        return res.render("1-index", {newEventsData, slideshowData})
+        return res.render("1-index", {newEventsData, slideshowData, isLoggedIn})
     }
     else {
     const existPastEvent = await PastEvent.find({title: {$regex: req.query.unisearch, $options: "i"}}).collation({ locale: "en" }).sort({ title: 1 })
     const existNewEvent = await NewEvent.find({title: {$regex: req.query.unisearch, $options: "i"}}).collation({ locale: "en" }).sort({ title: 1 })
     const name = req.query.unisearch;
-    return res.render("7-search.hbs", {name, existPastEvent, existNewEvent});
+    return res.render("7-search.hbs", {name, existPastEvent, existNewEvent, isLoggedIn});
     }
 })
 
